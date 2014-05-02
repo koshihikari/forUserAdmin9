@@ -1,0 +1,298 @@
+@charset "utf-8";
+#editInLibrary #propertyArea, #editInPage #propertyArea {
+  width:50%;
+  height:100%;
+  float:left;
+  float:right;
+}
+#editInLibrary #propertyArea > p, #editInPage #propertyArea > p { text-align:left; }
+#editInLibrary #propertyArea > div, #editInPage #propertyArea > div {
+  box-shadow:2px 2px 15px rgba(0,0,0,0.4), inset 0 0 500px rgba(0,0,0,0.03);
+  padding:10px;
+  padding-right:0;
+  height:810px;
+  background:-webkit-gradient(linear,left top,left bottom,from(rgba(253,246,227,0.2)),to(rgba(253,246,227,0.3)));
+  border-radius:5px;
+  border:1px solid rgba(0,0,0,0.1);
+  border-right:1px solid rgba(0,0,0,0.2);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,0.3), inset 1px 0 0 rgba(255,255,255,0.3), 2px 0 0 rgba(255,255,255,0.2), 0 2px 0 rgba(255,255,255,0.2);
+  padding-bottom:0;
+  margin-top:23px;
+  height:628px;
+  padding-top:5px;
+}
+#editInLibrary #propertyArea input[type="text"], #editInLibrary #propertyArea textarea, #editInPage #propertyArea input[type="text"], #editInPage #propertyArea textarea {
+  width:90%;
+  margin:5px 0;
+}
+#editInLibrary #propertyArea input[type="text"].color-input, #editInLibrary #propertyArea textarea.color-input, #editInPage #propertyArea input[type="text"].color-input, #editInPage #propertyArea textarea.color-input { background:-webkit-gradient(linear,left top,left bottom,from(rgba(255,255,255,0.3)),to(rgba(255,255,255,0.6))); }
+#editInLibrary #propertyArea .btn i, #editInPage #propertyArea .btn i { vertical-align:top; }
+#editInLibrary #propertyArea #masterPropertyElem, #editInPage #propertyArea #masterPropertyElem { display:none; }
+#editInLibrary #propertyArea .propertyElem .duplicateBtn, #editInPage #propertyArea .propertyElem .duplicateBtn { display:none; }
+#editInLibrary #propertyArea .propsWrapper, #editInPage #propertyArea .propsWrapper {
+  overflow-x:hidden;
+  overflow-y:scroll;
+  height:750px;
+  padding-right:5px;
+  margin-top:10px;
+}
+#editInLibrary #propertyArea .propsWrapper .propertyElement .elementTitle, #editInPage #propertyArea .propsWrapper .propertyElement .elementTitle {
+  width:99%;
+  color:#a40000;
+  color:#4b5e72;
+  padding:0;
+  text-align:center;
+  border-bottom:1px solid #4387f5;
+  box-shadow:0 1px 0 rgba(255,255,255,0.8), inset 0 -1px 0 rgba(0,0,0,0.2);
+  margin:10px 0;
+  cursor:pointer;
+}
+#editInLibrary #propertyArea .propsWrapper .propertyElement .slider, #editInPage #propertyArea .propsWrapper .propertyElement .slider {
+  width:70%;
+  display:inline-block;
+}
+#editInLibrary #propertyArea .propsWrapper .propertyElement .slider+input, #editInPage #propertyArea .propsWrapper .propertyElement .slider+input {
+  margin:0 5px 0 10px;
+  display:inline-block;
+  width:30px;
+}
+#editInLibrary #propertyArea .propsWrapper .propertyElement .slider .ui-slider-handle, #editInPage #propertyArea .propsWrapper .propertyElement .slider .ui-slider-handle {
+  width:1.5rem;
+  height:1.5rem;
+  border:2px solid #f0f0f0;
+  top:-3px;
+}
+#editInLibrary #propertyArea .propsWrapper .propertyElement .control-group, #editInPage #propertyArea .propsWrapper .propertyElement .control-group {
+  margin:0;
+  display:table;
+  width:100%;
+}
+#editInLibrary #propertyArea .propsWrapper .propertyElement .control-group .control-label, #editInPage #propertyArea .propsWrapper .propertyElement .control-group .control-label {
+  display:table-cell;
+  width:100px;
+  font-size:0.9em;
+  vertical-align:middle;
+  cursor:default;
+}
+#editInLibrary #propertyArea .propsWrapper .propertyElement .control-group .controls, #editInPage #propertyArea .propsWrapper .propertyElement .control-group .controls {
+  display:table-cell;
+  border-top:1px solid rgba(0,0,0,0.2);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,0.3);
+  padding:15px 0 10px;
+}
+#editInLibrary #propertyArea .propsWrapper .propertyElement .control-group .controls .box, #editInPage #propertyArea .propsWrapper .propertyElement .control-group .controls .box {
+  display:table;
+  width:100%;
+}
+#editInLibrary #propertyArea .propsWrapper .propertyElement .control-group .controls .box > *, #editInPage #propertyArea .propsWrapper .propertyElement .control-group .controls .box > * { display:table-cell; }
+#editInLibrary #propertyArea .propsWrapper .propertyElement .control-group .controls .box > .sliderWrapper, #editInPage #propertyArea .propsWrapper .propertyElement .control-group .controls .box > .sliderWrapper { width:100%; }
+#editInLibrary #propertyArea .propsWrapper .propertyElement .control-group .controls .box > .sliderWrapper .slider, #editInPage #propertyArea .propsWrapper .propertyElement .control-group .controls .box > .sliderWrapper .slider { width:100%; }
+#editInLibrary #propertyArea .propsWrapper .propertyElement .control-group .controls .box > input[type="text"], #editInPage #propertyArea .propsWrapper .propertyElement .control-group .controls .box > input[type="text"] {
+  width:44px;
+  margin-left:10px;
+}
+#editInLibrary #propertyArea .propsWrapper .propertyElement .control-group .controls .box > input[type="text"][data-item-name="slideshowSpeed"], #editInLibrary #propertyArea .propsWrapper .propertyElement .control-group .controls .box > input[type="text"][data-item-name="animationSpeed"], #editInPage #propertyArea .propsWrapper .propertyElement .control-group .controls .box > input[type="text"][data-item-name="slideshowSpeed"], #editInPage #propertyArea .propsWrapper .propertyElement .control-group .controls .box > input[type="text"][data-item-name="animationSpeed"] {
+  width:48px;
+  text-align:right;
+}
+#editInLibrary #propertyArea .propsWrapper .propertyElement .control-group .controls .box > .unit, #editInPage #propertyArea .propsWrapper .propertyElement .control-group .controls .box > .unit { padding:0 10px 0 5px; }
+#editInLibrary #propertyArea .propsWrapper .propertyElement .control-group:first-child .controls, #editInPage #propertyArea .propsWrapper .propertyElement .control-group:first-child .controls {
+  border-top:none;
+  box-shadow:none;
+  padding-top:0;
+}
+#editInLibrary #propertyArea .propsWrapper .propertyElement .colorPicker > div .colorCodeInput, #editInPage #propertyArea .propsWrapper .propertyElement .colorPicker > div .colorCodeInput { width:6em; }
+#editInLibrary #propertyArea .propsWrapper .propertyElement .colorPicker > div > a, #editInPage #propertyArea .propsWrapper .propertyElement .colorPicker > div > a {
+  vertical-align:top;
+  margin-top:8px;
+}
+#editInLibrary #propertyArea .slider, #editInLibrary #propertyArea .ui-slider, #editInLibrary #propertyArea .ui-slider-handle, #editInPage #propertyArea .slider, #editInPage #propertyArea .ui-slider, #editInPage #propertyArea .ui-slider-handle { cursor:pointer; }
+#editInLibrary #propertyArea div.dropdown-menu, #editInPage #propertyArea div.dropdown-menu { background:rgba(240,240,240,0.8); }
+#editInLibrary #propertyArea div.dropdown-menu > .btn, #editInPage #propertyArea div.dropdown-menu > .btn {
+  display:inline-block;
+  margin:5px;
+}
+#editInLibrary #propertyArea .forAccordionElement .listOrderWrapper ul, #editInPage #propertyArea .forAccordionElement .listOrderWrapper ul { margin:0; }
+#editInLibrary #propertyArea .forAccordionElement .listOrderWrapper ul > li.place-holder, #editInPage #propertyArea .forAccordionElement .listOrderWrapper ul > li.place-holder { background:rgba(0,0,200,0.3); }
+#editInLibrary #propertyArea .forBgElement .bgColorWrapper, #editInPage #propertyArea .forBgElement .bgColorWrapper { margin-bottom:-2px; }
+#editInLibrary #propertyArea .forBgElement .bgColorWrapper .controls, #editInPage #propertyArea .forBgElement .bgColorWrapper .controls { margin-left:-16px; }
+#editInLibrary #propertyArea .forBgElement .bgColorWrapper .controls input, #editInPage #propertyArea .forBgElement .bgColorWrapper .controls input { margin-left:5px; }
+#editInLibrary #propertyArea .forBgElement .bgGradationWrapper .controls .box > .key, #editInPage #propertyArea .forBgElement .bgGradationWrapper .controls .box > .key {
+  display:inline-block;
+  width:40px;
+}
+#editInLibrary #propertyArea .forBgElement .bgImageWrapper, #editInPage #propertyArea .forBgElement .bgImageWrapper { margin-bottom:-2px; }
+#editInLibrary #propertyArea .forBorderElement .borderColorWrapper, #editInPage #propertyArea .forBorderElement .borderColorWrapper { margin-bottom:-2px; }
+#editInLibrary #propertyArea .forBorderElement .borderColorWrapper .controls, #editInPage #propertyArea .forBorderElement .borderColorWrapper .controls { margin-left:-16px; }
+#editInLibrary #propertyArea .forBorderElement .borderColorWrapper .controls input, #editInPage #propertyArea .forBorderElement .borderColorWrapper .controls input { margin-left:5px; }
+#editInLibrary #propertyArea .forBorderElement .borderWidthWrapper .controls .box > .key, #editInLibrary #propertyArea .forBorderElement .borderRadiusWrapper .controls .box > .key, #editInPage #propertyArea .forBorderElement .borderWidthWrapper .controls .box > .key, #editInPage #propertyArea .forBorderElement .borderRadiusWrapper .controls .box > .key {
+  display:inline-block;
+  width:50px;
+}
+#editInLibrary #propertyArea .forCodeElement textarea, #editInPage #propertyArea .forCodeElement textarea { height:500px; }
+#editInLibrary #propertyArea .forGalleryElement .imagesWrapper .control-label, #editInPage #propertyArea .forGalleryElement .imagesWrapper .control-label {
+  display:block !important;
+  width:100% !important;
+}
+#editInLibrary #propertyArea .forGalleryElement .imagesWrapper .controls, #editInPage #propertyArea .forGalleryElement .imagesWrapper .controls { display:block !important; }
+#editInLibrary #propertyArea .forGalleryElement .imagesWrapper .controls ul, #editInPage #propertyArea .forGalleryElement .imagesWrapper .controls ul {
+  margin:0 10px 20px 0;
+  border:1px solid rgba(0,0,0,0.2);
+  padding:10px;
+  min-height:300px;
+  border-radius:5px;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,0.3), 1px 0 0 rgba(255,255,255,0.3), inset 1px 0 0 rgba(255,255,255,0.3), 0 1px 0 rgba(255,255,255,0.3);
+}
+#editInLibrary #propertyArea .forGalleryElement .imagesWrapper .controls ul:before, #editInPage #propertyArea .forGalleryElement .imagesWrapper .controls ul:before {
+  content:'ギャラリーに追加したい写真をここにドロップしてください';
+  color:rgba(200,50,50,0.9);
+  font-size:90%;
+  line-height:120%;
+  margin-bottom:10px;
+}
+#editInLibrary #propertyArea .forGalleryElement .imagesWrapper .controls ul > li, #editInPage #propertyArea .forGalleryElement .imagesWrapper .controls ul > li {
+  width:100px;
+  float:left;
+  margin:0 10px 10px 0;
+  text-align:center;
+  cursor:pointer;
+}
+#editInLibrary #propertyArea .forGalleryElement .imagesWrapper .controls ul > li > img, #editInPage #propertyArea .forGalleryElement .imagesWrapper .controls ul > li > img { max-height:50px; }
+#editInLibrary #propertyArea .forGalleryElement .imagesWrapper .controls ul > li > .del-btn, #editInPage #propertyArea .forGalleryElement .imagesWrapper .controls ul > li > .del-btn { margin-top:5px; }
+#editInLibrary #propertyArea .forGalleryElement .imagesWrapper .controls ul > li.placeholder, #editInPage #propertyArea .forGalleryElement .imagesWrapper .controls ul > li.placeholder { background:rgba(230,215,167,0.5); }
+#editInLibrary #propertyArea .forGalleryElement .imagesWrapper .control-group .control-label, #editInPage #propertyArea .forGalleryElement .imagesWrapper .control-group .control-label {
+  display:inline-block !important;
+  width:auto !important;
+  margin-top:5px;
+}
+#editInLibrary #propertyArea .forGalleryElement .imagesWrapper .control-group .add-image-btn, #editInPage #propertyArea .forGalleryElement .imagesWrapper .control-group .add-image-btn {
+  display:inline-block;
+  float:right;
+  margin-right:10px;
+}
+#editInLibrary #propertyArea .forGalleryElement .imagesWrapper .control-group .controls, #editInPage #propertyArea .forGalleryElement .imagesWrapper .control-group .controls { clear:both; }
+#editInLibrary #propertyArea .forIconElement .iconSelectWrapper >ul, #editInPage #propertyArea .forIconElement .iconSelectWrapper >ul { margin:0 0 10px; }
+#editInLibrary #propertyArea .forIconElement .iconSelectWrapper >ul >li, #editInPage #propertyArea .forIconElement .iconSelectWrapper >ul >li {
+  display:inline-block;
+  margin:5px;
+  border-top:1px solid rgba(0,0,0,0.2);
+  border-bottom:1px solid rgba(255,255,255,0.9);
+  border-left:1px solid rgba(0,0,0,0.2);
+  border-right:1px solid rgba(0,0,0,0.2);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,0.5), inset 1px 0 0 rgba(255,255,255,0.5), inset -1px 0 0 rgba(255,255,255,0.5), inset 0 -1px 0 rgba(0,0,0,0.2);
+  cursor:pointer;
+  background:none;
+}
+#editInLibrary #propertyArea .forIconElement .iconSelectWrapper >ul >li:hover, #editInPage #propertyArea .forIconElement .iconSelectWrapper >ul >li:hover {
+  background:-webkit-gradient(linear,left top,left bottom,from(rgba(97,223,66,0.7)),to(rgba(97,223,66,0.3)));
+  border-top:1px solid rgba(0,0,0,0.2);
+  border-bottom:1px solid rgba(255,255,255,0.9);
+  border-left:1px solid rgba(0,0,0,0.2);
+  border-right:1px solid rgba(0,0,0,0.2);
+  box-shadow:inset 0 1px 3px rgba(0,0,0,0.2), inset 1px 0 3px rgba(0,0,0,0.2), inset -1px 0 3px rgba(0,0,0,0.2), inset 0 -1px 3px rgba(255,255,255,0.5);
+}
+#editInLibrary #propertyArea .forIconElement .iconSelectWrapper >ul >li.active, #editInPage #propertyArea .forIconElement .iconSelectWrapper >ul >li.active {
+  border-top:1px solid rgba(0,0,0,0.2);
+  border-bottom:1px solid rgba(255,255,255,0.9);
+  border-left:1px solid rgba(0,0,0,0.2);
+  border-right:1px solid rgba(0,0,0,0.2);
+  box-shadow:inset 0 1px 3px rgba(0,0,0,0.2), inset 1px 0 3px rgba(0,0,0,0.2), inset -1px 0 3px rgba(0,0,0,0.2), inset 0 -1px 3px rgba(255,255,255,0.5);
+}
+#editInLibrary #propertyArea .forIconElement .iconSelectWrapper >ul >li >i, #editInPage #propertyArea .forIconElement .iconSelectWrapper >ul >li >i {
+  font-size:2rem;
+  width:100%;
+  height:100%;
+  padding:5px;
+  color:#646464;
+}
+#editInLibrary #propertyArea .forIconElement .textInputWrapper .control-label, #editInPage #propertyArea .forIconElement .textInputWrapper .control-label {
+  vertical-align:bottom;
+  display:inline-block;
+  width:70px;
+}
+#editInLibrary #propertyArea .forIconElement .textInputWrapper .btn-group, #editInPage #propertyArea .forIconElement .textInputWrapper .btn-group { display:inline-block; }
+#editInLibrary #propertyArea .forIconElement .textBaseWrapper .colorWrapper, #editInPage #propertyArea .forIconElement .textBaseWrapper .colorWrapper { margin-bottom:-2px; }
+#editInLibrary #propertyArea .forIconElement .textBaseWrapper .colorWrapper .controls, #editInPage #propertyArea .forIconElement .textBaseWrapper .colorWrapper .controls { margin-left:-16px; }
+#editInLibrary #propertyArea .forIconElement .textBaseWrapper div[data-toggle="buttons-checkbox"], #editInPage #propertyArea .forIconElement .textBaseWrapper div[data-toggle="buttons-checkbox"] { white-space:normal; }
+#editInLibrary #propertyArea .forIconElement .textShadowWrapper .controls > .box > .key, #editInPage #propertyArea .forIconElement .textShadowWrapper .controls > .box > .key {
+  display:inline-block !important;
+  width:60px;
+}
+#editInLibrary #propertyArea .forIconElement .textShadowWrapper .controls .textShadowColorWrapper .colorPicker, #editInPage #propertyArea .forIconElement .textShadowWrapper .controls .textShadowColorWrapper .colorPicker { width:100%; }
+#editInLibrary #propertyArea .forIconElement textarea, #editInPage #propertyArea .forIconElement textarea { height:100px; }
+#editInLibrary #propertyArea .forImageElement .imgViewWrapper img, #editInPage #propertyArea .forImageElement .imgViewWrapper img { max-height:150px; }
+#editInLibrary #propertyArea .forImageElement .imageSizeWrapper > .controls .box > .key, #editInPage #propertyArea .forImageElement .imageSizeWrapper > .controls .box > .key {
+  display:inline-block;
+  width:50px;
+}
+#editInLibrary #propertyArea .forImageElement .imageSizeWrapper > .controls .box > input[type="text"], #editInPage #propertyArea .forImageElement .imageSizeWrapper > .controls .box > input[type="text"] { margin-left:20px !important; }
+#editInLibrary #propertyArea .forImageElement .imageSizeWrapper .group, #editInPage #propertyArea .forImageElement .imageSizeWrapper .group { margin-top:20px; }
+#editInLibrary #propertyArea .forImageElement .imageSizeWrapper .group:first-child, #editInPage #propertyArea .forImageElement .imageSizeWrapper .group:first-child { margin:0; }
+#editInLibrary #propertyArea .forImageElement .imageSizeWrapper .group .pixel, #editInLibrary #propertyArea .forImageElement .imageSizeWrapper .group .percent, #editInPage #propertyArea .forImageElement .imageSizeWrapper .group .pixel, #editInPage #propertyArea .forImageElement .imageSizeWrapper .group .percent {
+  border:1px solid rgba(0,0,0,0.2);
+  padding:10px 20px;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,0.3), 1px 0 0 rgba(255,255,255,0.3), inset 1px 0 0 rgba(255,255,255,0.3), 0 1px 0 rgba(255,255,255,0.3);
+  border-radius:5px;
+}
+#editInLibrary #propertyArea .forLayoutElement div[data-toggle="buttons-radio"], #editInPage #propertyArea .forLayoutElement div[data-toggle="buttons-radio"] { white-space:normal; }
+#editInLibrary #propertyArea .forLinkElement .urlWrapper > .controls > .group:last-child, #editInPage #propertyArea .forLinkElement .urlWrapper > .controls > .group:last-child { margin-top:20px; }
+#editInLibrary #propertyArea .forLinkElement .urlWrapper > .controls > .group .linkUrl, #editInLibrary #propertyArea .forLinkElement .urlWrapper > .controls > .group .linkPage, #editInLibrary #propertyArea .forLinkElement .urlWrapper > .controls > .group .mapUrl, #editInPage #propertyArea .forLinkElement .urlWrapper > .controls > .group .linkUrl, #editInPage #propertyArea .forLinkElement .urlWrapper > .controls > .group .linkPage, #editInPage #propertyArea .forLinkElement .urlWrapper > .controls > .group .mapUrl {
+  display:block;
+  border:1px solid rgba(0,0,0,0.2);
+  padding:10px 20px;
+  margin-left:50px;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,0.3), 1px 0 0 rgba(255,255,255,0.3), inset 1px 0 0 rgba(255,255,255,0.3), 0 1px 0 rgba(255,255,255,0.3);
+  border-radius:5px;
+}
+#editInLibrary #propertyArea .forLinkElement .urlWrapper > .controls > .group .linkUrl > .controls, #editInLibrary #propertyArea .forLinkElement .urlWrapper > .controls > .group .linkPage > .controls, #editInLibrary #propertyArea .forLinkElement .urlWrapper > .controls > .group .mapUrl > .controls, #editInPage #propertyArea .forLinkElement .urlWrapper > .controls > .group .linkUrl > .controls, #editInPage #propertyArea .forLinkElement .urlWrapper > .controls > .group .linkPage > .controls, #editInPage #propertyArea .forLinkElement .urlWrapper > .controls > .group .mapUrl > .controls {
+  width:100% !important;
+  display:inline-block !important;
+}
+#editInLibrary #propertyArea .forLinkElement .urlWrapper > .controls > .group .linkPage .control-label, #editInPage #propertyArea .forLinkElement .urlWrapper > .controls > .group .linkPage .control-label { width:auto; }
+#editInLibrary #propertyArea .forMapElement .address .addressGroup, #editInPage #propertyArea .forMapElement .address .addressGroup {
+  display:table;
+  width:100%;
+}
+#editInLibrary #propertyArea .forMapElement .address .addressGroup > *, #editInPage #propertyArea .forMapElement .address .addressGroup > * { display:table-cell; }
+#editInLibrary #propertyArea .forMapElement .address .addressGroup > span, #editInPage #propertyArea .forMapElement .address .addressGroup > span { width:40px; }
+#editInLibrary #propertyArea .forMapElement .address .addressGroup > input[type="text"], #editInPage #propertyArea .forMapElement .address .addressGroup > input[type="text"] { width:95%; }
+#editInLibrary #propertyArea .forMapElement .latitude, #editInLibrary #propertyArea .forMapElement .longitude, #editInPage #propertyArea .forMapElement .latitude, #editInPage #propertyArea .forMapElement .longitude { display:inline-block; }
+#editInLibrary #propertyArea .forMapElement .latitude input[type="text"], #editInLibrary #propertyArea .forMapElement .longitude input[type="text"], #editInPage #propertyArea .forMapElement .latitude input[type="text"], #editInPage #propertyArea .forMapElement .longitude input[type="text"] {
+  width:100px;
+  text-align:right;
+  margin:5px;
+}
+#editInLibrary #propertyArea .forMapElement .latitude, #editInPage #propertyArea .forMapElement .latitude { margin-right:30px; }
+#editInLibrary #propertyArea .forMapElement .mapWrapper .group, #editInPage #propertyArea .forMapElement .mapWrapper .group { margin-top:20px; }
+#editInLibrary #propertyArea .forMapElement .mapWrapper .group:first-child, #editInPage #propertyArea .forMapElement .mapWrapper .group:first-child { margin-top:0; }
+#editInLibrary #propertyArea .forMapElement .mapWrapper .address, #editInLibrary #propertyArea .forMapElement .mapWrapper .latlong, #editInPage #propertyArea .forMapElement .mapWrapper .address, #editInPage #propertyArea .forMapElement .mapWrapper .latlong {
+  border:1px solid rgba(0,0,0,0.2);
+  padding:10px 20px;
+  margin-left:50px;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,0.3), 1px 0 0 rgba(255,255,255,0.3), inset 1px 0 0 rgba(255,255,255,0.3), 0 1px 0 rgba(255,255,255,0.3);
+  border-radius:5px;
+}
+#editInLibrary #propertyArea .forMapElement .mapSizeWrapper .box .key, #editInPage #propertyArea .forMapElement .mapSizeWrapper .box .key {
+  display:inline-block !important;
+  width:40px;
+}
+#editInLibrary #propertyArea .forMapElement .mapSizeWrapper .box input[type="text"], #editInPage #propertyArea .forMapElement .mapSizeWrapper .box input[type="text"] { margin-left:20px !important; }
+#editInLibrary #propertyArea .forSizeElement .percentWidth .key, #editInLibrary #propertyArea .forSizeElement .pixelWidth .key, #editInPage #propertyArea .forSizeElement .percentWidth .key, #editInPage #propertyArea .forSizeElement .pixelWidth .key { width:100px; }
+#editInLibrary #propertyArea .forSpaceElement .controls > .box > .key, #editInPage #propertyArea .forSpaceElement .controls > .box > .key {
+  display:inline-block !important;
+  width:40px;
+}
+#editInLibrary #propertyArea .forTextElement .textInputWrapper .control-label, #editInPage #propertyArea .forTextElement .textInputWrapper .control-label {
+  vertical-align:bottom;
+  display:inline-block;
+  width:70px;
+}
+#editInLibrary #propertyArea .forTextElement .textBaseWrapper .colorWrapper, #editInPage #propertyArea .forTextElement .textBaseWrapper .colorWrapper { margin-bottom:-2px; }
+#editInLibrary #propertyArea .forTextElement .textBaseWrapper .colorWrapper .controls, #editInPage #propertyArea .forTextElement .textBaseWrapper .colorWrapper .controls { margin-left:-16px; }
+#editInLibrary #propertyArea .forTextElement .textBaseWrapper div[data-toggle="buttons-checkbox"], #editInPage #propertyArea .forTextElement .textBaseWrapper div[data-toggle="buttons-checkbox"] { white-space:normal; }
+#editInLibrary #propertyArea .forTextElement .textShadowWrapper .controls > .box > .key, #editInPage #propertyArea .forTextElement .textShadowWrapper .controls > .box > .key {
+  display:inline-block !important;
+  width:60px;
+}
+#editInLibrary #propertyArea .forTextElement .textShadowWrapper .controls .textShadowColorWrapper .colorPicker, #editInPage #propertyArea .forTextElement .textShadowWrapper .controls .textShadowColorWrapper .colorPicker { width:100%; }
+#editInLibrary #propertyArea .forTextElement textarea, #editInPage #propertyArea .forTextElement textarea { height:100px; }

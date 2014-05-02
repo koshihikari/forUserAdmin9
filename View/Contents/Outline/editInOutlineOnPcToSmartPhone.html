@@ -1,0 +1,141 @@
+<?php //debug($residences); ?>
+<?php //debug($result['outlines']); ?>
+<div id="container">
+	<div id="outline-container">
+		<p class="residence-name">
+			<input type="text" name="residence-name" value="<?php echo $residences['residences']['name']; ?>" placeholder="ここに物件名を記述">
+			<input type="text" name="frk-num" value="<?php echo $residences['residences']['num'] ? $residences['residences']['num'] : ''; ?>" placeholder="ここにFRKの物件番号を記述">
+		</p>
+		<?php
+			$outlines = $result['outlines'];
+			for($i=0,$len=count($outlines); $i<$len; $i++):
+		?>
+		<dl class="category" data-category-id="<?php echo $outlines[$i]['category']['id']; ?>">
+			<dt>
+				<input type="text" name="category-name" value="<?php echo $outlines[$i]['category']['key']; ?>" data-prev-val="<?php echo $outlines[$i]['category']['key']; ?>" placeholder="ここにカテゴリ名称を記述">
+				<ul>
+					<li class="btn btn-primary add-category-btn"><span>追加</span></li>
+					<li class="btn btn-danger del-category-btn"><span>削除</span></li>
+					<li class="btn toggle-btn"><span>開閉</span></li>
+				</ul>
+			</dt>
+			<dd>
+				<ul class="connected-sortable items">
+					<?php if (isset($outlines[$i]['items'])): ?>
+						<?php for ($j=0,$len2=count($outlines[$i]['items']); $j<$len2; $j++): ?>
+							<li>
+								<?php
+									$is_required = (int) $outlines[$i]['items'][$j]['is_required'] === 1 ? true : false;
+									$frk_index = implode(', ', explode(',', $outlines[$i]['items'][$j]['frk_index']));
+									// $frk_index = implode(', ', mb_split(',', $outlines[$i]['items'][$j]['frk_index']));
+
+								?>
+								<input type="hidden" name="id" value="<?php echo $outlines[$i]['items'][$j]['id']; ?>" />
+								<input type="hidden" name="mtr-outline-id" value="<?php echo $outlines[$i]['items'][$j]['mtr_outline_id']; ?>" />
+								<input type="hidden" name="is-required" value="<?php echo $outlines[$i]['items'][$j]['is_required']; ?>" />
+								<input type="hidden" name="frk-index" value="<?php echo $outlines[$i]['items'][$j]['frk_index']; ?>" />
+								<input type="hidden" name="key" value="<?php echo $outlines[$i]['items'][$j]['key']; ?>" />
+								<input type="hidden" name="val" value="<?php echo $outlines[$i]['items'][$j]['val']; ?>" />
+								<table class="item-inputs">
+									<tr>
+										<td class="btns-wrapper" rowspan="2">
+											<button class="btn btn-primary add-item-btn">+</button>
+											<button class="btn del-item-btn <?php echo $is_required === true ? 'disable' : ''; ?>">-</button>
+										</td>
+										<td class="item-type">入力タイプ</td>
+										<td class="frk-index">FRKでのインデックス</td>
+										<td class="item-key">項目名</td>
+										<td class="item-val">値</td>
+									</tr>
+									<tr>
+										<td class="item-type"><?php echo $is_required === true ? '必須' : '任意'; ?></td>
+										<td class="frk-index">
+											<?php if ($is_required === true): ?>
+												<?php echo $frk_index; ?>
+											<?php else: ?>
+												<input type="text" name="frk-index" value="<?php echo $frk_index; ?>" placeholder="FRKでのインデックス">
+											<?php endif; ?>
+										</td>
+										<td class="item-key"><textarea class="key"><?php echo $outlines[$i]['items'][$j]['key']; ?></textarea></td>
+										<td class="item-val"><textarea class="val"><?php echo $outlines[$i]['items'][$j]['val']; ?></textarea></td>
+									</tr>
+								</table>
+							</li>
+						<?php endfor; ?>
+					<?php endif; ?>
+				</ul>
+			</dd>
+		</dl>
+		<?php endfor; ?>
+	</div>
+	<input type="hidden" name="currentUrl" value="<?php echo $this->Html->url('/', true); ?>" />
+	<input type="hidden" name="userId" value="<?php echo $userData['id']; ?>" />
+	<input type="hidden" name="residenceId" value="<?php echo $residenceId; ?>" />
+	<input type="hidden" name="residenceName" value="<?php echo $residences['residences']['name']; ?>" />
+	<input type="hidden" name="frkNum" value="<?php echo $residences['residences']['num']; ?>" />
+	<input type="hidden" name="mtrOutlines" value='<?php echo json_encode($mtr_outlines); ?>' />
+	<script id="category-template" type="text/html">
+		<dl class="category" data-category-id="<%= categoryId %>">
+			<dt>
+				<input type="text" name="category-name" value="<%= categoryName %>" placeholder="ここにカテゴリ名称を記述">
+				<ul>
+					<li class="btn btn-primary add-category-btn"><span>追加</span></li>
+					<li class="btn btn-danger del-category-btn"><span>削除</span></li>
+					<li class="btn toggle-btn"><span>開閉</span></li>
+				</ul>
+			</dt>
+			<dd>
+				<ul class="connected-sortable items">
+				</ul>
+			</dd>
+		</dl>
+	</script>
+	<script id="item-template" type="text/html">
+						<li>
+							<input type="hidden" name="id" value="<%= itemId %>" />
+							<input type="hidden" name="mtr-outline-id" value="<%= mtrOutlineId %>" />
+							<input type="hidden" name="is-required" value="<%= isRequired === true ? 1 : 0 %>" />
+							<input type="hidden" name="frk-index" value="<%= frkIndex %>" />
+							<input type="hidden" name="key" value="<%= itemKey %>" />
+							<input type="hidden" name="val" value="<%= itemVal %>" />
+							<table class="item-inputs">
+								<tr>
+									<td class="btns-wrapper" rowspan="2">
+										<button class="btn btn-primary add-item-btn">+</button>
+										<button class="btn del-item-btn <%= isRequired === true ? 'disable' : '' %>">-</button>
+									</td>
+									<td class="item-type">入力タイプ</td>
+									<td class="frk-index">FRKでのインデックス</td>
+									<td class="item-key">項目名</td>
+									<td class="item-val">値</td>
+								</tr>
+								<tr>
+									<td class="item-type"><%= itemTypeLabel %></td>
+									<td class="frk-index">
+										<% if (isRequired === true) { %>
+											<%= frkIndex %>
+										<% } else { %>
+											<input type="text" name="frk-index" value="<%= frkIndex %>" placeholder="FRKでのインデックス">
+										<% } %>
+									</td>
+									<td class="item-key"><textarea class="key"><%= itemKey %></textarea></td>
+									<td class="item-val"><textarea class="val"><%= itemVal %></textarea></td>
+								</tr>
+							</table>
+						</li>
+	</script>
+	<script id="empty-item-template" type="text/html">
+						<li class="empty-item">
+							<table class="item-inputs">
+								<tr>
+									<td class="btns-wrapper">
+										<button class="btn btn-primary add-item-btn">+</button>
+									</td>
+									<td>
+										<span>ここにアイテムをドロップするか、左の「+」ボタンをクリックしてアイテムを追加してください。</span>
+									</td>
+								</tr>
+							</table>
+						</li>
+	</script>
+</div>

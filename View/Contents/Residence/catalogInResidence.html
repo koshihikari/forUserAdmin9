@@ -1,0 +1,369 @@
+<?php //debug($data); ?>
+<?php //debug($userData); ?>
+<?php //debug($companySites); ?>
+<?php //debug($residenceSites); ?>
+
+<!--
+<div class="tucked-corners-top">
+	<div class="tucked-corners-bottom">
+		現在、お客様が利用しているのは以下の物件です。<br />
+		物件を修正する場合、物件をクリックしてください。
+	</div>
+</div>
+var pagePath = data['Library_Page']['path'].match(/^\//) !== null ? data['Library_Page']['path'] : '/' + data['Library_Page']['path'];
+pagePath = prop['residencePath'] === '' ? pagePath.replace(/^\//, '') : pagePath;
+pagePath = pagePath === '/' ? '' : pagePath;
+concreteQrUrl = prop['concreteUrl'] + prop['residencePath'] + pagePath;
+concreteQrUrl = pagePath === '' && concreteQrUrl.match(/\/$/) === null ? concreteQrUrl + '/' : concreteQrUrl;
+
+
+concreteQrUrl = $companyUrl + $residenceSites[$i]['residences']['path'] + pagePath;
+-->
+
+
+<div id="wrapper">
+	<?php if ($isEnable['PageCatalog'] === true): ?>
+	<ul id="company-list" class="list">
+		<?php for ($i=0,$len=count($companySites); $i<$len; $i++): ?>
+			<?php
+				$companyUrl = $companySites[$i]['companies']['url'];
+				$companyName = $companySites[$i]['companies']['name'];
+			?>
+			<li>
+				<div class="info">
+					<p class="record-id"><?php echo $companySites[$i]['companies']['id']; ?></p>
+					<p class="name">
+						<?php if ($companyUrl !== null): ?>
+							<a href="<?php echo $companySites[$i]['companies']['url']; ?>" target="blank"><?php echo $companyName; ?></a>
+						<?php else: ?>
+							<?php echo $companyName; ?>
+						<?php endif; ?>
+					</p>
+					<?php
+						// if ($companySites[$i]['companies']['support_device']['isSmartphone'] === true) {
+							echo '<P>';
+							echo $this->Html->link(
+								'<span><i data-icon="M"></i>スマホサイトを編集する</span>',
+								'/Page/catalog/s//' . $companySites[$i]['residences']['id'],
+								array(
+									'escape'=>false,
+									'class'=>('btn btn-primary edit-smartphone-site'),
+									'data-placement'=>'bottom',
+									'data-original-title'=>$companyName . 'のスマホサイトを編集します。'
+								)
+							);
+							echo '</P>';
+						// }
+						// if ($companySites[$i]['companies']['support_device']['isFeaturephone'] === true) {
+							echo '<P>';
+							echo $this->Html->link(
+								'<span><i data-icon="o"></i>フィーチャーフォンサイトを編集する</span>',
+								'/Page/catalog/f//' . $companySites[$i]['residences']['id'],
+								array(
+									'escape'=>false,
+									'class'=>('btn btn-primary edit-featurephone-site'),
+									'data-placement'=>'bottom',
+									'data-original-title'=>$companyName . 'のフィーチャーフォンサイトを編集します。'
+								)
+							);
+							echo '</P>';
+						// }
+					?>
+				</div>
+			</li>
+		<?php endfor; ?>
+	</ul>
+	<?php endif; ?>
+	<ul id="residence-list" class="list">
+		<?php for ($i=0,$len=count($residenceSites); $i<$len; $i++): ?>
+		<?php $residenceName = $residenceSites[$i]['residences']['name']; ?>
+		<li>
+			<div class="info">
+				<p class="record-id"><?php echo $residenceSites[$i]['residences']['id']; ?></p>
+				<p class="name">
+					<?php
+						echo $this->Html->link(
+							$residenceName,
+							$residenceSites[$i]['companies']['url'] . $residenceSites[$i]['residences']['path'] . '/',
+							array(
+								'target'	=> 'blank'
+							)
+						);
+					?>
+				</p>
+				<?php if ($isEnable['OutlineEdit'] === true): ?>
+				<?php
+					echo '<P>';
+					echo $this->Html->link(
+						'<span><i data-icon="M"></i>物件情報修正</span>',
+						'/Outline/edit/' . $residenceSites[$i]['residences']['id'] . '/',
+						array(
+							'escape'=>false,
+							'class'=>('btn btn-primary edit-outline' . ($residenceSites[$i]['residences']['support_device']['isSmartphone'] === true ? ' enabled' : ' disabled')),
+							'data-placement'=>'bottom',
+				'data-original-title' => $residenceName . 'の物件の物件情報を編集します。'
+						)
+					);
+					echo '</P>';
+				?>
+				<?php endif; ?>
+				<?php if ($isEnable['PageCatalog'] === true): ?>
+				<?php
+					if ($residenceSites[$i]['residences']['support_device']['isSmartphone'] === true) {
+						echo '<P>';
+						echo $this->Html->link(
+							'<span><i data-icon="M"></i>スマホサイトを編集する</span>',
+							'/Page/catalog/s//' . $residenceSites[$i]['residences']['id'],
+							array(
+								'escape'=>false,
+								'class'=>('btn btn-primary edit-smartphone-site' . ($residenceSites[$i]['residences']['support_device']['isSmartphone'] === true ? ' enabled' : ' disabled')),
+								'data-placement'=>'bottom',
+								'data-original-title'=>$residenceName . 'のスマホサイトを編集します。'
+							)
+						);
+						echo '</P>';
+					}
+					if ($residenceSites[$i]['residences']['support_device']['isTablet'] === true) {
+						echo '<P>';
+						echo $this->Html->link(
+							'<span><i data-icon="N"></i>タブレットサイトを編集する</span>',
+							'/Page/catalog/t/',
+							array(
+								'escape'=>false,
+								'class'=>('btn btn-primary edit-tablet-site' . ($residenceSites[$i]['residences']['support_device']['isTablet'] === true ? ' enabled' : ' disabled')),
+								'data-placement'=>'bottom',
+								'data-original-title'=>$residenceName . 'のタブレットサイトを編集します。'
+							)
+						);
+						echo '</P>';
+					}
+					if ($residenceSites[$i]['residences']['support_device']['isFeaturephone'] === true) {
+						echo '<P>';
+						echo $this->Html->link(
+							'<span><i data-icon="o"></i>フィーチャーフォンサイトを編集する</span>',
+							'/Page/catalog/f//' . $residenceSites[$i]['residences']['id'],
+							array(
+								'escape'=>false,
+								'class'=>('btn btn-primary edit-featurephone-site' . ($residenceSites[$i]['residences']['support_device']['isFeaturephone'] === true ? ' enabled' : ' disabled')),
+								'data-placement'=>'bottom',
+								'data-original-title'=>$residenceName . 'のフィーチャーフォンサイトを編集します。'
+							)
+						);
+						echo '</P>';
+					}
+				?>
+				<?php endif; ?>
+			</div>
+		</li>
+		<?php endfor; ?>
+	</ul>
+</div>
+<!--
+<section>
+	<h2>企業サイト</h2>
+	<ul id="companyList" class="clearfix">
+		<?php for ($i=0,$len=count($companySites); $i<$len; $i++): ?>
+			<?php $companyName = $companySites[$i]['companies']['name']; ?>
+			<li class="clearfix">
+				<div class="screenShot">
+					<div class="imgWrapper">
+						<?php
+							echo $this->Html->image(
+								'tmp/screenshot' . ($i + 1) . '.png',
+								array(
+								)
+							);
+						?>
+					</div>
+				</div>
+				<div class="wrapper">
+					<p class="residenceName">
+						<?php
+							echo $this->Html->link(
+								$companyName,
+								$companySites[$i]['companies']['url'] . 's/' . $companySites[$i]['residences']['id'],
+								array(
+									'class'=>'companyName enabled',
+									'data-placement'=>'bottom',
+									'data-original-title'=>$companyName . 'のスマホサイトを開きます。'
+								)
+							)
+						?>
+					</p>
+					<?php
+						/*
+						echo $this->Html->link(
+							'<i data-icon="M"></i><span>スマホサイトを編集する</span>',
+							'/Page/catalog/s//' . $companySites[$i]['residences']['id'],
+							array(
+								'escape'=>false,
+								'class'=>('btn btn-primary editForPcBtn' . ($companySites[$i]['residences']['support_device']['isSmartphone'] === true ? ' enabled' : ' disabled')),
+								'data-placement'=>'bottom',
+								'data-original-title'=>$companyName . 'のスマホサイトを編集します。'
+							)
+						);
+						*/
+					?>
+					<?php
+						echo $this->Html->link(
+							'<span><i data-icon="M"></i>スマホサイトを編集する</span>',
+							'/Page/catalog/s//' . $companySites[$i]['residences']['id'],
+							array(
+								'escape'=>false,
+								'class'=>('btn btn-primary editForPcBtn' . ($companySites[$i]['residences']['support_device']['isSmartphone'] === true ? ' enabled' : ' disabled')),
+								'data-placement'=>'bottom',
+								'data-original-title'=>$companyName . 'のスマホサイトを編集します。'
+							)
+						);
+					?>
+					<?php
+						/*
+						echo '<button class="btn btn-primary editForPcBtn btn-test btn-disable"><i data-icon="N"></i><span>タブレットサイトを編集する</span></button>';
+						*/
+					?>
+					<?php
+						/*
+						echo '<button class="btn btn-primary editForPcBtn btn-test btn-disable"><span><i data-icon="N"></i>タブレットサイトを編集する</span></button>';
+						*/
+					?>
+					<?php
+						if ($companySites[$i]['residences']['support_device']['isFeaturephone'] === true) {
+							echo $this->Html->link(
+								'<span><i data-icon="o"></i>フィーチャーフォンサイトを編集する</span>',
+								'/Page/catalog/f//' . $companySites[$i]['residences']['id'],
+								array(
+									'escape'=>false,
+									'class'=>('btn btn-primary editForPcBtn' . ($companySites[$i]['residences']['support_device']['isFeaturephone'] === true ? ' enabled' : ' disabled')),
+									'data-placement'=>'bottom',
+									'data-original-title'=>$companyName . 'のフィーチャーフォンサイトを編集します。'
+								)
+							);
+						}
+					?>
+					<?php
+						/*
+						echo $this->Html->link(
+							'<i data-icon="o"></i><span>フィーチャーフォンサイトを編集する</span>',
+							'/Page/catalog/f//' . $companySites[$i]['residences']['id'],
+							array(
+								'escape'=>false,
+								'class'=>('btn btn-primary editForPcBtn' . ($companySites[$i]['residences']['support_device']['isFeaturephone'] === true ? ' enabled' : ' disabled')),
+								'data-placement'=>'bottom',
+								'data-original-title'=>$companyName . 'のフィーチャーフォンサイトを編集します。'
+							)
+						);
+						*/
+					?>
+				</div>
+			</li>
+		<?php endfor; ?>
+	</ul>
+</section>
+<section>
+	<h2>物件サイト</h2>
+	<ul id="residenceList" class="clearfix">
+		<?php for ($i=0,$len=count($residenceSites); $i<$len; $i++): ?>
+			<?php //$residenceName = $data[$i]['Frk']['bukken_mei'] ? $data[$i]['Frk']['bukken_mei'] : '「物件名が設定されていません」'; ?>
+			<?php $residenceName = $residenceSites[$i]['residences']['name']; ?>
+			<li class="clearfix">
+				<div class="screenShot">
+					<div class="imgWrapper">
+						<?php
+							echo $this->Html->image(
+								'tmp/screenshot' . ($i + 1) . '.png',
+								array(
+								)
+							);
+						?>
+					</div>
+				</div>
+				<div class="wrapper">
+					<p class="residenceName">
+						<?php
+							echo $this->Html->link(
+								$residenceName,
+								$residenceSites[$i]['companies']['url'] . 's/' . $residenceSites[$i]['residences']['id'],
+								array(
+									'class'=>'residenceName enabled',
+									'data-placement'=>'bottom',
+									'data-original-title'=>$residenceName . 'のスマホサイトを開きます。'
+								)
+							)
+						?>
+					</p>
+					<?php
+						echo $this->Html->link(
+							'<span><i data-icon="M"></i>物件情報修正</span>',
+							'/Outline/edit/' . $residenceSites[$i]['residences']['id'] . '/',
+							array(
+								'escape'=>false,
+								'class'=>('btn btn-primary editForPcBtn' . ($residenceSites[$i]['residences']['support_device']['isSmartphone'] === true ? ' enabled' : ' disabled')),
+								'data-placement'=>'bottom',
+					'data-original-title' => $residenceName . 'の物件の物件情報を編集します。'
+							)
+						);
+					?>
+					<?php
+						/*
+						echo $this->Html->link(
+							'<i data-icon="M"></i><span>物件情報修正</span>',
+							'/Outline/edit/' . $residenceSites[$i]['residences']['id'] . '/',
+							array(
+								'escape'=>false,
+								'class'=>('btn btn-primary editForPcBtn' . ($residenceSites[$i]['residences']['support_device']['isSmartphone'] === true ? ' enabled' : ' disabled')),
+								'data-placement'=>'bottom',
+					'data-original-title' => $residenceName . 'の物件の物件情報を編集します。'
+							)
+						);
+						*/
+					?>
+					<?php
+						if ($residenceSites[$i]['residences']['support_device']['isSmartphone'] === true) {
+							echo $this->Html->link(
+								'<span><i data-icon="M"></i>スマホサイトを編集する</span>',
+								'/Page/catalog/s//' . $residenceSites[$i]['residences']['id'],
+								array(
+									'escape'=>false,
+									'class'=>('btn btn-primary editForPcBtn' . ($residenceSites[$i]['residences']['support_device']['isSmartphone'] === true ? ' enabled' : ' disabled')),
+									'data-placement'=>'bottom',
+									'data-original-title'=>$residenceName . 'のスマホサイトを編集します。'
+								)
+							);
+						}
+						if ($residenceSites[$i]['residences']['support_device']['isTablet'] === true) {
+							echo $this->Html->link(
+								'<span><i data-icon="N"></i>タブレットサイトを編集する</span>',
+								'/Page/catalog/t/',
+								array(
+									'escape'=>false,
+									'class'=>('btn btn-primary editForPcBtn' . ($residenceSites[$i]['residences']['support_device']['isTablet'] === true ? ' enabled' : ' disabled')),
+									'data-placement'=>'bottom',
+									'data-original-title'=>$residenceName . 'のタブレットサイトを編集します。'
+								)
+							);
+						}
+						if ($residenceSites[$i]['residences']['support_device']['isFeaturephone'] === true) {
+							echo $this->Html->link(
+								'<span><i data-icon="o"></i>フィーチャーフォンサイトを編集する</span>',
+								'/Page/catalog/f//' . $residenceSites[$i]['residences']['id'],
+								array(
+									'escape'=>false,
+									'class'=>('btn btn-primary editForPcBtn' . ($residenceSites[$i]['residences']['support_device']['isFeaturephone'] === true ? ' enabled' : ' disabled')),
+									'data-placement'=>'bottom',
+									'data-original-title'=>$residenceName . 'のフィーチャーフォンサイトを編集します。'
+								)
+							);
+						}
+					?>
+				</div>
+			</li>
+		<?php endfor; ?>
+	</ul>
+</section>
+-->
+<script>
+	jQuery.noConflict();
+	jQuery(document).ready(function($){
+		$('#contentForUserAdmin a[data-placement][data-original-title][class*="enabled"]').tooltip();
+	});
+</script>

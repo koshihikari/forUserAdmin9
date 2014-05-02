@@ -1,0 +1,84 @@
+@charset "utf-8";
+
+
+@borderColor: #e3e3e3;
+@tdFirstChildWidth: 150px;
+
+@hightligthBorder: 1px solid rgba(255, 255, 255, 0.4);
+@darknessBorder: 1px solid rgba(0, 0, 0, 0.2);
+.embosBox() {
+	border-top: @darknessBorder;
+	border-left: @darknessBorder;
+	border-right: @hightligthBorder;
+	border-bottom: @hightligthBorder;
+	border-radius: 5px;
+	box-shadow: inset 1px 1px 0 rgba(0, 0, 0, 0.2), inset -1px -1px 0 rgba(255, 255, 255, 0.4);
+}
+// #indexInAdmin {
+#catalogInResidence {
+	#residenceList {
+		margin-left: 0;
+		
+		li {
+			margin: 0 10px 50px 0;
+			float: left;
+			width: 455px;
+			
+			background: rgba(255, 255, 255, 0.1);
+			.embosBox();
+			padding: 10px;
+			
+			
+			.residenceName {
+				width: 310px;
+				overflow: hidden;
+				display: block;
+				text-overflow: ellipsis;
+				white-space: nowrap;
+			}
+			
+			.screenShot {
+			//	border: 1px solid #ddd;
+			//	background: #003;
+				background: rgba(255, 255, 255, 0.8);
+				width: 130px;
+				height: 182px;
+				overflow: hidden;
+				float: left;
+			//	display: table;
+				
+				> .imgWrapper {
+					display: table-cell;
+					text-align: center;
+				//	vertical-align: middle;
+				}
+			}
+			
+			.wrapper {
+				margin-left: 140px;
+				
+				> a {
+					margin-top: 5px;
+				//	padding: 5px 10px;
+				//	border-radius: 5px;
+					display: table;
+					
+					&:first-child {
+						margin: 0;
+					}
+					
+					> i {
+					//	font-size: 24px;
+						display: inline-block;
+					}
+					
+					> span {
+						display: inline-block;
+					//	vertical-align: bottom;
+						padding-left: 5px;
+					}
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,92 @@
+@charset "utf-8";
+
+
+@borderColor: #e3e3e3;
+@tdFirstChildWidth: 150px;
+
+body {
+	background: #fdfdfd;
+}
+#indexInAbout {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	text-decoration: none;
+	background-color: white;
+	font-size: small;
+	line-height: 125%;
+	font-style: normal;
+	font-weight: normal;
+	
+	#print {
+		width: 700px;
+		margin: 0 auto 3px;
+		text-align: right;
+		
+		> a {
+			width: 100px;
+			_width: 110px;
+			margin: 0 0 0 auto;
+			background: url(../img/confirm/about/print.gif) no-repeat left center;
+			display: block;
+			padding-left: 15px;
+			color: #4E5B7C;
+			font-size: 10px;
+			text-decoration: none;
+		}
+	}
+	
+	#close {
+		margin: 0 auto;
+		padding: 0;
+		
+		> a {
+			color: #4E5B7C;
+			font-size: 10px;
+			text-decoration: none;
+			margin: 20px auto 0;
+			width: 90px;
+			_width: 100px;
+			display: block;
+			padding-left: 12px;
+			background: url(../img/confirm/about/close.gif) no-repeat left center;
+		}
+	}
+	
+	#aboutTable {
+		width: 700px;
+		margin: 0 auto;
+		padding: 0;
+		background-color: white;
+		font-size: 12px;
+		border-spacing: 2px;
+		border-collapse: separate;
+		
+		caption {
+			margin: 0 auto;
+			padding: 0;
+			_padding: 9px 0;
+			height: 31px;
+			text-indent: -9999px;
+			background-image: url(../img/confirm/about/gaiyo_head.gif);
+		}
+		
+		tr {
+			> th,
+			> td {
+				border-right: 1px solid #999;
+				border-bottom: 1px solid #999;
+				padding: 5px 0 5px 10px;
+				color: #666;
+				line-height: 150%;
+				text-align: left;
+			}
+			
+			> th {
+				font-weight: normal;
+				width: 190px;
+				background: #F2F2F2;
+			}
+		}
+	}
+}

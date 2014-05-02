@@ -1,0 +1,56 @@
+
+
+
+<input type="hidden" name="currentUrl" value="<?php echo $this->Html->url('/', true); ?>" />
+<input type="hidden" name="concreteUrl" value="<?php echo $data['companies']['url']; ?>" />
+<input type="hidden" name="residencePath" value="<?php echo $data['ResidenceCompanyInfoAction']['path']; ?>" />
+<input type="hidden" name="companyId" value="<?php echo $data['companies']['id']; ?>" />
+<input type="hidden" name="residenceId" value="<?php echo $residenceId; ?>" />
+<input type="hidden" name="userId" value="<?php echo $userData['id']; ?>" />
+<input type="hidden" name="previewUrl" value="<?php echo $data['companies']['url']; ?>" />
+
+
+<div id="container">
+	<ul id="pageProperties">
+		<li>
+			<div class="key">ページパス</div>
+			<div class="val"><input type="text" name="path" value="<?php echo $pageInfo['path']; ?>" /></div>
+		</li>
+		<li>
+			<div class="key">ページタイトル</div>
+			<div class="val"><input type="text" name="title" value="<?php echo $pageInfo['title']; ?>" /></div>
+		</li>
+		<li>
+			<div class="key">キーワード</div>
+			<div class="val"><textarea><?php echo $pageInfo['keywords']; ?></textarea></div>
+		</li>
+		<li>
+			<div class="key">デスクリプション</div>
+			<div class="val"><textarea><?php echo $pageInfo['description']; ?></textarea></div>
+		</li>
+		<?php for ($i=0,$len=count($tags); $i<$len; $i++): ?>
+		<li>
+			<div class="key">
+				アナリティクス
+				<button type="button" class="btn btn-primary add-tag-are-btn" data-item-name="add-tag-area" data-placement="bottom" data-original-title="アナリティクス記述用エリアを追加します"><span><i data-icon=""></i>追加</span></button>
+				<button type="button" class="btn btn-danger del-tag-are-btn" data-item-name="del-tag-area" data-placement="bottom" data-original-title="このアナリティクス記述用エリアを削除します"><span><i data-icon=""></i>削除</span></button>
+			</div>
+			<div class="val">
+				<ul id="tagProperties">
+					<li>
+						<div class="key">タグ</div>
+						<div class="val"><input type="text" name="tag" value="<?php echo $tags[$i]['page_tags']['tag_name']; ?>" /></div>
+					</li>
+					<li>
+						<div class="key">コード</div>
+						<div class="val">
+							<textarea><?php echo $tags[$i]['page_tags']['tag_code']; ?></textarea>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</li>
+		<?php endfor; ?>
+	</ul>
+</div>
+

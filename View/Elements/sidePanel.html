@@ -1,0 +1,122 @@
+<?php if (isset($userData)): ?>
+<?php //$pageName = 'indexInAdmin'; ?>
+<?php $pageName = $this->action . 'In' . $this->name; ?>
+<div id="sidr">
+	<div>
+		<p class="user">
+			<span><i data-icon="&#x0061;"></i><?php echo $userData['name']; ?></span>
+		</p>
+		<ul>
+			<li class="logout">
+				<?php
+					echo $this->Html->link(
+						'<i data-icon="&#xe19b;"></i><span>ログアウト</span>',
+						array(
+							'controller' => '',
+							'action' => 'logout'
+						),
+						array(
+							'class' => 'btn btn-danger',
+							'escape' => false
+						)
+					);
+				?>
+			</li>
+			<li class="main">
+				<?php
+					echo $this->Html->link(
+						'<i data-icon="&#xe19b;"></i><span>物件一覧</span>',
+						'/Main/',
+						array(
+							'class' => $pageName === 'indexInMain' ? ' current' : '',
+							'escape' => false
+						)
+					);
+				?>
+			</li>
+			<?php if ($isEnable['ResidenceCatalog'] === true): ?>
+			<li class="residences">
+				<?php
+					echo $this->Html->link(
+						'<i data-icon="&#xe19b;"></i><span>物件一覧(旧ver)</span>',
+						'/Residence/catalog/',
+						array(
+							'class' => $pageName === 'catalogInResidence' ? ' current' : '',
+							'escape' => false
+						)
+					);
+				?>
+			</li>
+			<?php endif; ?>
+			<?php if ($isEnable['LibraryCatalog'] === true): ?>
+			<li class="libraries">
+				<?php
+					echo $this->Html->link(
+						'<i data-icon="&#xE00A;"></i><span>共通パーツ一覧</span>',
+						'/Library/catalog/s/',
+						array(
+							'class' => '' . ($pageName === 'catalogInLibrary' ? ' current' : ''),
+							'escape' => false,
+							'data-placement' => 'right'
+						)
+					);
+				?>
+			</li>
+			<?php endif; ?>
+			<?php if (isset($residenceId) && $residenceId): ?>
+			<li class="outline">
+				<?php
+					echo $this->Html->link(
+						'<i data-icon="&#x0026;"></i><span>物件情報編集</span>',
+						'/Outline/edit/' . $residenceId . '/',
+						array(
+							'class' => $pageName === 'indexInAdmin' ? ' current' : '',
+							'escape' => false
+						)
+					);
+				?>
+			</li>
+			<?php endif; ?>
+		</ul>
+			<!--
+			<?php if (isset($supportDevice)): ?>
+				<?php if ($isEnable['PageCatalog'] === true && $supportDevice['isSmartphone'] === true): ?>
+				<dl>
+					<dt><span><i data-icon="&#x004d;"></i>スマートフォン</span></dt>
+					<dd>
+						<?php
+							echo $this->Html->link(
+								'<i data-icon="&#xe0c3;"></i><span>ページ一覧</span>',
+								'/Page/catalog/s/' . $residenceId . '/',
+								array(
+									'class' => '' . ($pageName === 'catalogInPage' ? ' current' : ''),
+									'escape' => false
+								)
+							);
+						?>
+					</dd>
+				</dl>
+				<?php endif; ?>
+
+				<?php if ($isEnable['PageCatalog'] === true && $supportDevice['isSmartphone'] === true): ?>
+				<dl>
+					<dt><span><i data-icon="&#x004f;"></i>フィーチャーフォン</span></dt>
+					<dd>
+						<?php
+							echo $this->Html->link(
+								'<i data-icon="&#xe0c3;"></i><span>ページ一覧</span>',
+								'/Page/catalog/f/' . $residenceId . '/',
+								array(
+									'class' => '' . ($pageName === 'catalogInPage' ? ' current' : ''),
+									'escape' => false
+								)
+							);
+						?>
+					</dd>
+				</dl>
+				<?php endif; ?>
+			<?php endif; ?>
+		-->
+	</div>
+</div>
+<?php endif; ?>

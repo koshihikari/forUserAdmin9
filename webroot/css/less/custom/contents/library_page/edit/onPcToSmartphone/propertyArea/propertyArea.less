@@ -1,0 +1,830 @@
+@charset "utf-8";
+
+
+@primaryColor: rgba(149, 202, 223, 1);
+@primaryColor: rgb(64, 70, 78);
+@primaryColor: rgb(32, 42, 56);
+
+#editInLibrary,
+#editInPage {
+	#propertyArea {
+		width: 50%;
+		height: 100%;
+		float: left;
+		float: right;
+			> p {
+				text-align: left;
+			}
+
+			> div {
+				// margin-top: 6px;
+				box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.4), inset 0 0 500px rgba(0, 0, 0, 0.03);
+				// padding: 20px;
+				// padding-right: 10px;
+				padding: 10px;
+				padding-right: 0;
+				height: 810px;
+				background: -webkit-gradient(linear, left top, left bottom, from(rgba(253, 246, 227, 0.2)), to(rgba(253, 246, 227, 0.3)));
+				border-radius: 5px;
+
+
+				border: 1px solid rgba(0, 0, 0, 0.1);
+				border-right: 1px solid rgba(0, 0, 0, 0.2);
+				box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3), inset 1px 0 0 rgba(255, 255, 255, 0.3), 2px 0 0 rgba(255, 255, 255, 0.2), 0 2px 0 rgba(255, 255, 255, 0.2);
+				// border-radius: 10px;
+
+				// background: red;
+				padding-bottom: 0;
+				margin-top: 23px;
+				height: 628px;
+				padding-top: 5px;
+			}
+
+			input[type="text"],
+			textarea {
+				width: 90%;
+				margin: 5px 0;
+				// border: none;
+				// background: -webkit-gradient(linear,left top,left bottom,from(rgba(255, 255, 255, 0.6)),to(rgba(255, 255, 255, 0.9)));
+				// padding: 6px 10px 4px;
+				// box-shadow: inset 0 1px 7px rgba(0, 0, 0, 0.4);
+				// border-radius: 5px;
+
+				&:focus {
+					// box-shadow: inset 0 1px 7px rgba(0, 0, 0, 0.4), inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(82, 168, 236, 0.6)
+				}
+
+				&.color-input {
+					background: -webkit-gradient(linear,left top,left bottom,from(rgba(255, 255, 255, 0.3)),to(rgba(255, 255, 255, 0.6)))
+				}
+			}
+
+			.btn {
+				i {
+					vertical-align: top;
+				}
+			}
+
+			#masterPropertyElem {
+				display: none;
+			}
+
+			.propertyElem {
+				// background: blue;
+				.duplicateBtn {
+					display: none;
+				}
+			}
+
+			.propsWrapper {
+				overflow-x: hidden;
+				overflow-y: scroll;
+				height: 750px;
+				padding-right: 5px;
+				margin-top: 10px;
+
+				.propertyElement {
+
+					.elementTitle {
+						width: 99%;
+						color: #a40000;
+						color: rgb(75,94,114);
+						padding: 0;
+						text-align: center;
+						// border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+						// box-shadow: 0 1px 0 rgba(255, 255, 255, 0.2);
+						border-bottom: 1px solid #4387f5;
+						box-shadow: 0 1px 0 rgba(255, 255, 255,0.8), inset 0 -1px 0 rgba(0, 0,0,0.2);
+						margin: 10px 0;
+						cursor: pointer;
+					}
+
+					.slider {
+						width: 70%;
+						display: inline-block;
+
+						&+input {
+							margin: 0 5px 0 10px;
+							display: inline-block;
+							width: 30px;
+						}
+
+						.ui-widget-header {
+							// background: @primaryColor;
+						}
+						.ui-slider-handle {
+							width: 1.5rem;
+							height: 1.5rem;
+							border: 2px solid rgb(240, 240, 240);
+							top: -3px;
+						}
+					}
+					/*
+					*/
+
+					.control-group {
+						margin: 0;
+						display: table;
+						width: 100%;
+
+						.control-label {
+							display: table-cell;
+							width: 100px;
+							font-size: 0.9em;
+							vertical-align: middle;
+							cursor: default;
+						}
+						.controls {
+							display: table-cell;
+							border-top: 1px solid rgba(0, 0, 0, 0.2);
+							box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3);
+							padding: 15px 0 10px;
+
+							.box {
+								display: table;
+								width: 100%;
+
+								> * {
+									display: table-cell;
+								}
+
+								> .sliderWrapper {
+									width: 100%;
+
+									.slider {
+										width: 100%;
+									}
+								}
+
+								> input[type="text"] {
+									width: 44px;
+									margin-left: 10px;
+
+									&[data-item-name="slideshowSpeed"],
+									&[data-item-name="animationSpeed"] {
+										width: 48px;
+										text-align: right;
+									}
+								}
+
+								> .unit {
+									padding: 0 10px 0 5px;
+								}
+							}
+						}
+
+						&:first-child {
+							.controls {
+								border-top: none;
+								box-shadow: none;
+								padding-top: 0;
+							}
+						}
+					}
+
+					.colorPicker {
+						> div {
+							.colorCodeInput {
+								width: 6em;
+							}
+
+							> a {
+								vertical-align: top;
+								// margin-top: 3px;
+								margin-top: 8px;
+							}
+						}
+					}
+				}
+			}
+
+			.slider,
+			.ui-slider,
+			.ui-slider-handle {
+				cursor: pointer;
+			}
+
+
+
+			/*******************************************************************/
+			/* ここからドロップダウンメニューのスタイル */
+			/*******************************************************************/
+			div {
+				&.dropdown-menu {
+					background: rgba(240, 240, 240, 0.8);
+
+					> .btn {
+						display: inline-block;
+						margin: 5px;
+
+						// &:hover {
+						// //	padding: 6px 20px 4px 20px;
+						// }
+					}
+				}
+			}
+
+			/*
+			.forBorderElement {
+				.dropdown-menu {
+					margin-top: -176px;
+				}
+			}
+			*/
+			/*******************************************************************/
+			/* ここまでドロップダウンメニューのスタイル */
+			/*******************************************************************/
+
+
+
+
+
+			/*******************************************************************/
+			/* ここからアコーディオンプロパティエリアのスタイル */
+			/*******************************************************************/
+			.forAccordionElement {
+
+				.listOrderWrapper {
+					ul {
+						margin: 0;
+
+						> li {
+
+							&.place-holder {
+								background: rgba(0, 0, 200, 0.3);
+							}
+						}
+					}
+				}
+			}
+			/*******************************************************************/
+			/* ここまでアコーディオンプロパティエリアのスタイル */
+			/*******************************************************************/
+
+
+
+			/*******************************************************************/
+			/* ここから背景プロパティエリアのスタイル */
+			/*******************************************************************/
+			.forBgElement {
+
+				.bgColorWrapper {
+					margin-bottom: -2px;
+
+					.controls {
+						margin-left: -16px;
+
+						input {
+						//	width: 60px;
+							margin-left: 5px;
+						}
+					}
+				}
+
+				.bgGradationWrapper {
+
+					.controls {
+
+						.box {
+
+							> .key {
+								display: inline-block;
+								width: 40px;
+							}
+						}
+					}
+				}
+
+				.bgImageWrapper {
+					margin-bottom: -2px;
+				}
+			}
+			/*******************************************************************/
+			/* ここまで背景プロパティエリアのスタイル */
+			/*******************************************************************/
+
+
+
+			/*******************************************************************/
+			/* ここからボーダープロパティエリアのスタイル */
+			/*******************************************************************/
+			.forBorderElement {
+
+				.borderColorWrapper {
+					margin-bottom: -2px;
+
+					.controls {
+						margin-left: -16px;
+
+						input {
+						//	width: 60px;
+							margin-left: 5px;
+						}
+					}
+				}
+
+				.borderWidthWrapper,
+				.borderRadiusWrapper {
+
+					.controls {
+
+						.box {
+
+							> .key {
+								display: inline-block;
+								width: 50px;
+							}
+						}
+					}
+				}
+			}
+			/*******************************************************************/
+			/* ここまでボーダープロパティエリアのスタイル */
+			/*******************************************************************/
+
+
+
+			/*******************************************************************/
+			/* ここからコードプロパティエリアのスタイル */
+			/*******************************************************************/
+			.forCodeElement {
+
+				textarea {
+					height: 500px;
+				}
+			}
+			/*******************************************************************/
+			/* ここまでコードプロパティエリアのスタイル */
+			/*******************************************************************/
+
+
+
+			/*******************************************************************/
+			/* ここからギャラリープロパティエリアのスタイル */
+			/*******************************************************************/
+			.forGalleryElement {
+
+				.imagesWrapper {
+					.control-label {
+						display: block !important;
+						width: 100% !important;
+					}
+					.controls {
+						display: block !important;
+
+						ul {
+							margin: 0 10px 20px 0;
+							border: 1px solid rgba(0, 0, 0, 0.2);
+							padding: 10px;
+							min-height: 300px;
+							border-radius: 5px;
+							box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3), 1px 0 0 rgba(255, 255, 255, 0.3), inset 1px 0 0 rgba(255, 255, 255, 0.3), 0 1px 0 rgba(255, 255, 255, 0.3);
+
+							&:before {
+								content: 'ギャラリーに追加したい写真をここにドロップしてください';
+								color: rgba(200, 50, 50, 0.9);
+								font-size: 90%;
+								line-height: 120%;
+								margin-bottom: 10px;
+							}
+
+							> li {
+								width: 100px;
+								float: left;
+								margin: 0 10px 10px 0;
+								text-align: center;
+								cursor: pointer;
+
+								> img {
+									max-height: 50px;
+								}
+
+								> .del-btn {
+									margin-top: 5px;
+								}
+
+								&.placeholder {
+									background: rgba(230, 215, 167, 0.5);
+								}
+							}
+						}
+					}
+					.control-group {
+						.control-label {
+							display: inline-block !important;
+							width: auto !important;
+							margin-top: 5px;
+						}
+						.add-image-btn {
+							display: inline-block;
+							float: right;
+							margin-right: 10px;
+						}
+						.controls {
+							clear: both;
+						}
+					}
+				}
+			}
+			/*******************************************************************/
+			/* ここまでギャラリープロパティエリアのスタイル */
+			/*******************************************************************/
+
+
+
+			/*******************************************************************/
+			/* ここからアイコンプロパティエリアのスタイル */
+			/*******************************************************************/
+			.forIconElement {
+
+				.iconSelectWrapper {
+					>ul {
+						margin: 0 0 10px;
+						>li {
+							display: inline-block;
+							margin: 5px;
+							border-top: 1px solid rgba(0,0,0,0.2);
+							border-bottom: 1px solid rgba(255,255,255,0.9);
+							border-left: 1px solid rgba(0,0,0,0.2);
+							border-right: 1px solid rgba(0,0,0,0.2);
+							box-shadow: inset 0 1px 0 rgba(255,255,255,0.5), inset 1px 0 0 rgba(255,255,255,0.5), inset -1px 0 0 rgba(255,255,255,0.5), inset 0 -1px 0 rgba(0,0,0,0.2);
+							cursor: pointer;
+							background: none;
+
+							&:hover {
+								background: -webkit-gradient(linear,left top,left bottom,from(rgba(97,223,66,0.7)),to(rgba(97,223,66,0.3)));
+								border-top: 1px solid rgba(0,0,0,0.2);
+								border-bottom: 1px solid rgba(255,255,255,0.9);
+								border-left: 1px solid rgba(0,0,0,0.2);
+								border-right: 1px solid rgba(0,0,0,0.2);
+								box-shadow: inset 0 1px 3px rgba(0,0,0,0.2), inset 1px 0 3px rgba(0,0,0,0.2), inset -1px 0 3px rgba(0,0,0,0.2), inset 0 -1px 3px rgba(255,255,255,0.5);
+							}
+
+							&.active {
+								border-top: 1px solid rgba(0,0,0,0.2);
+								border-bottom: 1px solid rgba(255,255,255,0.9);
+								border-left: 1px solid rgba(0,0,0,0.2);
+								border-right: 1px solid rgba(0,0,0,0.2);
+								box-shadow: inset 0 1px 3px rgba(0,0,0,0.2), inset 1px 0 3px rgba(0,0,0,0.2), inset -1px 0 3px rgba(0,0,0,0.2), inset 0 -1px 3px rgba(255,255,255,0.5);
+							}
+
+							>i {
+								font-size: 2rem;
+								width: 100%;
+								height: 100%;
+								padding: 5px;
+								color: rgb(100, 100, 100);
+							}
+						}
+					}
+				}
+				.textInputWrapper {
+
+					.control-label {
+						vertical-align: bottom;
+						display: inline-block;
+						width: 70px;
+					}
+
+					.btn-group {
+						display: inline-block;
+					}
+				}
+
+				.textBaseWrapper {
+
+					.colorWrapper {
+						margin-bottom: -2px;
+
+						.controls {
+							margin-left: -16px;
+						}
+					}
+
+					div[data-toggle="buttons-checkbox"] {
+						white-space: normal;
+					}
+				}
+
+				.textShadowWrapper {
+					.controls {
+
+						> .box {
+
+							> .key {
+								display: inline-block !important;
+								width: 60px;
+							}
+						}
+
+						.textShadowColorWrapper {
+							.colorPicker {
+								width: 100%;
+							}
+						}
+					}
+				}
+
+				textarea {
+					height: 100px;
+				}
+			}
+			/*******************************************************************/
+			/* ここからアイコンプロパティエリアのスタイル */
+			/*******************************************************************/
+
+
+
+			/*******************************************************************/
+			/* ここから画像プロパティエリアのスタイル */
+			/*******************************************************************/
+			.forImageElement {
+
+				.imgViewWrapper {
+					img {
+						max-height: 150px;
+					}
+				}
+
+				.imageSizeWrapper {
+
+					> .controls {
+
+						.box {
+
+							> .key {
+								display: inline-block;
+								width: 50px;
+							}
+
+							> input[type="text"] {
+								margin-left: 20px !important;
+							}
+						}
+					}
+
+					.group {
+						margin-top: 20px;
+
+						&:first-child {
+							margin: 0;
+						}
+
+						.pixel,
+						.percent {
+							border: 1px solid rgba(0, 0, 0, 0.2);
+							padding: 10px 20px;
+							box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3), 1px 0 0 rgba(255, 255, 255, 0.3), inset 1px 0 0 rgba(255, 255, 255, 0.3), 0 1px 0 rgba(255, 255, 255, 0.3);
+							border-radius: 5px;
+						}
+					}
+				}
+			}
+			/*******************************************************************/
+			/* ここまで画像プロパティエリアのスタイル */
+			/*******************************************************************/
+
+
+
+			/*******************************************************************/
+			/* ここから配置プロパティエリアのスタイル */
+			/*******************************************************************/
+			.forLayoutElement {
+
+					div[data-toggle="buttons-radio"] {
+						white-space: normal;
+					}
+			}
+			/*******************************************************************/
+			/* ここまで配置プロパティエリアのスタイル */
+			/*******************************************************************/
+
+
+
+			/*******************************************************************/
+			/* ここから配置プロパティエリアのスタイル */
+			/*******************************************************************/
+			.forLinkElement {
+
+				.urlWrapper {
+					> .controls {
+						> .group {
+							&:last-child {
+								margin-top: 20px;
+							}
+							.linkUrl,
+							.linkPage,
+							.mapUrl {
+								display: block;
+								border: 1px solid rgba(0, 0, 0, 0.2);
+								padding: 10px 20px;
+								margin-left: 50px;
+								box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3), 1px 0 0 rgba(255, 255, 255, 0.3), inset 1px 0 0 rgba(255, 255, 255, 0.3), 0 1px 0 rgba(255, 255, 255, 0.3);
+								border-radius: 5px;
+
+								> .controls {
+									width: 100% !important;
+									display: inline-block !important;
+								}
+							}
+							.linkPage {
+								.control-label {
+									width: auto;
+								}
+							}
+						}
+					}
+				}
+			}
+			/*******************************************************************/
+			/* ここまで配置プロパティエリアのスタイル */
+			/*******************************************************************/
+
+
+
+			/*******************************************************************/
+			/* ここから地図プロパティエリアのスタイル */
+			/*******************************************************************/
+			.forMapElement {
+
+				.address {
+					.addressGroup {
+						display: table;
+						width: 100%;
+
+						> * {
+							display: table-cell;
+						}
+
+						> span {
+							width: 40px;
+						}
+
+						> input[type="text"] {
+							width: 95%;
+						}
+					}
+				}
+
+				.latitude,
+				.longitude {
+					display: inline-block;
+
+					input[type="text"] {
+						width: 100px;
+						text-align: right;
+						margin: 5px;
+					}
+				}
+
+				.latitude {
+					margin-right: 30px;
+				}
+
+				.mapWrapper {
+					.group {
+						margin-top: 20px;
+
+						&:first-child {
+							margin-top: 0;
+						}
+					}
+					.address,
+					.latlong {
+						border: 1px solid rgba(0, 0, 0, 0.2);
+						padding: 10px 20px;
+						margin-left: 50px;
+						box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3), 1px 0 0 rgba(255, 255, 255, 0.3), inset 1px 0 0 rgba(255, 255, 255, 0.3), 0 1px 0 rgba(255, 255, 255, 0.3);
+						border-radius: 5px;
+					}
+				}
+
+				.mapSizeWrapper {
+					.box {
+						.key {
+							display: inline-block !important;
+							width: 40px;
+						}
+
+						input[type="text"] {
+							margin-left: 20px !important;
+						}
+					}
+				}
+
+
+				/*
+				.mapScaleWrapper {
+					.box {
+						input[type="text"] {
+							margin-left: 20px !important;
+						}
+					}
+				}
+				*/
+			}
+			/*******************************************************************/
+			/* ここまで地図プロパティエリアのスタイル */
+			/*******************************************************************/
+
+
+
+			/*******************************************************************/
+			/* ここからサイズプロパティエリアのスタイル */
+			/*******************************************************************/
+			.forSizeElement {
+
+					.percentWidth,
+					.pixelWidth {
+						.key {
+							width: 100px;
+						}
+					}
+			}
+			/*******************************************************************/
+			/* ここまでサイズプロパティエリアのスタイル */
+			/*******************************************************************/
+
+
+
+			/*******************************************************************/
+			/* ここから間隔プロパティエリアのスタイル */
+			/*******************************************************************/
+			.forSpaceElement {
+
+				.controls {
+
+					> .box {
+
+						> .key {
+							display: inline-block !important;
+							width: 40px;
+						}
+					}
+				}
+			}
+			/*******************************************************************/
+			/* ここまで間隔プロパティエリアのスタイル */
+			/*******************************************************************/
+
+
+
+			/*******************************************************************/
+			/* ここからテキストプロパティエリアのスタイル */
+			/*******************************************************************/
+			.forTextElement {
+
+				.textInputWrapper {
+
+					.control-label {
+						vertical-align: bottom;
+						display: inline-block;
+						width: 70px;
+					}
+
+					.btn-group {
+						// display: inline-block;
+						// display: none;
+					}
+				}
+
+				.textBaseWrapper {
+
+					.colorWrapper {
+						margin-bottom: -2px;
+
+						.controls {
+							margin-left: -16px;
+						}
+					}
+
+					div[data-toggle="buttons-checkbox"] {
+						white-space: normal;
+					}
+				}
+
+				.textShadowWrapper {
+					.controls {
+
+						> .box {
+
+							> .key {
+								display: inline-block !important;
+								width: 60px;
+							}
+						}
+
+						.textShadowColorWrapper {
+							.colorPicker {
+								width: 100%;
+							}
+						}
+					}
+				}
+
+				textarea {
+					height: 100px;
+				}
+			}
+	}
+}

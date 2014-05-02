@@ -1,0 +1,423 @@
+@charset "utf-8";
+
+::-webkit-scrollbar-track {
+	background: none;
+}
+::-webkit-scrollbar {
+	width: 10px;
+	height: 10px;
+}
+::-webkit-scrollbar-thumb {
+	background: #bbb;
+	border-radius: 5px;
+}
+
+/* clearfix
+---------------------------------*/
+.clearfix:after {/*for modern browser*/
+	content: " ";
+	display: block;
+	clear: both;
+	height: 0;
+	visibility: hidden;
+}
+	
+.clearfix {
+	zoom: 1; /*for IE 5.5-7*/
+	display: inline-block;
+}
+	
+/* exlude MacIE 5 \*/
+* html .clearfix {
+	height: 1%;
+}
+	
+.clearfix {
+	display: block;
+}
+/* end MacIE5 */
+
+html {
+	position: relative;
+	height: 100%;
+	font-size: 62.5%;
+//	box-shadow: 1px 1px 10px rgba(50, 50, 50, 0.5)inset;
+/*
+*/
+}
+// body {
+// 	font-family: "メイリオ", "ＭＳ Ｐゴシック", sans-serif;
+// 	height: 100%;
+// 	color: #333;
+// 	background: url(../img/tmp/Melamine-wood-patterns-PIXEDEN/PNGs/Melamine-wood-001.png) 0 0 repeat;
+
+// }
+
+ul {
+  list-style: none;
+}
+
+p {
+	margin: 0;
+	padding: 5px;
+}
+
+.title {
+	font-size: 1.5em;
+	line-height: 1;
+}
+
+#container {
+	width: 100%;
+	margin: 0 auto;
+	
+	#content {
+		.bread {
+			height: 20px;
+		}
+	}
+}
+
+
+.error-message {
+	color: #f00;
+	font-weight: bold;
+}
+
+.cake-sql-log {
+	border: 1px solid #999;
+	td {
+		border: 1px solid #999;
+	}
+}
+
+
+.caution {
+	font-size: 12px;
+	color: #C33;
+	padding: 0;
+}
+
+p.info {
+	background: rgba(255, 255, 255, 0.8);
+	padding: 10px;
+	margin-bottom: 20px;
+	line-height: 2em;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+table {
+	width: 100%;
+}
+#contentForUserAdmin {
+	padding: 50px 20px;
+	
+	#container {
+		z-index: 2;
+	}
+}
+
+input, button, select, textarea {
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+}
+
+
+
+
+
+@primaryColor: rgba(146, 0, 0, 1);
+@primaryColor: rgba(23, 77, 128, 1);
+@primaryColor: rgba(0, 111, 185, 1);
+
+
+.btn {
+	// background: rgba(221,221,221,1);
+	// border-top: 1px solid rgba(0,0,0,0.2);
+	// border-bottom: 1px solid rgba(100, 100, 100, 0.5);
+	// border-left: 1px solid rgba(0, 0, 0, 0.2);
+	// border-right: 1px solid rgba(0, 0, 0, 0.2);
+	cursor: pointer;
+	border: none;
+	box-shadow: 0 1px 0px rgba(255,255,255,0.3) inset, 0 -1px 0 rgba(0, 0,0,.2) inset, 1px 0 0 rgba(255,255,255,0.1) inset, -1px 0 0 rgba(255,255,255,0.1) inset;
+	// color: #ffffff;
+	&.btn-primary {
+		// background: rgba(23, 77, 128, 1);
+		// background: rgba(146, 0, 0, 1);
+		background: @primaryColor;
+		border-bottom: 1px solid rgba(255,255,255,0.2);
+		// border-top: 1px solid rgba(100, 100, 100, 0.2);
+		// border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+		// border-left: 1px solid rgba(100, 100, 100, 0.2);
+		// border-right: 1px solid rgba(100, 100, 100, 0.2);
+		// box-shadow: 0 1px 0px rgba(255, 255, 255, 0.2) inset, 0 -1px 0 rgba(100, 100, 100, 0.5)inset, 1px 0 0 rgba(255, 255, 255, 0.1)inset, -1px 0 0 rgba(255, 255, 255, 0.1)inset;
+		color: #fff;
+	}
+
+	&.btn-danger {
+		border-bottom: 1px solid rgba(255,255,255,0.2);
+		background: rgba(51, 51, 51,1);
+		color: #fff;
+	}
+
+	&.disable {
+		opacity: 0.3;
+	}
+}
+
+
+
+* {
+	box-sizing: border-box;
+}
+body {
+	background: rgba(233, 233, 233, 0.9);
+	background: #eaeae0;
+	background: rgb(247, 238, 218);
+	color: #6a6a6a;
+	font-family: "メイリオ", "ＭＳ Ｐゴシック", sans-serif;
+	height: 100%;
+	// color: #333;
+	background: url(../img/tmp/Melamine-wood-patterns-PIXEDEN/PNGs/Melamine-wood-001.png) 0 0 repeat;
+}
+#outline-container {
+	.residence-name {
+		>input[name="residence-name"] {
+			width: 70%;
+		}
+		>input[name="frk-num"] {
+			width: 20%;
+		}
+	}
+	.category {
+		// border: 1px solid #d7d7d7;
+		border-radius: 5px;
+		background: white;
+		cursor: pointer;
+
+		&.ui-sortable-helper {
+			background: white;
+			opacity: 0.5;
+		}
+		&:hover {
+			cursor: pointer;
+			box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.2);
+		}
+
+		dt {
+			padding: 5px;
+			border-radius: 5px 5px 0 0;
+			background: @primaryColor;
+
+			padding: 0;
+			height: 40px;
+
+			>input {
+				width: 70%;
+				margin: 9px;
+				border: none;
+			}
+
+			>ul {
+				display: inline-block;
+				margin: 0;
+				margin-top: 3px;
+				padding: 0;
+				float: right;
+
+				margin: 0;
+				height: 100%;
+
+				>li {
+					display: inline-block;
+					padding: 5px 10px 3px;
+					border-radius: 2px;
+					margin: 0 2px;
+					cursor: pointer;
+
+					background: none;
+					border: none;
+					color: white;
+					border-left: 1px solid rgba(255, 255, 255, 0.2);
+					box-shadow: -1px 0 0 rgba(0, 0, 0, 0.2);
+					padding: 0;
+					margin: 0;
+					height: 100%;
+
+					>span {
+						display: inline-block;
+						width: 100%;
+						height: 100%;
+						padding: 14px;
+					}
+
+					&.btn {
+						&.disable {
+							opacity: 1;
+							cursor: default;
+							>span {
+								text-decoration: line-through;
+								color: rgba(255,255,255,0.5);
+							}
+						}
+					}
+
+					/*
+					&.add-btn {
+						// background: rgba(166, 211, 255, 1);
+						background: rgba(146, 0, 0, 1);
+						border-top: 1px solid rgba(100, 100, 100, 0.2);
+						border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+						border-left: 1px solid rgba(100, 100, 100, 0.2);
+						border-right: 1px solid rgba(100, 100, 100, 0.2);
+						box-shadow: 0 1px 0px rgba(255, 255, 255, 0.2) inset, 0 -1px 0 rgba(100, 100, 100, 0.5)inset, 1px 0 0 rgba(255, 255, 255, 0.1)inset, -1px 0 0 rgba(255, 255, 255, 0.1)inset;
+						color: #fff;
+					}
+					&.del-btn {
+						background: rgba(255, 189, 189, 1);
+						background: rgba(51, 51, 51,1);
+						color: #fff;
+					}
+					&.toggle-btn {
+						background: rgba(221, 221, 221, 1);
+					}
+					*/
+				}
+			}
+		}
+		dd {
+			// border-top: 1px solid rgba(213, 210, 210, 1);
+			margin: 0;
+
+			>ul {
+				padding-bottom: 1px;
+				// margin: 0;
+				// padding: 0;
+				>li {
+					border-bottom: 1px solid rgb(220, 220, 221);
+					// padding: 5px 0;
+					padding: 5px 0 17px;
+					// padding: 0;
+					// margin-right: 10px;
+					// border: 1px solid #ddd;
+					border-radius: 3px;
+					margin: 5px 10px 10px 0;
+					// position: relative;
+					
+					&:last-child {
+						border: none;
+						margin-bottom: 10px;
+					}
+					
+					&:hover {
+						background: #e5e9e9;
+						cursor: pointer;
+						box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.2);
+					}
+					
+					&.ui-sortable-helper {
+						// background: white;
+						opacity: 0.8;
+					}
+
+					&.placeholder {
+						// background: rgb(220, 220, 221);
+						background: rgba(220, 220, 221, 0.5);
+						border: 1px dashed rgba(0, 0, 0, 0.5);
+						border-radius: 5px;
+					}
+
+					// >.item-btns {
+					// 	width: 50px;
+					// 	background: red;
+					// 	position: absolute;
+					// 	top: 0;
+					// 	left: 0;
+
+					// 	>tbody {
+					// 		>tr {
+					// 			>td {
+					// 				background: blue;
+					// 				padding: 0;
+					// 				width: 100%;
+					// 				height: 100%;
+					// 			}
+					// 		}
+					// 	}
+					// }
+					
+					>.item-inputs {
+						// padding-left: 50px;
+						// background: green;
+						>tbody {
+							>tr {
+								>td {
+									padding: 5px 10px;
+									vertical-align: top;
+									> textarea {
+										width: 100%;
+										height: 70px;
+									}
+
+									&.btns-wrapper {
+										width: 50px;
+										padding: 5px;
+
+										>button {
+											width: 100%;
+											height: 50%;
+											padding: 0;
+											// background: rgba(221,221,221,1);
+											// border: 1px solid rgba(194, 194, 194, 1);
+											margin-bottom: 5px;
+										}
+									}
+									&.item-type {
+										width: 80px;
+									}
+									&.frk-index {
+										width: 160px;
+									}
+									&.item-key {
+										// width: 100px;
+									}
+									&.item-val {
+										// width: 100px;
+									}
+								}
+							}
+						}
+					}
+					td {
+						font-size: 1.2rem;
+					}
+
+					&.empty-item {
+						padding-bottom: 0;
+
+						td {
+							vertical-align: middle !important;
+
+							button {
+								height: 30px !important;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	.category-placeholder {
+		background: rgba(220, 220, 221, 0.5);
+		// border-radius: 5px;
+		border: 1px dashed rgba(0, 0, 0, 0.5);
+		border-radius: 5px;
+	}
+
+	input[type="text"],
+	textarea {
+		padding: 5px;
+		border: 1px solid #ccc;
+	}
+}
+
+

@@ -1,0 +1,35 @@
+@charset "utf-8";
+
+.selectLinkPageModal {
+	.pageList {
+		overflow-y: scroll;
+		margin-left: 50px;
+
+		>dt {
+			margin-top: 30px;
+			padding: 7px 3px;
+			border-bottom: 1px solid rgb(202, 201, 201);
+
+			&:first-child {
+				margin-top: 0;
+			}
+		}
+
+		>dd {
+			margin-left: 50px;
+			margin-right: 5px;
+			overflow: hidden;
+			padding: 7px 3px;
+			cursor: pointer;
+			border-bottom: 1px solid rgb(202, 201, 201);
+
+			&:hover {
+				background: rgba(215, 231, 255, 0.5);
+			}
+
+			&.current {
+				background: rgba(130, 178, 250, 0.57);
+			}
+		}
+	}
+}

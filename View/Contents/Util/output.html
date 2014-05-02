@@ -1,0 +1,66 @@
+
+<div>
+	<form action="./" method="post">
+		<?php echo $this->Form->select('company_id', $data['list'], array('empty'=>false)); ?>
+		<?php echo $this->Form->input('is_summarize', array('type'=>'checkbox', 'label'=>'物件ごとに分割して表示する')); ?>
+		<input type="submit" value="表示" />
+	</form>
+	<?php if($data['result'] === true): ?>
+		<?php
+			$resultArr = array();
+			$totalPageCount = 0;
+			$companyPath = $data['data']['companies']['url'];
+			if ($companyPath !== '' && preg_match('/\/$/', $companyPath) === 0) {
+				$companyPath = $companyPath . '/';
+			}
+			for ($i=0,$len=count($data['data']['residences']); $i<$len; $i++) {
+				$pagesInfoArr = array();
+				$residencePageCount = 0;
+				$residencePath = $data['data']['residences'][$i]['path'];
+				$residencePath = preg_replace('/^\//', '', $residencePath);
+				if ($residencePath !== '' && preg_match('/\/$/', $residencePath) === 0) {
+					$residencePath = $residencePath . '/';
+				}
+				for ($j=0,$len2=count($data['data']['residences'][$i]['smartphone_pages']); $j<$len2; $j++) {
+					$pagePath = $data['data']['residences'][$i]['smartphone_pages'][$j]['path'];
+					$pagePath = preg_replace('/^\//', '', $pagePath);
+					if ($pagePath !== '' && preg_match('/\/$/', $pagePath) === 0) {
+						$pagePath = $pagePath . '/';
+					}
+
+					$pageInfo = json_decode($data['data']['residences'][$i]['smartphone_pages'][$j]['source'], true);
+
+					array_push($pagesInfoArr,
+						implode(
+							array(
+								$data['data']['residences'][$i]['smartphone_pages'][$j]['id'],
+								($companyPath . $residencePath . $pagePath),
+								$data['data']['residences'][$i]['smartphone_pages'][$j]['title'],
+								isset($pageInfo['tag_code']) ? preg_replace('/\n/', '', $pageInfo['tag_code']) : ''
+							),
+							','
+						)
+					);
+					$residencePageCount++;
+					$totalPageCount++;
+				}
+				if ($is_summarize) {
+					array_push($resultArr,
+						($data['data']['residences'][$i]['name'] . '(' . $residencePageCount . 'ページ)<br />' . implode($pagesInfoArr, '<br />') . '<br />')
+					);
+				} else {
+					array_push($resultArr, implode($pagesInfoArr, '<br />'));
+				}
+			}
+		?>
+		<p><?php echo $data['data']['companies']['name']; ?>用ページの[ページID、ページURL、ページタイトル]をカンマ区切りにした一覧です。(全<?php echo $totalPageCount; ?>ページ)</p>
+		<textarea style="width:100%; height:300px;"><?php echo preg_replace('/<br \/>/', "\n", implode($resultArr, "<br />")); ?></textarea>
+	<?php else: ?>
+		<?php
+			if(isset($data['reason'])) {
+				echo '<p>' . $data['reason'] . '</p>';
+			}
+		?>
+		<p>ページ一覧を表示する企業を選択してください。</P>
+	<?php endif; ?>
+</div>

@@ -1,0 +1,139 @@
+<html>
+<head>
+<meta charset="utf-8"/>
+<title>test2</title>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.js"></script>
+<?php echo $this->Html->script('../plugin/html2canvas_0.34/html2canvas.js'); ?>
+
+
+<script type="text/javascript">
+/*
+$(document).ready(function() {
+	var target = $('body');
+	html2canvas(target, {
+		onrendered: function(canvas) {
+			var data = canvas.toDataURL();
+			var img = "<img src='" + data + "' style='border:1px solid #999; width:400px;'/>";
+		//	$(img).attr('src', data);
+			target.append(img);
+		//	window.open(data);
+		//	alert(data);
+			// data is the Base64-encoded image
+		}
+	});
+});
+*/
+
+var date = new Date();
+var message, timeoutTimer, timer;
+var proxyUrl = "http://html2canvas.appspot.com";
+function addRow(a, c, d) {
+    var b = $("<tr />").appendTo($(a));
+    b.append($("<td />").css("font-weight", "bold").text(c)).append($("<td />").text(d))
+}
+function throwMessage(b, a) {
+    window.clearTimeout(timeoutTimer);
+    timeoutTimer = window.setTimeout(function() {
+        message.fadeOut(function() {
+            message.remove()
+        })
+    }, a || 2000);
+    $(message).remove();
+    message = $("<div />").html(b).css({margin: 0,padding: 10,background: "#000",opacity: 0.7,position: "fixed",top: 10,right: 10,fontFamily: "Tahoma",color: "#fff",fontSize: 12,borderRadius: 12,width: "auto",height: "auto",textAlign: "center",textDecoration: "none"}).hide().fadeIn().appendTo("body")
+}
+$(function() {
+	/*
+    $("#recommended a").click(function(c) {
+        c.preventDefault();
+        $("#url").val(this.href);
+        $("button").click()
+    });
+    var a, b;
+    $('input[type="button"]').click(function() {
+        $(a.contentWindow).unbind("load");
+        $(a).contents().find("body").html2canvas({canvasHeight: b.body.scrollHeight,canvasWidth: b.body.scrollWidth,logging: true})
+    });
+    $("#getscreenshot").click(function(d) {
+        d.preventDefault();
+        $(this).prop("disabled", true);
+        var c = $("#url").val();
+        $("#content").append($("<img />").attr("src", "loading.gif").css("margin-top", 40));
+        var f = document.createElement("a");
+        f.href = c;
+        $.ajax({data: {xhr2: false,url: f.href},url: proxyUrl,dataType: "jsonp",success: function(e) {
+                a = document.createElement("iframe");
+                $(a).css({visibility: "hidden"}).width($(window).width()).height($(window).height());
+                $("#content").append(a);
+                b = a.contentWindow.document;
+                b.open();
+                $(a.contentWindow).load(function() {
+                    var g = $(a).contents().find("body"), h = {onrendered: function(j) {
+                            $("#content").empty().append(j);
+                            $("#getscreenshot").prop("disabled", false);
+                            $("base").attr("href", "")
+                        },allowTaint: true,taintTest: false,flashcanvas: "src/flashcanvas.min.js"}, i = html2canvas(g, h)
+                });
+                $("base").attr("href", f.protocol + "//" + f.hostname + "/" + f.pathname);
+                e = e.replace("<head>", "<head><base href='" + f.protocol + "//" + f.hostname + "/" + f.pathname + "'  />");
+                if ($("#disablejs").prop("checked")) {
+                    e = e.replace(/\<script/gi, "<!--<script");
+                    e = e.replace(/\<\/script\>/gi, "<\/script>-->")
+                }
+                b.write(e);
+                b.close()
+            }})
+    })
+    */
+    
+	var a, b;
+	function test() {
+		var c = "http://www.yahoo.com";
+	//	var c = $("#url").val();
+	//	$("#content").append($("<img />").attr("src", "loading.gif").css("margin-top", 40));
+		var f = document.createElement("a");
+		f.href = c;
+		$.ajax({data: {xhr2: false,url: f.href},url: proxyUrl,dataType: "jsonp",success: function(e) {
+		a = document.createElement("iframe");
+		$(a).css({visibility: "hidden"}).width($(window).width()).height($(window).height());
+	//	$(a).css({visibility: "hidden"}).width("100px");
+		$("#content").append(a);
+	//	$(a).appendTo("#content").css('style', '100px');
+		b = a.contentWindow.document;
+		b.open();
+		$(a.contentWindow).load(function() {
+			var g = $(a).contents().find("body"), h = {onrendered: function(j) {
+			$("#content").empty().append(j);
+			$("#getscreenshot").prop("disabled", false);
+			$("base").attr("href", "");
+			$("#content").css({'width':'200px', 'display':'block'}).find('canvas').css({'width':'100%', 'height':'auto'});
+			},allowTaint: true,taintTest: false,flashcanvas: "src/flashcanvas.min.js"}, i = html2canvas(g, h)
+		});
+		$("base").attr("href", f.protocol + "//" + f.hostname + "/" + f.pathname);
+		e = e.replace("<head>", "<head><base href='" + f.protocol + "//" + f.hostname + "/" + f.pathname + "'  />");
+		if ($("#disablejs").prop("checked")) {
+			e = e.replace(/\<script/gi, "<!--<script");
+			e = e.replace(/\<\/script\>/gi, "<\/script>-->")
+		}
+		b.write(e);
+		b.close()
+		}})
+	}
+	
+	test();
+});
+</script>
+
+</head>
+<body>
+<h1>Testing</h1>
+<p>あいうえお</P>
+<h4>One column:</h4>
+<table border="1">
+<tr>
+  <td>100</td>
+</tr>
+</table>
+<div id="content" style="display:none;"></div>
+</body>
+</html>

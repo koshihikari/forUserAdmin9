@@ -1,0 +1,362 @@
+<?php //debug($data); ?>
+<?php //debug($userData); ?>
+<?php //debug($companySites); ?>
+<?php //debug($residenceSites); ?>
+
+<input type="hidden" name="currentUrl" value="<?php echo $this->Html->url('/', true); ?>" />
+<input type="hidden" name="residenceId" value="<?php //echo $residenceId; ?>" />
+<input type="hidden" name="userId" value="<?php echo $userData['id']; ?>" />
+<input type="hidden" name="previewUrl" value="<?php //echo $data['companies']['url']; ?>" />
+<input type="hidden" name="companyId" value="<?php echo $userData['company_id']; ?>" />
+<input type="hidden" name="concreteUrl" value="<?php echo $concreteUrl; ?>" />
+	<input type="hidden" name="menuData" value='<?php echo json_encode($menuData); ?>' />
+	<input type="hidden" name="itemData" value='<?php echo json_encode($itemData); ?>' />
+
+<script id="residence-item-template" type="text/template">
+	<li id="residence-id_<%= residenceId %>" class="residence-item <%= isCompanySite === true ? 'company-item' : '' %>">
+		<label>
+			<p class="checkbox"><input type="checkbox" <%= checked ? 'checked' : '' %> /></p>
+			<p class="record-id"><%= residenceId %></p>
+		</label>
+		<div class="btn-group">
+		<% if (isCompanySite === false) { %>
+			<button class="btn btn-primary btn-duplicate-residence"><i data-icon="&#xE033;"></i>複製</button>
+			<button class="btn btn-danger btn-del-residence"><i data-icon="&#xE039;"></i>削除</button>
+		<% } %>
+			<a href="<%= outlineUrl %>" class="btn btn-primary btn-edit"><i data-icon="&#xE033;"></i>概要編集</a>
+		</div>
+		<div class="group">
+			<p class="name"><input type="text" name="name" value="<%= residenceName %>" /></p>
+			<p class="path"><%= companyUrl %><input type="text" name="path" value="<%= residencePath %>" /></p>
+		</div>
+		<div class="group clearfix">
+			<p class="smartphone-page-count"><%= smartphonePageCount %></p>
+			<p class="featurephone-page-count"><%= featurephonePageCount %></p>
+		</div>
+	</li>
+</script>
+
+<script id="page-wrapper-template" type="text/template">
+	<div id="page-wrapper-in-residence-id_<%= residenceId %>" class="page-wrapper">
+		<ul class="nav nav-tabs">
+			<li class="active"><a href="#sp-tab-content-in-residence-id_<%= residenceId %>">スマートフォン</a></li>
+			<li><a href="#fp-tab-content-in-residence-id_<%= residenceId %>">フィーチャーフォン</a></li>
+		</ul>
+
+		<div class="tab-content">
+			<div class="tab-pane sp-tab-pane active" id="sp-tab-content-in-residence-id_<%= residenceId %>">
+				<div class="btns">
+					<div class="btn-group">
+						<button class="btn btn-primary btn-add-page"><i data-icon="&#xE033;"></i>ページ追加</button>
+					</div>
+					<div class="btn-group">
+						<!--
+						<button class="btn btn-primary btn-bulk-edit-tag disabled"><i data-icon="&#xE033;"></i>チェックしたページのタグを一括編集</button>
+						-->
+						<button class="btn btn-primary btn-bulk-publish disabled"><i data-icon="&#xE033;"></i>チェックしたページを一括書き出し</button>
+					</div>
+					<div class="btn-group">
+						<button class="btn btn-primary btn-checked-all"><i data-icon="&#xE033;"></i>全てチェックする</button>
+						<button class="btn btn-primary btn-released-all"><i data-icon="&#xE033;"></i>全てのチェックを外す</button>
+						<button class="btn btn-primary btn-checkd-all-not-latest"><i data-icon="&#xE033;"></i>最新版でないページを全てチェックする</button>
+					</div>
+				</div>
+				<ul class="page-list">
+				</ul>
+			</div>
+			<div class="tab-pane fp-tab-pane" id="fp-tab-content-in-residence-id_<%= residenceId %>">
+				<div class="btns">
+					<div class="btn-group">
+						<button class="btn btn-primary btn-add-page"><i data-icon="&#xE033;"></i>ページ追加</button>
+					</div>
+					<div class="btn-group">
+						<button class="btn btn-primary btn-bulk-publish disabled"><i data-icon="&#xE033;"></i>チェックしたページを一括書き出し</button>
+					</div>
+					<div class="btn-group">
+						<button class="btn btn-primary btn-checked-all"><i data-icon="&#xE033;"></i>全てチェックする</button>
+						<button class="btn btn-primary btn-released-all"><i data-icon="&#xE033;"></i>全てのチェックを外す</button>
+						<button class="btn btn-primary btn-checkd-all-not-latest"><i data-icon="&#xE033;"></i>最新版でないページを全てチェックする</button>
+					</div>
+				</div>
+				<ul class="page-list">
+				</ul>
+			</div>
+		</div>
+	</div>
+</script>
+
+<script id="smartphone-page-item-template" type="text/template">
+	<li id="sp-page-item_<%= pageId %>" class="page-item sp-page-item <%= isLatest ? '' : 'not-latest' %>">
+		<div class="clearfix">
+			<label>
+				<p class="checkbox"><input type="checkbox"></p>
+				<p class="record-id"><%= pageId %></p>
+			</label>
+			<div class="btns">
+				<div class="btn-group">
+					<a href="<%= editUrl %>" class="btn btn-primary btn-edit"><i data-icon="&#xE033;"></i>編集</a>
+					<button class="btn btn-primary btn-duplicate-page"><i data-icon="&#xE033;"></i>複製</button>
+					<button class="btn btn-danger btn-del-page"><i data-icon="&#xE039;"></i>削除</button>
+					<button class="btn btn-primary btn-edit-tag"><i data-icon="&#xE033;"></i>タグ修正</button>
+				</div>
+				<div class="btn-group">
+					<div class="btn-group">
+							<button id="dropdown-preview-sp_<%= pageId %>" class="btn btn-primary btn-page-view dropdown-toggle" data-record-id="<%= pageId %>" data-placement="bottom" data-original-title="プレビュー：：「<%= pageTitle %>」ページを表示します。" data-toggle="dropdown"><span><i data-icon=""></i>プレビューページ表示</span></button>
+							<ul class="dropdown-menu dropdown-menu-for-preview" role="menu" aria-labelledby="dropdown-preview-sp_<%= pageId %>" data-title="<%= pageTitle %>" data-path="<%= pagePath %>">
+								<li>
+									<a href="<%= previewUrl %>" target="_blank"><%= pageTitle %></a>
+								</li>
+								<li>
+									<img src="http://chart.apis.google.com/chart?cht=qr&chs=150x150&chl=<%= previewUrl %>" width="100" height="100" alt="<%= pageTitle %>"/>
+								</li>
+							</ul>
+					</div>
+					<div class="btn-group">
+							<button id="dropdown-concrete-sp_<%= pageId %>" class="btn btn-primary btn-page-view dropdown-toggle" data-record-id="<%= pageId %>" data-placement="bottom" data-original-title="本番：：「<%= pageTitle %>」ページを表示します。" data-toggle="dropdown"><span><i data-icon=""></i>本番ページ表示</span></button>
+							<ul class="dropdown-menu dropdown-menu-for-concrete" role="menu" aria-labelledby="dropdown-concrete-sp_<%= pageId %>" data-title="<%= pageTitle %>" data-path="<%= pagePath %>">
+								<li>
+									<a href="<%= concreteUrl %>" target="_blank" class="page-title"><%= pageTitle %></a>
+								</li>
+								<li>
+									<img src="http://chart.apis.google.com/chart?cht=qr&chs=150x150&chl=<%= concreteUrl %>" width="100" height="100" alt="<%= pageTitle %>"/>
+								</li>
+							</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="group">
+			<p class="title"><input type="text" name="title" value="<%= pageTitle %>" /></p>
+			<p class="path"><span><%= pageUrl %></span><input type="text" name="path" value="<%= pagePath %>" /></p>
+		</div>
+		<div class="detail clearfix">
+			<div>
+				<p class="editor"><%= editor %></p>
+				<p class="edited"><%= edited %></p>
+			</div>
+			<div>
+				<p class="publisher"><%= publisher %></p>
+				<p class="published"><%= published %></p>
+			</div>
+			<div class="caution <%= isLatest ? 'empty' : '' %>">
+				<p>このページは最新版ではありません。</p>
+			</div>
+		</div>
+	</li>
+</script>
+
+<script id="featurephone-page-item-template" type="text/template">
+	<li id="fp-page-item_<%= pageId %>" class="page-item fp-page-item <%= isLatest ? '' : 'not-latest' %>">
+		<div class="clearfix">
+			<label>
+				<p class="checkbox"><input type="checkbox"></p>
+				<p class="record-id"><%= pageId %></p>
+			</label>
+			<div class="btns">
+				<div class="btn-group">
+					<a href="<%= editUrl %>" class="btn btn-primary btn-edit"><i data-icon="&#xE033;"></i>編集</a>
+					<button class="btn btn-primary btn-duplicate-page"><i data-icon="&#xE033;"></i>複製</button>
+					<button class="btn btn-danger btn-del-page"><i data-icon="&#xE039;"></i>削除</button>
+				</div>
+				<div class="btn-group">
+					<div class="btn-group">
+							<button id="dropdown-preview-fp_<%= pageId %>" class="btn btn-primary btn-page-view dropdown-toggle" data-record-id="<%= pageId %>" data-placement="bottom" data-original-title="プレビュー：：「<%= pageTitle %>」ページを表示します。" data-toggle="dropdown"><span><i data-icon=""></i>プレビューページ表示</span></button>
+							<ul class="dropdown-menu dropdown-menu-for-preview" role="menu" aria-labelledby="dropdown-preview-sp_<%= pageId %>" data-title="<%= pageTitle %>" data-path="<%= pagePath %>">
+								<li>
+									<a href="<%= previewUrl %>" target="_blank"><%= pageTitle %></a>
+								</li>
+								<li>
+									<img src="http://chart.apis.google.com/chart?cht=qr&chs=150x150&chl=<%= previewUrl %>" width="100" height="100" alt="<%= pageTitle %>"/>
+								</li>
+							</ul>
+					</div>
+					<div class="btn-group">
+							<button id="dropdown-concrete-fp_<%= pageId %>" class="btn btn-primary btn-page-view dropdown-toggle" data-record-id="<%= pageId %>" data-placement="bottom" data-original-title="本番：：「<%= pageTitle %>」ページを表示します。" data-toggle="dropdown"><span><i data-icon=""></i>本番ページ表示</span></button>
+							<ul class="dropdown-menu dropdown-menu-for-concrete" role="menu" aria-labelledby="dropdown-concrete-sp_<%= pageId %>" data-title="<%= pageTitle %>" data-path="<%= pagePath %>">
+								<li>
+									<a href="<%= concreteUrl %>" target="_blank" class="page-title"><%= pageTitle %></a>
+								</li>
+								<li>
+									<img src="http://chart.apis.google.com/chart?cht=qr&chs=150x150&chl=<%= concreteUrl %>" width="100" height="100" alt="<%= pageTitle %>"/>
+								</li>
+							</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="group">
+			<p class="title"><input type="text" name="title" value="<%= pageTitle %>" /></p>
+			<p class="path"><span><%= pageUrl %></span><input type="text" name="path" value="<%= pagePath %>" /></p>
+		</div>
+		<div class="detail clearfix">
+			<div>
+				<p class="editor"><%= editor %></p>
+				<p class="edited"><%= edited %></p>
+			</div>
+			<div>
+				<p class="publisher"><%= publisher %></p>
+				<p class="published"><%= published %></p>
+			</div>
+			<div class="caution <%= isLatest ? 'empty' : '' %>">
+				<p>このページは最新版ではありません。</p>
+			</div>
+		</div>
+	</li>
+</script>
+
+<script id="bulk-edit-outline-modal-template" type="text/template">
+	<div id="bulk-edit-outline-modal" class="modal hide fade">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+			<h3>物件概要一括編集</h3>
+		</div>
+		<div class="modal-body">
+			<ul class="edit-item-list">
+				<li>
+					<!--
+					<p class="checkbox"><label><input type="checkbox" checked="checked">情報更新日</label></p>
+					-->
+					<p class="checkbox">情報更新日</p>
+					<p class="datepicker-wrapper"><input type="text" id="modified" class="datepicker"></p>
+				</li>
+				<li>
+					<!--
+					<p class="checkbox"><label><input type="checkbox" checked="checked"></label></p>
+					-->
+					<p class="checkbox">次回更新日</p>
+					<p class="datepicker-wrapper"><input type="text" id="next-modified" class="datepicker"></p>
+				</li>
+			</ul>
+			<div class="info">
+				<p>上記の内容を下記の物件の物件概要に書き込みます。</p>
+				<ul class="residence-list">
+				</ul>
+			</div>
+		</div>
+		<div class="modal-footer">
+			<p><label><input type="checkbox" id="is-publish">更新と同時に本番ページを書き出す</label></p>
+			<button class="btn" data-dismiss="modal" aria-hidden="true">キャンセル</button>
+			<button class="btn btn-primary btn-update" >更新</button>
+		</div>
+	</div>
+</script>
+
+<script id="bulk-edit-outline-modal-residence-item-template" type="text/template">
+	<% _.each(residenceInfo, function(info) { %>
+		<li><%- info.name %></li>
+	<% }); %>
+</script>
+
+<!--
+<script id="bulk-edit-tag-modal-template" type="text/template">
+	<div id="bulk-edit-tag-modal" class="modal hide fade">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+			<h3>タグ一括編集</h3>
+		</div>
+		<div class="modal-body clearfix">
+			<div class="info">
+				<p>右記の内容を下記の物件のタグに書き込みます。</p>
+				<ul class="residence-list">
+					<li>
+						<p class="id"><%- residenceInfo.id %></p>
+						<p class="name"><%- residenceInfo.name %></p>
+					</li>
+				</ul>
+				<ul class="page-list">
+				</ul>
+			</div>
+			<dl class="tag-list">
+			</dl>
+		</div>
+		<div class="modal-footer">
+			<p><label><input type="checkbox" id="is-publish">更新と同時に本番ページを書き出す</label></p>
+			<button class="btn" data-dismiss="modal" aria-hidden="true">キャンセル</button>
+			<button class="btn btn-primary btn-update" >更新</button>
+		</div>
+	</div>
+</script>
+
+<script id="bulk-edit-tag-modal-tag-item-template" type="text/template">
+	<% _.each(tagInfo, function(info) { %>
+		<dt>
+			<div class="btn-group">
+				<button class="btn btn-primary btn-add-tag"><i data-icon="&#xE033;"></i>追加</button>
+				<button class="btn btn-danger btn-del-tag"><i data-icon="&#xE039;"></i>削除</button>
+				<button class="btn btn-primary btn-switch"><i data-icon="&#xE033;"></i>開閉</button>
+			</div>
+			<input type="text" value="<%- info.name %>" />
+		</dt>
+		<dd>
+			<textarea><%- info.code %></textarea>
+		</dd>
+	<% }); %>
+</script>
+
+<script id="bulk-edit-tag-modal-page-item-template" type="text/template">
+	<% _.each(pageInfo, function(info) { %>
+		<li><p class="id"><%- info.id %></p><p class="name"><%- info.name %></p></li>
+	<% }); %>
+</script>
+-->
+
+<script id="tag-edit-modal-template" type="text/template">
+	<div id="tag-edit-modal" class="modal hide fade">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+			<h3>タグ編集</h3>
+		</div>
+		<div class="modal-body clearfix">
+			<div class="info">
+				<p>「<%- data.name %>」に以下のタグを書き込みます。</p>
+				<ul class="tag-list">
+				</ul>
+			</div>
+		</div>
+		<div class="modal-footer">
+			<p><label><input type="checkbox" id="is-publish">更新と同時に本番ページを書き出す</label></p>
+			<button class="btn" data-dismiss="modal" aria-hidden="true">キャンセル</button>
+			<button class="btn btn-primary btn-update" >更新</button>
+		</div>
+	</div>
+</script>
+
+<script id="tag-edit-modal-tag-item-template" type="text/template">
+	<% _.each(tagInfo, function(info) { %>
+		<li id="tag-code-id_<%- info.id %>">
+			<div class="li-header">
+				<div class="btn-group">
+					<button class="btn btn-primary btn-add-tag"><i data-icon="&#xE033;"></i>追加</button>
+					<button class="btn btn-danger btn-del-tag"><i data-icon="&#xE039;"></i>削除</button>
+					<button class="btn btn-primary btn-toggle"><i data-icon="&#xE033;"></i>開閉</button>
+				</div>
+				<input type="text" name="tag-name" value="<%- info.tag_name %>" />
+			</div>
+			<div class="li-body">
+				<textarea><%- info.tag_code %></textarea>
+			</div>
+		</li>
+	<% }); %>
+</script>
+
+<div id="wrapper">
+	<div id="residences" class="parents">
+		<div class="btns">
+			<div class="btn-group">
+				<button class="btn btn-primary btn-add-residence"><i data-icon="&#xE033;"></i>物件追加</button>
+			</div>
+			<div class="btn-group">
+				<button class="btn btn-primary btn-checked-all"><i data-icon="&#xE033;"></i>全てチェックする</button>
+				<button class="btn btn-primary btn-released-all"><i data-icon="&#xE033;"></i>全てのチェックを外す</button>
+			</div>
+			<div class="btn-group">
+				<button class="btn btn-primary btn-bulk-edit-outline disabled"><i data-icon="&#xE033;"></i>チェックした物件の物件概要を一括編集する</button>
+			</div>
+		</div>
+		<ul class="residence-list">
+		</ul>
+	</div>
+
+	<div id="pages" class="children">
+	</div>
+</div>

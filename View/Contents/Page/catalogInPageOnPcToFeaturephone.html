@@ -1,0 +1,119 @@
+
+<div id="container">
+	<div class="controller">
+		<div class="btn-group">
+			<button class="btn btn-check-all"><i data-icon=""></i>全てチェックする</button>
+			<button class="btn btn-uncheck-all"><i data-icon=""></i>全てのチェックを外す</button>
+			<button class="btn btn-not-latest-check-all" data-placement="bottom" data-original-title="ページ作成後、一度も書きだされていないページ<br />ページ書き出し後に編集され、そのままになっているページをチェックします。"><i data-icon=""></i>最新版でないページをすべてチェックする</button>
+		</div>
+		<div class="btn-group">
+			<button class="btn btn-bulk-publish"><i data-icon=""></i>チェックしたページを一括書き出し</button>
+			<button class="btn btn-add-page"><i data-icon=""></i>新規ページ追加</button>
+		</div>
+	</div>
+	<div class="controller">
+		<div class="btn-group">
+			<button class="btn btn-check-all"><i data-icon=""></i>全てチェックする</button>
+			<button class="btn btn-uncheck-all"><i data-icon=""></i>全てのチェックを外す</button>
+			<button class="btn btn-not-latest-check-all" data-placement="top" data-original-title="ページ作成後、一度も書きだされていないページ<br />ページ書き出し後に編集され、そのままになっているページをチェックします。"><i data-icon=""></i>最新版でないページをすべてチェックする</button>
+		</div>
+		<div class="btn-group">
+			<button class="btn btn-bulk-publish"><i data-icon=""></i>チェックしたページを一括書き出し</button>
+			<button class="btn btn-add-page"><i data-icon=""></i>新規ページ追加</button>
+		</div>
+	</div>
+</div>
+
+
+<input type="hidden" name="currentUrl" value="<?php echo $this->Html->url('/', true); ?>" />
+<input type="hidden" name="concreteUrl" value="<?php echo $data['companies']['url']; ?>" />
+<input type="hidden" name="residencePath" value="<?php echo $data['ResidenceCompanyInfoAction']['path']; ?>" />
+<input type="hidden" name="companyId" value="<?php echo $companyId; ?>" />
+<input type="hidden" name="residenceId" value="<?php echo $residenceId; ?>" />
+<input type="hidden" name="userId" value="<?php echo $userData['id']; ?>" />
+
+
+<script id="page-table-template" type="text/html">
+	<table id="pageTable" class="footable">
+		<thead>
+			<tr>
+				<th class="footable-sortable wrapper-checkbox" data-type="numeric">&nbsp;</th>
+				<th class="footable-sortable wrapper-id" data-class="expand" data-type="numeric" data-sort-initial="true">ID</th>
+				<th class="footable-sortable wrapper-btn-edit" data-type="numeric">編集</th>
+				<th class="footable-sortable wrapper-btn-preview" data-type="numeric">プレビュー表示</th>
+				<th class="footable-sortable wrapper-btn-concrete" data-type="numeric">本番表示</th>
+				<th class="footable-sortable wrapper-page-tile">ページタイトル</th>
+				<th class="footable-sortable wrapper-page-path">ページパス</th>
+				<th class="footable-sortable wrapper-btns" data-hide="phone,tablet" data-type="numeric">ボタン</th>
+				<th class="footable-sortable wrapper-edited-user-name" data-hide="phone,tablet">更新ユーザ</th>
+				<th class="footable-sortable wrapper-edited" data-hide="phone,tablet" data-type="numeric">最終更新日時</th>
+				<th class="footable-sortable wrapper-published-user-name" data-hide="phone,tablet">書き出しユーザ</th>
+				<th class="footable-sortable wrapper-published" data-hide="phone,tablet" data-type="numeric">最終書き出し日時</th>
+			</tr>
+		</thead>
+		<tbody>
+		</tbody>
+	</table>
+</script>
+<script id="page-tr-template" type="text/html">
+	<tr id="record-id_<%= recordId %>" class="<% if (cautionMessage !== '') { %>notLatest<% } %>">
+		<td class="wrapper-checkbox" data-value="0"><input type="checkbox" name="record-id" value="<%= recordId %>" /></td>
+		<td class="wrapper-id" data-value="<%= recordId %>"><%= recordId %></td>
+		<td class="wrapper-btn-edit" data-value="<%= recordId %>">
+			<a href="<%= editUrl %>" class="btn  btn-primary btn-page-edit" data-placement="top" data-original-title="「<%= pageTitle %>」ページを編集します。">
+				<i data-icon=""></i>編集する
+			</a>
+		</td>
+		<td class="wrapper-btn-preview" data-value="<%= recordId %>">
+			<div class="btn-group">
+				<button id="dropdown_<%= recordId %>" class="btn btn-primary btn-page-view dropdown-toggle" data-record-id="<%= recordId %>" data-placement="top" data-original-title="プレビュー版：：「<%= pageTitle %>」ページを表示します。" data-toggle="dropdown"><i data-icon=""></i>プレビューページ表示</button>
+				<ul class="dropdown-menu" role="menu" aria-labelledby="dropdown_<%= recordId %>">
+					<li>
+						<a href="<%= previewUrl %>" target="_blank"><%= pageTitle %></a>
+					</li>
+					<li>
+						<img src="http://chart.apis.google.com/chart?cht=qr&chs=150x150&chl=<%= previewUrl %>" width="150" height="150" alt="<%= pageTitle %>"/>
+					</li>
+				</ul>
+			</div>
+		</td>
+		<td class="wrapper-btn-concrete" data-value="<%= recordId %>">
+			<div class="btn-group">
+				<button id="dropdown_<%= recordId %>" class="btn btn-primary btn-page-view dropdown-toggle" data-record-id="<%= recordId %>"
+					data-placement="bottom" data-original-title="本番：：「<%= pageTitle %>」ページを表示します。"
+					data-toggle="dropdown"><i data-icon=""></i>本番ページ表示</button>
+				<ul class="dropdown-menu" role="menu" aria-labelledby="dropdown_<%= recordId %>">
+					<li>
+						<a href="<%= concreteQrUrl %>" target="_blank"><%= pageTitle %></a>
+					</li>
+					<li>
+						<img src="http://chart.apis.google.com/chart?cht=qr&chs=150x150&chl=<%= concreteQrUrl %>" width="150" height="150" alt="<%= pageTitle %>"/>
+					</li>
+				</ul>
+			</div>
+		</td>
+		<td class="wrapper-page-tile" data-value="<%= pageTitle === '' ? '-' : pageTitle %>">
+			<input type="text" name="title" value="<%= pageTitle %>" data-record-id="<%= recordId %>" data-prev-title="<%= pageTitle %>" />
+		</td>
+		<td class="wrapper-page-path" data-value="<%= pagePath === '' ? '-' : pagePath %>">
+			<input type="text" name="path" value="<%= pagePath %>" data-record-id="<%= recordId %>" data-prev-title="<%= pagePath %>" />
+		</td>
+		<td class="wrapper-btns" data-value="<%= recordId %>">
+			<button class="btn  btn-primary btn-page-duplicate btn-disable" data-placement="top" data-original-title="「<%= pageTitle %>」ページを複製します。">
+				<i data-icon=""></i>複製する
+			</button>
+			<button class="btn btn-danger btn-page-delete" data-record-id="<%= recordId %>" data-placement="bottom" data-original-title="「<%= pageTitle %>」ページを削除します。">
+				<i data-icon=""></i>削除する
+			</button>
+			<button class="btn  btn-primary btn-page-publish btn-disablea" data-record-id="<%= recordId %>"
+				data-placement="bottom" data-original-title="「<%= pageTitle %>」ページを書きだします。">
+				<i data-icon=""></i>本番ページ書き出し
+			</button>
+			<p class="caution<% if (cautionMessage === '') { %> empty<% } %>"><%= cautionMessage %></p>
+		</td>
+		<td class="wrapper-edited-user-name" data-value="<%= editedUserName %>"><%= editedUserName %></td>
+		<td class="wrapper-edited" data-value="<%= edited %>"><%= edited %></td>
+		<td class="wrapper-published-user-name" data-value="<%= publishedUserName %>"><%= publishedUserName %></td>
+		<td class="wrapper-published" data-value="<%= published %>"><%= published %></td>
+	</tr>
+</script>

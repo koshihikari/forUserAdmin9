@@ -1,0 +1,430 @@
+@charset "utf-8";
+#editInLibrary #previewArea, #editInPage #previewArea {
+  float:left;
+  overflow:hidden;
+  width:400px;
+  padding-right:0;
+  padding-bottom:20px;
+  float:left;
+  margin-top:23px;
+  padding-left:7px;
+  margin-left:195px;
+}
+#editInLibrary #previewArea > p, #editInPage #previewArea > p {
+  text-align:left;
+  display:inline-block;
+}
+#editInLibrary #previewArea .dropdown, #editInPage #previewArea .dropdown {
+  display:inline-block;
+  margin-top:5px;
+}
+#editInLibrary #previewArea .dropdown .dropdown-menu, #editInPage #previewArea .dropdown .dropdown-menu { margin-top:-2px; }
+#editInLibrary #previewArea .dropdown > div, #editInPage #previewArea .dropdown > div { display:inline-block; }
+#editInLibrary #previewArea .iphone5, #editInPage #previewArea .iphone5 {
+  width:372px;
+  height:804px;
+  position:relative;
+  margin-top:5px;
+  background:#f0f0f0;
+  background:#303030;
+  border-radius:60px;
+  box-shadow:0 1px 1px rgba(0,0,0,0.3);
+  border:1px solid #dfdfdf;
+}
+#editInLibrary #previewArea .iphone5::before, #editInPage #previewArea .iphone5::before {
+  content:'';
+  border:1px solid rgba(0,0,0,0.2);
+  width:70px;
+  height:70px;
+  display:block;
+  position:absolute;
+  bottom:10px;
+  left:150px;
+  z-index:99999;
+  border-radius:60px;
+  background:rgba(0,0,0,0.1);
+}
+#editInLibrary #previewArea .iphone5::after, #editInPage #previewArea .iphone5::after {
+  content:'';
+  width:25px;
+  height:25px;
+  display:block;
+  position:absolute;
+  bottom:33px;
+  left:171px;
+  z-index:9999999;
+  border:2px solid rgba(0,0,0,0.1);
+  border-radius:7px;
+}
+#editInLibrary #previewArea .iphone5 .iphone5-header, #editInPage #previewArea .iphone5 .iphone5-header {
+  background:url(../img/contents/page_element/edit/onPcToSmartphone/iphone5-header.png) no-repeat;
+  background-position-x:-55px;
+  background-position-y:-57px;
+  width:100%;
+  position:absolute;
+  top:0;
+  left:0;
+  display:none;
+}
+#editInLibrary #previewArea .iphone5 .iphone5-body, #editInPage #previewArea .iphone5 .iphone5-body {
+  width:100%;
+  height:100%;
+  position:absolute;
+  top:0;
+  left:0;
+  overflow:hidden;
+  display:none;
+}
+#editInLibrary #previewArea .iphone5 .iphone5-body > img, #editInPage #previewArea .iphone5 .iphone5-body > img {
+  max-width:none;
+  height:100%;
+  position:absolute;
+  left:-55px;
+  top:0;
+}
+#editInLibrary #previewArea .iphone5 .iphone5-footer, #editInPage #previewArea .iphone5 .iphone5-footer {
+  background:url(../img/contents/page_element/edit/onPcToSmartphone/iphone5-footer.png) no-repeat;
+  background-position-x:-55px;
+  background-position-y:0;
+  height:114px;
+  width:100%;
+  position:absolute;
+  bottom:0;
+  left:0;
+  z-index:2;
+  display:none;
+}
+#editInLibrary #previewArea .iphone5 .scrollbar, #editInPage #previewArea .iphone5 .scrollbar {
+  position:relative;
+  margin-top:120px;
+  float:right;
+  width:10px;
+  width:5px;
+  border-radius:20px;
+  margin-right:20px;
+  margin-right:23px;
+  display:none;
+}
+#editInLibrary #previewArea .iphone5 .scrollbar .thumb, #editInPage #previewArea .iphone5 .scrollbar .thumb {
+  height:20px;
+  width:25px;
+  cursor:pointer;
+  overflow:hidden;
+  position:absolute;
+  top:0;
+  left:0;
+  background:rgba(255,255,255,0.8);
+  width:6px;
+  border-radius:20px;
+  border:1px solid rgba(0,0,0,1);
+}
+#editInLibrary #previewArea .iphone5 .scrollbar .thumb .end, #editInPage #previewArea .iphone5 .scrollbar .thumb .end {
+  background:transparent url(../images/bg-scrollbar-thumb-y.png) no-repeat 50% 0;
+  background:transparent url(http://www.baijs.nl/tinyscrollbar/images/bg-scrollbar-thumb-y.png) no-repeat 50% 0;
+  background:rgba(255,0,0,1);
+  overflow:hidden;
+  height:5px;
+  width:25px;
+  width:10px;
+  border-radius:20px;
+  display:none;
+}
+#editInLibrary #previewArea .iphone5 #spContentWrapper, #editInPage #previewArea .iphone5 #spContentWrapper {
+  width:336px;
+  height:568px;
+  position:relative;
+  left:27px;
+  top:97px;
+  overflow-y:scroll;
+  overflow-x:hidden;
+  position:relative;
+  width:320px;
+  border:1px solid rgba(255,255,255,0.2);
+  background:rgba(255,255,255,0.9);
+  border:1px solid rgba(0,0,0,0.2);
+  box-shadow:0 0 0 2px rgba(0,0,0,0.1);
+}
+#editInLibrary #previewArea .iphone5 #spContentWrapper #displayArea, #editInPage #previewArea .iphone5 #spContentWrapper #displayArea {
+  height:auto;
+  position:relative;
+}
+#editInLibrary #previewArea .iphone5 #spContentWrapper .sortable, #editInPage #previewArea .iphone5 #spContentWrapper .sortable {
+  list-style:none;
+  height:auto;
+}
+#editInLibrary #previewArea .iphone5 #spContentWrapper li, #editInPage #previewArea .iphone5 #spContentWrapper li { list-style:none; }
+#editInLibrary #previewArea .iphone5 #spContentWrapper .emptyText, #editInPage #previewArea .iphone5 #spContentWrapper .emptyText {
+  line-height:150%;
+  display:block;
+  min-height:50px;
+}
+#editInLibrary #previewArea .iphone5 #spContentWrapper .Table, #editInPage #previewArea .iphone5 #spContentWrapper .Table { margin:0; }
+#editInLibrary #previewArea .iphone5 #spContentWrapper .Table > table, #editInPage #previewArea .iphone5 #spContentWrapper .Table > table { width:100%; }
+#editInLibrary #previewArea .iphone5 #spContentWrapper .Table > table td, #editInPage #previewArea .iphone5 #spContentWrapper .Table > table td { padding:8px; }
+#editInLibrary #previewArea .iphone5 #spContentWrapper a, #editInPage #previewArea .iphone5 #spContentWrapper a { color:inherit; }
+#editInLibrary #previewArea .iphone5 #spContentWrapper a:hover, #editInLibrary #previewArea .iphone5 #spContentWrapper a:ative, #editInPage #previewArea .iphone5 #spContentWrapper a:hover, #editInPage #previewArea .iphone5 #spContentWrapper a:ative { color:inherit; }
+#editInLibrary #previewArea .iphone5 #spContentWrapper [data-item-type="displayObject"], #editInLibrary #previewArea .iphone5 #spContentWrapper [data-item-type="container"], #editInPage #previewArea .iphone5 #spContentWrapper [data-item-type="displayObject"], #editInPage #previewArea .iphone5 #spContentWrapper [data-item-type="container"] { position:relative; }
+#editInLibrary #previewArea .iphone5 #spContentWrapper [data-item-type="displayObject"].editable.now-edit, #editInLibrary #previewArea .iphone5 #spContentWrapper [data-item-type="displayObject"].editable:hover, #editInLibrary #previewArea .iphone5 #spContentWrapper [data-item-type="container"].editable.now-edit, #editInLibrary #previewArea .iphone5 #spContentWrapper [data-item-type="container"].editable:hover, #editInPage #previewArea .iphone5 #spContentWrapper [data-item-type="displayObject"].editable.now-edit, #editInPage #previewArea .iphone5 #spContentWrapper [data-item-type="displayObject"].editable:hover, #editInPage #previewArea .iphone5 #spContentWrapper [data-item-type="container"].editable.now-edit, #editInPage #previewArea .iphone5 #spContentWrapper [data-item-type="container"].editable:hover {
+  z-index:9999;
+  padding:0;
+  background-color:rgba(0,0,255,0.1);
+  box-shadow:0 0 20px rgba(0,0,0,0.5);
+  box-shadow:0 0 20px 10px rgba(0,0,0,0.7), 0 0 10px 15px rgba(255,255,255,0.3);
+}
+#editInLibrary #previewArea .iphone5 #spContentWrapper [data-item-type="displayObject"].editable.now-edit:before, #editInLibrary #previewArea .iphone5 #spContentWrapper [data-item-type="displayObject"].editable.now-edit:after, #editInLibrary #previewArea .iphone5 #spContentWrapper [data-item-type="displayObject"].editable:hover:before, #editInLibrary #previewArea .iphone5 #spContentWrapper [data-item-type="displayObject"].editable:hover:after, #editInLibrary #previewArea .iphone5 #spContentWrapper [data-item-type="container"].editable.now-edit:before, #editInLibrary #previewArea .iphone5 #spContentWrapper [data-item-type="container"].editable.now-edit:after, #editInLibrary #previewArea .iphone5 #spContentWrapper [data-item-type="container"].editable:hover:before, #editInLibrary #previewArea .iphone5 #spContentWrapper [data-item-type="container"].editable:hover:after, #editInPage #previewArea .iphone5 #spContentWrapper [data-item-type="displayObject"].editable.now-edit:before, #editInPage #previewArea .iphone5 #spContentWrapper [data-item-type="displayObject"].editable.now-edit:after, #editInPage #previewArea .iphone5 #spContentWrapper [data-item-type="displayObject"].editable:hover:before, #editInPage #previewArea .iphone5 #spContentWrapper [data-item-type="displayObject"].editable:hover:after, #editInPage #previewArea .iphone5 #spContentWrapper [data-item-type="container"].editable.now-edit:before, #editInPage #previewArea .iphone5 #spContentWrapper [data-item-type="container"].editable.now-edit:after, #editInPage #previewArea .iphone5 #spContentWrapper [data-item-type="container"].editable:hover:before, #editInPage #previewArea .iphone5 #spContentWrapper [data-item-type="container"].editable:hover:after {
+  font-size:150%;
+  text-align:center;
+  color:#ffffff;
+  font-weight:bold;
+  text-shadow:0 0 2px rgba(0,0,0,0.5), 0 0 5px rgba(0,0,0,0.9);
+  margin-left:20px;
+}
+#editInLibrary #previewArea .iphone5 #spContentWrapper [data-item-type="displayObject"].editable:hover, #editInPage #previewArea .iphone5 #spContentWrapper [data-item-type="displayObject"].editable:hover { padding-bottom:0; }
+#editInLibrary #previewArea .iphone5 #spContentWrapper [data-item-type="displayObject"].editable:hover:before, #editInLibrary #previewArea .iphone5 #spContentWrapper [data-item-type="displayObject"].editable:hover:after, #editInPage #previewArea .iphone5 #spContentWrapper [data-item-type="displayObject"].editable:hover:before, #editInPage #previewArea .iphone5 #spContentWrapper [data-item-type="displayObject"].editable:hover:after { display:inline-block; }
+#editInLibrary #previewArea .iphone5 #spContentWrapper [data-item-type="displayObject"].editable:hover:before, #editInPage #previewArea .iphone5 #spContentWrapper [data-item-type="displayObject"].editable:hover:before { top:0; }
+#editInLibrary #previewArea .iphone5 #spContentWrapper [data-item-name="About"].editable:hover::before, #editInLibrary #previewArea .iphone5 #spContentWrapper [data-item-name="About"].editable:hover::after, #editInPage #previewArea .iphone5 #spContentWrapper [data-item-name="About"].editable:hover::before, #editInPage #previewArea .iphone5 #spContentWrapper [data-item-name="About"].editable:hover::after { content:"物件概要"; }
+#editInLibrary #previewArea .iphone5 #spContentWrapper [data-item-name="About"] td.current, #editInPage #previewArea .iphone5 #spContentWrapper [data-item-name="About"] td.current {
+  z-index:9999;
+  background-color:rgba(0,255,0,0.2);
+  box-shadow:inset 0 0 10px 5px rgba(0,255,0,0.5);
+}
+#editInLibrary #previewArea .iphone5 #spContentWrapper [data-item-name="About"] td.current::after, #editInPage #previewArea .iphone5 #spContentWrapper [data-item-name="About"] td.current::after {
+  font-size:150%;
+  text-align:center;
+  color:#ffffff;
+  font-weight:bold;
+  text-shadow:0 0 2px rgba(0,0,0,0.5), 0 0 5px rgba(0,0,0,0.9), 0 0 20px rgba(0,0,0,0.9);
+}
+#editInLibrary #previewArea .iphone5 #spContentWrapper [data-item-name="About"] td.category:hover::after, #editInLibrary #previewArea .iphone5 #spContentWrapper [data-item-name="About"] td.key:hover::after, #editInLibrary #previewArea .iphone5 #spContentWrapper [data-item-name="About"] td.val:hover::after, #editInPage #previewArea .iphone5 #spContentWrapper [data-item-name="About"] td.category:hover::after, #editInPage #previewArea .iphone5 #spContentWrapper [data-item-name="About"] td.key:hover::after, #editInPage #previewArea .iphone5 #spContentWrapper [data-item-name="About"] td.val:hover::after {
+  font-size:150%;
+  text-align:center;
+  color:#ffffff;
+  font-weight:bold;
+  text-shadow:0 0 2px rgba(0,0,0,0.5), 0 0 5px rgba(0,0,0,0.9), 0 0 20px rgba(0,0,0,0.9);
+}
+#editInLibrary #previewArea .iphone5 #spContentWrapper [data-item-name="About"] td.category:hover::after, #editInPage #previewArea .iphone5 #spContentWrapper [data-item-name="About"] td.category:hover::after { content:"カテゴリー"; }
+#editInLibrary #previewArea .iphone5 #spContentWrapper [data-item-name="About"] td.key:hover::after, #editInPage #previewArea .iphone5 #spContentWrapper [data-item-name="About"] td.key:hover::after { content:"項目名"; }
+#editInLibrary #previewArea .iphone5 #spContentWrapper [data-item-name="About"] td.val:hover::after, #editInPage #previewArea .iphone5 #spContentWrapper [data-item-name="About"] td.val:hover::after { content:"値"; }
+#editInLibrary #previewArea .iphone5 #spContentWrapper [data-item-name="Accordion"] .accordion-header, #editInPage #previewArea .iphone5 #spContentWrapper [data-item-name="Accordion"] .accordion-header {
+  background:transparent;
+  margin:0;
+  padding:0;
+}
+#editInLibrary #previewArea .iphone5 #spContentWrapper [data-item-name="Accordion"] .accordion-header.empty, #editInPage #previewArea .iphone5 #spContentWrapper [data-item-name="Accordion"] .accordion-header.empty {
+  padding:8px;
+  display:block;
+}
+#editInLibrary #previewArea .iphone5 #spContentWrapper [data-item-name="Accordion"] .accordion-header.empty:before, #editInPage #previewArea .iphone5 #spContentWrapper [data-item-name="Accordion"] .accordion-header.empty:before {
+  content:'アコーディオンヘッダーにパーツをドロップしてください';
+  color:rgba(0,0,0,0.5);
+}
+#editInLibrary #previewArea .iphone5 #spContentWrapper [data-item-name="Accordion"] .accordion-header > .ui-accordion-header-icon, #editInPage #previewArea .iphone5 #spContentWrapper [data-item-name="Accordion"] .accordion-header > .ui-accordion-header-icon {
+  background:transparent;
+  display:none;
+}
+#editInLibrary #previewArea .iphone5 #spContentWrapper [data-item-name="Accordion"] .accordion-content, #editInPage #previewArea .iphone5 #spContentWrapper [data-item-name="Accordion"] .accordion-content { overflow:hidden; }
+#editInLibrary #previewArea .iphone5 #spContentWrapper [data-item-name="Accordion"] .accordion-content.empty, #editInPage #previewArea .iphone5 #spContentWrapper [data-item-name="Accordion"] .accordion-content.empty {
+  height:20px;
+  padding:8px;
+  display:block;
+}
+#editInLibrary #previewArea .iphone5 #spContentWrapper [data-item-name="Accordion"] .accordion-content.empty::before, #editInPage #previewArea .iphone5 #spContentWrapper [data-item-name="Accordion"] .accordion-content.empty::before {
+  content:'アコーディオンボディにパーツをドロップしてください';
+  color:rgba(0,0,0,0.5);
+}
+#editInLibrary #previewArea .iphone5 #spContentWrapper [data-item-name="Accordion"].editable:hover::before, #editInLibrary #previewArea .iphone5 #spContentWrapper [data-item-name="Accordion"].editable:hover::after, #editInPage #previewArea .iphone5 #spContentWrapper [data-item-name="Accordion"].editable:hover::before, #editInPage #previewArea .iphone5 #spContentWrapper [data-item-name="Accordion"].editable:hover::after { content:"アコーディオン"; }
+#editInLibrary #previewArea .iphone5 #spContentWrapper [data-item-name="Code"] > .contentWrapper.empty, #editInPage #previewArea .iphone5 #spContentWrapper [data-item-name="Code"] > .contentWrapper.empty {
+  height:30px;
+  background:rgba(0,0,0,0.2);
+}
+#editInLibrary #previewArea .iphone5 #spContentWrapper [data-item-name="Code"] > .contentWrapper.empty::after, #editInPage #previewArea .iphone5 #spContentWrapper [data-item-name="Code"] > .contentWrapper.empty::after {
+  content:"コードを記述して下さい";
+  color:rgba(0,0,0,0.5);
+}
+#editInLibrary #previewArea .iphone5 #spContentWrapper [data-item-name="Code"] > .contentWrapper > .minimum, #editInPage #previewArea .iphone5 #spContentWrapper [data-item-name="Code"] > .contentWrapper > .minimum {
+  min-height:200px;
+  border:3px dashed rgba(0,0,0,0.3);
+  margin:10px;
+  border-radius:20px;
+}
+#editInLibrary #previewArea .iphone5 #spContentWrapper [data-item-name="Code"].editable:hover::before, #editInLibrary #previewArea .iphone5 #spContentWrapper [data-item-name="Code"].editable:hover::after, #editInPage #previewArea .iphone5 #spContentWrapper [data-item-name="Code"].editable:hover::before, #editInPage #previewArea .iphone5 #spContentWrapper [data-item-name="Code"].editable:hover::after { content:"コード"; }
+#editInLibrary #previewArea .iphone5 #spContentWrapper [data-item-name="Gallery"] .contentWrapper .empty::after, #editInPage #previewArea .iphone5 #spContentWrapper [data-item-name="Gallery"] .contentWrapper .empty::after { content:'ギャラリーの画像を指定してください'; }
+#editInLibrary #previewArea .iphone5 #spContentWrapper [data-item-name="Gallery"] .contentWrapper .slides, #editInPage #previewArea .iphone5 #spContentWrapper [data-item-name="Gallery"] .contentWrapper .slides { margin:0; }
+#editInLibrary #previewArea .iphone5 #spContentWrapper [data-item-name="Icon"], #editInPage #previewArea .iphone5 #spContentWrapper [data-item-name="Icon"] {
+  display:inline-block;
+  width:auto;
+  height:auto;
+}
+#editInLibrary #previewArea .iphone5 #spContentWrapper [data-item-name="Icon"] > .contentWrapper.empty, #editInPage #previewArea .iphone5 #spContentWrapper [data-item-name="Icon"] > .contentWrapper.empty {
+  width:50px;
+  height:50px;
+  background:rgba(0,0,0,0.2);
+}
+#editInLibrary #previewArea .iphone5 #spContentWrapper [data-item-name="Icon"] > .contentWrapper.empty::after, #editInPage #previewArea .iphone5 #spContentWrapper [data-item-name="Icon"] > .contentWrapper.empty::after {
+  content:"アイコンを選択して下さい";
+  color:rgba(0,0,0,0.5);
+}
+#editInLibrary #previewArea .iphone5 #spContentWrapper [data-item-name="Icon"] > .contentWrapper >i, #editInPage #previewArea .iphone5 #spContentWrapper [data-item-name="Icon"] > .contentWrapper >i { display:inline-block; }
+#editInLibrary #previewArea .iphone5 #spContentWrapper [data-item-name="Icon"].editable:hover::before, #editInPage #previewArea .iphone5 #spContentWrapper [data-item-name="Icon"].editable:hover::before {
+  content:"アイコン";
+  font-size:2rem;
+  font-weight:rormal;
+  position:absolute;
+}
+#editInLibrary #previewArea .iphone5 #spContentWrapper [data-item-name="Image"] .img.empty::after, #editInPage #previewArea .iphone5 #spContentWrapper [data-item-name="Image"] .img.empty::after {
+  content:'画像を指定してください';
+  color:rgba(0,0,0,0.5);
+}
+#editInLibrary #previewArea .iphone5 #spContentWrapper [data-item-name="Image"] img, #editInPage #previewArea .iphone5 #spContentWrapper [data-item-name="Image"] img {
+  width:100%;
+  max-width:none;
+}
+#editInLibrary #previewArea .iphone5 #spContentWrapper [data-item-name="Image"].editable:hover::after, #editInPage #previewArea .iphone5 #spContentWrapper [data-item-name="Image"].editable:hover::after { content:"画像"; }
+#editInLibrary #previewArea .iphone5 #spContentWrapper [data-item-name="Map"] .contentWrapper, #editInPage #previewArea .iphone5 #spContentWrapper [data-item-name="Map"] .contentWrapper { height:100%; }
+#editInLibrary #previewArea .iphone5 #spContentWrapper [data-item-name="Map"] .contentWrapper > .map, #editInPage #previewArea .iphone5 #spContentWrapper [data-item-name="Map"] .contentWrapper > .map { height:100%; }
+#editInLibrary #previewArea .iphone5 #spContentWrapper [data-item-name="Map"].empty, #editInPage #previewArea .iphone5 #spContentWrapper [data-item-name="Map"].empty {
+  display:block;
+  position:relative;
+  height:200px;
+  background:#ffffff url(http://tctechcrunch2011.files.wordpress.com/2012/09/google_maps_android_logo_250.jpg?w=250) 50% 0 repeat-y;
+}
+#editInLibrary #previewArea .iphone5 #spContentWrapper [data-item-name="Map"]::before, #editInPage #previewArea .iphone5 #spContentWrapper [data-item-name="Map"]::before {
+  content:"";
+  width:100%;
+  position:absolute;
+}
+#editInLibrary #previewArea .iphone5 #spContentWrapper [data-item-name="Map"].editable:hover::before, #editInLibrary #previewArea .iphone5 #spContentWrapper [data-item-name="Map"].editable:hover::after, #editInPage #previewArea .iphone5 #spContentWrapper [data-item-name="Map"].editable:hover::before, #editInPage #previewArea .iphone5 #spContentWrapper [data-item-name="Map"].editable:hover::after { content:"地図"; }
+#editInLibrary #previewArea .iphone5 #spContentWrapper [data-item-name="tab"] > .tab, #editInPage #previewArea .iphone5 #spContentWrapper [data-item-name="tab"] > .tab {
+  display:block;
+  padding:0;
+}
+#editInLibrary #previewArea .iphone5 #spContentWrapper [data-item-name="tab"] > .tab > .nav-tabs > li, #editInPage #previewArea .iphone5 #spContentWrapper [data-item-name="tab"] > .tab > .nav-tabs > li {
+  margin:0;
+  background:transparent;
+}
+#editInLibrary #previewArea .iphone5 #spContentWrapper [data-item-name="tab"] > .tab > .nav-tabs > li > a, #editInPage #previewArea .iphone5 #spContentWrapper [data-item-name="tab"] > .tab > .nav-tabs > li > a {
+  border:1px solid rgba(0,0,0,0.1);
+  background:rgba(255,255,255,0.8);
+}
+#editInLibrary #previewArea .iphone5 #spContentWrapper [data-item-name="tab"].editable:hover::before, #editInLibrary #previewArea .iphone5 #spContentWrapper [data-item-name="tab"].editable:hover::after, #editInPage #previewArea .iphone5 #spContentWrapper [data-item-name="tab"].editable:hover::before, #editInPage #previewArea .iphone5 #spContentWrapper [data-item-name="tab"].editable:hover::after { content:"タブ"; }
+#editInLibrary #previewArea .iphone5 #spContentWrapper [data-item-name="Table"].editable:hover::before, #editInLibrary #previewArea .iphone5 #spContentWrapper [data-item-name="Table"].editable:hover::after, #editInPage #previewArea .iphone5 #spContentWrapper [data-item-name="Table"].editable:hover::before, #editInPage #previewArea .iphone5 #spContentWrapper [data-item-name="Table"].editable:hover::after { content:"テーブル"; }
+#editInLibrary #previewArea .iphone5 #spContentWrapper [data-item-name="Table"] td.editable:hover, #editInPage #previewArea .iphone5 #spContentWrapper [data-item-name="Table"] td.editable:hover {
+  z-index:9999;
+  background-color:rgba(0,255,0,0.3);
+  box-shadow:inset 0 0 20px rgba(0,255,0,1);
+}
+#editInLibrary #previewArea .iphone5 #spContentWrapper [data-item-name="Table"] td.editable:hover::after, #editInPage #previewArea .iphone5 #spContentWrapper [data-item-name="Table"] td.editable:hover::after {
+  content:"カラム";
+  font-size:150%;
+  text-align:center;
+  color:#ffffff;
+  font-weight:bold;
+  text-shadow:0 0 2px rgba(0,0,0,0.5), 0 0 5px rgba(0,0,0,0.9);
+}
+#editInLibrary #previewArea .iphone5 #spContentWrapper [data-item-name="Text"], #editInPage #previewArea .iphone5 #spContentWrapper [data-item-name="Text"] {
+  word-break:break-word;
+  line-height:100%;
+  padding:0px;
+}
+#editInLibrary #previewArea .iphone5 #spContentWrapper [data-item-name="Text"] > div.contentWrapper, #editInPage #previewArea .iphone5 #spContentWrapper [data-item-name="Text"] > div.contentWrapper { padding:8px; }
+#editInLibrary #previewArea .iphone5 #spContentWrapper [data-item-name="Text"] > div.contentWrapper >.text:empty::before, #editInPage #previewArea .iphone5 #spContentWrapper [data-item-name="Text"] > div.contentWrapper >.text:empty::before {
+  content:'文字を入力してください';
+  color:rgba(0,0,0,0.5);
+}
+#editInLibrary #previewArea .iphone5 #spContentWrapper [data-item-name="Text"].editable:hover:before, #editInLibrary #previewArea .iphone5 #spContentWrapper [data-item-name="Text"].editable:hover:after, #editInPage #previewArea .iphone5 #spContentWrapper [data-item-name="Text"].editable:hover:before, #editInPage #previewArea .iphone5 #spContentWrapper [data-item-name="Text"].editable:hover:after { content:"テキスト"; }
+#editInLibrary #previewArea .iphone5 #spContentWrapper [data-item-name="Youtube"].empty, #editInPage #previewArea .iphone5 #spContentWrapper [data-item-name="Youtube"].empty {
+  display:block;
+  position:relative;
+  height:150px;
+  background:#ffffff url(../img/tmp/20100928_682614.jpg) 50% 0 no-repeat;
+}
+#editInLibrary #previewArea .iphone5 #spContentWrapper [data-item-name="Youtube"] > .youtube > iframe, #editInPage #previewArea .iphone5 #spContentWrapper [data-item-name="Youtube"] > .youtube > iframe { width:100%; }
+#editInLibrary #previewArea .iphone5 #spContentWrapper [data-item-name="Youtube"]:before, #editInPage #previewArea .iphone5 #spContentWrapper [data-item-name="Youtube"]:before {
+  content:"";
+  width:100%;
+  position:absolute;
+}
+#editInLibrary #previewArea .iphone5 #spContentWrapper [data-item-name="Youtube"].editable:hover:before, #editInLibrary #previewArea .iphone5 #spContentWrapper [data-item-name="Youtube"].editable:hover:after, #editInPage #previewArea .iphone5 #spContentWrapper [data-item-name="Youtube"].editable:hover:before, #editInPage #previewArea .iphone5 #spContentWrapper [data-item-name="Youtube"].editable:hover:after { content:"YouTube"; }
+#editInLibrary #previewArea .iphone5 #spContentWrapper [data-item-name="Library"]:hover, #editInPage #previewArea .iphone5 #spContentWrapper [data-item-name="Library"]:hover {
+  z-index:9999;
+  padding:30px 0;
+  width:100%;
+  background-color:rgba(0,0,255,0.1);
+  box-shadow:inset 0 0 20px rgba(0,0,255,1);
+}
+#editInLibrary #previewArea .iphone5 #spContentWrapper [data-item-name="Library"]:hover:before, #editInLibrary #previewArea .iphone5 #spContentWrapper [data-item-name="Library"]:hover:after, #editInPage #previewArea .iphone5 #spContentWrapper [data-item-name="Library"]:hover:before, #editInPage #previewArea .iphone5 #spContentWrapper [data-item-name="Library"]:hover:after {
+  font-size:150%;
+  text-align:center;
+  color:#ffffff;
+  font-weight:bold;
+  text-shadow:0 0 2px rgba(0,0,0,0.5), 0 0 5px rgba(0,0,0,0.9);
+  margin-left:20px;
+}
+#editInLibrary #previewArea .iphone5 #spContentWrapper [data-item-name="Library"]:hover::before, #editInLibrary #previewArea .iphone5 #spContentWrapper [data-item-name="Library"]:hover::after, #editInPage #previewArea .iphone5 #spContentWrapper [data-item-name="Library"]:hover::before, #editInPage #previewArea .iphone5 #spContentWrapper [data-item-name="Library"]:hover::after { content:"共通パーツ"; }
+#editInLibrary #previewArea .iphone5 #spContentWrapper [data-item-name="header"], #editInPage #previewArea .iphone5 #spContentWrapper [data-item-name="header"] {
+  background:rgba(180,130,130,0.1);
+  border-top:1px solid rgba(0,0,0,0.5);
+  border-bottom:1px solid rgba(0,0,0,0.5);
+}
+#editInLibrary #previewArea .iphone5 #spContentWrapper [data-item-name="header"].editable:hover:before, #editInLibrary #previewArea .iphone5 #spContentWrapper [data-item-name="header"].editable:hover:after, #editInPage #previewArea .iphone5 #spContentWrapper [data-item-name="header"].editable:hover:before, #editInPage #previewArea .iphone5 #spContentWrapper [data-item-name="header"].editable:hover:after { content:"ヘッダー"; }
+#editInLibrary #previewArea .iphone5 #spContentWrapper .nav, #editInPage #previewArea .iphone5 #spContentWrapper .nav { margin:0; }
+#editInLibrary #previewArea .iphone5 #spContentWrapper .nav ul, #editInPage #previewArea .iphone5 #spContentWrapper .nav ul {
+  margin:0;
+  padding:1px 0;
+  background:#664444;
+}
+#editInLibrary #previewArea .iphone5 #spContentWrapper .nav ul li, #editInPage #previewArea .iphone5 #spContentWrapper .nav ul li {
+  background:-webkit-gradient(linear,left top,left bottom,color-stop(0.88,#e4c798),color-stop(0.00,#f6ecd9));
+  background:-webkit-linear-gradient(top,#f6ecd9 0%,#e4c798 88%);
+  background:-moz-linear-gradient(top,#f6ecd9 0%,#e4c798 88%);
+  background:-o-linear-gradient(top,#f6ecd9 0%,#e4c798 88%);
+  background:-ms-linear-gradient(top,#f6ecd9 0%,#e4c798 88%);
+  background:linear-gradient(to bottom,#f6ecd9 0%,#e4c798 88%);
+  border-top:1px solid rgba(255,255,255,0.2);
+  border-bottom:1px solid rgba(0,0,0,0.2);
+  margin-bottom:1px;
+}
+#editInLibrary #previewArea .iphone5 #spContentWrapper .nav ul li a, #editInPage #previewArea .iphone5 #spContentWrapper .nav ul li a {
+  padding:10px;
+  display:block;
+  text-decoration:none;
+  color:#663333;
+  text-shadow:-1px -1px 0 rgba(0,0,0,0.2);
+  font-weight:bold;
+}
+#editInLibrary #previewArea .iphone5 #spContentWrapper .footerMenu table, #editInPage #previewArea .iphone5 #spContentWrapper .footerMenu table {
+  width:100%;
+  cell-padding:1px;
+  cell-spacing:1px;
+}
+#editInLibrary #previewArea .iphone5 #spContentWrapper .footerMenu table td, #editInPage #previewArea .iphone5 #spContentWrapper .footerMenu table td {
+  border:1px solid rgba(0,0,0,0.2);
+  width:33%;
+  text-align:center;
+  background:#000000;
+  border-width:0 1px 1px 0;
+  border:solid 1px #c6c6c6;
+  color:#d1dc6d;
+}
+#editInLibrary #previewArea .iphone5 #spContentWrapper .copyright, #editInPage #previewArea .iphone5 #spContentWrapper .copyright {
+  font-size:0.5em;
+  text-align:center;
+  color:#000000;
+}
+#editInLibrary #previewArea .iphone5 #spContentWrapper #spContent > *:hover, #editInPage #previewArea .iphone5 #spContentWrapper #spContent > *:hover { cursor:pointer; }
+#editInLibrary #previewArea .iphone5 #spContentWrapper #spContent >.now-edit, #editInPage #previewArea .iphone5 #spContentWrapper #spContent >.now-edit { z-index:9999; }
+#editInLibrary #previewArea .iphone5 #spContentWrapper #spContent >.other, #editInPage #previewArea .iphone5 #spContentWrapper #spContent >.other {
+  opacity:0.3;
+  z-index:1;
+}
+#editInLibrary #previewArea .iphone5 #spContentWrapper #spContent .hover, #editInPage #previewArea .iphone5 #spContentWrapper #spContent .hover {
+  opacity:1;
+  z-index:9999;
+}
+#editInLibrary #previewArea .iphone5 #spContentWrapper .placeholder, #editInPage #previewArea .iphone5 #spContentWrapper .placeholder { background:rgba(0,0,0,0.2); }
+#editInLibrary #previewArea .iphone5 #spContentWrapper .placeholder:before, #editInPage #previewArea .iphone5 #spContentWrapper .placeholder:before { content:"　"; }
+[data-item-name="Icon"] {
+  display:inline-block;
+  width:auto;
+  height:auto;
+}

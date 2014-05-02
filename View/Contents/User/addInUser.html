@@ -1,0 +1,8 @@
+<?php
+echo $this->Form->create('User', array('action'=>'add'));
+echo $this->Form->input('username');
+echo $this->Form->input('password');
+echo $this->Form->input('company_id', array('type'=>'text'));
+echo $this->Form->input('name');
+echo $this->Form->end('Add');
+?>

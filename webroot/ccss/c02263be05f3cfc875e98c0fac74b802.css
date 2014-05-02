@@ -1,0 +1,21 @@
+@charset "utf-8";
+.selectLinkPageModal .pageList {
+  overflow-y:scroll;
+  margin-left:50px;
+}
+.selectLinkPageModal .pageList >dt {
+  margin-top:30px;
+  padding:7px 3px;
+  border-bottom:1px solid #cac9c9;
+}
+.selectLinkPageModal .pageList >dt:first-child { margin-top:0; }
+.selectLinkPageModal .pageList >dd {
+  margin-left:50px;
+  margin-right:5px;
+  overflow:hidden;
+  padding:7px 3px;
+  cursor:pointer;
+  border-bottom:1px solid #cac9c9;
+}
+.selectLinkPageModal .pageList >dd:hover { background:rgba(215,231,255,0.5); }
+.selectLinkPageModal .pageList >dd.current { background:rgba(130,178,250,0.57); }

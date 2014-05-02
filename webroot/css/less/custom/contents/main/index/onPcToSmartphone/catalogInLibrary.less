@@ -1,0 +1,692 @@
+@charset "utf-8";
+
+
+#indexInMain {
+	background: white;
+	overflow: hidden;
+
+	#contentForUserAdmin {
+		padding: 40px 10px 10px 10px;
+
+		#wrapper {
+			display: table;
+			table-layout: fixed;
+			width: 100%;
+
+			ul {
+				padding: 0;
+				margin: 0;
+			}
+
+			.parents,
+			.children {
+				display: table-cell;
+				vertical-align: top;
+				margin: 0;
+
+				li {
+					padding: 10px;
+				}
+			}
+
+
+			#residences {
+				width: 400px;
+				border: 1px solid #ccc;
+
+				>.btns {
+					margin: 8px 5px 5px;
+
+					>.btn-group {
+						margin-bottom: 5px;
+
+						&:last-child {
+							margin-bottom: 0;
+						}
+					}
+
+					.btn-group + .btn-group {
+						margin-left: 0;
+					}
+				}
+
+				>ul {
+					border-top: 1px solid #ccc;
+					overflow-y: scroll;
+
+					>li {
+						border-bottom: 1px solid #ccc;
+						cursor: pointer;
+						position: relative;
+						overflow: hidden;
+
+						&:last-child {
+							border-bottom: none;
+						}
+						&.not-latest {
+							background: rgb(255, 245, 174);
+						}
+						&:hover {
+							background: rgba(254, 255, 234, 1);
+						}
+						&.current {
+							background: rgba(222,234,254,1);
+						}
+						&.on-hover {
+							background: rgba(101, 157, 250, 1);
+						}
+
+						label {
+							// display: inline-block;
+							display: inline;
+
+							.checkbox {
+								display: inline-block;
+								padding-right: 0;
+							}
+							.record-id {
+								display: inline-block;
+								// width: 130px;
+								font-size: 3rem;
+								display: inline-block;
+								line-height: 3rem;
+								text-overflow: ellipsis;
+								white-space: nowrap;
+
+								&::before {
+									content: '物件ID';
+									font-size: 1rem;
+									line-height: 1rem;
+									color: rgba(0, 172, 238, 1);
+									display: inline-block;
+									vertical-align: middle;
+									margin-right: 5px;
+									margin-bottom: 5px;
+								}
+							}
+						}
+
+						&.company-item {
+							&::before{
+								content: '企業サイト';
+								position: absolute;
+								right: -50px;
+								top: 30px;
+								-webkit-transform: rotate(45deg);
+								width: 100px;
+								text-align: center;
+								font-size: 2rem;
+								background: rgba(115, 167, 214, 0.7);
+								color: white;
+								padding: 10px 50px;
+							}
+							// .record-id {
+							// 	width: 252px;
+							// }
+						}
+						.group {
+							position: relative;
+							input[type="text"] {
+								background: rgba(255, 255, 255, 0.7);
+							}
+						}
+						.btn-group {
+							// display: inline-block;
+							// margin-top: -15px;
+							float: right;
+							margin-top: 5px;
+							margin-bottom: 5px;
+						}
+						.name {
+							display: inline-block;
+							padding: 0 0 0 5px;
+
+							>input[type="text"] {
+								width: 328px;
+							}
+
+							&::before {
+								content: '物件名';
+								font-size: 1rem;
+								color: rgba(0, 172, 238, 1);
+								display: inline-block;
+								vertical-align: middle;
+								margin-right: 5px;
+								margin-bottom: 5px;
+							}
+						}
+						.path {
+							padding: 0 5px;
+
+							&::before {
+								content: 'パス';
+								font-size: 1rem;
+								line-height: 1rem;
+								color: rgba(0, 172, 238, 1);
+								margin-bottom: 5px;
+								display: inline-block;
+								margin-right: 5px;
+							}
+						}
+						.smartphone-page-count {
+							display: inline-block;
+							padding: 0 5px;
+							float: left;
+
+							&::before {
+								content: 'スマホページ数';
+								font-size: 1rem;
+								color: rgba(0, 172, 238, 1);
+								display: inline-block;
+								vertical-align: middle;
+								margin-right: 5px;
+							}
+						}
+						.featurephone-page-count {
+							display: inline-block;
+							padding: 0 5px;
+							float: right;
+
+							&::before {
+								content: 'フィーチャーフォンページ数';
+								font-size: 1rem;
+								color: rgba(0, 172, 238, 1);
+								display: inline-block;
+								vertical-align: middle;
+								margin-right: 5px;
+							}
+						}
+					}
+
+					>.placeholder {
+						background: rgb(231, 231, 231);
+					}
+				}
+			}
+
+			#pages {
+				>div.page-wrapper {
+					border: 1px solid #ccc;
+					border-left: none;
+					display: none;
+
+					&.current {
+						display: block;
+					}
+
+					.nav-tabs {
+						background: whiteSmoke;
+
+						>li {
+							padding-top: 0;
+							padding-bottom: 0;
+							>a {
+								border-top: none;
+								text-decoration: none;
+								color: #aaa;
+							}
+							&.active {
+								>a {
+									color: #333;
+								}
+							}
+						}
+					}
+
+					.tab-content {
+						.tab-pane {
+							>.btns {
+								padding: 5px;
+								border-bottom: 1px solid #ccc;
+
+								>.btn-group {
+									margin-bottom: 5px;
+
+									&:last-child {
+										margin-bottom: 0;
+										display: block;
+									}
+								}
+
+								.btn-group + .btn-group {
+									margin-left: 0;
+								}
+							}
+
+							>.page-list {
+								overflow-y: scroll;
+
+								>.page-item {
+									border-bottom: 1px solid #ccc;
+									cursor: pointer;
+
+									&:hover {
+										background: rgba(254, 255, 234, 1);
+									}
+									&.current {
+										background: rgba(222,234,254,1);
+									}
+									&.active {
+										background: rgb(182, 203, 255);
+									}
+									&.not-latest {
+										background: rgb(255, 245, 174);
+									}
+									&:last-child {
+										border-bottom: none;
+									}
+
+									.checkbox {
+										display: inline-block;
+										float: left;
+										margin-top: -1px;
+									}
+									.record-id {
+										display: inline-block;
+										font-size: 3rem;
+										display: inline-block;
+										line-height: 3rem;
+										text-overflow: ellipsis;
+										white-space: nowrap;
+										float: left;
+										margin-top: -5px;
+
+										&::before {
+											content: 'ページID';
+											font-size: 1rem;
+											line-height: 1rem;
+											color: rgba(0, 172, 238, 1);
+											display: inline-block;
+											vertical-align: middle;
+											margin-right: 5px;
+											margin-bottom: 5px;
+										}
+									}
+									.btns {
+										float: right;
+										margin-bottom: 10px;
+
+										.dropdown-menu{
+											min-width: 100px;
+
+											>li {
+												padding: 0;
+												&:first-child {
+													margin-bottom: -5px;
+												}
+												&:last-child {
+													overflow: hidden;
+													height: 100px;
+													text-align: center;
+												}
+												>a {
+													text-overflow: ellipsis;
+													overflow: hidden;
+													width: 152px;
+													padding: 3px 10px;
+												}
+											}
+										}
+										.dropdown-menu-for-concrete {
+											margin-left: -39px;
+										}
+									}
+									.title {
+										border-bottom: 1px dotted #CCD;
+										padding-bottom: 0;
+										margin-top: -5px;
+										>input[type="text"] {
+											width: 90%;
+										}
+
+										&::before {
+											content: 'ページ名';
+											font-size: 1rem;
+											color: rgba(0, 172, 238, 1);
+											display: inline-block;
+											vertical-align: middle;
+											margin-right: 5px;
+											margin-bottom: 5px;
+										}
+									}
+									.path {
+										margin-bottom: -10px;
+										padding-bottom: 0;
+
+										&::before {
+											content: 'パス';
+											font-size: 1rem;
+											line-height: 1rem;
+											color: rgba(0, 172, 238, 1);
+											margin-bottom: 5px;
+											display: inline-block;
+											margin-right: 5px;
+										}
+									}
+									.detail {
+										border: 1px solid #ccc;
+										margin-top: 10px;
+										background: whiteSmoke;
+
+										>div {
+											position: relative;
+											height: 20px;
+
+											> p {
+												display: inline-block;
+												padding: 0 5px;
+												// position: relative;
+												position: absolute;
+												top: 0;
+
+												&::before {
+													font-size: 1rem;
+													line-height: 1rem;
+													color: rgba(0, 172, 238, 1);
+													margin-bottom: 5px;
+													display: inline-block;
+													margin-right: 5px;
+													position: absolute;
+													top: 6px;
+													left: 0;
+												}
+
+												&:first-child {
+													margin-left: 80px;
+												}
+												&:last-child {
+													margin-left: 100px;
+												}
+											}
+
+											&.caution {
+												&.empty {
+													display: none;
+												}
+												>p {
+													margin-left : 0;
+												}
+											}
+										}
+										.editor {
+											left: 0;
+
+											&::before {
+												content: '更新ユーザ';
+												left: -75px;
+												width: 75px;
+												text-align: right;
+											}
+										}
+
+										.edited {
+											left: 400px;
+
+											&::before {
+												content: '最終更新日時';
+												left: -80px;
+												width: 80px;
+												text-align: right;
+											}
+										}
+
+										.publisher {
+											left: 0;
+
+											&::before {
+												content: '書き出しユーザ';
+												left: -75px;
+												width: 75px;
+												text-align: right;
+											}
+										}
+
+										.published {
+											left: 400px;
+
+											&::before {
+												content: '最終書き出し日時';
+												left: -80px;
+												width: 80px;
+												text-align: right;
+											}
+										}
+									}
+								}
+
+								>.placeholder {
+									background: rgb(231, 231, 231);
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+	#bulk-edit-outline-modal {
+		.modal-body {
+			ul.edit-item-list {
+				margin-left: 0;
+
+				>li {
+					margin-bottom: 10px;
+
+					p.checkbox {
+						display: inline-block;
+					}
+					p.datepicker-wrapper {
+						display: inline-block;
+						margin-left: 20px;
+
+						>input[type="text"] {
+							margin: 0;
+						}
+					}
+				}
+			}
+
+			.info {
+				margin-top: 20px;
+
+				ul.residence-list {
+					border: 1px solid #ccc;
+					padding: 10px;
+					width: 100%;
+					height: 200px;
+					overflow-y: scroll;
+					margin: 0;
+
+					>li {
+						border-bottom: 1px solid #ccc;
+					}
+				}
+			}
+		}
+
+		.modal-footer {
+			label {
+				text-align: center;
+
+				input[type="checkbox"] {
+					margin-right: 10px;
+					vertical-align: top;
+				}
+			}
+		}
+	}
+
+	#tag-edit-modal {
+
+		.modal-body {
+			padding: 0;
+
+			.info {
+				vertical-align: top;
+				margin: 0;
+
+				p {
+					margin: 10px;
+				}
+			}
+
+			.tag-list {
+				height: 300px;
+				margin: 0;
+				border: 1px solid #ccc;
+				padding: 10px;
+				overflow-y: scroll;
+
+				.btn-group {
+					display: block;
+				}
+				li {
+					margin: 0;
+					margin-bottom: 10px;
+					border-bottom: 1px solid #ccc;
+
+					&:last-child {
+						border: none;
+						margin: 0;
+					}
+					input[type="text"],
+					textarea {
+						width: 100%;
+					}
+					textarea {
+						height: 200px;
+					}
+
+					&.placeholder {
+						background: rgb(231, 231, 231);
+					}
+				}
+			}
+		}
+
+		.modal-footer {
+			label {
+				text-align: center;
+
+				input[type="checkbox"] {
+					margin-right: 10px;
+					vertical-align: top;
+				}
+			}
+		}
+	}
+
+	/*
+	#bulk-edit-tag-modal {
+		width: 950px;
+		margin-left: -475px;
+
+		.modal-body {
+			border: 1px solid #ccc;
+			padding: 0;
+
+			.info {
+				float: left;
+				// margin-top: 20px;
+				// display: inline-block;
+				vertical-align: top;
+				margin: 0;
+				width: 350px;
+
+				p {
+					margin: 10px;
+				}
+
+				ul.residence-list {
+					margin: 0;
+					> li {
+						overflow: hidden;
+						white-space: nowrap;
+						.id,
+						.name {
+							display: inline-block;
+							margin: 0;
+						}
+						.name {
+							margin-left: 10px;
+						}
+					}
+				}
+				ul.page-list {
+					margin: 0;
+					border: 0;
+					border-top: 1px solid #ccc;
+					padding: 10px;
+					// width: 100%;
+					height: 225px;
+					overflow-y: scroll;
+					margin: 0;
+					>li {
+						border-bottom: 1px solid #ccc;
+						overflow: hidden;
+						// text-overflow: ellipsis;
+						white-space: nowrap;
+
+						&:last-child {
+							border: none;
+						}
+						.id,
+						.name {
+							display: inline-block;
+							margin: 0;
+						}
+						.name {
+							margin-left: 10px;
+						}
+					}
+				}
+			}
+
+			.tag-list {
+				// float: right;
+				width: 516px;
+				height: 300px;
+				// display: inline-block;
+				margin: 0;
+				border-left: 1px solid #ccc;
+				padding: 10px;
+				float: right;
+				overflow-y: scroll;
+
+				.btn-group {
+					display: block;
+				}
+				dd {
+					margin: 0;
+					margin-bottom: 10px;
+					border-bottom: 1px solid #ccc;
+
+					&:last-child {
+						border: none;
+						margin: 0;
+					}
+				}
+				input[type="text"],
+				textarea {
+					width: 100%;
+				}
+				textarea {
+					height: 200px;
+				}
+			}
+		}
+
+		.modal-footer {
+			label {
+				text-align: center;
+
+				input[type="checkbox"] {
+					margin-right: 10px;
+					vertical-align: top;
+				}
+			}
+		}
+	}
+	*/
+}

@@ -1,0 +1,18 @@
+
+
+
+<div id="container">
+	<input type="hidden" name="currentUrl" value="<?php echo $this->Html->url('/', true); ?>" />
+	<input type="hidden" name="userId" value="<?php echo $userId; ?>" />
+	<input type="hidden" name="residenceId" value="<?php echo $residenceId; ?>" />
+	<input type="hidden" name="targetDeviceName" value="<?php echo $targetDeviceName; ?>" />
+	<input type="hidden" name="isLibraryElementPage" value="<?php echo $isLibraryElementPage; ?>" />
+	<input type="hidden" name="pageId" value="<?php echo $pageId; ?>" />
+	<input type="hidden" name="libraryPageProperty" value='<?php echo $libraryPageProperty; ?>' />
+	<input type="hidden" name="smartphoneLibraryId" value='<?php echo $smartphoneLibraryId; ?>' />
+	<input type="hidden" name="menuData" value='<?php echo json_encode($menuData); ?>' />
+	<input type="hidden" name="itemData" value='<?php echo json_encode($itemData); ?>' />
+
+<div id="spContent" class="sortable droppable overview contentWrapper"></div>
+
+</div>

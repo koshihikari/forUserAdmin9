@@ -1,0 +1,126 @@
+@charset "utf-8";
+#catalogInResidence section h2 {
+  padding:12px 20px;
+  background:#1d8ade;
+  background:-moz-linear-gradient(left,#1d8ade 0%,#53a2e2 50%,#1d8ade 100%);
+  background:-webkit-gradient(linear,left top,right top,color-stop(0%,#1d8ade),color-stop(50%,#53a2e2),color-stop(100%,#1d8ade));
+  background:-webkit-linear-gradient(left,#1d8ade 0%,#53a2e2 50%,#1d8ade 100%);
+  background:-o-linear-gradient(left,#1d8ade 0%,#53a2e2 50%,#1d8ade 100%);
+  background:-ms-linear-gradient(left,#1d8ade 0%,#53a2e2 50%,#1d8ade 100%);
+  background:linear-gradient(left,#1d8ade 0%,#53a2e2 50%,#1d8ade 100%);
+  color:#ffffff;
+  text-shadow:1px 1px 2px #333333;
+  box-shadow:0 2px 3px rgba(0,0,0,0.4), inset 0 0 50px rgba(0,0,0,0.1);
+  position:relative;
+  border-radius:0 15px 0 15px;
+  background:none;
+  text-shadow:none;
+  box-shadow:none;
+  border:none;
+  color:#666666;
+}
+#catalogInResidence #companyList, #catalogInResidence #residenceList { margin-left:0; }
+#catalogInResidence #companyList li, #catalogInResidence #residenceList li {
+  margin:0 10px 50px 0;
+  float:left;
+  width:455px;
+  background:rgba(255,255,255,0.1);
+  border-top:1px solid rgba(0,0,0,0.2);
+  border-left:1px solid rgba(0,0,0,0.2);
+  border-right:1px solid rgba(255,255,255,0.4);
+  border-bottom:1px solid rgba(255,255,255,0.4);
+  border-radius:5px;
+  box-shadow:inset 1px 1px 0 rgba(0,0,0,0.2), inset -1px -1px 0 rgba(255,255,255,0.4);
+  padding:10px;
+}
+#catalogInResidence #companyList li .residenceName, #catalogInResidence #residenceList li .residenceName {
+  width:310px;
+  overflow:hidden;
+  display:block;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+#catalogInResidence #companyList li .screenShot, #catalogInResidence #residenceList li .screenShot {
+  background:rgba(255,255,255,0.8);
+  width:130px;
+  height:182px;
+  overflow:hidden;
+  float:left;
+}
+#catalogInResidence #companyList li .screenShot > .imgWrapper, #catalogInResidence #residenceList li .screenShot > .imgWrapper {
+  display:table-cell;
+  text-align:center;
+}
+#catalogInResidence #companyList li .wrapper, #catalogInResidence #residenceList li .wrapper { margin-left:140px; }
+#catalogInResidence #companyList li .wrapper > a, #catalogInResidence #residenceList li .wrapper > a {
+  margin-top:5px;
+  display:table;
+}
+#catalogInResidence #companyList li .wrapper > a:first-child, #catalogInResidence #residenceList li .wrapper > a:first-child { margin:0; }
+#catalogInResidence #companyList li .wrapper > a > i, #catalogInResidence #residenceList li .wrapper > a > i { display:inline-block; }
+#catalogInResidence #companyList li .wrapper > a > span, #catalogInResidence #residenceList li .wrapper > a > span {
+  display:inline-block;
+  padding-left:5px;
+}
+#catalogInResidence #wrapper >.list {
+  background:white;
+  border:1px solid #cccccc;
+  margin:0;
+  margin-top:20px;
+  position:relative;
+  margin-top:80px;
+}
+#catalogInResidence #wrapper >.list:first-child { margin-top:20px; }
+#catalogInResidence #wrapper >.list::before {
+  position:absolute;
+  top:-30px;
+  left:0;
+  font-size:2rem;
+  box-shadow:-3px 0 0 #4387f5;
+  padding-left:5px;
+  margin-left:3px;
+}
+#catalogInResidence #wrapper >.list >li {
+  padding:5px;
+  border-bottom:1px solid #cccccc;
+  display:inline-block;
+  display:block;
+}
+#catalogInResidence #wrapper >.list >li:last-child { border-bottom:none; }
+#catalogInResidence #wrapper >.list >li >div {
+  display:table;
+  table-layout:fixed;
+}
+#catalogInResidence #wrapper >.list >li >div >* {
+  display:table-cell;
+  vertical-align:middle;
+}
+#catalogInResidence #wrapper >.list >li >div >.record-id {
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+  font-size:3rem;
+  line-height:3rem;
+  display:inline-block;
+  width:100px;
+}
+#catalogInResidence #wrapper >.list >li >div >.name {
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+  width:100%;
+}
+#catalogInResidence #wrapper >.list >li >div >.record-id, #catalogInResidence #wrapper >.list >li >div >.name { vertical-align:top; }
+#catalogInResidence #wrapper >.list >li >div >.record-id::before, #catalogInResidence #wrapper >.list >li >div >.name::before {
+  font-size:1rem;
+  line-height:1rem;
+  color:rgba(0,172,238,1);
+  display:block;
+  margin-bottom:5px;
+}
+#catalogInResidence #wrapper >#company-list::before { content:'企業'; }
+#catalogInResidence #wrapper >#company-list >li >div >.record-id::before { content:'企業ID'; }
+#catalogInResidence #wrapper >#company-list >li >div >.name::before { content:'企業名'; }
+#catalogInResidence #wrapper >#residence-list::before { content:'物件'; }
+#catalogInResidence #wrapper >#residence-list >li >div >.record-id::before { content:'物件ID'; }
+#catalogInResidence #wrapper >#residence-list >li >div >.name::before { content:'物件名'; }

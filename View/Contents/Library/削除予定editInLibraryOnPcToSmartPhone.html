@@ -1,0 +1,119 @@
+
+
+
+<div id="container">
+	<input type="hidden" name="currentUrl" value="<?php echo $this->Html->url('/', true); ?>" />
+	<input type="hidden" name="userId" value="<?php echo $userId; ?>" />
+	<input type="hidden" name="residenceId" value="<?php echo $residenceId; ?>" />
+	<input type="hidden" name="targetDeviceName" value="<?php echo $targetDeviceName; ?>" />
+	<input type="hidden" name="isLibraryElementPage" value="<?php echo $isLibraryElementPage; ?>" />
+	<input type="hidden" name="smartphoneLibraryId" value="<?php echo $smartphoneLibraryId; ?>" />
+
+	<!-- ここから#toolbar -->
+	<div id="toolbar">
+		<div id="palette" class="accordion">
+			<dl>
+				<dt class="open">パーツ</dt>
+				<dd class="open">
+					<div class="elementBtns">
+						<ul class="sortable">
+							<li data-item-name="Text">
+								<a class="btn btn-primary" data-placement="bottom" data-original-title="このボタンをドロップするとテキストを挿入することができます。" href="#"><i data-icon="&"></i><span>テキスト</span></a>
+							</li>
+							<li data-item-name="Image">
+								<a class="btn btn-primary" data-placement="bottom" data-original-title="このボタンをドロップすると画像を挿入することができます。" href="#"><i data-icon="("></i><span>画像</span></a>
+							</li>
+							<li data-item-name="Map">
+								<a class="btn btn-primary" data-placement="bottom" data-original-title="このボタンをドロップすると地図を挿入することができます。" href="#"><i data-icon="C"></i><span>地図</span></a>
+							</li>
+							<li data-item-name="Youtube">
+								<a class="btn btn-primary" data-placement="bottom" data-original-title="このボタンをドロップするとYouTubeの動画を挿入することができます。" href="#"><i data-icon=""></i><span>YouTube</span></a>
+							</li>
+						</ul>
+					</div>
+					<div class="elementBtns">
+						<ul class="sortable">
+							<li data-item-name="Table">
+								<a class="btn btn-primary" data-placement="bottom" data-original-title="このボタンをドロップするとテーブルを挿入することができます。" href="#"><i data-icon=""></i><span>テーブル</span></a>
+							</li>
+						</ul>
+					</div>
+				</dd>
+				<dt>共通パーツ</dt>
+				<dd>
+					<div class="elementBtns">
+						<ul class="sortable">
+							<?php //for ($i=0,$len=count($commonElements); $i<$len; $i++): ?>
+							<?php /*
+							<li data-item-name="Common" data-record-id="<?php echo $commonElements[$i]['SmartphoneCommonElementProfile']['id']; ?>">
+								<a class="btn btn-primary" data-placement="bottom" data-original-title="<?php echo $commonElements[$i]['SmartphoneCommonElementProfile']['name']; ?>" href="#"><i data-icon=""></i><span><?php echo $commonElements[$i]['SmartphoneCommonElementProfile']['name']; ?></span></a>
+							</li>
+							*/ ?>
+							<?php //endfor; ?>
+						</ul>
+					</div>
+				</dd>
+			</dl>
+		</div>
+	</div>
+	<!-- ここまで#toolbar -->
+
+
+
+
+
+	<!-- ここから#previewArea -->
+	<div id="previewArea">
+		<p>プレビュー画面</p>
+		<div class="dropdown">
+			<div class="btn-hole">
+				<div>
+					<button class="btn btn-test btn-wood wood5 dropdown-toggle" data-toggle="dropdown" href="#"><span>デバイス選択</span></button>
+					<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+						<li><a href="#" data-device="iphone5-black">iPhone5(黒)</a></li>
+						<li><a href="#" data-device="iphone5-white">iPhone5(白)</a></li>
+						<li><a href="#" data-device="ipodTouch5g-black">iPod Touch 5G(ブラック)</a></li>
+						<li><a href="#" data-device="ipodTouch5g-silver">iPod Touch 5G(シルバー)</a></li>
+						<li><a href="#" data-device="ipodTouch5g-pink">iPod Touch 5G(ピンク)</a></li>
+						<li><a href="#" data-device="ipodTouch5g-blue">iPod Touch 5G(ブルー)</a></li>
+						<li><a href="#" data-device="ipodTouch5g-yellow">iPod Touch 5G(イエロー)</a></li>
+					</ul>
+				</div>
+				<button id="bgBtn" class="btn btn-test btn-primary"><span>背景</span></button>
+			</div>
+		</div>
+		<div id="iphone5" class="iphone5">
+			<div class="iphone5-header"></div>
+			<div class="iphone5-body">
+				<?php echo $this->Html->image('contents/page_element/edit/onPcToSmartphone/iphone5-body.png', array('width'=>'3315px', 'height'=>'100%')); ?>
+			</div>
+			<div class="iphone5-footer"></div>
+			<div class="scrollbar"><div class="track"><div class="thumb"><div class="end"></div></div></div></div>
+			<div id="spContentWrapper" class="viewporta">
+				<div id="displayArea" class="viewport" data-item-name="Bg">
+					<div id="spContent" class="sortable droppable overview contentWrapper">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- ここまで#previewArea -->
+
+
+
+
+
+	<div id="propertyArea">
+				<div>
+					<div id="masterPropertyElem" class="propertyElem">
+						<div class="btnsWrapper">
+							<div class="btn-hole">
+								<button type="button" class="btn btn-test btn-danger deleteBtn" data-placement="bottom" data-original-title="現在編集しているパーツを削除します。"><span><i data-icon=""></i>削除</span></button>
+								<button type="button" class="btn btn-test btn-primary duplicateBtn" data-placement="bottom" data-original-title="現在編集しているパーツを複製します。"><span><i data-icon=""></i>複製</span></button>
+							</div>
+						</div>
+						<div class="propsWrapper"></div>
+					</div>
+				</div>
+	</div>
+</div>

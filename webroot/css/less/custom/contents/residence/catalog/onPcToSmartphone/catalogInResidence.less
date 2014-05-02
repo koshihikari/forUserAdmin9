@@ -1,0 +1,228 @@
+@charset "utf-8";
+
+
+@borderColor: #e3e3e3;
+@tdFirstChildWidth: 150px;
+
+@hightligthBorder: 1px solid rgba(255, 255, 255, 0.4);
+@darknessBorder: 1px solid rgba(0, 0, 0, 0.2);
+.embosBox() {
+	border-top: @darknessBorder;
+	border-left: @darknessBorder;
+	border-right: @hightligthBorder;
+	border-bottom: @hightligthBorder;
+	border-radius: 5px;
+	box-shadow: inset 1px 1px 0 rgba(0, 0, 0, 0.2), inset -1px -1px 0 rgba(255, 255, 255, 0.4);
+}
+#catalogInResidence {
+
+
+	section {
+		h2 {
+			padding:12px 20px;
+			background: #1d8ade; /* Old browsers */
+			background: -moz-linear-gradient(left, #1d8ade 0%, #53a2e2 50%, #1d8ade 100%); /* FF3.6+ */
+			background: -webkit-gradient(linear, left top, right top, color-stop(0%,#1d8ade), color-stop(50%,#53a2e2), color-stop(100%,#1d8ade)); /* Chrome,Safari4+ */
+			background: -webkit-linear-gradient(left, #1d8ade 0%,#53a2e2 50%,#1d8ade 100%); /* Chrome10+,Safari5.1+ */
+			background: -o-linear-gradient(left, #1d8ade 0%,#53a2e2 50%,#1d8ade 100%); /* Opera11.10+ */
+			background: -ms-linear-gradient(left, #1d8ade 0%,#53a2e2 50%,#1d8ade 100%); /* IE10+ */
+			background: linear-gradient(left, #1d8ade 0%,#53a2e2 50%,#1d8ade 100%); /* W3C */
+			color:#FFF;
+			text-shadow:1px 1px 2px #333;
+			box-shadow:0 2px 3px rgba(0, 0, 0, 0.4) , inset 0 0 50px rgba(0, 0, 0, 0.1) ;
+			position:relative;
+			border-radius: 0 15px 0 15px;
+
+			background: none;
+			text-shadow: none;
+			box-shadow: none;
+			border: none;
+			color: #666;
+		}
+	}
+
+	#companyList,
+	#residenceList {
+		margin-left: 0;
+
+		li {
+			margin: 0 10px 50px 0;
+			float: left;
+			width: 455px;
+
+			background: rgba(255, 255, 255, 0.1);
+			.embosBox();
+			padding: 10px;
+
+
+			.residenceName {
+				width: 310px;
+				overflow: hidden;
+				display: block;
+				text-overflow: ellipsis;
+				white-space: nowrap;
+			}
+
+			.screenShot {
+				background: rgba(255, 255, 255, 0.8);
+				width: 130px;
+				height: 182px;
+				overflow: hidden;
+				float: left;
+
+				> .imgWrapper {
+					display: table-cell;
+					text-align: center;
+				}
+			}
+
+			.wrapper {
+				margin-left: 140px;
+
+				> a {
+					margin-top: 5px;
+					display: table;
+
+					&:first-child {
+						margin: 0;
+					}
+
+					> i {
+						display: inline-block;
+					}
+
+					> span {
+						display: inline-block;
+						padding-left: 5px;
+					}
+				}
+			}
+		}
+	}
+
+
+
+	#wrapper {
+
+		>.list {
+			background: white;
+			border: 1px solid #ccc;
+			margin: 0;
+			margin-top: 20px;
+			position: relative;
+			margin-top: 80px;
+
+			&:first-child {
+				margin-top: 20px;
+			}
+
+			&::before {
+				position: absolute;
+				top: -30px;
+				left: 0;
+				font-size: 2rem;
+				box-shadow: -3px 0 0 #4387f5;
+				padding-left: 5px;
+				margin-left: 3px;
+			}
+
+			>li {
+				padding: 5px;
+				border-bottom: 1px solid #ccc;
+				display: inline-block;
+				display: block;
+
+				&:last-child {
+					border-bottom: none;
+				}
+
+				>div {
+					display: table;
+					table-layout: fixed;
+
+					>* {
+						display: table-cell;
+						vertical-align: middle;
+					}
+
+					>.record-id {
+						overflow: hidden;
+						text-overflow: ellipsis;
+						white-space: nowrap;
+						font-size: 3rem;
+						line-height: 3rem;
+						display: inline-block;
+						width: 100px;
+					}
+					>.name {
+						overflow: hidden;
+						text-overflow: ellipsis;
+						white-space: nowrap;
+						width: 100%;
+					}
+					>.edit-outline {
+
+					}
+					>.edit-smartphone-site {
+
+					}
+					>.edit-featurephone-site {
+
+					}
+					>.record-id,
+					>.name {
+						vertical-align: top;
+
+						&::before {
+							font-size: 1rem;
+							line-height: 1rem;
+							color: rgba(0, 172, 238, 1);
+							display: block;
+							margin-bottom: 5px;
+						}
+					}
+				}
+
+			}
+		}
+		>#company-list {
+			&::before {
+				content: '企業';
+			}
+			>li {
+				>div {
+					>.record-id {
+						&::before {
+							content: '企業ID';
+						}
+					}
+					>.name {
+						&::before {
+							content: '企業名';
+						}
+					}
+				}
+			}
+		}
+		>#residence-list {
+			&::before {
+				content: '物件';
+			}
+			// margin-top: 80px;
+			>li {
+				>div {
+					>.record-id {
+						&::before {
+							content: '物件ID';
+						}
+					}
+					>.name {
+						&::before {
+							content: '物件名';
+						}
+					}
+				}
+			}
+		}
+	}
+}

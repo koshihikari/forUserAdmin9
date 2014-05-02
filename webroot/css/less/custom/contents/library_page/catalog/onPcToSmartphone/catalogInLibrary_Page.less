@@ -1,0 +1,522 @@
+@charset "utf-8";
+
+
+#catalogInLibrary,
+#catalogInPage {
+	#contentForUserAdmin {
+		#container {
+			ul#pageList2 {
+				>li {
+					display: block;
+					border-bottom: 1px solid rgba(255, 255,255, 0.5);
+					box-shadow: 0 1px 1px rgba(0,0,0,0.3);
+					padding: 0;
+					margin: 20px 0;
+					border: 1px solid #dadada;
+					background: #fdfdfd;
+					border-radius: 3px;
+
+					&.notLatest {
+						background: rgb(243, 229, 186);
+					}
+
+
+					>div.btns {
+						border-bottom: 1px solid #ccc;
+						font-size: 30px;
+						display: table;
+						width: 100%;
+						padding: 10px 0 5px 10px;
+						padding: 5px 0 5px 10px;;
+
+						>div {
+							display: table-cell;
+							line-height: 100%;
+						}
+						>p {
+							padding-bottom: 0;
+							line-height: 100%;
+							display: block;
+							text-align: right;
+							display: table-cell;
+							padding-top: 0;
+							vertical-align: bottom;
+						}
+					}
+
+					>div.info {
+						display: table;
+						width: 100%;
+					}
+
+					>div.detail {
+						display: table;
+						width: 100%;
+						margin-top: -5px;
+						display: block;
+
+
+						>div {
+							width: 49%;
+							display: inline-block;
+
+							&:first-child {
+								float: left;
+							}
+							&:last-child {
+								float: right;
+							}
+
+							>p {
+								overflow: hidden;
+								text-overflow: ellipsis;
+								white-space: nowrap;
+								float: left;
+								display: inline-block;
+								width: 50%;
+							}
+						}
+					}
+
+					>div.caution {
+						font-size: 12px;
+						color: #cc3333;
+
+						&.empty {
+							display: none;
+						}
+					}
+
+					p {
+						display: table-cell;
+						vertical-align: middle;
+						padding: 5px 10px;
+
+						&::before {
+							font-size: 80%;
+							color: #4d90fe;
+							display: block;
+							margin-bottom: -5px;
+						}
+
+						&.pageId {
+							&::before {
+								content: 'ページID';
+								font-size: 10px !important;
+								display: inline-block !important;
+								margin-right: 5px;
+							}
+						}
+						&.name {
+							width: 100%;
+
+							&::before {
+								content: 'ページタイトル';
+							}
+
+							input[type="text"] {
+								width: 100%;
+								margin: 0;
+							}
+						}
+						&.path {
+							&::before {
+								content: 'ページパス';
+							}
+
+							input[type="text"] {
+								width: 400px;
+								margin: 0;
+							}
+						}
+						&.editer {
+							&::before {
+								content: '更新ユーザ';
+							}
+						}
+						&.edited {
+							&::before {
+								content: '最終更新日時';
+							}
+						}
+						&.publisher {
+							&::before {
+								content: '書き出しユーザ';
+							}
+						}
+						&.published {
+							&::before {
+								content: '最終書き出し日時';
+							}
+						}
+					}
+					.btn-group + .btn-group {
+						margin-left: 0;
+					}
+
+					.dropdown-menu {
+						width: 200px;
+
+						>li {
+							padding: 3px;
+
+							>a {
+								text-overflow: ellipsis;
+								overflow: hidden;
+								padding: 3px;
+							}
+							>img {
+								width: 100%;
+								height: auto;
+							}
+						}
+					}
+
+					&.createPage {
+						display: inline-block;
+						background: none;
+						box-shadow: none;
+						border: none;
+						margin: 0;
+						width: 100%;
+						text-align: center;
+
+						>.btn-page-create {
+							display: block;
+							font-size: 8rem;
+							line-height: 100%;
+							display: inline-block;
+							cursor: pointer;
+
+							&:hover {
+								color: #333;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+#catalogInLibrary {
+	ul#pageList2 {
+		>li {
+			width: 420px !important;
+			display: inline-block !important;
+			margin-right: 10px !important;
+
+			>div.detail {
+				>div {
+					width: 420px !important;
+
+					>p {
+						display: inline-block !important;
+						overflow: hidden !important;
+						text-overflow: ellipsis !important;
+						white-space: nowrap !important;
+
+						&.editer {
+							width: 215px !important;
+						}
+						&.edited {
+							width: 200px !important;
+						}
+					}
+				}
+			}
+			p {
+				&.pageId {
+					&::before {
+						content: 'パーツID' !important;
+					}
+				}
+				&.name {
+					&::before {
+						content: 'パーツ名' !important;
+					}
+				}
+			}
+
+			&.createPage {
+				vertical-align: top;
+				margin-top: 50px !important;
+				// >.btn-page-create {
+				// 	margin-top: -130px;
+				// }
+			}
+		}
+	}
+}
+
+
+#catalogInLibrary {
+	#contentForUserAdmin {
+		padding: 40px 10px 10px 10px;
+		background: white;
+
+		#wrapper {
+			display: table;
+			table-layout: fixed;
+			width: 100%;
+
+			ul {
+				padding: 0;
+				margin: 0;
+			}
+
+			.parents,
+			.children {
+				display: table-cell;
+				vertical-align: top;
+				margin: 0;
+
+				li {
+					padding: 10px;
+				}
+			}
+			#directories {
+				width: 400px;
+
+				>.btn-group {
+					margin-bottom: 5px;
+				}
+
+				>ul {
+					overflow-y: scroll;
+					background: rgba(238,239,239,1);
+					border: 1px solid #ccc;
+
+					>li {
+						padding: 10px 0 10px 20px;
+						margin: 0;
+						border-bottom: 1px solid #ccc;
+						position: relative;
+						cursor: pointer;
+
+						&:last-child {
+							border-bottom: none;
+						}
+
+						&:first-child {
+							border-bottom: 1px solid #ccc;
+						}
+
+						&:hover {
+							background: rgba(254, 255, 234, 1);
+						}
+						&.current {
+							background: red;
+							background: rgba(222,234,254,1);
+
+							&::before {
+								content: '';
+								display: inline-block;
+								width: 10px;
+								height: 10px;
+								border-top: 3px solid #4d90fe;
+								border-right: 3px solid #4d90fe;
+								-webkit-transform: rotate(45deg);
+								position: absolute;
+								top: 30px;
+								left: 0;
+							}
+						}
+						&.placeholder {
+							background: #ccc;
+							border: 1px solid #aaa;
+						}
+
+						&.on-hover {
+							background: rgba(101, 157, 250, 1);
+						}
+
+						// span {
+						// 	display: block;
+						// 	background: rgba(0,0,0,0.3);
+						// 	width: 100%;
+						// }
+
+						.name {
+							width: 231px;
+
+							&::before {
+								content: 'フォルダ名';
+								font-size: 1rem;
+								line-height: 1rem;
+								color: rgba(0, 172, 238, 1);
+								display: block;
+								margin-bottom: 5px;
+							}
+
+							input {
+								vertical-align: middle;
+							}
+						}
+
+						.count {
+							position: absolute;
+							top: 4px;
+							right: 5px;
+							text-overflow: ellipsis;
+							white-space: nowrap;
+
+							&::before {
+								content: '共通パーツ数';
+								font-size: 1rem;
+								line-height: 1rem;
+								color: rgba(0, 172, 238, 1);
+								position: absolute;
+								top: 11px;
+								left: -60px;
+							}
+						}
+					}
+				}
+			}
+			#libraries {
+
+				>.btn-group {
+					margin-bottom: 5px;
+				}
+
+				>ul {
+					overflow-y: scroll;
+					border: 1px solid #ccc;
+
+					>.directory-container {
+						display: none;
+						// padding: 0 10px;
+						padding: 0;
+
+						&.current {
+							display: block;
+						}
+
+						>ul {
+							>.library-element {
+								border-bottom: 1px solid #ccc;
+								// padding: 10px 0 3px;
+								background: white;
+								cursor: pointer;
+								padding: 10px 10px 5px 5px;
+
+								&:last-child {
+									border-bottom: none;
+								}
+
+								&:first-child {
+									border-bottom: 1px solid #ccc;
+								}
+
+								&:hover {
+									background: rgba(254, 255, 234, 1);
+								}
+
+								.info,
+								.detail {
+									display: table;
+									width: 100%;
+
+									>* {
+										display: table-cell;
+										overflow: hidden;
+										vertical-align: top;
+
+										&::before {
+											font-size: 1rem;
+											line-height: 1rem;
+											color: rgba(0, 172, 238, 1);
+											display: block;
+											margin-bottom: 5px;
+										}
+									}
+								}
+								.info {
+									.id {
+										width: 150px;
+										font-size: 3rem;
+										display: inline-block;
+										line-height: 3rem;
+										text-overflow: ellipsis;
+										white-space: nowrap;
+
+										&::before {
+											content: '共通パーツID';
+										}
+									}
+
+									.name {
+										width: 100%;
+
+										&::before {
+											content: '共通パーツ名';
+										}
+									}
+
+									.wrapper-btn {
+										width: 65px;
+										padding-right: 5px;
+
+										&::before {
+											content: '　';
+											margin-bottom: 10px;
+										}
+									}
+
+									.wrapper-btns {
+										width: 125px;
+
+										&::before {
+											content: '　';
+											margin-bottom: 10px;
+										}
+									}
+								}
+								.detail {
+									.edited-user-name {
+										display: inline-block;
+										width: 200px;
+										text-overflow: ellipsis;
+										white-space: nowrap;
+
+										&::before {
+											content: '更新ユーザ';
+										}
+									}
+
+									.edited {
+										width: 100%;
+										padding-left: 10px;
+
+										&::before {
+											content: '最終更新日時';
+										}
+									}
+								}
+							}
+							>.placeholder {
+								background: #ccc;
+								border: 1px solid #aaa;
+							}
+						}
+					}
+				}
+			}
+
+			.id,
+			.name,
+			.btn-group {
+				display: inline-block;
+			}
+
+			input[type="text"] {
+				margin: 0;
+				width: 100%;
+			}
+		}
+	}
+}
+
+
+

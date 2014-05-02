@@ -1,0 +1,203 @@
+<?php $pageName = 'indexInAdmin'; ?>
+<div id="navigationPanel">
+	<h1><a id="simple-menu" href="#sldr">codeless</a></h1>
+
+	<!--
+	<h1><i class="upArrow" data-icon="&#xe066;"></i><i class="downArrow" data-icon="&#xe068;"></i><span>codeless</span></h1>
+	-->
+
+	<div class="info">
+		<h2><?php echo $title_for_layout; ?></h2>
+		<span class="status">&nbsp;</span>
+	</div>
+	<!--
+	<nav>
+		<ul>
+			<li class="residenceListBtn">
+				<?php 
+					echo $this->Html->link(
+						'<i data-icon=""></i><span>物件一覧</span>',
+						'/Residence/catalog/',
+						array(
+							'class' => $pageName === 'indexInAdmin' ? 'current' : '',
+							'escape' => false,
+							'data-placement' => 'right',
+							'data-original-title' => '御社が作成中の物件一覧を表示します。'
+						)
+					);
+				?>
+			</li>
+			<?php if (isset($residenceId) && $residenceId): ?>
+			<li class="residenceListBtn">
+				<?php 
+					echo $this->Html->link(
+						'<i data-icon=""></i><span>物件情報編集</span>',
+						'/Outline/edit/' . $residenceId . '/',
+						array(
+							'class' => $pageName === 'indexInAdmin' ? 'current' : '',
+							'escape' => false,
+							'data-placement' => 'right',
+							'data-original-title' => 'この物件の物件情報を編集します。'
+						)
+					);
+				?>
+			</li>
+			<?php endif; ?>
+		</ul>
+		<?php if ($userData['company_id'] === '1' && isset($residenceId) && $residenceId): ?>
+		<div class="tabWrapper">
+			<?php if (isset($supportDevice)): ?>
+			<ul class="nav nav-tabs" id="deviceTab">
+				<?php if ($supportDevice['isSmartphone'] === true): ?>
+				<li class="<?php echo $device === 's' ? 'active' : ''; ?>">
+					<a href="#smartphoneTab">スマートフォン</a>
+				</li>
+				<?php endif; ?>
+				<?php if ($supportDevice['isTablet'] === true): ?>
+				<li class="<?php echo $device === 't' ? 'active' : ''; ?>">
+					<a href="#tabletTab">タブレット</a>
+				</li>
+				<?php endif; ?>
+				<?php if ($supportDevice['isFeaturephone'] === true): ?>
+				<li class="<?php echo $device === 'f' ? 'active' : ''; ?>">
+					<a href="#featurephoneTab">フィーチャーフォン</a>
+				</li>
+				<?php endif; ?>
+			</ul>
+			<div class="tab-content">
+				<?php if ($supportDevice['isSmartphone'] === true): ?>
+				<div class="tab-pane <?php echo $device === 's' ? 'active' : ''; ?>" id="smartphoneTab">
+					<ul>
+						<li class="pageListBtn">
+							<?php 
+								echo $this->Html->link(
+									'<i data-icon="&#x0038;"></i><span>スマートフォンページ一覧</span>',
+									'/Page/catalog/s/' . $residenceId . '/',
+									array(
+										'class' => $pageName === 'catalogInPage' ? 'current' : '',
+										'escape' => false,
+										'data-placement' => 'right',
+										'data-original-title' => 'この物件サイト内のスマートフォン向けページを一覧表示します。'
+									)
+								);
+							?>
+						</li>
+						<li class="libraryListBtn">
+							<?php 
+								echo $this->Html->link(
+									'<i data-icon="&#xe008;"></i><span>スマートフォン共通パーツ一覧</span>',
+									'/Library/catalog/s/' . $residenceId . '/',
+									array(
+										'class' => $pageName === 'catalogInParts' ? 'current' : '',
+										'escape' => false,
+										'data-placement' => 'right',
+										'data-original-title' => 'この物件サイト内で共通して使われるスマートフォン向けパーツを一覧表示します。'
+									)
+								);
+							?>
+						</li>
+					</ul>
+				</div>
+				<?php endif; ?>
+				<?php if ($supportDevice['isTablet'] === true): ?>
+				<div class="tab-pane <?php echo $device === 't' ? 'active' : ''; ?>" id="tabletTab">
+					<ul>
+						<li class="pageListBtn">
+							<?php 
+								echo $this->Html->link(
+									'<i data-icon="&#x0038;"></i><span>タブレットページ一覧</span>',
+									'/Page/catalog/t/' . $residenceId . '/',
+									array(
+										'class' => $pageName === 'catalogInPage' ? 'current' : '',
+										'escape' => false,
+										'data-placement' => 'right',
+										'data-original-title' => 'この物件サイト内のタブレット向けページを一覧表示します。'
+									)
+								);
+							?>
+						</li>
+						<li class="libraryListBtn">
+							<?php 
+								echo $this->Html->link(
+									'<i data-icon="&#xe008;"></i><span>タブレット共通パーツ一覧</span>',
+									'/Library/catalog/t/' . $residenceId . '/',
+									array(
+										'class' => $pageName === 'catalogInParts' ? 'current' : '',
+										'escape' => false,
+										'data-placement' => 'right',
+										'data-original-title' => 'この物件サイト内で共通して使われるタブレット向けパーツを一覧表示します。'
+									)
+								);
+							?>
+						</li>
+					</ul>
+				</div>
+				<?php endif; ?>
+				<?php if ($supportDevice['isSmartphone'] === true): ?>
+				<div class="tab-pane <?php echo $device === 'f' ? 'active' : ''; ?>" id="featurephoneTab">
+					<ul>
+						<li class="pageListBtn">
+							<?php 
+								echo $this->Html->link(
+									'<i data-icon="&#x0038;"></i><span>フィーチャーフォンページ一覧</span>',
+									'/Page/catalog/f/' . $residenceId . '/',
+									array(
+										'class' => $pageName === 'catalogInPage' ? 'current' : '',
+										'escape' => false,
+										'data-placement' => 'right',
+										'data-original-title' => 'この物件サイト内のフィーチャーフォン向けページを一覧表示します。'
+									)
+								);
+							?>
+						</li>
+					</ul>
+				</div>
+				<?php endif; ?>
+			</div>
+			<?php endif; ?>
+		</div>
+		<?php endif; ?>
+		<?php echo $this->Html->link('<span>ログアウト</span>', array('controller'=>'', 'action'=>'logout'), array('escape'=>false, 'class'=>'logoutBtn btn btn-danger btn-test'));?>
+	</nav>
+-->
+</div>
+<script>
+jQuery.noConflict();
+jQuery(document).ready(function($){
+	/*
+	$('#navigationPanel h1')
+		.on('click', function(){
+			var targetY;
+			if ($('#navigationPanel').hasClass('show') === true) {
+				targetY = $('#navigationPanel').height() * -1;
+				$('#navigationPanel').removeClass('show');
+				$('.upArrow').hide();
+				$('.downArrow').show();
+			} else {
+				targetY = 0;
+				$('#navigationPanel').addClass('show');
+				$('.upArrow').show();
+				$('.downArrow').hide();
+			}
+			$('#navigationPanel')
+				.stop(true)
+				.animate(
+					{
+						'top' : targetY
+					},
+					{
+						duration: 300,
+						easing: 'linear',
+						complete: function(event) {
+						}
+					}
+				)
+		});
+	// $('#deviceTab a:first').tab('show');
+		*/
+	$('#deviceTab a').click(function(event) {
+		event.preventDefault();
+		$(this).tab('show');
+	});
+});
+</script>

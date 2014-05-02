@@ -1,0 +1,177 @@
+@charset "utf-8";
+#editInLibrary #toolbar, #editInPage #toolbar {
+  float:left;
+  z-index:9999;
+  margin-right:10px;
+  overflow:scroll;
+  background:none;
+  overflow:hidden;
+  overflow-y:scroll;
+  position:absolute;
+  top:29px;
+  left:13px;
+  width:174px;
+  background:rgba(247,247,247,1);
+  box-shadow:0 1px 1px rgba(0,0,0,0.3);
+}
+#editInLibrary #toolbar #palette, #editInPage #toolbar #palette {
+  margin:0;
+  background:rgba(247,247,247,1);
+}
+#editInLibrary #toolbar #palette >dl, #editInPage #toolbar #palette >dl {
+  margin:0;
+  padding:0;
+  border:0;
+  width:90%;
+  margin:0 auto;
+}
+#editInLibrary #toolbar #palette >dl dt, #editInLibrary #toolbar #palette >dl dd, #editInPage #toolbar #palette >dl dt, #editInPage #toolbar #palette >dl dd {
+  margin:5px 10px;
+  padding:0;
+}
+#editInLibrary #toolbar #palette >dl >dt, #editInPage #toolbar #palette >dl >dt {
+  line-height:30px;
+  color:#4b5e72;
+  text-align:center;
+  margin:0;
+  text-indent:10px;
+  border-bottom:2px solid #4387f5;
+  font-weight:normal;
+}
+#editInLibrary #toolbar #palette >dl >dt:first-child, #editInPage #toolbar #palette >dl >dt:first-child { border-radius:15px 15px 0 0; }
+#editInLibrary #toolbar #palette >dl >dd, #editInPage #toolbar #palette >dl >dd {
+  display:none;
+  margin:0;
+  padding:5px 10px;
+  padding:0;
+}
+#editInLibrary #toolbar #palette >dl >dd ul, #editInPage #toolbar #palette >dl >dd ul {
+  margin:0;
+  overflow:hidden;
+}
+#editInLibrary #toolbar #palette >dl >dd ul li, #editInPage #toolbar #palette >dl >dd ul li {
+  display:inline;
+  display:block;
+}
+#editInLibrary #toolbar #palette >dl >dd ul li >.btn, #editInPage #toolbar #palette >dl >dd ul li >.btn {
+  display:block;
+  color:#4b5e72;
+  box-shadow:none;
+  border-radius:2px;
+  background:-webkit-gradient(linear,left top,left bottom,from(rgba(255,255,255,0.3)),to(rgba(255,255,255,0.1)));
+  background:none;
+  box-shadow:0 -1px 0 rgba(255,255,255,0.2), 0 1px 0 rgba(0,0,0,0.4);
+  border:none;
+  border-radius:0;
+  margin:2px 0;
+  padding:5px;
+  text-align:left;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+#editInLibrary #toolbar #palette >dl >dd ul li >.btn >span, #editInPage #toolbar #palette >dl >dd ul li >.btn >span {
+  font-weight:normal;
+  font-size:1.2rem;
+  background:none;
+}
+#editInLibrary #toolbar #palette >dl >dd ul li .ui-draggable-dragging, #editInPage #toolbar #palette >dl >dd ul li .ui-draggable-dragging { z-index:1000; }
+#editInLibrary #toolbar #palette >dl >dd .libraries >dt, #editInPage #toolbar #palette >dl >dd .libraries >dt {
+  background:#4387f5;
+  margin:0;
+  padding:5px;
+  color:#ffffff;
+}
+#editInLibrary #toolbar #palette >dl >dd .libraries >dd, #editInPage #toolbar #palette >dl >dd .libraries >dd { margin:0; }
+#editInLibrary #toolbar #palette >dl >dd .libraries >dd >ul >li, #editInPage #toolbar #palette >dl >dd .libraries >dd >ul >li {
+  margin:0;
+  padding:0;
+  border:1px solid #cccccc;
+  border-top:none;
+}
+#editInLibrary #toolbar #palette >dl >dd .libraries >dd >ul >li >a, #editInPage #toolbar #palette >dl >dd .libraries >dd >ul >li >a {
+  text-decoration:none;
+  box-shadow:none;
+  padding:5px;
+  line-height:20px;
+}
+#editInLibrary #toolbar #palette >dl >dd.parts, #editInPage #toolbar #palette >dl >dd.parts { margin-bottom:10px; }
+#editInLibrary #toolbar #palette >dl >dd.parts ul, #editInPage #toolbar #palette >dl >dd.parts ul {
+  margin:0 auto;
+  padding:0;
+  padding:1px 0;
+  width:180px;
+}
+#editInLibrary #toolbar #palette >dl >dd.parts ul >li, #editInPage #toolbar #palette >dl >dd.parts ul >li {
+  display:inline-block;
+  width:74px;
+  height:50px;
+  border:1px solid white;
+  border:none;
+  margin-bottom:1px;
+  box-shadow:inset 1px 0 0 rgba(255,255,255,0.2), inset -1px 0 0 rgba(0,0,0,0.2), inset 0 -1px 0 rgba(0,0,0,0.2), -1px 0 0 rgba(0,0,0,0.2), 1px 0 0 rgba(255,255,255,0.2), 0 1px 0 rgba(255,255,255,0.2);
+  border:none;
+  box-shadow:none;
+  border-right:1px solid rgba(201,201,201,1);
+  border-bottom:1px solid rgba(201,201,201,1);
+  margin-top:-1px;
+}
+#editInLibrary #toolbar #palette >dl >dd.parts ul >li >a, #editInPage #toolbar #palette >dl >dd.parts ul >li >a {
+  display:inline-block;
+  margin:0;
+  width:100%;
+  height:100%;
+  box-shadow:none;
+  position:relative;
+  overflow:hidden;
+}
+#editInLibrary #toolbar #palette >dl >dd.parts ul >li >a >i, #editInPage #toolbar #palette >dl >dd.parts ul >li >a >i {
+  position:absolute;
+  top:13px;
+  right:-7px;
+  font-size:5rem;
+  color:rgba(255,255,255,0.7);
+  text-shadow:0px 0px 0 rgba(0,0,0,0.3);
+}
+#editInLibrary #toolbar #palette >dl >dd.parts ul >li >a >span, #editInPage #toolbar #palette >dl >dd.parts ul >li >a >span {
+  position:relative;
+  z-index:9999;
+}
+#editInLibrary #toolbar #palette >dl >dd.parts ul >li:nth-child(odd), #editInPage #toolbar #palette >dl >dd.parts ul >li:nth-child(odd) { border-left:1px solid rgba(201,201,201,1); }
+#editInLibrary #toolbar #palette >dl >dd.parts ul >li:nth-child(even), #editInPage #toolbar #palette >dl >dd.parts ul >li:nth-child(even) { margin-left:-4px; }
+#editInLibrary #toolbar #palette >dl >dd.parts ul >li:nth-of-type(1), #editInLibrary #toolbar #palette >dl >dd.parts ul >li:nth-of-type(2), #editInPage #toolbar #palette >dl >dd.parts ul >li:nth-of-type(1), #editInPage #toolbar #palette >dl >dd.parts ul >li:nth-of-type(2) { margin-top:0; }
+#editInLibrary #toolbar #palette >dl >dd.parts ul >li[data-item-name="Text"] i, #editInPage #toolbar #palette >dl >dd.parts ul >li[data-item-name="Text"] i {
+  top:1px;
+  right:-8px;
+}
+#editInLibrary #toolbar #palette >dl >dd.parts ul >li[data-item-name="Image"] i, #editInPage #toolbar #palette >dl >dd.parts ul >li[data-item-name="Image"] i {
+  top:1px;
+  right:-11px;
+}
+#editInLibrary #toolbar #palette >dl >dd.parts ul >li[data-item-name="Map"] i, #editInPage #toolbar #palette >dl >dd.parts ul >li[data-item-name="Map"] i {
+  top:1px;
+  right:-11px;
+}
+#editInLibrary #toolbar #palette >dl >dd.parts ul >li[data-item-name="Youtube"] i, #editInPage #toolbar #palette >dl >dd.parts ul >li[data-item-name="Youtube"] i {
+  top:1px;
+  right:-11px;
+}
+#editInLibrary #toolbar #palette >dl >dd.parts ul >li[data-item-name="About"] i, #editInPage #toolbar #palette >dl >dd.parts ul >li[data-item-name="About"] i {
+  top:1px;
+  right:-11px;
+}
+#editInLibrary #toolbar #palette >dl >dd.parts ul >li[data-item-name="Table"] i, #editInPage #toolbar #palette >dl >dd.parts ul >li[data-item-name="Table"] i {
+  top:1px;
+  right:-11px;
+}
+#editInLibrary #toolbar #palette >dl >dd.parts ul >li[data-item-name="Code"] i, #editInPage #toolbar #palette >dl >dd.parts ul >li[data-item-name="Code"] i {
+  top:1px;
+  right:-11px;
+}
+#editInLibrary #toolbar #palette >dl >dd.parts ul >li[data-item-name="Icon"] i, #editInPage #toolbar #palette >dl >dd.parts ul >li[data-item-name="Icon"] i {
+  top:1px;
+  right:-11px;
+}
+#editInLibrary #toolbar #palette >dl >dd.parts ul >li[data-item-name="Gallery"] i, #editInPage #toolbar #palette >dl >dd.parts ul >li[data-item-name="Gallery"] i {
+  top:1px;
+  right:-11px;
+}

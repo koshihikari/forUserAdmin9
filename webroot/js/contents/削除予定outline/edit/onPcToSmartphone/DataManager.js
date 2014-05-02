@@ -1,0 +1,460 @@
+
+
+jQuery.noConflict();
+jQuery(document).ready(function($){
+//$(function() {
+	/*
+	 * データ管理クラス
+	 * eventName		onRequestComplete		データのリクエスト完了
+	 */
+	MYNAMESPACE.namespace('modules.outline.edit.DataManager');
+	MYNAMESPACE.modules.outline.edit.DataManager = function() {
+		this.initialize.apply(this, arguments);
+	};
+	MYNAMESPACE.modules.outline.edit.DataManager.prototype = {
+		_isEnabled						: false
+		,_prop							: {}
+		,_isAccess						: false
+		,_isAccesable					: false
+		
+		/*
+		 * コンストラクタ
+		 * @param	void
+		 * @return	void
+		 */
+		,initialize: function() {
+			var thisObj = this;
+			_.bindAll(
+				this
+				,'setSeverAccessEnable'
+				,'insertField'
+				,'deleteField'
+				,'update'
+				,'reorder'
+				,'saveFRK'
+				,'setProp'
+				,'setData'
+				,'getData'
+			);
+			
+			this.setProp();
+			this._isAccesable = true;
+		}
+		
+		/*
+		 * サーバアクセス可能/不可能セットメソッド
+		 * @param	isEnable	true===サーバアクセス可能
+		 * @return	void
+		 */
+		,setSeverAccessEnable: function(isEnable) {
+			var thisObj = this;
+			thisObj._isAccesable = isEnable;
+		}
+		
+		/*
+		 * データをDBに保存するメソッド
+		 * @param	void
+		 * @return	void
+		 */
+		,insertField: function(targetOrder) {
+			var thisObj = this;
+			// console.log('insertField');
+			if (thisObj._isAccesable === true && thisObj._isAccess === false) {
+				thisObj._isAccess = true;
+
+				var tmpElementId = 'tmp-' + new Date().getTime();
+				// thisObj._insertFieldHolder[tmpElementId] = -1;
+				$(thisObj).trigger('onInitInsertField', [tmpElementId, targetOrder]);
+				var sendData = {
+					'residence_id'		: thisObj._prop['residenceId'],
+					'company_id'		: thisObj._prop['companyId'],
+					'user_id'			: thisObj._prop['userId'],
+					'order'				: targetOrder + 2,
+					'is_deletable'		: 1,
+					'mtr_status_id'		: thisObj._prop['visibleId']
+				}
+				// console.log(sendData);
+				$.ajax({
+					type		: "POST",
+					url			: thisObj._prop['currentUrl'] + 'Outline/insertField/',
+					data		: sendData,
+					dataType	: "json",
+					success		: function(obj){
+						// console.log('追加完了');
+						// console.log('obj');
+						// console.log(obj);
+						thisObj._isAccess = false;
+						if (obj['result'] === true) {
+							$(thisObj).trigger('onCompleteInsertField', [tmpElementId, obj['data']['outlines']['id']]);
+						} else {
+							$(thisObj).trigger('onErroInsertField', tmpElementId);
+						}
+					},
+					error		: function(XMLHttpRequest, textStatus, errorThrown) {
+						// alert('エラーが発生しました。しばらくしてから再度試してみてください。');
+						console.log('Error :: insertField');
+						console.log('---------------------');
+						console.log(XMLHttpRequest);
+						console.log(textStatus);
+						console.log(errorThrown);
+						console.log('---------------------');
+						thisObj._isAccess = false;
+						$(thisObj).trigger('onErrorInsertField', tmpElementId);
+					}
+				});
+			}
+		}
+		
+		/*
+		 * DBからデータを削除するメソッド
+		 * @param	void
+		 * @return	void
+		 */
+		,deleteField: function(targetRecordId) {
+			var thisObj = this;
+			if (thisObj._isAccesable === true && thisObj._isAccess === false) {
+				thisObj._isAccess = true;
+
+				var tmpElementId = 'tmp-' + new Date().getTime();
+				// thisObj._insertFieldHolder[tmpElementId] = -1;
+				$(thisObj).trigger('onInitDeleteField', targetRecordId);
+				var sendData = {
+					'residence_id'		: thisObj._prop['residenceId'],
+					'company_id'		: thisObj._prop['companyId'],
+					'user_id'			: thisObj._prop['userId'],
+					'id'				: targetRecordId
+				}
+				// console.log(sendData);
+				$.ajax({
+					type		: "POST",
+					url			: thisObj._prop['currentUrl'] + 'Outline/deleteField/',
+					data		: sendData,
+					dataType	: "json",
+					success		: function(obj){
+						// console.log('削除完了');
+						// console.log('obj');
+						// console.log(obj);
+						thisObj._isAccess = false;
+						if (obj['result'] === true) {
+							$(thisObj).trigger('onCompleteDeleteField', targetRecordId);
+						} else {
+							$(thisObj).trigger('onErrorDeleteField', targetRecordId);
+						}
+					},
+					error		: function(XMLHttpRequest, textStatus, errorThrown) {
+						// alert('エラーが発生しました。しばらくしてから再度試してみてください。');
+						console.log('Error :: insertField');
+						console.log('---------------------');
+						console.log(XMLHttpRequest);
+						console.log(textStatus);
+						console.log(errorThrown);
+						console.log('---------------------');
+						thisObj._isAccess = false;
+						$(thisObj).trigger('onErrorDeleteField', targetRecordId);
+					}
+				});
+			}
+		}
+		
+		/*
+		 * DBのデータを更新するメソッド
+		 * @param	void
+		 * @return	void
+		 */
+		,update: function(targetRecordId, data) {
+			var thisObj = this;
+			if (thisObj._isAccesable === true && thisObj._isAccess === false) {
+				thisObj._isAccess = true;
+
+				var tmpElementId = 'tmp-' + new Date().getTime();
+				$(thisObj).trigger('onInitUpdateField', [targetRecordId, data]);
+				var sendData = {
+					'residence_id'		: thisObj._prop['residenceId'],
+					'company_id'		: thisObj._prop['companyId'],
+					'user_id'			: thisObj._prop['userId'],
+					'id'				: targetRecordId,
+					'property'			: data
+				}
+				// console.log(sendData);
+				// return;
+				$.ajax({
+					type		: "POST",
+					url			: thisObj._prop['currentUrl'] + 'Outline/updateField/',
+					data		: sendData,
+					dataType	: "json",
+					success		: function(obj){
+						// console.log('更新完了');
+						// console.log('obj');
+						// console.log(obj);
+						thisObj._isAccess = false;
+						if (obj['result'] === true) {
+							$(thisObj).trigger('onCompleteUpdateField', [targetRecordId, data]);
+						} else {
+							$(thisObj).trigger('onErrorUpdateField', [targetRecordId, data]);
+						}
+					},
+					error		: function(XMLHttpRequest, textStatus, errorThrown) {
+						// alert('エラーが発生しました。しばらくしてから再度試してみてください。');
+						console.log('Error :: insertField');
+						console.log('---------------------');
+						console.log(XMLHttpRequest);
+						console.log(textStatus);
+						console.log(errorThrown);
+						console.log('---------------------');
+						thisObj._isAccess = false;
+						$(thisObj).trigger('onErrorUpdateField', [targetRecordId, data]);
+					}
+				});
+			}
+		}
+		
+		/*
+		 * DBのデータを更新するメソッド
+		 * @param	void
+		 * @return	void
+		 */
+		,reorder: function(targetRecordId, targetOrder) {
+			var thisObj = this;
+			if (thisObj._isAccesable === true && thisObj._isAccess === false) {
+				thisObj._isAccess = true;
+
+				$(thisObj).trigger('onInitReorder', [targetRecordId, targetOrder]);
+				var sendData = {
+					'residence_id'		: thisObj._prop['residenceId'],
+					'company_id'		: thisObj._prop['companyId'],
+					'user_id'			: thisObj._prop['userId'],
+					'id'				: targetRecordId,
+					'order'				: targetOrder + 1
+				}
+				// console.log(sendData);
+				$.ajax({
+					type		: "POST",
+					url			: thisObj._prop['currentUrl'] + 'Outline/reorderField/',
+					data		: sendData,
+					dataType	: "json",
+					success		: function(obj){
+						// console.log('更新完了');
+						// console.log('obj');
+						// console.log(obj);
+						thisObj._isAccess = false;
+						if (obj['result'] === true) {
+							$(thisObj).trigger('onCompleteReorder', [targetRecordId, targetOrder]);
+						} else {
+							$(thisObj).trigger('onErrorReorder', [targetRecordId, targetOrder]);
+						}
+					},
+					error		: function(XMLHttpRequest, textStatus, errorThrown) {
+						// alert('エラーが発生しました。しばらくしてから再度試してみてください。');
+						console.log('Error :: insertField');
+						console.log('---------------------');
+						console.log(XMLHttpRequest);
+						console.log(textStatus);
+						console.log(errorThrown);
+						console.log('---------------------');
+						thisObj._isAccess = false;
+						$(thisObj).trigger('onErrorReorder', [targetRecordId, targetOrder]);
+					}
+				});
+			}
+		}
+
+		/*
+		 * エレメントデータを取得するメソッド
+		 * @param	ヴvoid
+		 * @return	void
+		 */
+		,getFieldList: function() {
+			var thisObj = this;
+
+			if (thisObj._isAccesable === true && thisObj._isAccess === false) {
+				thisObj._isAccess = true;
+
+				$(thisObj).trigger('onInitGetFieldList');
+				var sendData = {
+					'residence_id'		: thisObj._prop['residenceId']
+				}
+				// console.log(sendData);
+				$.ajax({
+					type: "POST",
+					url	: thisObj._prop['currentUrl'] + 'Outline/getFieldList/',
+					data: sendData,
+					dataType: "json",
+					success: function(obj){
+						// console.log('リクエスト完了');
+						// console.log("\n");
+						// console.log(obj);
+						// console.log("\n");
+						
+						thisObj._isAccess = false;
+						if (obj['result'] === true) {
+							var newObj = $.extend(true,{},obj['data']);
+							var fixedClone = [];
+							for (var key in newObj) {
+								if (!isNaN(key) === true) {
+									fixedClone[(key-0)] = newObj[key];
+								}
+							}
+							$(thisObj).trigger('onCompleteGetFieldList', [fixedClone]);
+						} else {
+							$(thisObj).trigger('onErrorGetFieldList');
+						}
+					},
+					error: function(XMLHttpRequest, textStatus, errorThrown) {
+						// alert('エラーが発生しました。しばらくしてから再度試してみてください。');
+						console.log('Error :: getFieldList');
+						console.log('---------------------');
+						console.log(XMLHttpRequest);
+						console.log(textStatus);
+						console.log(errorThrown);
+						console.log('---------------------');
+						thisObj._isAccess = false;
+							$(thisObj).trigger('onErrorGetFieldList');
+					}
+				});
+			}
+		}
+
+		/*
+		 * DropされたFRKデータを差分保存するメソッド
+		 * @param	saveData	差分保存するFRKデータ
+		 * @return	void
+		 */
+		,saveFRK: function(saveData) {
+			var thisObj = this;
+
+			if (thisObj._isAccess === false) {
+				thisObj._isAccess = true;
+
+				$(thisObj).trigger('onInitSaveFRK');
+				var sendData = {
+					'residence_id'		: thisObj._prop['residenceId'],
+					'company_id'		: thisObj._prop['companyId'],
+					'user_id'			: thisObj._prop['userId'],
+					'save_data'			: saveData,
+				}
+				console.log(sendData);
+				$.ajax({
+					type: "POST",
+					url	: thisObj._prop['currentUrl'] + 'Outline/saveFRK/',
+					data: sendData,
+					dataType: "json",
+					success: function(obj){
+						console.log('リクエスト完了');
+						console.log("\n");
+						console.log(obj);
+						console.log("\n");
+						
+						thisObj._isAccess = false;
+						if (obj['result'] === true) {
+							$(thisObj).trigger('onCompleteSaveFRK');
+						} else {
+							$(thisObj).trigger('onErrorSaveFRK');
+						}
+					},
+					error: function(XMLHttpRequest, textStatus, errorThrown) {
+						// alert('エラーが発生しました。しばらくしてから再度試してみてください。');
+						console.log('Error :: getFieldList');
+						console.log('---------------------');
+						console.log(XMLHttpRequest);
+						console.log(textStatus);
+						console.log(errorThrown);
+						console.log('---------------------');
+						thisObj._isAccess = false;
+						$(thisObj).trigger('onErrorSaveFRK');
+					}
+				});
+			}
+		}
+
+		/*
+		 * 物件番号を保存するメソッド
+		 * @param	saveData	差分保存するFRKデータ
+		 * @return	void
+		 */
+		,saveResidenceNum: function(residenceNum) {
+			var thisObj = this;
+
+			if (thisObj._isAccess === false) {
+				thisObj._isAccess = true;
+
+				$(thisObj).trigger('onInitSaveResidenceNum');
+				var sendData = {
+					'id'			: thisObj._prop['residenceId'],
+					'user_id'		: thisObj._prop['userId'],
+					'num'			: residenceNum
+				}
+				console.log(sendData);
+				$.ajax({
+					type: "POST",
+					url	: thisObj._prop['currentUrl'] + 'Residence/updateResidenceData/',
+					data: sendData,
+					dataType: "json",
+					success: function(obj){
+						console.log('リクエスト完了');
+						console.log("\n");
+						console.log(obj);
+						console.log("\n");
+						
+						thisObj._isAccess = false;
+						if (obj['result'] === true) {
+							thisObj._prop['residenceNum'] = residenceNum;
+							$(thisObj).trigger('onCompleteSaveResidenceNum');
+						} else {
+							$(thisObj).trigger('onErrorSaveResidenceNum');
+						}
+					},
+					error: function(XMLHttpRequest, textStatus, errorThrown) {
+						// alert('エラーが発生しました。しばらくしてから再度試してみてください。');
+						console.log('Error :: getFieldList');
+						console.log('---------------------');
+						console.log(XMLHttpRequest);
+						console.log(textStatus);
+						console.log(errorThrown);
+						console.log('---------------------');
+						thisObj._isAccess = false;
+						$(thisObj).trigger('onErrorSaveResidenceNum');
+					}
+				});
+			}
+		}
+		
+		/*
+		 * データをDBに保存する際のプロパティをオブジェクトにセットするメソッド
+		 * @param	void
+		 * @return	void
+		 */
+		,setProp: function() {
+			var thisObj = this;
+
+			thisObj._prop = {
+				'currentUrl'				: $('input[type="hidden"][name="currentUrl"]') ? $('input[type="hidden"][name="currentUrl"]').val() : '',
+				'residenceId'				: $('input[type="hidden"][name="residenceId"]') ? $('input[type="hidden"][name="residenceId"]').val() - 0 : -1,
+				'companyId'					: $('input[type="hidden"][name="companyId"]') ? $('input[type="hidden"][name="companyId"]').val() - 0: -1,
+				'userId'					: $('input[type="hidden"][name="userId"]') ? $('input[type="hidden"][name="userId"]').val() - 0: -1,
+				'residenceNum'				: $('input[type="hidden"][name="residenceNum"]') ? $('input[type="hidden"][name="residenceNum"]').val(): '',
+				'visibleId'					: $('input[type="hidden"][name="visibleId"]') ? $('input[type="hidden"][name="visibleId"]').val() - 0: -1
+			}
+		}
+		
+		/*
+		 * データをDBに保存する際のプロパティを返すメソッド
+		 * @param	void
+		 * @return	void
+		 */
+		,setData: function(key, val) {
+			var thisObj = this;
+			thisObj._prop[key] = val;
+		}
+		
+		/*
+		 * データをDBに保存する際のプロパティを返すメソッド
+		 * @param	void
+		 * @return	void
+		 */
+		,getData: function() {
+			var thisObj = this;
+			var cloneElementData = $.extend(true, {}, thisObj._prop);
+			return cloneElementData;
+		}
+	}
+});

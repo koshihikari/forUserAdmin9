@@ -1,0 +1,38 @@
+@charset "utf-8";
+#loginInUsers, #logoutInUsers {
+  font-size:1.2rem;
+  color:#666666;
+  display:table;
+  width:100%;
+}
+#loginInUsers section, #logoutInUsers section {
+  width:100%;
+  margin:0 auto;
+  text-align:center;
+  display:table-cell;
+  vertical-align:middle;
+}
+#loginInUsers section h1, #logoutInUsers section h1 { margin:20px; }
+#loginInUsers section h1 a, #logoutInUsers section h1 a {
+  color:#4b5e72;
+  color:rgba(64,132,232,1);
+  font-weight:normal;
+  text-shadow:none;
+  font-size:6rem;
+}
+#loginInUsers section form, #logoutInUsers section form {
+  margin:0 auto 60px;
+  width:300px;
+}
+#loginInUsers section form input[type="text"], #loginInUsers section form input[type="password"], #logoutInUsers section form input[type="text"], #logoutInUsers section form input[type="password"] {
+  display:block;
+  width:100%;
+  margin:10px 0;
+}
+#loginInUsers section ul, #logoutInUsers section ul { display:block; }
+#loginInUsers section ul >li, #logoutInUsers section ul >li { display:inline-block; }
+#loginInUsers section .copyright, #logoutInUsers section .copyright {
+  margin:50px 0;
+  font-size:1rem;
+  display:block;
+}

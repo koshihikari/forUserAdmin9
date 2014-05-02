@@ -1,0 +1,99 @@
+
+
+
+<input type="hidden" name="currentUrl" value="<?php echo $this->Html->url('/', true); ?>" />
+<input type="hidden" name="concreteUrl" value="<?php echo $data['companies']['url']; ?>" />
+<!--
+<input type="hidden" name="companyId" value="<?php echo $data['companies']['id']; ?>" />
+-->
+<input type="hidden" name="residencePath" value="<?php echo $data['ResidenceCompanyInfoAction']['path']; ?>" />
+<input type="hidden" name="companyId" value="<?php echo $companyId; ?>" />
+<input type="hidden" name="residenceId" value="<?php echo $residenceId; ?>" />
+<input type="hidden" name="userId" value="<?php echo $userData['id']; ?>" />
+<input type="hidden" name="previewUrl" value="<?php echo $data['companies']['url']; ?>" />
+<input type="hidden" name="isLibraryElementPage" value="<?php echo $isLibraryElementPage; ?>" />
+
+	<input type="hidden" name="smartphoneLibraryId" value='<?php echo $smartphoneLibraryId; ?>' />
+	<input type="hidden" name="menuData" value='<?php echo json_encode($menuData); ?>' />
+	<input type="hidden" name="itemData" value='<?php echo json_encode($itemData); ?>' />
+
+
+<button class="bulkPublishBtn"><i data-icon=""></i>一括書き出し</button>
+<div id="container">
+	<ul id="pageList2">
+	</ul>
+	<!--
+	<ul id="pageList">
+	</ul>
+-->
+</div>
+
+
+<script id="li-template" type="text/html">
+	<li id="record-id_<%= recordId %>" data-record-id="<%= recordId %>" class="<% if (cautionMessage !== '') { %>notLatest<% } %>">
+		<div class="btns">
+			<div>
+				<a href="<%= editUrl %>" class="btn btn-primary btnPageEdit" data-placement="top" data-original-title="「<%= pageTitle %>」ページを編集します。">
+					<i data-icon=""></i>編集する
+				</a>
+				<button class="btn btn-primary btn-page-duplicate btn-disable" data-placement="top" data-original-title="「<%= pageTitle %>」ページを複製します。">
+					<i data-icon=""></i>複製する
+				</button>
+				<button class="btn btn-danger btn-page-delete" data-record-id="<%= recordId %>" data-placement="bottom" data-original-title="「<%= pageTitle %>」ページを削除します。">
+					<i data-icon=""></i>削除する
+				</button>
+				<div class="btn-group">
+						<button id="dropdown_<%= recordId %>" class="btn btn-primary btn-page-view dropdown-toggle" data-record-id="<%= recordId %>" data-placement="bottom" data-original-title="プレビュー版：：「<%= pageTitle %>」ページを表示します。" data-toggle="dropdown"><i data-icon=""></i>プレビューページ表示</button>
+						<ul class="dropdown-menu" role="menu" aria-labelledby="dropdown_<%= recordId %>">
+							<li>
+								<a href="<%= previewUrl %>" target="_blank"><%= pageTitle %></a>
+							</li>
+							<li>
+								<img src="http://chart.apis.google.com/chart?cht=qr&chs=150x150&chl=<%= previewUrl %>" width="150" height="150" alt="<%= pageTitle %>"/>
+							</li>
+						</ul>
+				</div>
+				<div class="btn-group">
+						<button id="dropdown_'<%= recordId %>" class="btn btn-primary btn-page-view dropdown-toggle" data-record-id="<%= recordId %>" data-placement="bottom" data-original-title="本番：：「<%= pageTitle %>」ページを表示します。" data-toggle="dropdown"><span><i data-icon=""></i>本番ページ表示</span></button>
+						<ul class="dropdown-menu" role="menu" aria-labelledby="dropdown_<%= recordId %>">
+							<li>
+								<a href="<%= concreteQrUrl %>" target="_blank"><%= pageTitle %></a>
+							</li>
+							<li>
+								<img src="http://chart.apis.google.com/chart?cht=qr&chs=150x150&chl=<%= concreteQrUrl %>" width="150" height="150" alt="<%= pageTitle %>"/>
+							</li>
+						</ul>
+				</div>
+				<button class="btn btn-primary btn-page-publish btn-disablea" data-record-id="<%= recordId %>" data-placement="bottom" data-original-title="「<%= pageTitle %>」ページを書きだします。">
+					<i data-icon=""></i>本番ページ書き出し
+				</button>
+			</div>
+			<p class="pageId"><%= recordId %></p>
+		</div>
+		<div class="info">
+			<p class="name">
+				<input type="text" name="title" value="<%= pageTitle %>" data-record-id="<%= recordId %>" data-prev-title="<%= pageTitle %>" />
+			</p>
+			<p class="path">
+				<input type="text" name="path" value="<%= pagePath %>" data-record-id="<%= recordId %>" data-prev-path="<%= pagePath %>" />
+			</p>
+		</div>
+		<div class="detail clearfix">
+			<div>
+				<p class="editer"><%= editedUserName %></p>
+				<p class="edited"><%= edited %></p>
+			</div>
+			<div>
+				<p class="publisher"><%= pubhlishedUserName %></p>
+				<p class="published"><%= pubhlished %></p>
+			</div>
+		</div>
+		<div class="caution<% if (cautionMessage === '') { %> empty<% } %>">
+			<p><%= cautionMessage %></p>
+		</div>
+	</li>
+</script>
+
+<script id="li-add-btn-template" type="text/html">
+	<li class="createPage"><i class="btn-page-create" data-icon=""></i></li>
+</script>

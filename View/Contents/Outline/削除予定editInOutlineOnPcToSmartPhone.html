@@ -1,0 +1,94 @@
+<?php //debug($statuses); ?>
+<?php //debug($data); ?>
+<?php //debug($visibilityId); ?>
+<?php //debug($companyId); ?>
+<?php //debug($residences); ?>
+<div id="container">
+	<input type="hidden" name="currentUrl" value="<?php echo $this->Html->url('/', true); ?>" />
+	<input type="hidden" name="userId" value="<?php echo $userData['id']; ?>" />
+	<input type="hidden" name="residenceId" value="<?php echo $residenceId; ?>" />
+	<input type="hidden" name="companyId" value="<?php echo $companyId; ?>" />
+	<input type="hidden" name="residenceNum" value="<?php echo $residences['num']; ?>" />
+	<?php for($i=0,$len=count($statuses); $i<$len; $i++): ?>
+		<input type="hidden" name="<?php echo $statuses[$i]['mtr_statuses']['val']; ?>Id" value="<?php echo $statuses[$i]['mtr_statuses']['id']; ?>" data-name="<?php echo $statuses[$i]['mtr_statuses']['name']; ?>" />
+	<?php endfor; ?>
+
+	<h1><?php echo $residences['name']; ?>の物件概要を編集する</h1>
+	<div id="">
+		<div class="btn-hole" data-toggle="buttons-checkbox">
+			<button type="button" class="btn btn-test<?php echo $residences['is_notice_advertising']==='1' ? ' active' : '';?>" data-item-name="isMarginLinkage" data-placement="right" data-original-title="物件概要に予告広告の表記を追加します。"><span><i data-icon=""></i>予告広告の表記</span></button>
+		</div>
+		<p>現在の物件番号：<span class="residenceNum"><?php echo $residences['num']; ?></span></p>
+		<div class="btn-hole">
+			<button type="button" class="btn btn-test btn-danger changeResidenceNumBtn" data-item-name="isMarginLinkage" data-placement="right" data-original-title="物件番号を変更します。<br />物件番号はFRKと紐付ける際に必要です。<br />正しい物件番号を設定して下さい。"><span><i data-icon=""></i>物件番号の変更</span></button>
+		</div>
+	</div>
+	<div id="fieldsWrapper">
+		<ul class="header">
+			<li class="">
+				<div class="statusWrapper">&nbsp;</div>
+				<div class="dataWrapper">
+					<div class="fieldName">項目名</div>
+					<div class="fieldVal">内容</div>
+				</div>
+				<div class="isFrk">FRKデータ<br />(一括更新対象)</div>
+				<div class="controller"></div>
+			</li>
+		</ul>
+		<ul class="body">
+			<?php 
+				$requiredIdArr = array(1, 2, 3, 4, 5, 6, 9, 11, 12, 13, 14, 15, 18, 19, 22, 26, 27, 33, 34, 35, 36);
+			?>
+			<?php for ($i=0, $len=count($data); $i<$len; $i++): ?>
+				<?php
+					$recordId = $data[$i]['outlines']['id'];
+					$type = $data[$i]['mtr_outlines']['type'] !== null ? $data[$i]['mtr_outlines']['type'] : 'textarea';
+					$fieldName = $data[$i]['outlines']['name'] === '' && $data[$i]['mtr_outlines']['name'] !== null ? $data[$i]['mtr_outlines']['name'] : $data[$i]['outlines']['name'];
+					$fieldVal = $data[$i]['outlines']['val'];
+					$isShow = $data[$i]['mtr_statuses']['val'] === 'visible' ? true : false;
+					// $isFrkData = $data[$i]['mtr_outlines']['id'] !== null ? true : false;
+					$isFrkData = $data[$i]['mtr_outlines']['is_frk'] === '1' ? true : false;
+					$isDeletable = $data[$i]['outlines']['is_deletable'] === '1' ? true : false;
+					$index = $data[$i]['mtr_outlines']['order'] !== null ? (int)$data[$i]['mtr_outlines']['order'] - 1 : -1;
+					$frkKey = $data[$i]['mtr_outlines']['key'] !== null ? $data[$i]['mtr_outlines']['key'] : '';
+					$isRequired = in_array($data[$i]['mtr_outlines']['id'], $requiredIdArr);
+				?>
+				<li class="<?php echo $isRequired === true || $isShow === true ?  'isShow' : 'isHide'; ?>" data-record-id="<?php echo $recordId; ?>" data-frk-index="<?php echo $index; ?>" data-frk-key="<?php echo $frkKey; ?>">
+					<div class="statusWrapper">
+						<div class="btn-hole">
+							<?php if ($isRequired): ?>
+								<div>
+									<div class="btn btn-test btn-danger active" data-placement="right" data-original-title="<?php echo $fieldName; ?>は必須入力項目なので、非表示にすることはできません。"><span><i data-icon=""></i>必須入力項目</span></div>
+								</div>
+							<?php else: ?>
+								<div class="btn-group" data-toggle="buttons-radio">
+									<button type="button" class="btn btn-test showBtn<?php echo $isRequired === true || $isShow === true ?  ' active' : ''; ?>" data-item-name="isShow" data-placement="right" data-original-title="物件概要パーツにこのフィールドを表示します。"><span><i data-icon=""></i>表示</span></button>
+									<button type="button" class="btn btn-test hideBtn<?php echo $isRequired === false && $isShow !== true ?  ' active' : ''; ?>" data-item-name="isHide" data-placement="right" data-original-title="このフィールドを物件概要パーツでは表示しません。"><span><i data-icon=""></i>非表示</span></button>
+								</div>
+							<?php endif; ?>
+						</div>
+					</div>
+					<div class="dataWrapper">
+						<div class="fieldName"><?php echo $this->Form->text("key_" . $recordId, array("value"=>$fieldName)); ?></div>
+						<div class="fieldVal">
+							<?php 
+								if ($type === 'text') {
+									echo $this->Form->text("val_" . $recordId, array("value"=>$fieldVal));
+								} else {
+									echo $this->Form->textarea("val_" . $recordId, array("value"=>$fieldVal));
+								}
+							?>
+						</div>
+					</div>
+					<div class="isFrk"><?php echo $isFrkData === true ? '<div class="fs1" aria-hidden="true" data-icon=""></div>' : '&nbsp;'; ?></div>
+					<div class="controller">
+						<button type="button" class="btn btn-primary btn-bright btn-test addBtn" data-placement="left" data-original-title="この項目の下に新しい項目を追加します。"><span><i data-icon=""></i></span></button>
+						<?php if ($isDeletable === true): ?>
+						<button type="button" class="btn btn-danger btn-bright btn-test delBtn" data-placement="left" data-original-title="この項目を削除します。"><span><i data-icon=""></i></span></button>
+						<?php endif; ?>
+					</div>
+				</li>
+			<?php endfor; ?>
+		</ul>
+	</div>
+</div>

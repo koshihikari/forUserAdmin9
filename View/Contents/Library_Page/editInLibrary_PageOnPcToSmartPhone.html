@@ -1,0 +1,165 @@
+
+<?php //debug($libraryPageProperty); ?>
+<?php //debug($targetDeviceName); ?>
+<?php //debug($title_for_layout); ?>
+<?php //debug($libraries); ?>
+
+
+<div id="container">
+
+	<!-- ここから#toolbar -->
+	<div id="toolbar">
+		<div id="palette" class="accordion">
+			<dl>
+				<dt class="open">パーツ</dt>
+				<dd class="parts open">
+					<div class="elementBtns">
+						<ul class="sortable">
+							<?php $icons = array(
+								'Text'			=> '&#x0026;',
+								'Image'			=> '&#x0028;',
+								'Map'			=> '&#x0043;',
+								'Youtube'		=> '&#x002D;',
+								'About'			=> '&#xE037;',
+								'Table'			=> '&#xE017;',
+								'Code'			=> '&#xE0D3;',
+								'Icon'			=> '&#xE030;',
+								'Gallery'		=> '&#xE118;'
+							); ?>
+							<?php $menuDataArr = json_decode($menuData); ?>
+							<?php foreach ($menuDataArr as $index => $val): ?>
+								<li data-item-name="<?php echo $val->itemName; ?>">
+									<a class="btn btn-primary" data-placement="right" data-original-title="このボタンをドロップすると<?php echo $val->label; ?>を挿入することができます。" href="#"><i data-icon="<?php echo $icons[$val->itemName]; ?>"></i><span><?php echo $val->label; ?></span></a>
+								</li>
+							<?php endforeach; ?>
+						</ul>
+					</div>
+				</dd>
+				<?php if ($isLibraryElementPage === false): ?>
+				<dt class="common-parts open">共通パーツ</dt>
+				<dd class="open">
+					<div class="elementBtns">
+						<?php for ($i=0,$len=count($libraries); $i<$len; $i++): ?>
+							<dl class="libraries sortable">
+								<dt><?php echo $libraries[$i]['smartphone_library_directories']['name']; ?></dt>
+								<dd>
+									<ul class="sortable">
+								<?php for ($j=0,$len2=count($libraries[$i]['smartphone_libraries']); $j<$len2; $j++): ?>
+										<li data-item-name="Library" data-record-id="<?php echo $libraries[$i]['smartphone_libraries'][$j]['id']; ?>"><a class="btn btn-primary" data-placement="right" data-original-title="<?php echo $libraries[$i]['smartphone_libraries'][$j]['title']; ?>" href="#"><i data-icon="&#xE00A;"></i><span><?php echo $libraries[$i]['smartphone_libraries'][$j]['title']; ?></span></a></li>
+								<?php endfor; ?>
+									</ul>
+								</dd>
+							</dl>
+						<?php endfor; ?>
+						<!--
+						<ul class="sortable">
+							<?php for ($i=0,$len=count($libraries); $i<$len; $i++): ?>
+							<li data-item-name="Library" data-record-id="<?php echo $libraries[$i]['smartphone_libraries']['id']; ?>">
+								<a class="btn btn-primary" data-placement="right" data-original-title="<?php echo $libraries[$i]['smartphone_libraries']['title']; ?>" href="#"><i data-icon="&#xE00A;"></i><span><?php echo $libraries[$i]['smartphone_libraries']['title']; ?></span></a>
+							</li>
+							<?php endfor; ?>
+						</ul>
+						-->
+					</div>
+				</dd>
+				<?php endif; ?>
+			</dl>
+		</div>
+	</div>
+	<!-- ここまで#toolbar -->
+
+
+
+
+
+	<!-- ここから#previewArea -->
+	<div id="previewArea">
+		<div class="dropdown">
+				<div>
+					<button class="btn dropdown-toggle" data-toggle="dropdown" href="#"><span>デバイス選択</span></button>
+					<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+						<li><a href="#" data-device="iphone5-black">iPhone5(黒)</a></li>
+						<li><a href="#" data-device="iphone5-white">iPhone5(白)</a></li>
+						<li><a href="#" data-device="ipodTouch5g-black">iPod Touch 5G(ブラック)</a></li>
+						<li><a href="#" data-device="ipodTouch5g-silver">iPod Touch 5G(シルバー)</a></li>
+						<li><a href="#" data-device="ipodTouch5g-pink">iPod Touch 5G(ピンク)</a></li>
+						<li><a href="#" data-device="ipodTouch5g-blue">iPod Touch 5G(ブルー)</a></li>
+						<li><a href="#" data-device="ipodTouch5g-yellow">iPod Touch 5G(イエロー)</a></li>
+					</ul>
+				</div>
+				<button id="bgBtn" class="btn btn-test btn-primary"><span>背景</span></button>
+		</div>
+
+<!--
+<div style="
+    width: 377px;
+    height: 1257px;
+    position: absolute;
+    background: rgba(250, 250, 250, 0.7);
+    z-index: 99;
+    border: 1px solid rgba(0,0,0,0.1);
+    top: 62px;
+    left: 205px;
+    border-radius: 60px;
+    box-shadow: 0 0 1px 0 rgba(0,0,0,0.2);
+"><div style="
+    position: absolute;
+    width: 320px;
+    height: 1027px;
+    background: rgba(0,0,0,0.7);
+    left: 27px;
+    top: 115px;
+    box-shadow: inset 0 0 2px 2px rgba(0,0,0,0.3);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+"></div></div>
+-->
+
+
+		<div id="iphone5" class="iphone5">
+			<div class="iphone5-header"></div>
+			<div class="iphone5-body">
+				<?php echo $this->Html->image('contents/page_element/edit/onPcToSmartphone/iphone5-body.png', array('width'=>'3315px', 'height'=>'100%')); ?>
+			</div>
+			<div class="iphone5-footer"></div>
+			<!--
+			<div class="scrollbar"><div class="track"><div class="thumb"><div class="end"></div></div></div></div>
+		-->
+			<div id="spContentWrapper" class="viewporta">
+				<div id="displayArea" class="viewport" data-item-name="Bg">
+					<div id="spContent" class="sortable droppable overview contentWrapper">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- ここまで#previewArea -->
+
+
+
+
+
+	<div id="propertyArea">
+				<div>
+					<div id="masterPropertyElem" class="propertyElem">
+						<div class="btnsWrapper">
+							<div class="btn-hole">
+								<button type="button" class="btn btn-test btn-danger deleteBtn" data-placement="bottom" data-original-title="現在編集しているパーツを削除します。"><span><i data-icon=""></i>削除</span></button>
+								<button type="button" class="btn btn-test btn-primary duplicateBtn" data-placement="bottom" data-original-title="現在編集しているパーツを複製します。"><span><i data-icon=""></i>複製</span></button>
+							</div>
+						</div>
+						<div class="propsWrapper"></div>
+					</div>
+				</div>
+	</div>
+	<input type="hidden" name="currentUrl" value="<?php echo $this->Html->url('/', true); ?>" />
+	<input type="hidden" name="concreteUrl" value="<?php echo $this->Html->url('/', true); ?>" />
+	<input type="hidden" name="companyId" value="<?php echo $userData['company_id']; ?>" />
+	<input type="hidden" name="userId" value="<?php echo $userData['id']; ?>" />
+	<input type="hidden" name="residenceId" value="<?php echo $residenceId; ?>" />
+	<input type="hidden" name="targetDeviceName" value="<?php echo $targetDeviceName; ?>" />
+	<input type="hidden" name="isLibraryElementPage" value="<?php echo $isLibraryElementPage; ?>" />
+	<input type="hidden" name="pageId" value="<?php echo $pageId; ?>" />
+	<input type="hidden" name="smartphoneLibraryId" value='<?php echo $smartphoneLibraryId; ?>' />
+	<input type="hidden" name="menuData" value='<?php echo json_encode($menuData); ?>' />
+	<input type="hidden" name="itemData" value='<?php echo json_encode($itemData); ?>' />
+</div>

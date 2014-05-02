@@ -1,0 +1,306 @@
+@charset "utf-8";
+#catalogInLibrary #contentForUserAdmin #container ul#pageList2 >li, #catalogInPage #contentForUserAdmin #container ul#pageList2 >li {
+  display:block;
+  border-bottom:1px solid rgba(255,255,255,0.5);
+  box-shadow:0 1px 1px rgba(0,0,0,0.3);
+  padding:0;
+  margin:20px 0;
+  border:1px solid #dadada;
+  background:#fdfdfd;
+  border-radius:3px;
+}
+#catalogInLibrary #contentForUserAdmin #container ul#pageList2 >li.notLatest, #catalogInPage #contentForUserAdmin #container ul#pageList2 >li.notLatest { background:#f3e5ba; }
+#catalogInLibrary #contentForUserAdmin #container ul#pageList2 >li >div.btns, #catalogInPage #contentForUserAdmin #container ul#pageList2 >li >div.btns {
+  border-bottom:1px solid #cccccc;
+  font-size:30px;
+  display:table;
+  width:100%;
+  padding:10px 0 5px 10px;
+  padding:5px 0 5px 10px;
+}
+#catalogInLibrary #contentForUserAdmin #container ul#pageList2 >li >div.btns >div, #catalogInPage #contentForUserAdmin #container ul#pageList2 >li >div.btns >div {
+  display:table-cell;
+  line-height:100%;
+}
+#catalogInLibrary #contentForUserAdmin #container ul#pageList2 >li >div.btns >p, #catalogInPage #contentForUserAdmin #container ul#pageList2 >li >div.btns >p {
+  padding-bottom:0;
+  line-height:100%;
+  display:block;
+  text-align:right;
+  display:table-cell;
+  padding-top:0;
+  vertical-align:bottom;
+}
+#catalogInLibrary #contentForUserAdmin #container ul#pageList2 >li >div.info, #catalogInPage #contentForUserAdmin #container ul#pageList2 >li >div.info {
+  display:table;
+  width:100%;
+}
+#catalogInLibrary #contentForUserAdmin #container ul#pageList2 >li >div.detail, #catalogInPage #contentForUserAdmin #container ul#pageList2 >li >div.detail {
+  display:table;
+  width:100%;
+  margin-top:-5px;
+  display:block;
+}
+#catalogInLibrary #contentForUserAdmin #container ul#pageList2 >li >div.detail >div, #catalogInPage #contentForUserAdmin #container ul#pageList2 >li >div.detail >div {
+  width:49%;
+  display:inline-block;
+}
+#catalogInLibrary #contentForUserAdmin #container ul#pageList2 >li >div.detail >div:first-child, #catalogInPage #contentForUserAdmin #container ul#pageList2 >li >div.detail >div:first-child { float:left; }
+#catalogInLibrary #contentForUserAdmin #container ul#pageList2 >li >div.detail >div:last-child, #catalogInPage #contentForUserAdmin #container ul#pageList2 >li >div.detail >div:last-child { float:right; }
+#catalogInLibrary #contentForUserAdmin #container ul#pageList2 >li >div.detail >div >p, #catalogInPage #contentForUserAdmin #container ul#pageList2 >li >div.detail >div >p {
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+  float:left;
+  display:inline-block;
+  width:50%;
+}
+#catalogInLibrary #contentForUserAdmin #container ul#pageList2 >li >div.caution, #catalogInPage #contentForUserAdmin #container ul#pageList2 >li >div.caution {
+  font-size:12px;
+  color:#cc3333;
+}
+#catalogInLibrary #contentForUserAdmin #container ul#pageList2 >li >div.caution.empty, #catalogInPage #contentForUserAdmin #container ul#pageList2 >li >div.caution.empty { display:none; }
+#catalogInLibrary #contentForUserAdmin #container ul#pageList2 >li p, #catalogInPage #contentForUserAdmin #container ul#pageList2 >li p {
+  display:table-cell;
+  vertical-align:middle;
+  padding:5px 10px;
+}
+#catalogInLibrary #contentForUserAdmin #container ul#pageList2 >li p::before, #catalogInPage #contentForUserAdmin #container ul#pageList2 >li p::before {
+  font-size:80%;
+  color:#4d90fe;
+  display:block;
+  margin-bottom:-5px;
+}
+#catalogInLibrary #contentForUserAdmin #container ul#pageList2 >li p.pageId::before, #catalogInPage #contentForUserAdmin #container ul#pageList2 >li p.pageId::before {
+  content:'ページID';
+  font-size:10px !important;
+  display:inline-block !important;
+  margin-right:5px;
+}
+#catalogInLibrary #contentForUserAdmin #container ul#pageList2 >li p.name, #catalogInPage #contentForUserAdmin #container ul#pageList2 >li p.name { width:100%; }
+#catalogInLibrary #contentForUserAdmin #container ul#pageList2 >li p.name::before, #catalogInPage #contentForUserAdmin #container ul#pageList2 >li p.name::before { content:'ページタイトル'; }
+#catalogInLibrary #contentForUserAdmin #container ul#pageList2 >li p.name input[type="text"], #catalogInPage #contentForUserAdmin #container ul#pageList2 >li p.name input[type="text"] {
+  width:100%;
+  margin:0;
+}
+#catalogInLibrary #contentForUserAdmin #container ul#pageList2 >li p.path::before, #catalogInPage #contentForUserAdmin #container ul#pageList2 >li p.path::before { content:'ページパス'; }
+#catalogInLibrary #contentForUserAdmin #container ul#pageList2 >li p.path input[type="text"], #catalogInPage #contentForUserAdmin #container ul#pageList2 >li p.path input[type="text"] {
+  width:400px;
+  margin:0;
+}
+#catalogInLibrary #contentForUserAdmin #container ul#pageList2 >li p.editer::before, #catalogInPage #contentForUserAdmin #container ul#pageList2 >li p.editer::before { content:'更新ユーザ'; }
+#catalogInLibrary #contentForUserAdmin #container ul#pageList2 >li p.edited::before, #catalogInPage #contentForUserAdmin #container ul#pageList2 >li p.edited::before { content:'最終更新日時'; }
+#catalogInLibrary #contentForUserAdmin #container ul#pageList2 >li p.publisher::before, #catalogInPage #contentForUserAdmin #container ul#pageList2 >li p.publisher::before { content:'書き出しユーザ'; }
+#catalogInLibrary #contentForUserAdmin #container ul#pageList2 >li p.published::before, #catalogInPage #contentForUserAdmin #container ul#pageList2 >li p.published::before { content:'最終書き出し日時'; }
+#catalogInLibrary #contentForUserAdmin #container ul#pageList2 >li .btn-group + .btn-group, #catalogInPage #contentForUserAdmin #container ul#pageList2 >li .btn-group + .btn-group { margin-left:0; }
+#catalogInLibrary #contentForUserAdmin #container ul#pageList2 >li .dropdown-menu, #catalogInPage #contentForUserAdmin #container ul#pageList2 >li .dropdown-menu { width:200px; }
+#catalogInLibrary #contentForUserAdmin #container ul#pageList2 >li .dropdown-menu >li, #catalogInPage #contentForUserAdmin #container ul#pageList2 >li .dropdown-menu >li { padding:3px; }
+#catalogInLibrary #contentForUserAdmin #container ul#pageList2 >li .dropdown-menu >li >a, #catalogInPage #contentForUserAdmin #container ul#pageList2 >li .dropdown-menu >li >a {
+  text-overflow:ellipsis;
+  overflow:hidden;
+  padding:3px;
+}
+#catalogInLibrary #contentForUserAdmin #container ul#pageList2 >li .dropdown-menu >li >img, #catalogInPage #contentForUserAdmin #container ul#pageList2 >li .dropdown-menu >li >img {
+  width:100%;
+  height:auto;
+}
+#catalogInLibrary #contentForUserAdmin #container ul#pageList2 >li.createPage, #catalogInPage #contentForUserAdmin #container ul#pageList2 >li.createPage {
+  display:inline-block;
+  background:none;
+  box-shadow:none;
+  border:none;
+  margin:0;
+  width:100%;
+  text-align:center;
+}
+#catalogInLibrary #contentForUserAdmin #container ul#pageList2 >li.createPage >.btn-page-create, #catalogInPage #contentForUserAdmin #container ul#pageList2 >li.createPage >.btn-page-create {
+  display:block;
+  font-size:8rem;
+  line-height:100%;
+  display:inline-block;
+  cursor:pointer;
+}
+#catalogInLibrary #contentForUserAdmin #container ul#pageList2 >li.createPage >.btn-page-create:hover, #catalogInPage #contentForUserAdmin #container ul#pageList2 >li.createPage >.btn-page-create:hover { color:#333333; }
+#catalogInLibrary ul#pageList2 >li {
+  width:420px !important;
+  display:inline-block !important;
+  margin-right:10px !important;
+}
+#catalogInLibrary ul#pageList2 >li >div.detail >div { width:420px !important; }
+#catalogInLibrary ul#pageList2 >li >div.detail >div >p {
+  display:inline-block !important;
+  overflow:hidden !important;
+  text-overflow:ellipsis !important;
+  white-space:nowrap !important;
+}
+#catalogInLibrary ul#pageList2 >li >div.detail >div >p.editer { width:215px !important; }
+#catalogInLibrary ul#pageList2 >li >div.detail >div >p.edited { width:200px !important; }
+#catalogInLibrary ul#pageList2 >li p.pageId::before { content:'パーツID' !important; }
+#catalogInLibrary ul#pageList2 >li p.name::before { content:'パーツ名' !important; }
+#catalogInLibrary ul#pageList2 >li.createPage {
+  vertical-align:top;
+  margin-top:50px !important;
+}
+#catalogInLibrary #contentForUserAdmin {
+  padding:40px 10px 10px 10px;
+  background:white;
+}
+#catalogInLibrary #contentForUserAdmin #wrapper {
+  display:table;
+  table-layout:fixed;
+  width:100%;
+}
+#catalogInLibrary #contentForUserAdmin #wrapper ul {
+  padding:0;
+  margin:0;
+}
+#catalogInLibrary #contentForUserAdmin #wrapper .parents, #catalogInLibrary #contentForUserAdmin #wrapper .children {
+  display:table-cell;
+  vertical-align:top;
+  margin:0;
+}
+#catalogInLibrary #contentForUserAdmin #wrapper .parents li, #catalogInLibrary #contentForUserAdmin #wrapper .children li { padding:10px; }
+#catalogInLibrary #contentForUserAdmin #wrapper #directories { width:400px; }
+#catalogInLibrary #contentForUserAdmin #wrapper #directories >.btn-group { margin-bottom:5px; }
+#catalogInLibrary #contentForUserAdmin #wrapper #directories >ul {
+  overflow-y:scroll;
+  background:rgba(238,239,239,1);
+  border:1px solid #cccccc;
+}
+#catalogInLibrary #contentForUserAdmin #wrapper #directories >ul >li {
+  padding:10px 0 10px 20px;
+  margin:0;
+  border-bottom:1px solid #cccccc;
+  position:relative;
+  cursor:pointer;
+}
+#catalogInLibrary #contentForUserAdmin #wrapper #directories >ul >li:last-child { border-bottom:none; }
+#catalogInLibrary #contentForUserAdmin #wrapper #directories >ul >li:first-child { border-bottom:1px solid #cccccc; }
+#catalogInLibrary #contentForUserAdmin #wrapper #directories >ul >li:hover { background:rgba(254,255,234,1); }
+#catalogInLibrary #contentForUserAdmin #wrapper #directories >ul >li.current {
+  background:red;
+  background:rgba(222,234,254,1);
+}
+#catalogInLibrary #contentForUserAdmin #wrapper #directories >ul >li.current::before {
+  content:'';
+  display:inline-block;
+  width:10px;
+  height:10px;
+  border-top:3px solid #4d90fe;
+  border-right:3px solid #4d90fe;
+  -webkit-transform:rotate(45deg);
+  position:absolute;
+  top:30px;
+  left:0;
+}
+#catalogInLibrary #contentForUserAdmin #wrapper #directories >ul >li.placeholder {
+  background:#cccccc;
+  border:1px solid #aaaaaa;
+}
+#catalogInLibrary #contentForUserAdmin #wrapper #directories >ul >li.on-hover { background:rgba(101,157,250,1); }
+#catalogInLibrary #contentForUserAdmin #wrapper #directories >ul >li .name { width:231px; }
+#catalogInLibrary #contentForUserAdmin #wrapper #directories >ul >li .name::before {
+  content:'フォルダ名';
+  font-size:1rem;
+  line-height:1rem;
+  color:rgba(0,172,238,1);
+  display:block;
+  margin-bottom:5px;
+}
+#catalogInLibrary #contentForUserAdmin #wrapper #directories >ul >li .name input { vertical-align:middle; }
+#catalogInLibrary #contentForUserAdmin #wrapper #directories >ul >li .count {
+  position:absolute;
+  top:4px;
+  right:5px;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+#catalogInLibrary #contentForUserAdmin #wrapper #directories >ul >li .count::before {
+  content:'共通パーツ数';
+  font-size:1rem;
+  line-height:1rem;
+  color:rgba(0,172,238,1);
+  position:absolute;
+  top:11px;
+  left:-60px;
+}
+#catalogInLibrary #contentForUserAdmin #wrapper #libraries >.btn-group { margin-bottom:5px; }
+#catalogInLibrary #contentForUserAdmin #wrapper #libraries >ul {
+  overflow-y:scroll;
+  border:1px solid #cccccc;
+}
+#catalogInLibrary #contentForUserAdmin #wrapper #libraries >ul >.directory-container {
+  display:none;
+  padding:0;
+}
+#catalogInLibrary #contentForUserAdmin #wrapper #libraries >ul >.directory-container.current { display:block; }
+#catalogInLibrary #contentForUserAdmin #wrapper #libraries >ul >.directory-container >ul >.library-element {
+  border-bottom:1px solid #cccccc;
+  background:white;
+  cursor:pointer;
+  padding:10px 10px 5px 5px;
+}
+#catalogInLibrary #contentForUserAdmin #wrapper #libraries >ul >.directory-container >ul >.library-element:last-child { border-bottom:none; }
+#catalogInLibrary #contentForUserAdmin #wrapper #libraries >ul >.directory-container >ul >.library-element:first-child { border-bottom:1px solid #cccccc; }
+#catalogInLibrary #contentForUserAdmin #wrapper #libraries >ul >.directory-container >ul >.library-element:hover { background:rgba(254,255,234,1); }
+#catalogInLibrary #contentForUserAdmin #wrapper #libraries >ul >.directory-container >ul >.library-element .info, #catalogInLibrary #contentForUserAdmin #wrapper #libraries >ul >.directory-container >ul >.library-element .detail {
+  display:table;
+  width:100%;
+}
+#catalogInLibrary #contentForUserAdmin #wrapper #libraries >ul >.directory-container >ul >.library-element .info >*, #catalogInLibrary #contentForUserAdmin #wrapper #libraries >ul >.directory-container >ul >.library-element .detail >* {
+  display:table-cell;
+  overflow:hidden;
+  vertical-align:top;
+}
+#catalogInLibrary #contentForUserAdmin #wrapper #libraries >ul >.directory-container >ul >.library-element .info >*::before, #catalogInLibrary #contentForUserAdmin #wrapper #libraries >ul >.directory-container >ul >.library-element .detail >*::before {
+  font-size:1rem;
+  line-height:1rem;
+  color:rgba(0,172,238,1);
+  display:block;
+  margin-bottom:5px;
+}
+#catalogInLibrary #contentForUserAdmin #wrapper #libraries >ul >.directory-container >ul >.library-element .info .id {
+  width:150px;
+  font-size:3rem;
+  display:inline-block;
+  line-height:3rem;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+#catalogInLibrary #contentForUserAdmin #wrapper #libraries >ul >.directory-container >ul >.library-element .info .id::before { content:'共通パーツID'; }
+#catalogInLibrary #contentForUserAdmin #wrapper #libraries >ul >.directory-container >ul >.library-element .info .name { width:100%; }
+#catalogInLibrary #contentForUserAdmin #wrapper #libraries >ul >.directory-container >ul >.library-element .info .name::before { content:'共通パーツ名'; }
+#catalogInLibrary #contentForUserAdmin #wrapper #libraries >ul >.directory-container >ul >.library-element .info .wrapper-btn {
+  width:65px;
+  padding-right:5px;
+}
+#catalogInLibrary #contentForUserAdmin #wrapper #libraries >ul >.directory-container >ul >.library-element .info .wrapper-btn::before {
+  content:'　';
+  margin-bottom:10px;
+}
+#catalogInLibrary #contentForUserAdmin #wrapper #libraries >ul >.directory-container >ul >.library-element .info .wrapper-btns { width:125px; }
+#catalogInLibrary #contentForUserAdmin #wrapper #libraries >ul >.directory-container >ul >.library-element .info .wrapper-btns::before {
+  content:'　';
+  margin-bottom:10px;
+}
+#catalogInLibrary #contentForUserAdmin #wrapper #libraries >ul >.directory-container >ul >.library-element .detail .edited-user-name {
+  display:inline-block;
+  width:200px;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+#catalogInLibrary #contentForUserAdmin #wrapper #libraries >ul >.directory-container >ul >.library-element .detail .edited-user-name::before { content:'更新ユーザ'; }
+#catalogInLibrary #contentForUserAdmin #wrapper #libraries >ul >.directory-container >ul >.library-element .detail .edited {
+  width:100%;
+  padding-left:10px;
+}
+#catalogInLibrary #contentForUserAdmin #wrapper #libraries >ul >.directory-container >ul >.library-element .detail .edited::before { content:'最終更新日時'; }
+#catalogInLibrary #contentForUserAdmin #wrapper #libraries >ul >.directory-container >ul >.placeholder {
+  background:#cccccc;
+  border:1px solid #aaaaaa;
+}
+#catalogInLibrary #contentForUserAdmin #wrapper .id, #catalogInLibrary #contentForUserAdmin #wrapper .name, #catalogInLibrary #contentForUserAdmin #wrapper .btn-group { display:inline-block; }
+#catalogInLibrary #contentForUserAdmin #wrapper input[type="text"] {
+  margin:0;
+  width:100%;
+}

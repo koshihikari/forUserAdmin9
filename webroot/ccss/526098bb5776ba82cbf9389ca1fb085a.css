@@ -1,0 +1,46 @@
+@import url("chrome://resources/css/widgets.css");
+[hidden] { display:none !important; }
+html.loading * {
+  -webkit-transition-delay:0 !important;
+  -webkit-transition-duration:0 !important;
+}
+body {
+  cursor:default;
+  margin:0;
+}
+p { line-height:1.8em; }
+h1, h2, h3 {
+  -webkit-user-select:none;
+  font-weight:normal;
+  line-height:1;
+}
+h1 { font-size:1.5em; }
+h2 {
+  font-size:1.3em;
+  margin-bottom:0.4em;
+}
+h3 {
+  color:black;
+  font-size:1.2em;
+  margin-bottom:0.5em;
+}
+a {
+  color:#1155cc;
+  text-decoration:underline;
+}
+a:active { color:#052577; }
+html[dir='rtl'] .weakrtl {
+  direction:ltr;
+  text-align:right;
+}
+html[dir='rtl'] div.weakrtl input {
+  direction:ltr;
+  text-align:right;
+}
+html[dir='rtl'] .favicon-cell.weakrtl {
+  -webkit-padding-end:22px;
+  -webkit-padding-start:0;
+}
+html[dir='rtl'] select.weakrtl { direction:rtl; }
+html[dir='rtl'] select.weakrtl option { direction:ltr; }
+html[dir='rtl'] input.weakrtl::-webkit-input-placeholder, html[dir='rtl'] .weakrtl input::-webkit-input-placeholder { direction:rtl; }

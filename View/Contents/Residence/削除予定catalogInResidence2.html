@@ -1,0 +1,119 @@
+
+				<div id="contentForUserAdmin" class="commonElem">
+			<div id="navigationPanel" class="" style="top: -110px;">
+	<h1><i class="upArrow" data-icon="" style="display: none;"></i><i class="downArrow" data-icon="" style="display: inline;"></i><span>codeless</span></h1>
+	<nav>
+		<ul>
+			<li class="residenceListBtn">
+				<a href="/px/cms/workspace/cms/forUserAdmin3/Residence/catalog/" class="current" data-placement="right" data-original-title="御社が作成中の物件一覧を表示します。"><i data-icon=""></i><span>物件一覧</span></a>			</li>
+					</ul>
+				<a href="/px/cms/workspace/cms/forUserAdmin3/logout" class="logoutBtn btn btn-danger btn-test"><span>ログアウト</span></a>	</nav>
+</div>
+<script>
+jQuery.noConflict();
+jQuery(document).ready(function($){
+	$('#navigationPanel h1')
+		.on('click', function(){
+			var targetY;
+			if ($('#navigationPanel').hasClass('show') === true) {
+				targetY = $('#navigationPanel').height() * -1;
+				$('#navigationPanel').removeClass('show');
+				$('.upArrow').hide();
+				$('.downArrow').show();
+			} else {
+				targetY = 0;
+				$('#navigationPanel').addClass('show');
+				$('.upArrow').show();
+				$('.downArrow').hide();
+			}
+			$('#navigationPanel')
+				.stop(true)
+				.animate(
+					{
+						'top' : targetY
+					},
+					{
+						duration: 300,
+						easing: 'linear',
+						complete: function(event) {
+						}
+					}
+				)
+		});
+
+});
+</script>
+<section>
+	<ul id="residenceList" class="clearfix">
+											<li class="clearfix">
+				<div class="screenShot">
+					<div class="imgWrapper">
+						<img src="/px/cms/workspace/cms/forUserAdmin3/img/tmp/screenshot1.png" alt="">					</div>
+				</div>
+				<div class="wrapper">
+					<p class="residenceName">
+						<a href="http://ec2-54-248-184-12.ap-northeast-1.compute.amazonaws.com/cms/forResidence2/s/1" class="residenceName enabled" data-placement="bottom" data-original-title="トゥールダルジャンのスマホサイトを開きます。">aaa</a>					</p>
+										<a href="/px/cms/workspace/cms/forUserAdmin3/Page/catalog/s/1" class="btn btn-primary editForPcBtn enabled" data-placement="bottom" data-original-title="トゥールダルジャンのスマホサイトを編集します。"><i data-icon="M"></i><span>スマホサイトを編集する</span></a>					<button class="btn btn-primary editForPcBtn btn-test btn-disable"><i data-icon="N"></i><span>タブレットサイトを編集する</span></button>					<a href="/px/cms/workspace/cms/forUserAdmin3/Page/catalog/f/1" class="btn btn-primary editForPcBtn enabled" data-placement="bottom" data-original-title="トゥールダルジャンのフィーチャーフォンサイトを編集します。"><i data-icon="o"></i><span>フィーチャーフォンサイトを編集する</span></a>				</div>
+			</li>
+			</ul>
+	<script>
+		jQuery.noConflict();
+		jQuery(document).ready(function($){
+	//	$(function() {
+			$('#contentForUserAdmin a[data-placement][data-original-title][class*="enabled"]').tooltip();
+		});
+	</script>
+</section>
+<section>
+	<ul id="residenceList" class="clearfix">
+											<li class="clearfix">
+				<div class="screenShot">
+					<div class="imgWrapper">
+						<img src="/px/cms/workspace/cms/forUserAdmin3/img/tmp/screenshot1.png" alt="">					</div>
+				</div>
+				<div class="wrapper">
+					<p class="residenceName">
+						<a href="http://ec2-54-248-184-12.ap-northeast-1.compute.amazonaws.com/cms/forResidence2/s/1" class="residenceName enabled" data-placement="bottom" data-original-title="トゥールダルジャンのスマホサイトを開きます。">aaa</a>					</p>
+										<a href="/px/cms/workspace/cms/forUserAdmin3/Page/catalog/s/1" class="btn btn-primary editForPcBtn enabled" data-placement="bottom" data-original-title="トゥールダルジャンのスマホサイトを編集します。"><i data-icon="M"></i><span>スマホサイトを編集する</span></a>					<button class="btn btn-primary editForPcBtn btn-test btn-disable"><i data-icon="N"></i><span>タブレットサイトを編集する</span></button>					<a href="/px/cms/workspace/cms/forUserAdmin3/Page/catalog/f/1" class="btn btn-primary editForPcBtn enabled" data-placement="bottom" data-original-title="トゥールダルジャンのフィーチャーフォンサイトを編集します。"><i data-icon="o"></i><span>フィーチャーフォンサイトを編集する</span></a>				</div>
+			</li>
+											<li class="clearfix">
+				<div class="screenShot">
+					<div class="imgWrapper">
+						<img src="/px/cms/workspace/cms/forUserAdmin3/img/tmp/screenshot1.png" alt="">					</div>
+				</div>
+				<div class="wrapper">
+					<p class="residenceName">
+						<a href="http://ec2-54-248-184-12.ap-northeast-1.compute.amazonaws.com/cms/forResidence2/s/1" class="residenceName enabled" data-placement="bottom" data-original-title="トゥールダルジャンのスマホサイトを開きます。">aaa</a>					</p>
+										<a href="/px/cms/workspace/cms/forUserAdmin3/Page/catalog/s/1" class="btn btn-primary editForPcBtn enabled" data-placement="bottom" data-original-title="トゥールダルジャンのスマホサイトを編集します。"><i data-icon="M"></i><span>スマホサイトを編集する</span></a>					<button class="btn btn-primary editForPcBtn btn-test btn-disable"><i data-icon="N"></i><span>タブレットサイトを編集する</span></button>					<a href="/px/cms/workspace/cms/forUserAdmin3/Page/catalog/f/1" class="btn btn-primary editForPcBtn enabled" data-placement="bottom" data-original-title="トゥールダルジャンのフィーチャーフォンサイトを編集します。"><i data-icon="o"></i><span>フィーチャーフォンサイトを編集する</span></a>				</div>
+			</li>
+			</ul>
+	<script>
+		jQuery.noConflict();
+		jQuery(document).ready(function($){
+	//	$(function() {
+			$('#contentForUserAdmin a[data-placement][data-original-title][class*="enabled"]').tooltip();
+		});
+	</script>
+</section>		</div>
+	
+		<script>
+jQuery.noConflict();
+jQuery(document).ready(function($){
+//$(function() {
+	var timerId = setTimeout(function() {
+		operable();
+	}, 3000);
+	$('#flashMessage').on('click', function(event) {
+		operable();
+	});
+	function operable() {
+		clearTimeout(timerId);
+		$('#flashMessage').fadeOut("fast");
+	}
+	$('#switchSidebar *[data-placement][data-original-title]').tooltip();
+});
+</script>
+<div id="statusDisplay">&nbsp;</div>
+
+
+<img id="feedlyMiniIcon" title="feedly mini" style="position: fixed; bottom: 14px; right: 14px; z-index: 99; cursor: pointer; border: 0px; -webkit-transition: opacity 0.3s ease; transition: opacity 0.3s ease; visibility: visible; width: 24px; height: 24px; max-height: 24px; max-width: 24px; overflow: hidden; display: block; padding: 0px; opacity: 0.35;" width="24" height="24" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAYlJREFUeNrMVD1rwlAUPfkwBBxFKQQlDhmjqzj4F9w7FfwThZaW9n8UnDrrn1BEXNTBRQQhEE1ERRR0Sd990A7VaKJJ6YHzEu4N99z3zrsRGo2GAuCF8YFRQzSwGOuM7zJb3hgfES2o0SdGSWRLDfGhRgLpGAXS4q0VCoUCBEHwzd8skM/nUSqVoCjKybz8O1CtVn2LeZ4H27YxnU6xXC6x3+95PJPJoFKpoN1uY7vdnhfww3w+x3A4xGaz4d3quo5sNvuTTyaTXKTb7cJ13csCzWbzKKaqKj/zXC4HSZKO8iRcLpcxGAwwmUzC7UDTNBSLRSQSiVAeyUGNpM4v4XA4oNfr8eMMLJBKpWCaJn9fLBawLAur1Qq73Y6b/H0pyNyrTDYMA7PZDKPRCOv1+uQ3ZCqZe9UcOI6DTqfjW5zMbLVa3Bu6RaE9GI/HZ/P9fp8/qfipYROj+ukEnuQgEx0GImKGHGSC//UO/kTAibG+QwIfMQrUyeRXusaM94x3ERW2GT8Zn78EGACRmoKUJhB1TQAAAABJRU5ErkJggg=="><div id="showtitlewrapper" class="bottom_right"><p><span id="showtitle-title" title="Length: 14 chars">株式会社プライム様の物件一覧</span> <span class="link" id="showtitlemove" title="Move this bar"><i class="icon-hand-down"></i><i class="icon-hand-up"></i><i class="icon-hand-right"></i><i class="icon-hand-left"></i></span> <span id="showtitleremovelink" class="link" title="Hide this bar"><i class="icon-eye-open"></i><i class="icon-eye-close"></i></span></p></div>

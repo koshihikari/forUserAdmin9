@@ -1,0 +1,689 @@
+@charset "utf-8";
+
+* {
+	box-sizing: border-box;
+}
+::-webkit-scrollbar-track {
+	background: rgb(199, 199, 199);
+}
+::-webkit-scrollbar {
+	width: 10px;
+	height: 10px;
+}
+::-webkit-scrollbar-thumb {
+	// background: #bbb;
+	// background: -webkit-gradient(linear,left top,right top,from(rgba(75,94,114,0.3)),to(rgba(75,94,114,0.9))) !important;
+	// background: rgba(39,39,39,0.3) !important;
+	// background: rgb(95, 91, 91) !important;
+	background: rgb(153, 153, 153) !important;
+	border-radius: 5px;
+	// box-shadow: 0 0 0 1px rgb(240, 240, 241) inset;
+	box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.3) inset;
+}
+
+#curtain {
+	// position: absolute;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 9999;
+	background: rgba(255, 255, 255, 0.5);
+	background-image: -webkit-linear-gradient(left,rgba(100,100,100,0.1),rgba(255,255,255,0.1) 10%,rgba(255,255,255,0.1) 60%,rgba(100,100,100,0.1));
+	> p {
+		display: table-cell;
+		vertical-align: middle;
+		text-align: center;
+		font-size: 1.8rem;
+
+		&:before {
+			width: 100%;
+			height: 0.125rem;
+			position: absolute;
+			left: 0;
+			top: 0;
+			content: "";
+			// background-image: linear-gradient(left, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.8) 40%, rgba(255, 255, 255, 0.8) 60%, rgba(255, 255, 255, 0));
+			background-image: -webkit-linear-gradient(left, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.8) 40%, rgba(255, 255, 255, 0.8) 60%, rgba(255, 255, 255, 0));
+		}
+		%:after {
+			width: 100%;
+			height: 0.125rem;
+			position: absolute;
+			left: 0;
+			bottom: 0;
+			content: "";
+			background-image: -webkit-linear-gradient(left, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.8) 40%, rgba(255, 255, 255, 0.8) 60%, rgba(255, 255, 255, 0));
+		}
+	}
+}
+// #blurCurtain {
+// 	position: fixed;
+// }
+// #vague-svg-blur {
+// 	display: none;
+// }
+
+/* clearfix
+---------------------------------*/
+.clearfix:after {/*for modern browser*/
+	content: " ";
+	display: block;
+	clear: both;
+	height: 0;
+	visibility: hidden;
+}
+
+.clearfix {
+	zoom: 1; /*for IE 5.5-7*/
+	display: inline-block;
+}
+
+/* exlude MacIE 5 \*/
+* html .clearfix {
+	height: 1%;
+}
+
+.clearfix {
+	display: block;
+}
+/* end MacIE5 */
+
+html {
+	position: relative;
+	height: 100%;
+	font-size: 62.5%;
+//	box-shadow: 1px 1px 10px rgba(50, 50, 50, 0.5)inset;
+/*
+*/
+}
+body {
+//	background-color: transparent;
+	background: #FCFAFC;
+	font-family: "メイリオ", "ＭＳ Ｐゴシック", sans-serif;
+	height: 100%;
+	color: #666;
+	color: #333;
+	color: rgb(117, 117, 117);
+				//	text-shadow: 2px 2px 0 rgba(255, 255, 255, 0.3), -1px -1px 0 rgba(0, 0, 0, 0.1);
+//	background: #FEFAED;
+	background: #FEFEFE;
+	background: url(../img/tmp/Wood_floor_by_gnrbishop.jpg) 0 0 repeat;
+	background: url(../img/tmp/Melamine-wood-patterns-PIXEDEN/PNGs/Melamine-wood-003.png) 0 0 repeat;
+	background: url(../img/tmp/Melamine-wood-patterns-PIXEDEN/PNGs/Melamine-wood-001.png) 0 0 repeat;
+//	background: url(../img/tmp/lyonnette.png) 0 0 repeat;
+	background: url(../img/tmp/fabric-patterns-04.png) 0 0 repeat;
+	background: url(../img/tmp/fabric-patterns-05.png) 0 0 repeat;
+	background: #efefef;;
+	// background: rgba(238, 238, 218, 1);
+
+	#wrapper {
+	//	height: 100%;
+	}
+}
+
+ul {
+	list-style: none;
+}
+
+p {
+	margin: 0;
+	padding: 5px;
+}
+
+.title {
+	font-size: 1.5em;
+	line-height: 1;
+}
+
+#container {
+	width: 100%;
+	margin: 0 auto;
+
+	#content {
+		.bread {
+			height: 20px;
+		}
+	}
+}
+
+
+.error-message {
+	color: #f00;
+	font-weight: bold;
+}
+
+.cake-sql-log {
+	border: 1px solid #999;
+	td {
+		border: 1px solid #999;
+	}
+}
+
+
+.caution {
+	font-size: 12px !important;
+	color: #C33;
+	padding: 0;
+}
+
+p.info {
+	background: rgba(255, 255, 255, 0.8);
+	padding: 10px;
+	margin-bottom: 20px;
+	line-height: 2em;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+table {
+	width: 100%;
+	border-collapse: separate;
+}
+th,
+td {
+	table-layout: fixed;
+}
+
+
+@h1ColorInSection: #666;
+@h1FogColorInSection: #777;
+@h1FogInSection: 1px;
+@primaryBtnColor: #3D8AF7;
+@primaryBtnHoverColor: #1464F6;
+
+#contentForUserAdmin {
+	padding: 50px 20px;
+
+	#container {
+		z-index: 2;
+	}
+}
+
+input, button, select, textarea {
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+}
+
+
+/*******************************************************************/
+/* ここからサイトタイトルのスタイル */
+/*******************************************************************/
+	.siteTitle {
+	//	margin: 10px;
+		text-align: center;
+
+		> a {
+			font-family: 'ABeeZee', sans-serif;
+			color: #ffffff;
+			font-size: 36px;
+			text-decoration: none;
+
+color: #C33;
+text-shadow: 2px 0 0px rgba(255, 255, 255, 0.5), 0px 2px 0px rgba(255, 255, 255, 0.5), -1px 0 0px rgba(255, 255, 255, 0.5), 0 -1px 0px rgba(255, 255, 255, 0.5), 0 0 10px rgba(0, 0, 0, 0.9);
+font-weight: bold;
+		}
+	}
+/*******************************************************************/
+/* ここまでサイトタイトルのスタイル */
+/*******************************************************************/
+
+/*******************************************************************/
+/* ここからボタンのスタイル */
+/*******************************************************************/
+.btn {
+	font-weight: normal;
+	height: 22px;
+	// min-height: 22px;
+	line-height: 100%;
+	overflow: hidden;
+	text-overflow: ellipis;
+
+	i {
+		margin-right: 5px;
+	}
+
+	span {
+		white-space: nowrap;
+	}
+}
+a.btn {
+	text-decoration: none;
+	// line-height: 20px;
+	// border: none;
+}
+.btn-hole {
+	margin: 5px;
+	margin-left: 0;
+}
+.btn-primary {
+	// background: rgba(91, 168, 217, 1);
+
+	&.active {
+		background: rgba(67, 182, 251, 0.5);
+		box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.5);
+
+		span{
+			color: rgb(30, 18, 77);
+			text-shadow: 0 -1px 1px rgba(255,255,255,0.5);
+		}
+	}
+
+	/*
+	&:hover {
+		background: rgb(113, 168, 255);
+	}
+	*/
+}
+.+
+.btn-danger {
+	background: rgba(235, 96, 148, 1);
+	&:hover {
+		background: rgba(224, 47, 113, 1);
+	}
+}
+*/
+/*
+.btn {
+	border: none;
+	border-radius: 5px;
+	margin: 5px;
+	padding: 0;
+	text-decoration: none;
+	text-shadow: none;
+	font-size: 1.1rem !important;
+	border: 1px solid #aaa;
+
+	> i {
+		display: inline-block;
+	}
+
+	> span {
+		display: inline-block;
+		width: 100%;
+		padding: 2px 10px;
+		background: -webkit-gradient(linear,left top,left bottom,from(rgba(255,255,255,0.3)),to(rgba(255,255,255,0.1)));
+	}
+
+	&.btn-primary {
+		// background: rgb(32, 42, 56);
+		// border: 1px solid #333;
+		background: rgb(75,94,114);
+		border: 1px solid #666;
+
+		&.active {
+			box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.5), inset 0 -1px 5px rgba(255, 255, 255, 0.8);
+			// background: rgb(245, 182, 70);
+			background: rgb(97, 223, 66) !important;
+			color: rgb(13, 9, 107);
+			text-shadow: 0 0 5px rgba(255, 255, 255, 0.9);
+			border: 1px solid #999;
+		}
+	}
+
+	&.btn-danger {
+		background: #da4f49;
+		border: 1px solid rgb(235, 104, 104);
+	}
+
+	&:hover {
+		> span {
+			display: inline-block;
+			width: 100%;
+			padding: 2px 10px;
+			background: -webkit-gradient(linear,left bottom,left top,from(rgba(255,255,255,0.3)),to(rgba(255,255,255,0.1)));
+		}
+	}
+}
+
+.btn-group {
+	>.btn {
+		margin: 0;
+		&:first-child {
+			border-right: none;
+			border-top-right-radius: 0;
+			border-bottom-right-radius: 0;
+		}
+	}
+}
+
+span {
+	>i[data-icon] {
+		margin-right: 10px;
+	}
+}
+.modal-footer .btn + .btn {
+	margin-top: 0;
+}
+*/
+/*******************************************************************/
+/* ここまでボタンのスタイル */
+/*******************************************************************/
+
+/*******************************************************************/
+/* ここからformのスタイル */
+/*******************************************************************/
+input[disabled] {
+	background: rgba(0, 0, 0, 0.1) !important;
+}
+
+input[type="text"],
+input[type="password"],
+textarea {
+	border: none;
+	// background: -webkit-gradient(linear,left top,left bottom,from(rgba(255,255,255,0.6)),to(rgba(255,255,255,0.9)));
+	// background: rgb(242, 244, 255);
+	background: rgb(250, 250, 250);
+	padding: 13px 10px;
+	// padding: 6px 10px 4px;
+	// box-shadow: inset 0 1px 7px rgba(0,0,0,0.4);
+	box-shadow: inset 0 1px 4px rgba(0,0,0,0.3), inset 0 -1px 3px rgba(0,0,0,0.2);;
+	border-radius: 2px;
+	color: rgb(117, 117, 117);
+
+}
+input[type="text"],
+input[type="password"] {
+	height: 30px;
+}
+input[type="password"]:hover,
+input[type="password"]:focus,
+input[type="text"]:hover,
+input[type="text"]:focus {
+	// border: 1px solid #4d90fe;
+	box-shadow: 0 0 0 1px #4d90fe;
+}
+/*******************************************************************/
+/* ここまでformのスタイル */
+/*******************************************************************/
+
+
+
+#logout {
+	z-index: 100;
+	top: 0;
+	position: fixed;
+	right: 246px;
+	z-index: 9999;
+}
+#switchSidebar {
+	z-index: 100;
+	top: 0;
+	position: fixed;
+	right: 0;
+	z-index: 9999;
+}
+
+/*******************************************************************/
+/* ここからツールチップのスタイル */
+/*******************************************************************/
+.tooltip {
+	z-index: 9999;
+	border: none;
+
+	&.in {
+		opacity: 1;
+	}
+
+	.tooltip-inner {
+		background: rgba(20, 20, 20, 0.9);
+		padding: 10px 30px;
+		line-height: 1.7em;
+		font-size: 14px;
+		text-align: left;
+		max-width: 100%;
+	}
+}
+/*******************************************************************/
+/* ここまでツールチップのスタイル */
+/*******************************************************************/
+
+
+/*******************************************************************/
+/* ここからモーダル(reveal-modal)のスタイル */
+/*******************************************************************/
+.reveal-modal {
+//	background: #F7F4F4;
+	background: #FFF;
+	z-index: 9999;
+
+	p.title {
+		text-align: center;
+	}
+
+	.modalContent {
+		line-height: 180%;
+		margin: 20px auto 30px;
+	}
+
+	.btnWrapper {
+		text-align: center;
+	}
+}
+.reveal-modal-bg {
+//	background: rgba(230, 230, 230, 0.5);
+	background: rgba(255, 255, 255, 0.5);
+}
+/*******************************************************************/
+/* ここからモーダル(reveal-modal)のスタイル */
+/*******************************************************************/
+
+
+/*******************************************************************/
+/* ここからモーダル(bootstrap)のスタイル */
+/*******************************************************************/
+.modal-scrollable {
+	.modal {
+		border: 1px solid rgba(0, 0, 0, 0.1);
+		background: -webkit-gradient(linear,left top,left bottom,from(rgba(255, 255, 255, 0.99)),to(rgba(255, 255, 255, 0.85)));
+		> .modal-header {
+			h3 {
+				color: #666;
+			}
+		}
+
+		> .modal-body {
+			color: #666;
+
+			p {
+				padding: 0;
+				font-size: 1.5rem;
+			}
+		}
+
+		> .modal-footer {
+			background: transparent;
+		}
+	}
+}
+
+.modal-backdrop {
+	background: -webkit-gradient(linear,left top,left bottom,from(rgba(0, 0, 0, 0.1)),to(rgba(0, 0, 0, 0.3))) !important;
+}
+.modal-footer {
+	text-align: right;
+}
+/*******************************************************************/
+/* ここまでモーダル(bootstrap)のスタイル */
+/*******************************************************************/
+
+
+@primaryColor: rgba(146, 0, 0, 1);
+@primaryColor: rgba(23, 77, 128, 1);
+@primaryColor: rgba(0, 111, 185, 1);
+@primaryColor: rgba(149, 202, 223, 1);
+@primaryColor: rgb(64, 70, 78);
+@primaryColor: rgb(75,94,114);
+// @primaryColor: rgba(194, 246, 253, 1);
+@defaultInputBgColor: white;
+/*******************************************************************/
+/* ここからsliderのスタイル */
+/*******************************************************************/
+.slider {
+	// background: @defaultInputBgColor;
+	// background: -webkit-gradient(linear,left top,left bottom,from(rgba(255, 255, 255, 1)),to(rgba(215, 215, 215, 1)));
+	border: 1px solid #bbb;
+
+	> .ui-slider-range {
+		border-top-left-radius: 4px;
+		border-bottom-left-radius: 4px;
+		// background: -webkit-gradient(linear,left top,left bottom,from(rgba(32, 42, 56,0.3)),to(rgba(32, 42, 56,0.9))) !important;
+		// background: -webkit-gradient(linear,left top,left bottom,from(rgba(75,94,114,0.3)),to(rgba(75,94,114,0.9))) !important;
+		// border: 1px solid #666;
+		border-bottom: none;
+		background: rgba(54, 123, 233, 1);
+		border: none;
+		border-radius: 0;
+	}
+
+	> .ui-slider-handle {
+		border-radius: 10px;
+		box-shadow: inset 0 0 7px rgba(0, 0, 0, 0.2);
+		outline: none;
+		background: @primaryColor;
+		border: 5px solid rgb(240, 240, 240);
+		border: 5px solid rgb(209, 209, 209);
+		box-shadow: 0 0 0 1px #999;
+		// background: -webkit-gradient(linear,left top,left bottom,from(rgba(75,94,114,1)),to(rgba(191, 194, 197, 1))) !important;
+		background: rgba(54,123,233,1);
+	}
+}
+/*******************************************************************/
+/* ここまでsliderのスタイル */
+/*******************************************************************/
+
+
+/*******************************************************************/
+/* ここからColorboxのスタイル */
+/*******************************************************************/
+#cboxOverlay {
+	background: rgba(200, 200, 200, 0.5);
+}
+/*******************************************************************/
+/* ここまでColorboxのスタイル */
+/*******************************************************************/
+
+
+/*******************************************************************/
+/* ここからStatusDisplayのスタイル */
+/*******************************************************************/
+#statusDisplay {
+	position: fixed;
+	top: 0;
+	left: 50%;
+	z-index: 9999;
+	background: rgba(255, 255, 255, 0.5);
+	color: rgba(10, 150, 250, 0.8);
+	padding: 5px 10px 3px;
+	font-weight: bold;
+	box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.2);
+	opacity: 0;
+}
+/*******************************************************************/
+/* ここまでStatusDisplayのスタイル */
+/*******************************************************************/
+
+
+/*******************************************************************/
+/* ここからcolorpickerのスタイル */
+/*******************************************************************/
+.colorpicker {
+	z-index: 200;
+
+	input,
+	textarea {
+		width: 30px;
+		line-height: normal;
+
+		&:focus {
+		//	background: #f00;
+			border: none;
+			box-shadow: none;
+		}
+	}
+
+	.colorpicker_hex {
+		input {
+			width: 45px;
+		}
+	}
+}
+/*******************************************************************/
+/* ここまでcolorpickerのスタイル */
+/*******************************************************************/
+
+
+				.valLabelWrapper {
+					width: auto;
+
+					> * {
+						display: inline;
+					}
+
+					> input[type="checkbox"] {
+						display: none;
+					}
+
+					> label {
+						cursor: pointer;
+						padding: 5px 20px;
+						border: solid 1px #AAA;
+						display: inline-block;
+					}
+
+					> input {
+						& +label {
+							/*
+							box-shadow: inset 1px 1px 0 rgba(255, 255, 255, 0.4), inset -1px -1px 0 rgba(0, 0, 0, 0.2);
+							border-top: 1px solid rgba(0, 0, 0, 0.2);
+							border-right: 1px solid rgba(255, 255, 255, 0.4);
+							border-left: 1px solid rgba(0, 0, 0, 0.2);
+							border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+							*/
+							border-radius: 5px;
+							background: #999;
+	box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4),
+				inset 0 -1px 0 rgba(0, 0, 0, 0.2),
+				inset -1px 0 0 rgba(255, 255, 255, 0.4),
+				inset 1px 0 0 rgba(255, 255, 255, 0.4);
+	border: 1px solid rgba(0, 0, 0, 0.2);
+
+							&:before {
+								color: #fff;
+								content: '非表示';
+							}
+
+							&:hover {
+								/*
+								box-shadow: inset 1px 1px 0 rgba(0, 0, 0, 0.2), inset -1px -1px 0 rgba(255, 255, 255, 0.4);
+									padding: 6px 19px 4px 21px;
+									*/
+		padding: 6px 20px 4px 20px;
+
+		box-shadow: inset 0 1px 0 rgba(0, 0, 0, 0.2),
+					inset 0 -1px 0 rgba(255, 255, 255, 0.2),
+					inset -1px 0 0 rgba(0, 0, 0, 0.2),
+					inset 1px 0 0 rgba(0, 0, 0, 0.2);
+							}
+						}
+					}
+					> input:checked {
+						&+label {
+							background: #3D8AF7;
+
+							&:before {
+								color: #fff;
+								content: '表　示';
+							}
+						}
+					}
+				}
+
+
+/*******************************************************************/
+/*  */
+/*******************************************************************/
+
+
+#error-message {
+	font-size: 2rem;
+}

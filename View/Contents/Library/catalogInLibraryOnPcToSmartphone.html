@@ -1,0 +1,68 @@
+
+
+<input type="hidden" name="currentUrl" value="<?php echo $this->Html->url('/', true); ?>" />
+<input type="hidden" name="residenceId" value="<?php //echo $residenceId; ?>" />
+<input type="hidden" name="userId" value="<?php echo $userId; ?>" />
+<input type="hidden" name="previewUrl" value="<?php //echo $data['companies']['url']; ?>" />
+<input type="hidden" name="isLibraryElementPage" value="<?php echo $isLibraryElementPage; ?>" />
+<input type="hidden" name="companyId" value="<?php echo $userData['company_id']; ?>" />
+
+	<input type="hidden" name="libraryPageProperty" value='<?php echo $libraryPageProperty; ?>' />
+	<input type="hidden" name="smartphoneLibraryId" value='<?php echo $smartphoneLibraryId; ?>' />
+	<input type="hidden" name="menuData" value='<?php echo json_encode($menuData); ?>' />
+	<input type="hidden" name="itemData" value='<?php echo json_encode($itemData); ?>' />
+
+
+<script id="directory-template" type="text/html">
+	<li id="directory-id_<%= directoryId %>">
+		<p class="name"><input type="text" value="<%= directoryName %>" /></p>
+		<p class="count"><%= libraryCount %></p>
+		<div class="btn-group">
+			<button class="btn btn-primary btn-duplicate-directory"><i data-icon="&#xE033;"></i>複製</button>
+			<button class="btn btn-danger btn-del-directory"><i data-icon="&#xE039;"></i>削除</button>
+		</div>
+	</li>
+</script>
+<script id="library-container-template" type="text/html">
+	<li id="directory-container-id_<%= directoryId %>" class="directory-container">
+		<ul>
+		</ul>
+	</li>
+</script>
+<script id="library-template" type="text/html">
+	<li id="library-id_<%= libraryId %>" class="library-element">
+		<div class="info">
+			<p class="id"><%= libraryId %></p>
+			<p class="name"><input type="text" value="<%= libraryName %>"></p>
+			<div class="btn-group wrapper-btn">
+				<a class="btn btn-primary" href="<%= editPageUrl %>"><i data-icon="&#xE033;"></i>編集</a>
+			</div>
+			<div class="btn-group wrapper-btns">
+				<button class="btn btn-primary btn-duplicate-library"><i data-icon="&#xE033;"></i>複製</button>
+				<button class="btn btn-danger btn-del-library"><i data-icon="&#xE039"></i>削除</button>
+			</div>
+		</div>
+		<div class="detail">
+			<p class="edited-user-name"><%= editedUserName %></p>
+			<p class="edited"><%= edited %></p>
+		</div>
+	</li>
+</script>
+
+<div id="wrapper">
+	<div id="directories" class="parents">
+		<div class="btn-group">
+			<button class="btn btn-add-directory"><i data-icon="&#xE033;"></i>フォルダ追加</button>
+		</div>
+		<ul>
+		</ul>
+	</div>
+
+	<div id="libraries" class="children">
+		<div class="btn-group">
+			<button class="btn btn-add-library"><i data-icon="&#xE033;"></i>共通パーツ追加</button>
+		</div>
+		<ul>
+		</ul>
+	</div>
+</div>

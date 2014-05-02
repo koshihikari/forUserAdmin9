@@ -1,0 +1,4 @@
+@charset "UTF-8";
+
+
+.icon-folder:before { content: '📁'; } /* '\1f4c1' */

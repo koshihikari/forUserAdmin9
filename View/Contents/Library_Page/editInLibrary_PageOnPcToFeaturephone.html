@@ -1,0 +1,24 @@
+
+<?php //debug($libraryPageProperty); ?>
+<?php //debug($targetDeviceName); ?>
+<?php //debug($jsonData); ?>
+
+
+<div id="container">
+	<div class="wrapper">
+		<div class="previewArea">
+			<textarea id="input" name="input"><?php echo $pageSource; ?></textarea>
+		</div>
+		<div class="controllArea">
+			<div class="btn-hole">
+				<button id="saveBtn" class="btn btn-test btn-primary"><span>保存</span></button>
+			</div>
+		</div>
+	</div>
+	<input type="hidden" name="currentUrl" value="<?php echo $this->Html->url('/', true); ?>" />
+	<input type="hidden" name="pageSourceReacordId" value="<?php echo $pageSourceReacordId; ?>" />
+	<input type="hidden" name="userId" value="<?php echo $userId; ?>" />
+	<input type="hidden" name="residenceId" value="<?php echo $residenceId; ?>" />
+	<input type="hidden" name="pageId" value="<?php echo $pageId; ?>" />
+	<input type="hidden" name="outlines" value='<?php echo json_encode($outlines); ?>' />
+</div>
