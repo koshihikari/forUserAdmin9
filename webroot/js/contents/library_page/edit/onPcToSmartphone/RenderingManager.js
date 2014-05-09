@@ -95,11 +95,11 @@ jQuery(document).ready(function($){
 					var targetElementData = thisObj._instances['DataManager'].getChildElementDataObj('spContent');
 					// console.log(targetElementData);
 					if (0 < targetElementData.length) {
-						console.log('PreviewAreaManagerのレンダリング開始');
+						// console.log('PreviewAreaManagerのレンダリング開始');
 						thisObj._instances['PreviewAreaManager'].reset();
 						thisObj._instances['PreviewAreaManager'].render('spContent', null, true);
 					} else {
-						console.log('PreviewAreaManagerの全てのエレメントのスタイルセット開始');
+						// console.log('PreviewAreaManagerの全てのエレメントのスタイルセット開始');
 						thisObj._instances['PreviewAreaManager'].refreshAllElementStyle();
 						thisObj._instances['DataManager'].setEvent(true);
 						thisObj.onCompleteRenderHandler();
@@ -163,7 +163,7 @@ jQuery(document).ready(function($){
 		 */
 		,publishConcretePage: function(recordId, companyId, residenceId, path, title, source, callback) {
 			var thisObj = this;
-			console.log('RenderingManager :: publishConcretePage :: recordId = ' + recordId + ', companyId = ' + companyId + ', residenceId = ' + residenceId + ', path = ' + path + ', title = ' + title);
+			// console.log('RenderingManager :: publishConcretePage :: recordId = ' + recordId + ', companyId = ' + companyId + ', residenceId = ' + residenceId + ', path = ' + path + ', title = ' + title);
 			var prop = thisObj._instances['DataManager'].getProp();
 			$(thisObj._instances['DataManager'])
 				.on('onCompletePublishConcretePage', function(event, data) {
@@ -248,7 +248,7 @@ jQuery(document).ready(function($){
 		 */
 		,onCompleteRefreshAllElementStyleHandler: function(event) {
 			var thisObj = this;
-			console.log('プレビューエリアに配置した全てのエレメントへのスタイルの適用が完了した');
+			// console.log('プレビューエリアに配置した全てのエレメントへのスタイルの適用が完了した');
 			// thisObj._instances['PreviewAreaManager'].onCompleteRefreshStyle();
 			thisObj._instances['LayoutManager'].onResizeWindow();
 

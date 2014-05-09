@@ -165,13 +165,13 @@ jQuery(document).ready(function($){
 		,render: function(parentId, targetElement, isBaseElement) {
 			var thisObj = this;
 			var targetElementData = thisObj._instances['DataManager'].getChildElementDataObj(parentId);
-			console.log('--------');
-			console.log('PreviewAreaManager :: render');
-			console.log('parentId =' + parentId);
-			console.log(targetElementData);
-			console.log(targetElement);
-			console.log(targetElementData.length);
-			console.log('--------');
+			// console.log('--------');
+			// console.log('PreviewAreaManager :: render');
+			// console.log('parentId =' + parentId);
+			// console.log(targetElementData);
+			// console.log(targetElement);
+			// console.log(targetElementData.length);
+			// console.log('--------');
 			if (0 < targetElementData.length) {
 				for (var order=0,len=targetElementData.length; order<len; order++) {
 					// var isLibrary = targetElementData[order]['isLibrary'];
@@ -215,10 +215,10 @@ jQuery(document).ready(function($){
 				var itemDataObj = thisObj._instances['DataManager'].getItemDataObj(itemName);
 				var addElemSource = itemDataObj['defaultSource'];
 				var itemType = itemDataObj['itemType'];
-				if (itemName === 'Td') {
-					console.log('新規作成 :: elementId = ' + elementId);
-					console.log('isEditable = ' + isEditable);
-				}
+				// if (itemName === 'Td') {
+				// 	console.log('新規作成 :: elementId = ' + elementId);
+				// 	console.log('isEditable = ' + isEditable);
+				// }
 				var addElem = $('<div id="' + elementId + '">' + addElemSource + '</div>');
 				addElem
 					.attr(
@@ -335,8 +335,8 @@ jQuery(document).ready(function($){
 					instance = new MYNAMESPACE.modules.PreviewOfGallery(thisObj._instances['DataManager']);
 					break;
 
-				case 'GSTag':
-					instance = new MYNAMESPACE.modules.PreviewOfGSTag(thisObj._instances['DataManager']);
+				case 'GsTag':
+					instance = new MYNAMESPACE.modules.PreviewOfGsTag(thisObj._instances['DataManager']);
 					break;
 
 				case 'Icon':
@@ -407,13 +407,15 @@ jQuery(document).ready(function($){
 				// console.log('b');
 			var elementData = thisObj._instances['DataManager'].getElementDataObj(elementId);
 			var elementProperty = elementData['property']
-			console.log('build :: elementId = ' + elementId + ', elementId = ' + elementId);
-			console.log(elementProperty);
+			// console.log('build :: elementId = ' + elementId + ', elementId = ' + elementId);
+			// console.log(elementProperty);
 
 			if (elementProperty !== undefined) {
 				for (var componentName in elementProperty) {
 					thisObj._elementInstances[elementId] = thisObj._elementInstances[elementId] || {};
+					// console.log('thisObj._elementInstances[' + elementId + '][' + componentName + '] = ' + thisObj._elementInstances[elementId][componentName]);
 					if (!thisObj._elementInstances[elementId][componentName]) {
+						// console.log('作成');
 						thisObj._elementInstances[elementId][componentName] = thisObj.createElementManagerInstance(componentName);
 					}
 					$(thisObj._elementInstances[elementId][componentName]).on('onCompleteBuild', function(event, elementId2) {
@@ -422,7 +424,7 @@ jQuery(document).ready(function($){
 						}
 					});
 					// console.log('componentName = ' + componentName);
-					// console.log('thisObj._elementInstances[elementId][componentName] = ' + thisObj._elementInstances[elementId][componentName]);
+					// console.log('thisObj._elementInstances[' + elementId + '][' + componentName + '] = ' + thisObj._elementInstances[elementId][componentName]);
 					if (thisObj._elementInstances[elementId][componentName] && thisObj._elementInstances[elementId][componentName].build) {
 						thisObj._elementInstances[elementId][componentName].build(elementId, elementProperty[componentName]);
 					}

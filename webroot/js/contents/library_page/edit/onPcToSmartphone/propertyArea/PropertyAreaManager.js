@@ -65,6 +65,7 @@ jQuery(document).ready(function($){
 		,onRefreshStyle: function(event, elementId, componentName, property) {
 			var thisObj = this;
 			var elementDataobj = thisObj._instances['DataManager'].getElementDataObj(elementId);
+	// console.log('-------------');
 	// console.log('aa');
 	// console.log('property');
 	// console.log(property);
@@ -72,6 +73,7 @@ jQuery(document).ready(function($){
 	// console.log('aa1');
 	// console.log('elementDataobj');
 	// console.log(elementDataobj);
+	// console.log('-------------');
 			thisObj._instances['DataManager'].setElementDataObj(elementId, 'property', elementDataobj['property']);
 			// thisObj._instances['DataManager'].updateElementProperty(elementId, componentName, property);
 			// var elementProperty = thisObj._instances['DataManager'].getElementProperty(elementId);
@@ -173,15 +175,15 @@ jQuery(document).ready(function($){
 			// 	'AccessManager'		: thisObj._instances['AccessManager']
 			// };
 			var instances = thisObj._instances;
-			console.log('PropertyAreaManager :: createPropertyAreaInstance :: itemName = ' + itemName);
+			// console.log('PropertyAreaManager :: createPropertyAreaInstance :: itemName = ' + itemName);
 			var elementProperty = thisObj._instances['DataManager'].getElementDataObj(elementId);
 			var retArr = [];
-			console.log('itemName = ' + itemName);
-			console.log('elementId = ' + elementId);
-			console.log(elementProperty);
+			// console.log('itemName = ' + itemName);
+			// console.log('elementId = ' + elementId);
+			// console.log(elementProperty);
 			if (itemName !== 'Library') {
 				for (var componentName in elementProperty['property']) {
-					console.log('componentName = ' + componentName);
+					// console.log('componentName = ' + componentName);
 					retArr.push(eval('new MYNAMESPACE.modules.PropertyOf' + componentName + '(instances, elementId)'));
 				}
 			}

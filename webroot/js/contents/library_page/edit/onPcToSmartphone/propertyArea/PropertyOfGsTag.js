@@ -107,7 +107,8 @@ jQuery(document).ready(function($){
 					break;
 			}
 			thisObj._currentVal['type'] = type;
-			var gsTag = thisObj.createGsTag(thisObj._currentVal['url'], thisObj._currentVal['type']);
+			thisObj._currentVal['tag'] = thisObj.createGsTag(thisObj._currentVal['url'], thisObj._currentVal['type']);
+			// var gsTag = thisObj.createGsTag(thisObj._currentVal['url'], thisObj._currentVal['type']);
 			var source = '\
 						<div class="propertyElement forGsTagElement">\
 							<p class="elementTitle">Google Spreadsheet埋め込み</p>\
@@ -128,7 +129,7 @@ jQuery(document).ready(function($){
 								</div>\
 								<div class="group gs-tag">\
 									<p>挿入されるGSタグ</p>\
-									<textarea class="preview" readonly>' + gsTag + '</textarea>\
+									<textarea class="preview" readonly>' + thisObj._currentVal['tag'] + '</textarea>\
 								</div>\
 							</div>\
 						</div>\
@@ -180,8 +181,9 @@ jQuery(document).ready(function($){
 			// 		}
 			// 	);
 			// GSタグの更新
-			var gsTag = thisObj.createGsTag(thisObj._currentVal['url'], thisObj._currentVal['type']);
-			$('.gs-tag .preview').val(gsTag);
+			// var gsTag = thisObj.createGsTag(thisObj._currentVal['url'], thisObj._currentVal['type']);
+			thisObj._currentVal['tag'] = thisObj.createGsTag(thisObj._currentVal['url'], thisObj._currentVal['type']);
+			$('.gs-tag .preview').val(thisObj._currentVal['tag']);
 			$(thisObj).trigger('onCompleteRefreshStyle', [thisObj._targetId, thisObj._elementType, $.extend(true, {}, thisObj._currentVal)]);
 			if (isEnforcement === true) {
 				 console.log('GSTagデータ保存');
