@@ -43,7 +43,8 @@ class Page_Smartphone_InsertElementAction extends AppModel {
 			) {
 				$this->begin();
 				$is_correct = true;
-				$is_correct = $this->_updatePageElementsOrderData($is_correct, $request);
+				$is_correct = $this->updateElementOrder($is_correct, $request->data['leave_data_arr']);
+				// $is_correct = $this->_updatePageElementsOrderData($is_correct, $request);
 				// error_log('$this->latestInsertId = ' . $this->latestInsertId . "\n", 3, 'log.txt');
 				// error_log('1 = ' . $is_correct . "\n", 3, 'log.txt');
 				$is_correct = $this->cleanupElement($is_correct, false, $request->data['leave_data_arr'], $request->data['base_data']['page_id']);

@@ -165,13 +165,13 @@ jQuery(document).ready(function($){
 		,render: function(parentId, targetElement, isBaseElement) {
 			var thisObj = this;
 			var targetElementData = thisObj._instances['DataManager'].getChildElementDataObj(parentId);
-			// console.log('--------');
-			// console.log('PreviewAreaManager :: render');
-			// console.log('parentId =' + parentId);
-			// console.log(targetElementData);
-			// console.log(targetElement);
-			// console.log(targetElementData.length);
-			// console.log('--------');
+			console.log('--------');
+			console.log('PreviewAreaManager :: render');
+			console.log('parentId =' + parentId);
+			console.log(targetElementData);
+			console.log(targetElement);
+			console.log(targetElementData.length);
+			console.log('--------');
 			if (0 < targetElementData.length) {
 				for (var order=0,len=targetElementData.length; order<len; order++) {
 					// var isLibrary = targetElementData[order]['isLibrary'];
@@ -313,6 +313,7 @@ jQuery(document).ready(function($){
 		,createElementManagerInstance: function(componentName) {
 			var thisObj = this;
 			var instance = null;
+			// console.log('componentName = ' + componentName);
 			switch (componentName) {
 				case 'About':
 					instance = new MYNAMESPACE.modules.PreviewOfAbout(thisObj._instances['DataManager'], {'onClick':thisObj.onClickPreviewElement});
@@ -332,6 +333,10 @@ jQuery(document).ready(function($){
 
 				case 'Gallery':
 					instance = new MYNAMESPACE.modules.PreviewOfGallery(thisObj._instances['DataManager']);
+					break;
+
+				case 'GSTag':
+					instance = new MYNAMESPACE.modules.PreviewOfGSTag(thisObj._instances['DataManager']);
 					break;
 
 				case 'Icon':
@@ -402,8 +407,8 @@ jQuery(document).ready(function($){
 				// console.log('b');
 			var elementData = thisObj._instances['DataManager'].getElementDataObj(elementId);
 			var elementProperty = elementData['property']
-			// console.log('build :: elementId = ' + elementId + ', elementId = ' + elementId);
-			// console.log(elementProperty);
+			console.log('build :: elementId = ' + elementId + ', elementId = ' + elementId);
+			console.log(elementProperty);
 
 			if (elementProperty !== undefined) {
 				for (var componentName in elementProperty) {

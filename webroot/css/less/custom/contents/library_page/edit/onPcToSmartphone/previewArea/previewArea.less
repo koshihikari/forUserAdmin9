@@ -810,6 +810,22 @@
 					}
 				}
 
+
+				/*******************************************************************/
+				/* ここからGoogle Spreadsheet埋め込みタグエレメントのスタイル */
+				/*******************************************************************/
+				[data-item-name="GsTag"] {
+					> div.contentWrapper {
+						padding: 8px;
+						&:empty {
+							&::before {
+								content: 'GoogleSpreadsheet';
+								color: rgba(0, 0, 0, 0.5);
+							}
+						}
+					}
+				}
+
 				.nav {
 					margin: 0;
 

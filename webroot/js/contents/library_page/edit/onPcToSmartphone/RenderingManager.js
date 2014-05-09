@@ -95,11 +95,11 @@ jQuery(document).ready(function($){
 					var targetElementData = thisObj._instances['DataManager'].getChildElementDataObj('spContent');
 					// console.log(targetElementData);
 					if (0 < targetElementData.length) {
-						// console.log('PreviewAreaManagerのレンダリング開始');
+						console.log('PreviewAreaManagerのレンダリング開始');
 						thisObj._instances['PreviewAreaManager'].reset();
 						thisObj._instances['PreviewAreaManager'].render('spContent', null, true);
 					} else {
-						// console.log('PreviewAreaManagerの全てのエレメントのスタイルセット開始');
+						console.log('PreviewAreaManagerの全てのエレメントのスタイルセット開始');
 						thisObj._instances['PreviewAreaManager'].refreshAllElementStyle();
 						thisObj._instances['DataManager'].setEvent(true);
 						thisObj.onCompleteRenderHandler();

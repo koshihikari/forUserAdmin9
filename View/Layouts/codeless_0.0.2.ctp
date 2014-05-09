@@ -302,6 +302,7 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 				array_push($arr, 'contents/library_page/edit/onPcToSmartphone/propertyArea/PropertyOfBorder.js?' . $modified);
 				array_push($arr, 'contents/library_page/edit/onPcToSmartphone/propertyArea/PropertyOfCode.js?' . $modified);
 				array_push($arr, 'contents/library_page/edit/onPcToSmartphone/propertyArea/PropertyOfGallery.js?' . $modified);
+				array_push($arr, 'contents/library_page/edit/onPcToSmartphone/propertyArea/PropertyOfGsTag.js?' . $modified);
 				array_push($arr, 'contents/library_page/edit/onPcToSmartphone/propertyArea/PropertyOfIcon.js?' . $modified);
 				array_push($arr, 'contents/library_page/edit/onPcToSmartphone/propertyArea/PropertyOfImage.js?' . $modified);
 				array_push($arr, 'contents/library_page/edit/onPcToSmartphone/propertyArea/PropertyOfLayout.js?' . $modified);
@@ -319,6 +320,7 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 				array_push($arr, 'contents/library_page/edit/onPcToSmartphone/previewArea/PreviewOfBorder.js?' . $modified);
 				array_push($arr, 'contents/library_page/edit/onPcToSmartphone/previewArea/PreviewOfCode.js?' . $modified);
 				array_push($arr, 'contents/library_page/edit/onPcToSmartphone/previewArea/PreviewOfGallery.js?' . $modified);
+				array_push($arr, 'contents/library_page/edit/onPcToSmartphone/previewArea/PreviewOfGsTag.js?' . $modified);
 				array_push($arr, 'contents/library_page/edit/onPcToSmartphone/previewArea/PreviewOfIcon.js?' . $modified);
 				array_push($arr, 'contents/library_page/edit/onPcToSmartphone/previewArea/PreviewOfImage.js?' . $modified);
 				array_push($arr, 'contents/library_page/edit/onPcToSmartphone/previewArea/PreviewOfLayout.js?' . $modified);
@@ -387,6 +389,7 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 					array_push($arr, 'contents/library_page/edit/onPcToSmartphone/propertyArea/PropertyOfBorder.js?' . $modified);
 					array_push($arr, 'contents/library_page/edit/onPcToSmartphone/propertyArea/PropertyOfCode.js?' . $modified);
 					array_push($arr, 'contents/library_page/edit/onPcToSmartphone/propertyArea/PropertyOfGallery.js?' . $modified);
+					array_push($arr, 'contents/library_page/edit/onPcToSmartphone/propertyArea/PropertyOfGsTag.js?' . $modified);
 					array_push($arr, 'contents/library_page/edit/onPcToSmartphone/propertyArea/PropertyOfIcon.js?' . $modified);
 					array_push($arr, 'contents/library_page/edit/onPcToSmartphone/propertyArea/PropertyOfImage.js?' . $modified);
 					array_push($arr, 'contents/library_page/edit/onPcToSmartphone/propertyArea/PropertyOfLayout.js?' . $modified);
@@ -404,6 +407,7 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 					array_push($arr, 'contents/library_page/edit/onPcToSmartphone/previewArea/PreviewOfBorder.js?' . $modified);
 					array_push($arr, 'contents/library_page/edit/onPcToSmartphone/previewArea/PreviewOfCode.js?' . $modified);
 					array_push($arr, 'contents/library_page/edit/onPcToSmartphone/previewArea/PreviewOfGallery.js?' . $modified);
+					array_push($arr, 'contents/library_page/edit/onPcToSmartphone/previewArea/PreviewOfGsTag.js?' . $modified);
 					array_push($arr, 'contents/library_page/edit/onPcToSmartphone/previewArea/PreviewOfIcon.js?' . $modified);
 					array_push($arr, 'contents/library_page/edit/onPcToSmartphone/previewArea/PreviewOfImage.js?' . $modified);
 					array_push($arr, 'contents/library_page/edit/onPcToSmartphone/previewArea/PreviewOfLayout.js?' . $modified);
