@@ -2,44 +2,62 @@
 
 google.load("visualization", "1");
 google.setOnLoadCallback(function() {
-	// console.log('Google');
+	var gsData = {};
 	var baseUrl = 'https://docs.google.com/spreadsheet/pub';
-	// var key = '0AtvxJEe7IC7ndFNfbjhXZnIwQnVNOGFraFVGOEtUaHc';
-	// var seetIds = [0];
 
-	var getGSData = function(id, key, gid) {
-		var dfd = jQuery.Deferred();
-		dfd.pipe(
-			function() {
-				// console.log('1');
-				return requestData(baseUrl, key, gid);
+	var getGsData = function(spredsheetId) {
+		var retObj = {};
+		if (gsData[spredsheetId]) {
+			retObj = jQuery.extend(true, {}, gsData[spredsheetId]);
+		}
+		return retObj;
+	}
+	var setGsData = function(spredsheetId, data, key) {
+		if (key) {
+			if (!gsData[spredsheetId]) {
+				gsData[spredsheetId] = {};
 			}
-		)
-		.then(
-			function(data) {
-				// console.log('2');
-				var retData = {
-					key: key,
-					gid: gid,
-					data: data
-					// data: fixed(data, seetId)
+			gsData[spredsheetId][key] = data;
+		} else {
+			gsData[spredsheetId] = data;
+		}
+	}
+	var getSpreadsheetId = function(key, gid) {
+		return 'https://docs.google.com/spreadsheet/ccc?key=' + key + '&usp=drive_web#gid=' + gid;
+	}
+	var requestGsData = function(id, key, gid) {
+		var spredsheetId = getSpreadsheetId(key, gid);
+		if (gsData[spredsheetId] && gsData[spredsheetId]['baseData']) {
+			var baseData = getGsData(spredsheetId);
+			jQuery(window).trigger(('onCompleteRequestData_' + id), [baseData['baseData']]);
+		} else {
+			var dfd = jQuery.Deferred();
+			dfd.pipe(
+				function() {
+					var url = baseUrl + '?key=' + key + '&gid=' + gid + '&pub=1' + '&ms=' + new Date().getUTCMilliseconds();
+					return requestData(url, gid);
 				}
-				// console.log(retData);
-				// console.log('終了');
-				jQuery(window).trigger(('onCompleteRequestData_' + id), [retData]);
-				// jQuery(window).trigger('onCompleteRequestData', [retData]);
-			}
-		);
-		dfd.resolve();
+			)
+			.then(
+				function(data) {
+					var retData = {
+						key: key,
+						gid: gid,
+						data: data
+					}
+					setGsData(spredsheetId, retData, 'baseData');
+					jQuery(window).trigger(('onCompleteRequestData_' + id), [retData]);
+				}
+			);
+			dfd.resolve();
+		}
 
 
-		function requestData(baseUrl, key, gid) {
-			// console.log('1 - a');
+		function requestData(url, gid) {
 			var dfd = jQuery.Deferred();
 			var retObj = {};
 			var count = 0;
-			function request(gid, ms) {
-				var url = baseUrl + '?key=' + key + '&gid=' + gid + '&pub=1' + '&ms=' + ms;
+			function request(gid) {
 				var query = new google.visualization.Query(url);
 				query.send(handleResponse);
 				function handleResponse(response)
@@ -48,9 +66,14 @@ google.setOnLoadCallback(function() {
 					dfd.resolve(retObj);
 				}
 			}
-			request(gid, new Date().getUTCMilliseconds());
+			request(gid);
 			return dfd.promise();
 		}
 	}
-	window.getGSData = getGSData;
+	window.GsManager = {
+		getGsData	: getGsData,
+		setGsData	: setGsData,
+		getSpreadsheetId	: getSpreadsheetId,
+		requestGsData	: requestGsData
+	};
 });

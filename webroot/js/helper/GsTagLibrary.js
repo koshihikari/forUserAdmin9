@@ -8,7 +8,7 @@ jQuery(document).ready(function($){
 	MYNAMESPACE.namespace('modules.helper.GsTagLibrary');
 	MYNAMESPACE.modules.helper.GsTagLibrary = function() {
 		this._timerId = -1;
-		this._gsData = {};
+		// this._gsData = {};
 		this._code = '';
 		this._id = '';
 		this.initialize.apply(this, arguments);
@@ -25,7 +25,7 @@ jQuery(document).ready(function($){
 			thisObj._id = id;
 			_.bindAll(
 				this
-				,'getGsData'
+				// ,'getGsData'
 				,'execute'
 				,'expandGsTag'
 				,'getGSInfo'
@@ -38,14 +38,14 @@ jQuery(document).ready(function($){
 		 * @param	key 				GoogleSpreadsheetのURL
 		 * @return	GoogleSpredsheetから取得したデータオブジェクト
 		 */
-		,getGsData: function(key) {
-			var thisObj = this;
-			var retObj = {};
-			if (thisObj._gsData[key]) {
-				retObj = thisObj._gsData[key];
-			}
-			return $.extend(true, {}, retObj);
-		}
+		// ,getGsData: function(key) {
+		// 	var thisObj = this;
+		// 	var retObj = {};
+		// 	if (thisObj._gsData[key]) {
+		// 		retObj = thisObj._gsData[key];
+		// 	}
+		// 	return $.extend(true, {}, retObj);
+		// }
 
 		/*
 		 * GSタグ展開メソッド
@@ -63,7 +63,8 @@ jQuery(document).ready(function($){
 			}
 			thisObj._timerId = setInterval(
 				function(event) {
-					if (window.getGSData) {
+					if (window.GsManager['requestGsData']) {
+					// if (window.getGSData) {
 						clearInterval(thisObj._timerId);
 						console.log('GS展開の事前準備が完了しているので、実際の展開処理を実行');
 						console.log('thisObj._code = ' + thisObj._code);
@@ -93,18 +94,26 @@ jQuery(document).ready(function($){
 				var counter = 0, complete = gsInfo.length;
 				$(window).off(('onCompleteRequestData_' + thisObj._id));
 				$(window).on(('onCompleteRequestData_' + thisObj._id), function(event, data) {
-				// $(window).off('onCompleteRequestData');
-				// $(window).on('onCompleteRequestData', function(event, data) {
-					var key = 'https://docs.google.com/spreadsheet/ccc?key=' + data.key + '&usp=drive_web#gid=' + data.gid;
-					// thisObj._gsData[key]['source'] = thisObj.convertData(data['data'], data['gid'], thisObj._gsData[key]['pageType']);
-					var obj = thisObj.convertData(data['data'], data['gid'], thisObj._gsData[key]['pageType']);
-					thisObj._gsData[key]['source'] = obj['source'] ? obj['source'] : undefined;
-					thisObj._gsData[key]['data'] = obj['data'] ? obj['data'] : undefined;
-					thisObj._gsData[key]['master'] = data;
-					// thisObj._gsData[key] = {
-					// 	'source'	: thisObj.convertData(data['data'], data['gid']),
-					// 	'master'	: data
-					// };
+					// var key = 'https://docs.google.com/spreadsheet/ccc?key=' + data.key + '&usp=drive_web#gid=' + data.gid;
+					// console.log('data');
+					// console.log(data);
+					var spreadsheetId = window.GsManager['getSpreadsheetId'](data.key, data.gid);
+					// console.log('key = ' + key);
+					var gsData = window.GsManager['getGsData'](spreadsheetId);
+					// console.log('gsData');
+					// console.log(gsData);
+					var obj = thisObj.convertData(data['data'], data['gid'], gsData['pageType']);
+					// window.GsManager['setGsData'](spreadsheetId, gsInfo[i]['pageType'], 'pageType');
+					// thisObj._gsData[spreadsheetId]['source'] = obj['source'] ? obj['source'] : undefined;
+					// thisObj._gsData[spreadsheetId]['data'] = obj['data'] ? obj['data'] : undefined;
+					// thisObj._gsData[spreadsheetId]['master'] = data;
+					// console.log('GsManagerに値をセット2');
+					window.GsManager['setGsData'](spreadsheetId, (obj['source'] ? obj['source'] : undefined), 'source');
+					// console.log('GsManagerに値をセット3');
+					window.GsManager['setGsData'](spreadsheetId, (obj['data'] ? obj['data'] : undefined), 'data');
+					// console.log('GsManagerに値をセット4');
+					window.GsManager['setGsData'](spreadsheetId, data, 'master');
+
 					counter ++;
 					// console.log('**********');
 					// console.log('GsTagLibrary :: expandGsTag :: _code = ' + thisObj._code);
@@ -117,7 +126,12 @@ jQuery(document).ready(function($){
 					if (counter === complete) {
 						$(window).off(('onCompleteRequestData_' + thisObj._id));
 						// $(window).off('onCompleteRequestData');
-						console.log('全てのGSデータ取得完了');
+						var gsData = window.GsManager['getGsData'](spreadsheetId);
+						// console.log('全てのGSデータ取得完了');
+						// console.log('gsData');
+						// console.log(gsData);
+					// console.log('thisObj._gsData');
+					// console.log(thisObj._gsData);
 						$(thisObj).trigger(('onCompleteExpandGsTag_' + thisObj._id));
 						// $(thisObj).trigger('onCompleteExpandGsTag', thisObj._id);
 						// $scope.$apply(function() {
@@ -129,17 +143,24 @@ jQuery(document).ready(function($){
 					}
 				});
 				for (var i=0; i<complete; i++) {
-					var key = 'https://docs.google.com/spreadsheet/ccc?key=' + gsInfo[i].key + '&usp=drive_web#gid=' + gsInfo[i].gid;
-					if (thisObj._gsData[key]) {
-						thisObj._gsData[key]['pageType'] = gsInfo[i]['pageType'];
+					var spreadsheetId = window.GsManager['getSpreadsheetId'](gsInfo[i].key, gsInfo[i].gid);
+					// console.log('i = ' + i + ', spreadsheetId = ' + spreadsheetId);
+					/*
+					// var key = 'https://docs.google.com/spreadsheet/ccc?key=' + gsInfo[i].key + '&usp=drive_web#gid=' + gsInfo[i].gid;
+					if (thisObj._gsData[spreadsheetId]) {
+						thisObj._gsData[spreadsheetId]['pageType'] = gsInfo[i]['pageType'];
 						counter++;
 						// $(window).trigger(('onCompleteRequestData_' + thisObj._id), [thisObj._gsData[key].master]);
 					} else {
-						thisObj._gsData[key] = {
-							'pageType' :	gsInfo[i]['pageType']
-						};
-						window.getGSData(thisObj._id, gsInfo[i].key, gsInfo[i].gid);
-					}
+						// thisObj._gsData[spreadsheetId] = {
+						// 	'pageType' :	gsInfo[i]['pageType']
+						// };
+						// window.getGSData(thisObj._id, gsInfo[i].key, gsInfo[i].gid);
+						*/
+						// console.log('GsManagerに値をセット1');
+						window.GsManager['setGsData'](spreadsheetId, gsInfo[i]['pageType'], 'pageType');
+						window.GsManager['requestGsData'](thisObj._id, gsInfo[i].key, gsInfo[i].gid);
+					// }
 				}
 			}
 		}
@@ -212,11 +233,9 @@ jQuery(document).ready(function($){
 				switch (pageType) {
 					case 'about':
 						for (row = 1; row < maxRow; row++) {
-							// var tmpArr = [dateData.getValue(row, 0), dateData.getValue(row, 1)];
 							tmpArr.push('<tr><td class="key">' + dateData.getValue(row, 0) + '</td><td class="val">' + dateData.getValue(row, 1) + '</td></tr>');
 						}
 						retObj['source'] = '<table class="table table-bordered for-about"><tbody>' + tmpArr.join('') + '</tbody></table>';
-						// retStr = '<table class="table table-bordered for-about"><tbody>' + tmpArr.join('') + '</tbody></table>';
 						break;
 
 					case 'map':
@@ -235,28 +254,7 @@ jQuery(document).ready(function($){
 							console.log(tmpObj);
 							console.log('');
 							retObj['data'].push(tmpObj);
-							// var tmpArr = [dateData.getValue(row, 0), dateData.getValue(row, 1)];
-							// tmpArr.push('<tr><td class="key">' + dateData.getValue(row, 0) + '</td><td class="val">' + dateData.getValue(row, 1) + '</td></tr>');
 						}
-						// retStr = '<table class="table table-bordered for-about"><tbody>' + tmpArr.join('') + '</tbody></table>';
-
-
-					/*
-					var myOptions = {
-						zoom			: targetProperty['mapScale'],
-						center			: new google.maps.LatLng(lat, lng),
-						mapTypeId		: google.maps.MapTypeId.ROADMAP,
-						scaleControl	: true,
-						draggable		: false,
-						scrollwheel		: false
-					};
-					thisObj._gMapObj['map'] = new google.maps.Map($("#" + elementId).find('.map')[0], myOptions);
-					var marker = new google.maps.Marker({
-						position	: new google.maps.LatLng(lat, lng),
-						map			: thisObj._gMapObj['map'],
-						title		: ''
-					});
-					*/
 						break;
 				}
 				return retObj;

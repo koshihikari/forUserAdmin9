@@ -82,9 +82,12 @@ jQuery(document).ready(function($){
 					$(gsDataInstace).off(('onCompleteExpandGsTag_' + thisObj._id));
 					// $(gsDataInstace).off('onCompleteExpandGsTag');
 					// $(thisObj._instances['GsTagLibrary']).off('onCompleteExpandGsTag');
-					var gsData = gsDataInstace.getGsData(targetProperty['url']);
+					var gsData = window.GsManager['getGsData'](targetProperty['url']);
+					// var gsData = gsDataInstace.getGsData(targetProperty['url']);
 					// var gsData = thisObj._instances['GsTagLibrary'].getGsData(targetProperty['url']);
 					console.log('-------------');
+			console.log('targetProperty');
+			console.log(targetProperty);
 					console.log('_id = ' + thisObj._id);
 					console.log(elementId + ', url = ' + targetProperty['url']);
 					console.log(elementId + ', gsData');
