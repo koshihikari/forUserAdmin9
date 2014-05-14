@@ -180,7 +180,8 @@
 				position: relative;
 				width: 320px;
 				border: 1px solid rgba(255, 255, 255, 0.2);
-				background: rgba(255, 255, 255, 0.9);
+				// background: rgba(255, 255, 255, 0.9);
+				background: rgba(255, 255, 255, 1);
 				border: 1px solid rgba(0,0,0,0.2);
 				box-shadow: 0 0 0 2px rgba(0,0,0,0.1);
 
@@ -241,11 +242,15 @@
 							&:before,
 							&:after {
 								font-size: 150%;
+								font-size: 20px;
 								text-align: center;
 								color: #fff;
 								font-weight: bold;
 								text-shadow: 0 0 2px rgba(0, 0, 0, 0.5), 0 0 5px rgba(0, 0, 0, 0.9);
 								margin-left: 20px;
+								position: absolute;
+								width: 100%;
+								margin: 0 auto;
 							}
 				/*
 				*/
@@ -397,8 +402,9 @@
 					}
 					&.editable {
 						&:hover {
-							&::before,
-							&::after {
+							// &::before,
+							// &::after {
+							&:before {
 								content: "アコーディオン";
 							}
 						}
@@ -433,8 +439,9 @@
 					}
 					&.editable {
 						&:hover {
-							&::before,
-							&::after {
+							// &::before,
+							// &::after {
+							&:before {
 								content: "コード";
 							}
 						}
@@ -601,8 +608,9 @@
 
 					&.editable {
 						&:hover {
-							&::before,
-							&::after {
+							// &::before,
+							// &::after {
+							&:before {
 								content: "地図";
 							}
 						}
@@ -639,8 +647,9 @@
 
 					&.editable {
 						&:hover {
-							&::before,
-							&::after {
+							// &::before,
+							// &::after {
+							&:before {
 								content: "タブ";
 							}
 						}
@@ -659,8 +668,9 @@
 
 					&.editable {
 						&:hover {
-							&::before,
-							&::after {
+							// &::before,
+							// &::after {
+							&:before {
 								content: "テーブル";
 							}
 						}
@@ -713,8 +723,9 @@
 
 					&.editable {
 						&:hover {
-							&:before,
-							&:after {
+							// &:before,
+							// &:after {
+							&:before {
 								content: "テキスト";
 							}
 						}
@@ -751,8 +762,9 @@
 
 					&.editable {
 						&:hover {
-							&:before,
-							&:after {
+							// &:before,
+							// &:after {
+							&:before {
 								content: "YouTube";
 							}
 						}
@@ -784,8 +796,9 @@
 								text-shadow: 0 0 2px rgba(0, 0, 0, 0.5), 0 0 5px rgba(0, 0, 0, 0.9);
 								margin-left: 20px;
 							}
-							&::before,
-							&::after {
+							// &::before,
+							// &::after {
+							&:before {
 								content: "共通パーツ";
 							}
 						}
@@ -802,8 +815,9 @@
 
 					&.editable {
 						&:hover {
-							&:before,
-							&:after {
+							// &:before,
+							// &:after {
+							&:before {
 								content: "ヘッダー";
 							}
 						}
@@ -816,11 +830,19 @@
 				/*******************************************************************/
 				[data-item-name="GsTag"] {
 					> div.contentWrapper {
-						padding: 8px;
+						// padding: 8px;
 						&:empty {
 							&::before {
 								content: 'GoogleSpreadsheet';
 								color: rgba(0, 0, 0, 0.5);
+							}
+						}
+					}
+
+					&.editable {
+						&:hover {
+							&:before {
+								content: "GoogleSpreadsheet";
 							}
 						}
 					}
@@ -918,10 +940,44 @@
 	width: auto;
 	height: auto;
 }
-				// #displayArea {
-				// 	td {
-				// 		&.hasChildren {
-				// 			line-height: 0;
-				// 		}
-				// 	}
-				// }
+
+
+[data-item-name="GsTag"] {
+	&[data-element-type="about"] {
+		margin: 15px 5px;
+		table {
+			&.for-about {
+				width: 100%;
+				border-collapse: separate;
+				// margin: 15px 5px;
+				td {
+					vertical-align: inherit;
+					line-height: 100%;
+					&.key {
+						width: 100px;
+						background-color: rgb(233, 233, 233);
+						text-align: left;
+						margin: 0px auto;
+						padding: 3px;
+					}
+					&.val {
+						width: auto;
+						background-color: transparent;
+						text-align: left;
+						margin: 0px auto;
+						padding: 3px;
+					}
+				}
+			}
+		}
+	}
+	&[data-element-type="map"] {
+		margin: 0;
+		.address {
+			padding: 6px 8px 8px;
+			a {
+				text-decoration: underline;
+			}
+		}
+	}
+}

@@ -621,7 +621,7 @@ jQuery(document).ready(function($){
 				*/
 			}
 
-			console.log(thisObj._prop['mtrOutlines']);
+			// console.log(thisObj._prop['mtrOutlines']);
 		}
 
 		/*
