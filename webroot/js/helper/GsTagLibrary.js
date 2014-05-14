@@ -127,9 +127,9 @@ jQuery(document).ready(function($){
 						$(window).off(('onCompleteRequestData_' + thisObj._id));
 						// $(window).off('onCompleteRequestData');
 						var gsData = window.GsManager['getGsData'](spreadsheetId);
-						// console.log('全てのGSデータ取得完了');
-						// console.log('gsData');
-						// console.log(gsData);
+						console.log('全てのGSデータ取得完了');
+						console.log('gsData');
+						console.log(gsData);
 					// console.log('thisObj._gsData');
 					// console.log(thisObj._gsData);
 						$(thisObj).trigger(('onCompleteExpandGsTag_' + thisObj._id));
@@ -239,7 +239,8 @@ jQuery(document).ready(function($){
 						break;
 
 					case 'map':
-						retObj['data'] = [];
+						var obj = {data:[]};
+						// retObj['data'] = [];
 						// console.log('dateData');
 						// console.log(dateData);
 						for (row = 0; row < maxRow; row++) {
@@ -248,13 +249,53 @@ jQuery(document).ready(function($){
 								lat			: dateData.getValue(row, 1),
 								lng			: dateData.getValue(row, 2),
 								zoom		: dateData.getValue(row, 3),
-								address		: dateData.getValue(row, 4)
+								address		: dateData.getValue(row, 4),
+								btnName		: dateData.getValue(row, 5),
+								url			: dateData.getValue(row, 6)
 							}
 							console.log('row = ' + row);
 							console.log(tmpObj);
 							console.log('');
-							retObj['data'].push(tmpObj);
+							obj['data'].push(tmpObj);
 						}
+						// GSに記述されているデータをGoogleMap用とボタン用に分ける為に一度データを検証する
+						var len = obj['data'].length;
+						retObj['data'] = [];
+						for (var i=0; i<len; i++) {
+							console.log('i = ' + i);
+							// タイトル、緯度、経度、ズームレベル、住所が入力されていればGoogleMapのデータ
+							if (
+								obj['data'][i]['title'] !== null && obj['data'][i]['title'] !== '' &&
+								obj['data'][i]['lat'] !== null && obj['data'][i]['lat'] !== '' &&
+								obj['data'][i]['lng'] !== null && obj['data'][i]['lng'] !== '' &&
+								obj['data'][i]['zoom'] !== null && obj['data'][i]['zoom'] !== '' &&
+								obj['data'][i]['address'] !== null && obj['data'][i]['address'] !== ''
+							) {
+								console.log('	GoogleMapのデータ');
+								retObj['data'].push(obj['data'][i]);
+
+							// ボタン名、URLが入力されていればリンクボタンのデータ
+							} else {
+								console.log('	リンクボタンのデータかも');
+							// } else if (
+							// 	data[i]['btnName'] !== null && data[i]['btnName'] !== '' &&
+							// 	data[i]['url'] !== null && data[i]['url'] !== ''
+							// ) {
+								var btnArr = [];
+								for (i=i; i<len; i++) {
+									console.log('		i = ' + i + ', リンクボタンのデータです');
+									if (
+										obj['data'][i]['btnName'] !== null && obj['data'][i]['btnName'] !== '' &&
+										obj['data'][i]['url'] !== null && obj['data'][i]['url'] !== ''
+									) {
+										btnArr.push(obj['data'][i]);
+									}
+								}
+								if (0 < btnArr.length) {
+									retObj['data'].push(btnArr);
+								}
+							}
+						};
 						break;
 				}
 				return retObj;
