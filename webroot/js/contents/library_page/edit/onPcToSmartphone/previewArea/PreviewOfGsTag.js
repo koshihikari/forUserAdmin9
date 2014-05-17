@@ -46,8 +46,8 @@ jQuery(document).ready(function($){
 			thisObj._elementId = elementId;
 			// console.log('-------------------');
 			// console.log('PreviewOfCode :: refreshStyle :: elementId = ' + elementId + ', itemName = ' + itemName);
-			// console.log('targetProperty');
-			// console.log(targetProperty);
+			console.log('targetProperty');
+			console.log(targetProperty);
 			// console.log('targetElem');
 			// console.log(targetElem);
 			// console.log('val = ' + thisObj.val);
@@ -118,14 +118,22 @@ jQuery(document).ready(function($){
 			var aboutLen = data.length;
 			if (0 < aboutLen) {
 				for (var aboutNum=0; aboutNum<aboutLen; aboutNum++) {
-					var rowLen = data[aboutNum].length;
-					if (0 < rowLen) {
-						var tmpArr = [];
-						for (var row=1; row<rowLen; row++) {
-							tmpArr.push('<tr><td class="key">' + data[aboutNum][row]['key'] + '</td><td class="val">' + data[aboutNum][row]['val'] + '</td></tr>');
-						}
-						source += '<div class="group"><h3>' + data[aboutNum][0]['title'] + '</h3><table class="table table-bordered for-about"><tbody>' + tmpArr.join('') + '</tbody></table></div>';
+					source += '<div class="group">';
+					if (data[aboutNum]['title']) {
+						source += '<h3>' + data[aboutNum]['title'] + '</h3>';
 					}
+					if (data[aboutNum]['keyVal'] && data[aboutNum]['keyVal'].length) {
+						var rowLen = data[aboutNum]['keyVal'].length;
+						var tmpArr = [];
+						for (var row=0; row<rowLen; row++) {
+							tmpArr.push('<tr><td class="key">' + data[aboutNum]['keyVal'][row]['key'] + '</td><td class="val">' + data[aboutNum]['keyVal'][row]['val'] + '</td></tr>');
+						}
+						source += '<table class="table table-bordered for-about"><tbody>' + tmpArr.join('') + '</tbody></table>';
+					}
+					if (data[aboutNum]['note'] && data[aboutNum]['note'].length) {
+						source += '<div class="note">' + data[aboutNum]['note'].join('<br>') + '</div>';
+					}
+					source += '</div>';
 				}
 			}
 			targetElem.html(source);

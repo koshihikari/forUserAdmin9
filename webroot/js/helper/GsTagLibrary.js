@@ -200,22 +200,31 @@ jQuery(document).ready(function($){
 							var title = dateData.getValue(row, 0);
 							var key = title === '' ? dateData.getValue(row, 1) : '';
 							var val = title === '' ? dateData.getValue(row, 2) : '';
-							// console.log('row = ' + row);
-							// console.log('	title = ' + title);
-							// console.log('	key = ' + key);
-							// console.log('	val = ' + val);
-							if (title === '' && key === '' && val === '') {
+							var note = title === '' ? dateData.getValue(row, 3) : '';
+
+							if (title === '' && key === '' && val === '' && note === '') {
 								continue;
 							}
-							var tmpObj = {
-								title		: title,
-								key			: key,
-								val			: val
-							}
 							if (title !== '') {
-								tmpArr.push([]);
+								// 新しい配列オブジェクトを作成して代入
+								tmpArr.push({title:title});
+							} else if (key !== '' && val !== '') {
+								if (!tmpArr.length) {
+									tmpArr.push({});
+								}
+								if (!tmpArr[tmpArr.length-1]['keyVal']) {
+									tmpArr[tmpArr.length-1]['keyVal'] = [];
+								}
+								tmpArr[tmpArr.length-1]['keyVal'].push({key:key, val:val});
+							} else if (note !== '') {
+								if (!tmpArr.length) {
+									tmpArr.push({});
+								}
+								if (!tmpArr[tmpArr.length-1]['note']) {
+									tmpArr[tmpArr.length-1]['note'] = [];
+								}
+								tmpArr[tmpArr.length-1]['note'].push(note);
 							}
-							tmpArr[tmpArr.length-1].push(tmpObj);
 						}
 						retObj['data'] = tmpArr;
 						break;
