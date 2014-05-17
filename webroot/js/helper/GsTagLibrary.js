@@ -25,27 +25,12 @@ jQuery(document).ready(function($){
 			thisObj._id = id;
 			_.bindAll(
 				this
-				// ,'getGsData'
 				,'execute'
 				,'expandGsTag'
 				,'getGSInfo'
 				,'convertData'
 			);
 		}
-
-		/*
-		 * GoogleSpredsheetから取得したデータを返すメソッド
-		 * @param	key 				GoogleSpreadsheetのURL
-		 * @return	GoogleSpredsheetから取得したデータオブジェクト
-		 */
-		// ,getGsData: function(key) {
-		// 	var thisObj = this;
-		// 	var retObj = {};
-		// 	if (thisObj._gsData[key]) {
-		// 		retObj = thisObj._gsData[key];
-		// 	}
-		// 	return $.extend(true, {}, retObj);
-		// }
 
 		/*
 		 * GSタグ展開メソッド
@@ -231,7 +216,6 @@ jQuery(document).ready(function($){
 				var tmpArr = [];
 				var retObj = {};
 				console.log('map :: maxRow = ' + maxRow);
-				// var retStr = '';
 				switch (pageType) {
 					case 'about':
 						retObj['data'] = [];
@@ -256,27 +240,12 @@ jQuery(document).ready(function($){
 								tmpArr.push([]);
 							}
 							tmpArr[tmpArr.length-1].push(tmpObj);
-
-
-							/*
-							var tmpObj = {
-								title		: title,
-								key			: key,
-								val			: val
-							}
-							retObj['data'].push(tmpObj);
-							*/
-							// tmpArr.push('<tr><td class="key">' + dateData.getValue(row, 0) + '</td><td class="val">' + dateData.getValue(row, 1) + '</td></tr>');
 						}
 						retObj['data'] = tmpArr;
-						// retObj['source'] = '<table class="table table-bordered for-about"><tbody>' + tmpArr.join('') + '</tbody></table>';
 						break;
 
 					case 'map':
 						var obj = {data:[]};
-						// retObj['data'] = [];
-						// console.log('dateData');
-						// console.log(dateData);
 						for (row = 0; row < maxRow; row++) {
 							var tmpObj = {
 								title		: dateData.getValue(row, 0),
@@ -289,9 +258,9 @@ jQuery(document).ready(function($){
 								target		: dateData.getValue(row, 7)
 							}
 							tmpObj['target'] = tmpObj['target'] === '_blank' ? '_blank' : '_self'
-							console.log('row = ' + row);
-							console.log(tmpObj);
-							console.log('');
+							// console.log('row = ' + row);
+							// console.log(tmpObj);
+							// console.log('');
 							obj['data'].push(tmpObj);
 						}
 						// GSに記述されているデータをGoogleMap用とメニューボタン用に分ける為に一度データを検証する
