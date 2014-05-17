@@ -703,13 +703,28 @@ input[type="text"]:focus {
 
 [data-item-name="GsTag"] {
 	&[data-element-type="about"] {
-		margin: 15px 5px;
-		table {
-			&.for-about {
+		margin: 0 5px;
+		.group {
+			margin-bottom: 15px;
+			h3 {
+				color: rgb(0, 0, 0);
+				font-size: 15px;
+				line-height: 14px;
+				font-weight: normal;
+				font-style: normal;
+				text-align: left;
+				margin: 0px auto;
+				padding: 5px;
+			}
+			table.for-about {
 				width: 100%;
 				border-collapse: separate;
-				// margin: 15px 5px;
+				border: 1px solid rgb(204,204,204);
+				margin: 0;
+
 				td {
+					border-left: 1px solid rgb(204,204,204);
+					border-top: 1px solid rgb(204,204,204);
 					vertical-align: inherit;
 					line-height: 100%;
 					&.key {
@@ -725,6 +740,21 @@ input[type="text"]:focus {
 						text-align: left;
 						margin: 0px auto;
 						padding: 3px;
+					}
+				}
+				tr {
+					&:first-child {
+						td {
+							border-top: none;
+							// &:first-child {
+							// 	border-left: none;
+							// }
+						}
+					}
+					td {
+						&:first-child {
+							border-left: none;
+						}
 					}
 				}
 			}

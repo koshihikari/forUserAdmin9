@@ -108,7 +108,7 @@ jQuery(document).ready(function($){
 					// thisObj._gsData[spreadsheetId]['data'] = obj['data'] ? obj['data'] : undefined;
 					// thisObj._gsData[spreadsheetId]['master'] = data;
 					// console.log('GsManagerに値をセット2');
-					window.GsManager['setGsData'](spreadsheetId, (obj['source'] ? obj['source'] : undefined), 'source');
+					// window.GsManager['setGsData'](spreadsheetId, (obj['source'] ? obj['source'] : undefined), 'source');
 					// console.log('GsManagerに値をセット3');
 					window.GsManager['setGsData'](spreadsheetId, (obj['data'] ? obj['data'] : undefined), 'data');
 					// console.log('GsManagerに値をセット4');
@@ -234,10 +234,42 @@ jQuery(document).ready(function($){
 				// var retStr = '';
 				switch (pageType) {
 					case 'about':
+						retObj['data'] = [];
+						var tmpArr = [];
 						for (row = 1; row < maxRow; row++) {
-							tmpArr.push('<tr><td class="key">' + dateData.getValue(row, 0) + '</td><td class="val">' + dateData.getValue(row, 1) + '</td></tr>');
+							var title = dateData.getValue(row, 0);
+							var key = title === '' ? dateData.getValue(row, 1) : '';
+							var val = title === '' ? dateData.getValue(row, 2) : '';
+							// console.log('row = ' + row);
+							// console.log('	title = ' + title);
+							// console.log('	key = ' + key);
+							// console.log('	val = ' + val);
+							if (title === '' && key === '' && val === '') {
+								continue;
+							}
+							var tmpObj = {
+								title		: title,
+								key			: key,
+								val			: val
+							}
+							if (title !== '') {
+								tmpArr.push([]);
+							}
+							tmpArr[tmpArr.length-1].push(tmpObj);
+
+
+							/*
+							var tmpObj = {
+								title		: title,
+								key			: key,
+								val			: val
+							}
+							retObj['data'].push(tmpObj);
+							*/
+							// tmpArr.push('<tr><td class="key">' + dateData.getValue(row, 0) + '</td><td class="val">' + dateData.getValue(row, 1) + '</td></tr>');
 						}
-						retObj['source'] = '<table class="table table-bordered for-about"><tbody>' + tmpArr.join('') + '</tbody></table>';
+						retObj['data'] = tmpArr;
+						// retObj['source'] = '<table class="table table-bordered for-about"><tbody>' + tmpArr.join('') + '</tbody></table>';
 						break;
 
 					case 'map':
@@ -262,7 +294,7 @@ jQuery(document).ready(function($){
 							console.log('');
 							obj['data'].push(tmpObj);
 						}
-						// GSに記述されているデータをGoogleMap用とボタン用に分ける為に一度データを検証する
+						// GSに記述されているデータをGoogleMap用とメニューボタン用に分ける為に一度データを検証する
 						var len = obj['data'].length;
 						retObj['data'] = [];
 						for (var i=0; i<len; i++) {
@@ -281,10 +313,6 @@ jQuery(document).ready(function($){
 							// ボタン名、URLが入力されていればリンクボタンのデータ
 							} else {
 								console.log('	リンクボタンのデータかも');
-							// } else if (
-							// 	data[i]['btnName'] !== null && data[i]['btnName'] !== '' &&
-							// 	data[i]['url'] !== null && data[i]['url'] !== ''
-							// ) {
 								var btnArr = [];
 								for (i=i; i<len; i++) {
 									console.log('		i = ' + i + ', リンクボタンのデータです');
@@ -307,10 +335,8 @@ jQuery(document).ready(function($){
 						break;
 				}
 				return retObj;
-				// return retStr;
 			} else {
 				return {};
-				// return '';
 			}
 		}
 	}

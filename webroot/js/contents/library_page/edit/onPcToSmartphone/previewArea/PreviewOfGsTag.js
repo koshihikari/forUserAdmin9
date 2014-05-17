@@ -48,6 +48,7 @@ jQuery(document).ready(function($){
 			_.bindAll(
 				this
 				,'refreshStyle'
+				,'insertAbout'
 				,'insertMap'
 			);
 		}
@@ -90,13 +91,14 @@ jQuery(document).ready(function($){
 					// console.log(targetProperty);
 					// console.log('_id = ' + thisObj._id);
 					// console.log(elementId + ', url = ' + targetProperty['url']);
-					// console.log(elementId + ', gsData');
-					// console.log(gsData);
+					console.log(elementId + ', gsData');
+					console.log(gsData);
 					var wrapperElement = targetElem.attr('data-element-type', gsData['pageType']).find('> .contentWrapper');
 
 					switch (gsData['pageType']) {
 						case 'about':
-							wrapperElement.html(gsData['source']).removeClass('empty');
+							thisObj.insertAbout(targetElem, gsData['data']);
+							// wrapperElement.html(gsData['source']).removeClass('empty');
 							break;
 						case 'map':
 							thisObj.insertMap(targetElem, gsData['data']);
@@ -109,8 +111,41 @@ jQuery(document).ready(function($){
 		}
 
 		/*
-		 * プレビューエリアのスキン変更メソッド
-		 * @param	deviceName		変更するスキン名
+		 * 指定したエレメントに物件概要を挿入するメソッド
+		 * @param	targetElem		物件概要を挿入するエレメント
+		 * @param	data			物件概要のデータオブジェクト
+		 * @return	void
+		 */
+		,insertAbout: function(targetElem, data) {
+			var thisObj = this;
+			var source = '';
+			var aboutLen = data.length;
+			if (0 < aboutLen) {
+				// var tmpArr = [];
+				for (var aboutNum=0; aboutNum<aboutLen; aboutNum++) {
+					var rowLen = data[aboutNum].length;
+					if (0 < rowLen) {
+						var tmpArr = [];
+						for (var row=1; row<rowLen; row++) {
+							tmpArr.push('<tr><td class="key">' + data[aboutNum][row]['key'] + '</td><td class="val">' + data[aboutNum][row]['val'] + '</td></tr>');
+						}
+						source += '<div class="group"><h3>' + data[aboutNum][0]['title'] + '</h3><table class="table table-bordered for-about"><tbody>' + tmpArr.join('') + '</tbody></table></div>';
+					}
+				}
+				/*
+				for (var i=1; i<len; i++) {
+					tmpArr.push('<tr><td class="key">' + data[i]['key'] + '</td><td class="val">' + data[i]['val'] + '</td></tr>');
+				}
+				source += '<div class="group"><h3>' + data[0]['title'] + '</h3><table class="table table-bordered for-about"><tbody>' + tmpArr.join('') + '</tbody></table></div>';
+				*/
+			}
+			targetElem.html(source);
+		}
+
+		/*
+		 * 指定したエレメントにGoogleMapを挿入するメソッド
+		 * @param	targetElem		GoogleMapを挿入するエレメント
+		 * @param	data			GoogleMapのデータオブジェクト
 		 * @return	void
 		 */
 		,insertMap: function(targetElem, data) {
