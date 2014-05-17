@@ -162,6 +162,8 @@ jQuery(document).ready(function($){
 						window.GsManager['requestGsData'](thisObj._id, gsInfo[i].key, gsInfo[i].gid);
 					// }
 				}
+			} else {
+				$(thisObj).trigger(('notIncludeGsTag_' + thisObj._id));
 			}
 		}
 
@@ -222,8 +224,8 @@ jQuery(document).ready(function($){
 			var thisObj = this;
 			var row = 0;
 			var dateData = data["gid" + gid];
-			console.log('dateData');
-			console.log(dateData);
+			// console.log('dateData');
+			// console.log(dateData);
 			if (dateData !== null) {
 				var maxRow = dateData.getNumberOfRows();;
 				var tmpArr = [];
@@ -251,8 +253,10 @@ jQuery(document).ready(function($){
 								zoom		: dateData.getValue(row, 3),
 								address		: dateData.getValue(row, 4),
 								btnName		: dateData.getValue(row, 5),
-								url			: dateData.getValue(row, 6)
+								url			: dateData.getValue(row, 6),
+								target		: dateData.getValue(row, 7)
 							}
+							tmpObj['target'] = tmpObj['target'] === '_blank' ? '_blank' : '_self'
 							console.log('row = ' + row);
 							console.log(tmpObj);
 							console.log('');
@@ -286,9 +290,13 @@ jQuery(document).ready(function($){
 									console.log('		i = ' + i + ', リンクボタンのデータです');
 									if (
 										obj['data'][i]['btnName'] !== null && obj['data'][i]['btnName'] !== '' &&
-										obj['data'][i]['url'] !== null && obj['data'][i]['url'] !== ''
+										obj['data'][i]['url'] !== null && obj['data'][i]['url'] !== '' &&
+										obj['data'][i]['target'] !== null && obj['data'][i]['target'] !== ''
 									) {
 										btnArr.push(obj['data'][i]);
+									} else {
+										i --;
+										break;
 									}
 								}
 								if (0 < btnArr.length) {

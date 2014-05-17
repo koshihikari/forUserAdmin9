@@ -27,10 +27,10 @@ google.setOnLoadCallback(function() {
 	}
 	var requestGsData = function(id, key, gid) {
 		var spredsheetId = getSpreadsheetId(key, gid);
-		if (gsData[spredsheetId] && gsData[spredsheetId]['baseData']) {
+		if (gsData[spredsheetId] && gsData[spredsheetId]['baseData']) {	// GoogleSpreadsheetのデータを取得済みなら、キャッシュから返す
 			var baseData = getGsData(spredsheetId);
 			jQuery(window).trigger(('onCompleteRequestData_' + id), [baseData['baseData']]);
-		} else {
+		} else {// GoogleSpreadsheetのデータが未取得なら、アクセスして取得
 			var dfd = jQuery.Deferred();
 			dfd.pipe(
 				function() {

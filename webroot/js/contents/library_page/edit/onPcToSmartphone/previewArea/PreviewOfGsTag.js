@@ -74,7 +74,7 @@ jQuery(document).ready(function($){
 				targetElem.find('> .contentWrapper').empty().addClass('empty');
 			} else {
 				var gsDataInstace = thisObj._instances[('GsTagLibrary_' + thisObj._id)];
-				console.log(elementId + ', GS展開');
+				// console.log(elementId + ', GS展開');
 				// targetElem.find('> .contentWrapper').empty().html(targetProperty['tag']);
 				$(gsDataInstace).on(('onCompleteExpandGsTag_' + thisObj._id), function(event) {
 				// $(gsDataInstace).on('onCompleteExpandGsTag', function(event) {
@@ -85,13 +85,13 @@ jQuery(document).ready(function($){
 					var gsData = window.GsManager['getGsData'](targetProperty['url']);
 					// var gsData = gsDataInstace.getGsData(targetProperty['url']);
 					// var gsData = thisObj._instances['GsTagLibrary'].getGsData(targetProperty['url']);
-					console.log('-------------');
-					console.log('targetProperty');
-					console.log(targetProperty);
-					console.log('_id = ' + thisObj._id);
-					console.log(elementId + ', url = ' + targetProperty['url']);
-					console.log(elementId + ', gsData');
-					console.log(gsData);
+					// console.log('-------------');
+					// console.log('targetProperty');
+					// console.log(targetProperty);
+					// console.log('_id = ' + thisObj._id);
+					// console.log(elementId + ', url = ' + targetProperty['url']);
+					// console.log(elementId + ', gsData');
+					// console.log(gsData);
 					var wrapperElement = targetElem.attr('data-element-type', gsData['pageType']).find('> .contentWrapper');
 
 					switch (gsData['pageType']) {
@@ -165,21 +165,15 @@ jQuery(document).ready(function($){
 					mapElem.css('height', 240);
 				} else if (0 < data[i].length) {
 					var tagArr = [];
-					tagArr.push('<table><tr>');
-					for (var j=0,len2=data[i].length; j<len2; j++) {
-						tagArr.push('<td><a href="#">' + data[i][j]['btnName'] + '</a></td>');
+					var menuCount = data[i].length;
+					var spaceCount = menuCount - 1;
+					var liWidth = ((100 - (spaceCount * 2)) / menuCount) + '%';
+					tagArr.push('<ul class="menu">');
+					for (var j=0; j<menuCount; j++) {
+						tagArr.push('<li style="width:' + liWidth + ';"><a href="' + data[i][j]['url'] + '" target="' + data[i][j]['target'] + '">' + data[i][j]['btnName'] + '</a></li>');
 					}
-					tagArr.push('</tr></table>');
+					tagArr.push('</ul>');
 					containerElem.append(tagArr.join(''));
-				// } else if (
-				// 	data[i]['btnName'] !== null && data[i]['btnName'] !== '' &&
-				// 	data[i]['url'] !== null && data[i]['url'] !== ''
-				// ) {
-
-
-
-
-//<div id="id-1371777958056_797914321528" data-item-name="Table" data-item-type="container" class="not-editable" style="margin: 10px 5px 15px;"><div class="contentWrapper" style="background-color: transparent; padding: 0px; background-position: initial initial; background-repeat: initial initial;"><div class="Table"><table><tbody><tr><td id="id-1371777958056_797914321528_0-0" data-item-name="Td" class="hasChildren" style="border-style: outset; border-width: 3px 0px 3px 3px; border-top-left-radius: 5px; border-top-right-radius: 0px; border-bottom-right-radius: 0px; border-bottom-left-radius: 5px; width: 40%; background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(rgba(255, 255, 255, 0.2)), to(rgba(0, 0, 0, 0.2))); background-color: rgb(255, 255, 255); text-align: left; border-color: rgb(153, 153, 153); margin: 0px auto; background-position: initial initial; background-repeat: initial initial;"><a href="https://enq.nisshinfudosan.co.jp/form/fm/honsya/mitaka?_ga=1.7253872.3360344.1395900698" target="_blank" style="text-decoration: none;"><div id="id-1377227050590_797914321528" data-item-name="Text" data-item-type="displayObject" class="" style="color: rgb(0, 0, 0); font-size: 16px; line-height: 14px; font-weight: bold; font-style: normal; text-decoration: none; text-shadow: rgb(255, 255, 255) 0px 1px 1px; text-align: left; border-top-left-radius: 0px; border-top-right-radius: 0px; border-bottom-right-radius: 0px; border-bottom-left-radius: 0px; margin: 0px auto;"><div class="contentWrapper" style="background-color: transparent; border-style: solid; border-width: 0px; border-top-left-radius: 0px; border-top-right-radius: 0px; border-bottom-right-radius: 0px; border-bottom-left-radius: 0px; padding: 10px; background-position: initial initial; background-repeat: initial initial;"><span class="text">資料請求</span></div></div></a></td><td id="id-1371777958056_797914321528_0-1" data-item-name="Td" class="hasChildren" style="border-style: outset; border-width: 3px 3px 3px 0px; border-top-left-radius: 0px; border-top-right-radius: 5px; border-bottom-right-radius: 5px; border-bottom-left-radius: 0px; width: 9%; background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(rgba(255, 255, 255, 0.2)), to(rgba(0, 0, 0, 0.2))); background-color: rgb(255, 255, 255); text-align: right; border-color: rgb(153, 153, 153); margin: 0px auto; background-position: initial initial; background-repeat: initial initial;"><a href="https://enq.nisshinfudosan.co.jp/form/fm/honsya/mitaka" target="_blank" style="text-decoration: none;"><div id="id-1377227061109_797914321528" data-item-name="Icon" data-item-type="displayObject" class="" style="color: rgb(0, 0, 0); font-size: 2.6rem; line-height: 2rem; font-weight: normal; font-style: normal; text-decoration: none; text-shadow: rgb(255, 255, 255) 0px 1px 1px; border-top-left-radius: 0px; border-top-right-radius: 0px; border-bottom-right-radius: 0px; border-bottom-left-radius: 0px; margin: 0px auto;"><div class="contentWrapper" style="background-color: transparent; border-style: solid; border-width: 0px; border-top-left-radius: 0px; border-top-right-radius: 0px; border-bottom-right-radius: 0px; border-bottom-left-radius: 0px; padding: 10px 3px 10px 0px; background-position: initial initial; background-repeat: initial initial;"><i data-icon=""></i></div></div></a></td><td id="id-1371777958056_797914321528_0-2" data-item-name="Td" class="" style="border: 0px solid rgb(153, 153, 153); border-top-left-radius: 0px; border-top-right-radius: 0px; border-bottom-right-radius: 0px; border-bottom-left-radius: 0px; width: 2%; background-color: transparent; text-align: left; margin: 0px auto; background-position: initial initial; background-repeat: initial initial;"></td><td id="id-1371777958056_797914321528_0-3" data-item-name="Td" class="hasChildren" style="border-style: outset; border-width: 3px 0px 3px 3px; border-top-left-radius: 5px; border-top-right-radius: 0px; border-bottom-right-radius: 0px; border-bottom-left-radius: 5px; width: 40%; background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(rgba(255, 255, 255, 0.2)), to(rgba(0, 0, 0, 0.2))); background-color: rgb(255, 255, 255); text-align: left; border-color: rgb(153, 153, 153); margin: 0px auto; background-position: initial initial; background-repeat: initial initial;"><a href="https://enq.nisshinfudosan.co.jp/form/fm/honsya/mitaka_raijyo" target="_blank" style="text-decoration: none;"><div id="id-1377227070845_797914321528" data-item-name="Text" data-item-type="displayObject" class="" style="color: rgb(0, 0, 0); font-size: 16px; line-height: 14px; font-weight: bold; font-style: normal; text-decoration: none; text-shadow: rgb(255, 255, 255) 0px 1px 1px; text-align: left; border-top-left-radius: 0px; border-top-right-radius: 0px; border-bottom-right-radius: 0px; border-bottom-left-radius: 0px; margin: 0px auto;"><div class="contentWrapper" style="background-color: transparent; border-style: solid; border-width: 0px; border-top-left-radius: 0px; border-top-right-radius: 0px; border-bottom-right-radius: 0px; border-bottom-left-radius: 0px; padding: 10px; background-position: initial initial; background-repeat: initial initial;"><span class="text">来場予約</span></div></div></a></td><td id="id-1371777958056_797914321528_0-4" data-item-name="Td" class="hasChildren" style="border-style: outset; border-width: 3px 3px 3px 0px; border-top-left-radius: 0px; border-top-right-radius: 5px; border-bottom-right-radius: 5px; border-bottom-left-radius: 0px; width: 9%; background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(rgba(255, 255, 255, 0.2)), to(rgba(0, 0, 0, 0.2))); background-color: rgb(255, 255, 255); text-align: right; border-color: rgb(153, 153, 153); margin: 0px auto; background-position: initial initial; background-repeat: initial initial;"><a href="https://enq.nisshinfudosan.co.jp/form/fm/honsya/mitaka_raijyo" target="_blank" style="text-decoration: none;"><div id="id-1377227086991_797914321528" data-item-name="Icon" data-item-type="displayObject" class="" style="color: rgb(0, 0, 0); font-size: 2.6rem; line-height: 2rem; font-weight: normal; font-style: normal; text-decoration: none; text-shadow: rgb(255, 255, 255) 0px 1px 1px; border-top-left-radius: 0px; border-top-right-radius: 0px; border-bottom-right-radius: 0px; border-bottom-left-radius: 0px; margin: 0px auto;"><div class="contentWrapper" style="background-color: transparent; border-style: solid; border-width: 0px; border-top-left-radius: 0px; border-top-right-radius: 0px; border-bottom-right-radius: 0px; border-bottom-left-radius: 0px; padding: 10px 3px 10px 0px; background-position: initial initial; background-repeat: initial initial;"><i data-icon=""></i></div></div></a></td></tr></tbody></table></div></div></div>
 				}
 			};
 			/*

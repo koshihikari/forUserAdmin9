@@ -687,3 +687,190 @@ input[type="text"]:focus {
 #error-message {
 	font-size: 2rem;
 }
+
+
+
+
+
+
+// プレビューHTML表示用プロパティ
+[data-item-name="Icon"] {
+	display: inline-block;
+	width: auto;
+	height: auto;
+}
+
+
+[data-item-name="GsTag"] {
+	&[data-element-type="about"] {
+		margin: 15px 5px;
+		table {
+			&.for-about {
+				width: 100%;
+				border-collapse: separate;
+				// margin: 15px 5px;
+				td {
+					vertical-align: inherit;
+					line-height: 100%;
+					&.key {
+						width: 100px;
+						background-color: rgb(233, 233, 233);
+						text-align: left;
+						margin: 0px auto;
+						padding: 3px;
+					}
+					&.val {
+						width: auto;
+						background-color: transparent;
+						text-align: left;
+						margin: 0px auto;
+						padding: 3px;
+					}
+				}
+			}
+		}
+	}
+	&[data-element-type="map"] {
+		margin: 0;
+		.address {
+			padding: 6px 8px 8px;
+			a {
+				text-decoration: underline;
+			}
+		}
+		.menu {
+			// background: red;
+			margin: 5px 5px 20px;
+			> li {
+				display: inline-block;
+				background: blue;
+				// width: 49%;
+				margin-left: 2%;
+				background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(rgba(255, 255, 255, 0.2)), to(rgba(0, 0, 0, 0.2)));
+				background-color: rgb(255, 255, 255);
+								border-style: outset;
+								// border-width: 3px 0px 3px 3px;
+								// border-top-left-radius: 5px;
+								// border-top-right-radius: 0px;
+								// border-bottom-right-radius: 0px;
+								// border-bottom-left-radius: 5px;
+								border-width: 3px;
+								border-radius: 5px;
+								border-color: rgb(153, 153, 153);
+
+				&:first-child {
+					margin-left: 0;
+				}
+				>a {
+					color: rgb(0, 0, 0);
+					font-size: 16px;
+					line-height: 14px;
+					font-weight: bold;
+					font-style: normal;
+					text-decoration: none;
+					text-shadow: rgb(255, 255, 255) 0px 1px 1px;
+					display: block;
+					padding: 14px 13px 12px;
+					position: relative;
+					&:after {
+						display: block;
+						content: "";
+						position: absolute;
+						-webkit-transform: rotate(45deg);
+						transform: rotate(45deg);
+						top: 50%;
+						right: 13px;
+						width: 9px;
+						height: 9px;
+						margin-top: -5px;
+						border-top: 3px solid black;
+						border-right: 3px solid black;
+						border-top-right-radius: 2px;
+					}
+				}
+			}
+		}
+		/*
+		table.menu {
+			tbody {
+				tr {
+					td {
+						border-style: outset;
+						border-width: 3px 0px 3px 3px;
+						border-top-left-radius: 5px;
+						border-top-right-radius: 0px;
+						border-bottom-right-radius: 0px;
+						border-bottom-left-radius: 5px;
+						width: 40%;
+						background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(rgba(255, 255, 255, 0.2)), to(rgba(0, 0, 0, 0.2)));
+						background-color: rgb(255, 255, 255);
+						text-align: left;
+						border-color: rgb(153, 153, 153);
+						margin: 0px auto;
+						background-position: initial initial;
+						background-repeat: initial initial;
+						>a {
+							>div {
+								color: rgb(0, 0, 0);
+								font-size: 16px;
+								line-height: 14px;
+								font-weight: bold;
+								font-style: normal;
+								text-decoration: none;
+								text-shadow: rgb(255, 255, 255) 0px 1px 1px;
+								text-align: left;
+								border-top-left-radius: 0px;
+								border-top-right-radius: 0px;
+								border-bottom-right-radius: 0px;
+								border-bottom-left-radius: 0px;
+								margin: 0px auto;
+								>div {
+									background-color: transparent;
+									border-style: solid;
+									border-width: 0px;
+									border-top-left-radius: 0px;
+									border-top-right-radius: 0px;
+									border-bottom-right-radius: 0px;
+									border-bottom-left-radius: 0px;
+									padding: 10px;
+									background-position: initial initial;
+									background-repeat: initial initial;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		*/
+	}
+}
+
+/*
+#menuTest >li >a:before{
+	display: block;
+	content: "";
+	position: absolute;
+	-webkit-transform: rotate(45deg);
+	transform: rotate(45deg);
+	top: 50%;
+	right: 35px;
+	width: 10px;
+	height: 10px;
+	margin-top: -5px;
+	background: #fff;
+}
+#menuTest >li >a:after{
+	display: block;
+	content: "";
+	position: absolute;
+	-webkit-transform: rotate(45deg);
+	transform: rotate(45deg);
+	top: 50%;
+	right: 40px;
+	width: 10px;
+	height: 10px;
+	margin-top: -5px;
+	background: #a1b91d;
+	}
+	*/
