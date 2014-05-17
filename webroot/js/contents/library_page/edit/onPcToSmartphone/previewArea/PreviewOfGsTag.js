@@ -74,18 +74,27 @@ jQuery(document).ready(function($){
 					// console.log(elementId + ', url = ' + targetProperty['url']);
 					console.log(elementId + ', gsData');
 					console.log(gsData);
-					var wrapperElement = targetElem.attr('data-element-type', gsData['pageType']).find('> .contentWrapper');
+					if (gsData['data']) {
+						var wrapperElement = targetElem.attr('data-element-type', gsData['pageType']).find('> .contentWrapper');
 
-					switch (gsData['pageType']) {
-						case 'about':
-							thisObj.insertAbout(targetElem, gsData['data']);
-							// wrapperElement.html(gsData['source']).removeClass('empty');
-							break;
-						case 'map':
-							thisObj.insertMap(targetElem, gsData['data']);
-							break;
+						switch (gsData['pageType']) {
+							case 'about':
+								thisObj.insertAbout(targetElem.find('> .contentWrapper'), gsData['data']);
+								// wrapperElement.html(gsData['source']).removeClass('empty');
+								break;
+							case 'map':
+								thisObj.insertMap(targetElem, gsData['data']);
+								break;
+						}
+					} else {
+						console.log('空にする');
+						targetElem.attr('data-eleent-type', '').find('> .contentWrapper').empty();
 					}
 				})
+				$(gsDataInstace).on(('notIncludeGsTag_' + thisObj._id), function(event) {
+					console.log('そんなGSない');
+					targetElem.find('> .contentWrapper').empty().addClass('empty');
+				});
 				gsDataInstace.execute(targetProperty['tag']);
 			}
 			$(thisObj).trigger('onCompleteRefreshStyle', [elementId, itemName]);
