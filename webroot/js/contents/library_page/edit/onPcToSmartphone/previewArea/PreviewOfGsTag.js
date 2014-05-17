@@ -30,6 +30,7 @@ jQuery(document).ready(function($){
 				this
 				,'refreshStyle'
 				,'insertAbout'
+				,'insertPlan'
 				,'insertMap'
 			);
 		}
@@ -80,7 +81,9 @@ jQuery(document).ready(function($){
 						switch (gsData['pageType']) {
 							case 'about':
 								thisObj.insertAbout(targetElem.find('> .contentWrapper'), gsData['data']);
-								// wrapperElement.html(gsData['source']).removeClass('empty');
+								break;
+							case 'plan':
+								thisObj.insertPlan(targetElem.find('> .contentWrapper'), gsData['data']);
 								break;
 							case 'map':
 								thisObj.insertMap(targetElem, gsData['data']);
@@ -121,6 +124,40 @@ jQuery(document).ready(function($){
 						source += '<div class="group"><h3>' + data[aboutNum][0]['title'] + '</h3><table class="table table-bordered for-about"><tbody>' + tmpArr.join('') + '</tbody></table></div>';
 					}
 				}
+			}
+			targetElem.html(source);
+		}
+
+		/*
+		 * 指定したエレメントに間取りエレメントを挿入するメソッド
+		 * @param	targetElem		間取りエレメントを挿入するエレメント
+		 * @param	data			間取りエレメントのデータオブジェクト
+		 * @return	void
+		 */
+		,insertPlan: function(targetElem, data) {
+			var thisObj = this;
+			var source = '';
+			var tmpArr = [];
+			var len = data.length;
+			if (0 < len) {
+				if (len === 1) {
+					tmpArr.push('<tr><td><a href="' + data[0]['url'] + '" target="_blank"><img src="' + data[0]['img'] + '" /></a></td></tr>');
+				} else {
+					if ((len % 2) !== 0) {
+						data.push({});
+					}
+					for (var i=0; i<len; i+=2) {
+						tmpArr.push('<tr>');
+						tmpArr.push('<td><a href="' + data[i]['url'] + '" target="_blank"><img src="' + data[i]['img'] + '" /></a></td>');
+						if (data[i+1]['url']) {
+							tmpArr.push('<td><a href="' + data[i+1]['url'] + '" target="_blank"><img src="' + data[i+1]['img'] + '" /></a></td>');
+						} else {
+							tmpArr.push('<td>&nbsp;</td>');
+						}
+						tmpArr.push('</tr>');
+					}
+				}
+				source += '<table class="table table-bordered for-plan"><tbody>' + tmpArr.join('') + '</tbody></table>';
 			}
 			targetElem.html(source);
 		}

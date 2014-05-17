@@ -760,6 +760,32 @@ input[type="text"]:focus {
 			}
 		}
 	}
+	&[data-element-type="plan"] {
+		margin: 0;
+		table.for-plan {
+			width: 100%;
+			border-collapse: separate;
+			border: none;
+			margin: 0;
+			tr {
+				td {
+					border: none;
+					padding: 15px 1px 1px 1px;
+					>a {
+						>img {
+							width: 100%;
+							height: auto;
+						}
+					}
+				}
+				&:first-child {
+					td {
+						padding-top: 1px;
+					}
+				}
+			}
+		}
+	}
 	&[data-element-type="map"] {
 		margin: 0;
 		.address {

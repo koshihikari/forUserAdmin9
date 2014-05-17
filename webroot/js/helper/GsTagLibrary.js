@@ -79,19 +79,9 @@ jQuery(document).ready(function($){
 				var counter = 0, complete = gsInfo.length;
 				$(window).off(('onCompleteRequestData_' + thisObj._id));
 				$(window).on(('onCompleteRequestData_' + thisObj._id), function(event, data) {
-					// var key = 'https://docs.google.com/spreadsheet/ccc?key=' + data.key + '&usp=drive_web#gid=' + data.gid;
-					// console.log('data');
-					// console.log(data);
 					var spreadsheetId = window.GsManager['getSpreadsheetId'](data.key, data.gid);
-					// console.log('key = ' + key);
 					var gsData = window.GsManager['getGsData'](spreadsheetId);
-					// console.log('gsData');
-					// console.log(gsData);
 					var obj = thisObj.convertData(data['data'], data['gid'], gsData['pageType']);
-					// window.GsManager['setGsData'](spreadsheetId, gsInfo[i]['pageType'], 'pageType');
-					// thisObj._gsData[spreadsheetId]['source'] = obj['source'] ? obj['source'] : undefined;
-					// thisObj._gsData[spreadsheetId]['data'] = obj['data'] ? obj['data'] : undefined;
-					// thisObj._gsData[spreadsheetId]['master'] = data;
 					// console.log('GsManagerに値をセット2');
 					// window.GsManager['setGsData'](spreadsheetId, (obj['source'] ? obj['source'] : undefined), 'source');
 					// console.log('GsManagerに値をセット3');
@@ -129,23 +119,9 @@ jQuery(document).ready(function($){
 				});
 				for (var i=0; i<complete; i++) {
 					var spreadsheetId = window.GsManager['getSpreadsheetId'](gsInfo[i].key, gsInfo[i].gid);
-					// console.log('i = ' + i + ', spreadsheetId = ' + spreadsheetId);
-					/*
-					// var key = 'https://docs.google.com/spreadsheet/ccc?key=' + gsInfo[i].key + '&usp=drive_web#gid=' + gsInfo[i].gid;
-					if (thisObj._gsData[spreadsheetId]) {
-						thisObj._gsData[spreadsheetId]['pageType'] = gsInfo[i]['pageType'];
-						counter++;
-						// $(window).trigger(('onCompleteRequestData_' + thisObj._id), [thisObj._gsData[key].master]);
-					} else {
-						// thisObj._gsData[spreadsheetId] = {
-						// 	'pageType' :	gsInfo[i]['pageType']
-						// };
-						// window.getGSData(thisObj._id, gsInfo[i].key, gsInfo[i].gid);
-						*/
-						// console.log('GsManagerに値をセット1');
-						window.GsManager['setGsData'](spreadsheetId, gsInfo[i]['pageType'], 'pageType');
-						window.GsManager['requestGsData'](thisObj._id, gsInfo[i].key, gsInfo[i].gid);
-					// }
+					// console.log('GsManagerに値をセット1');
+					window.GsManager['setGsData'](spreadsheetId, gsInfo[i]['pageType'], 'pageType');
+					window.GsManager['requestGsData'](thisObj._id, gsInfo[i].key, gsInfo[i].gid);
 				}
 			} else {
 				$(thisObj).trigger(('notIncludeGsTag_' + thisObj._id));
@@ -242,6 +218,23 @@ jQuery(document).ready(function($){
 							tmpArr[tmpArr.length-1].push(tmpObj);
 						}
 						retObj['data'] = tmpArr;
+						break;
+
+					case 'plan':
+						retObj['data'] = [];
+						for (row = 0; row < maxRow; row++) {
+							var isShow = dateData.getValue(row, 0);
+							isShow = Number(isShow) === 1 ? true : false;
+							if (isShow === true) {
+								var img = dateData.getValue(row, 1);
+								var url = dateData.getValue(row, 2);
+								var tmpObj = {
+									img		: img,
+									url		: url
+								}
+								retObj['data'].push(tmpObj);
+							}
+						}
 						break;
 
 					case 'map':
