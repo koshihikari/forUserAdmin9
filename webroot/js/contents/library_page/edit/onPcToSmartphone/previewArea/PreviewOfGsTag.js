@@ -73,25 +73,28 @@ jQuery(document).ready(function($){
 					// console.log(targetProperty);
 					// console.log('_id = ' + thisObj._id);
 					// console.log(elementId + ', url = ' + targetProperty['url']);
-					console.log(elementId + ', gsData');
-					console.log(gsData);
+					// console.log(elementId + ', gsData');
+					// console.log(gsData);
+					var contentWrapperElement = targetElem.attr('data-eleent-type', '').find('> .contentWrapper');
+					contentWrapperElement.empty();
 					if (gsData['data']) {
-						var wrapperElement = targetElem.attr('data-element-type', gsData['pageType']).find('> .contentWrapper');
+						targetElem.attr('data-element-type', gsData['pageType']);
+						// var wrapperElement = targetElem.attr('data-element-type', gsData['pageType']).find('> .contentWrapper');
 
 						switch (gsData['pageType']) {
 							case 'about':
-								thisObj.insertAbout(targetElem.find('> .contentWrapper'), gsData['data']);
+								thisObj.insertAbout(contentWrapperElement, gsData['data']);
 								break;
 							case 'plan':
-								thisObj.insertPlan(targetElem.find('> .contentWrapper'), gsData['data']);
+								thisObj.insertPlan(contentWrapperElement, gsData['data']);
 								break;
 							case 'map':
-								thisObj.insertMap(targetElem, gsData['data']);
+								thisObj.insertMap(contentWrapperElement, gsData['data']);
 								break;
 						}
-					} else {
-						console.log('空にする');
-						targetElem.attr('data-eleent-type', '').find('> .contentWrapper').empty();
+					// } else {
+					// 	console.log('空にする');
+						// targetElem.attr('data-eleent-type', '').find('> .contentWrapper').empty();
 					}
 				})
 				$(gsDataInstace).on(('notIncludeGsTag_' + thisObj._id), function(event) {
@@ -171,17 +174,17 @@ jQuery(document).ready(function($){
 		,insertMap: function(targetElem, data) {
 			var thisObj = this;
 			var len = data.length;
-			targetElem
-				.removeClass('empty')
-				.find(' > .contentWrapper')
-				.find('.group')
-					.remove();
-			var containerElem = targetElem.find(' > .contentWrapper');
+			// targetElem
+			// 	.removeClass('empty')
+			// 	.find(' > .contentWrapper')
+			// 	.find('.group')
+			// 		.remove();
+			// var containerElem = targetElem.find(' > .contentWrapper');
 			// GSに記述されているデータをGoogleMap用とボタン用に分ける為に一度データを検証する
 			for (var i=0; i<len; i++) {
 				// タイトル、緯度、経度、ズームレベル、住所が入力されていればGoogleMapを埋め込む
 				if (data[i]['lat']) {
-					var groupElem = $('<div>').addClass('group').appendTo(containerElem);
+					var groupElem = $('<div>').addClass('group').appendTo(targetElem);
 					var myOptions = {
 						zoom			: data[i]['zoom'],
 						center			: new google.maps.LatLng(data[i]['lat'], data[i]['lng']),
@@ -204,6 +207,7 @@ jQuery(document).ready(function($){
 					var addressElem = '<div class="address"><a href="http://maps.apple.com/?q=' + data[i]['address'] + '" class="openmap" style="text-decoration: underline;"><span class="text">' + data[i]['address'] + '</span></a></div>';
 					groupElem.append(addressElem);
 					mapElem.css('height', 240);
+				// データが配列なら、メニューエレメントを作成する
 				} else if (0 < data[i].length) {
 					var tagArr = [];
 					var menuCount = data[i].length;
@@ -214,7 +218,7 @@ jQuery(document).ready(function($){
 						tagArr.push('<li style="width:' + liWidth + ';"><a href="' + data[i][j]['url'] + '" target="' + data[i][j]['target'] + '">' + data[i][j]['btnName'] + '</a></li>');
 					}
 					tagArr.push('</ul>');
-					containerElem.append(tagArr.join(''));
+					targetElem.append(tagArr.join(''));
 				}
 			};
 		}
