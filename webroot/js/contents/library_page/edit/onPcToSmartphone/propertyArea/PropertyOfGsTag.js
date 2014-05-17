@@ -20,13 +20,6 @@ jQuery(document).ready(function($){
 		,_hasSaveData					: false
 		,_timers						: {}
 		,_timerId						: -1
-		/*
-		,tooltipMessages				: {
-			'isLeft'					: ['表示する内容を左揃えにします。'],
-			'isCenter'					: ['表示する内容を中央に配置します。'],
-			'isRight'					: ['表示する内容を右揃えにします']
-		}
-		*/
 
 		/*
 		 * @param	dataManager 	データ管理クラスのインスタンス
@@ -48,14 +41,6 @@ jQuery(document).ready(function($){
 			this._elems		= {
 				'propertyElement'		: propertyElement
 			}
-			// console.log('---------');
-			// console.log('this._instances');
-			// console.log(this._instances);
-			// console.log('elementProperty');
-			// console.log(elementProperty);
-			// console.log('this._currentVal');
-			// console.log(this._currentVal);
-			// console.log('---------');
 		}
 
 		/*
@@ -107,8 +92,8 @@ jQuery(document).ready(function($){
 					break;
 			}
 			thisObj._currentVal['type'] = type;
+			thisObj._currentVal['isPreview'] = thisObj._currentVal['isPreview'] === false ? false : true;
 			thisObj._currentVal['tag'] = thisObj.createGsTag(thisObj._currentVal['url'], thisObj._currentVal['type']);
-			// var gsTag = thisObj.createGsTag(thisObj._currentVal['url'], thisObj._currentVal['type']);
 			var source = '\
 						<div class="propertyElement forGsTagElement">\
 							<p class="elementTitle">Google Spreadsheet埋め込み</p>\
@@ -120,11 +105,18 @@ jQuery(document).ready(function($){
 								<div class="group gs-page-type">\
 									<p>ページタイプ</p>\
 									<div class="btn-group" data-toggle="buttons-radio" data-item-name="type">\
-										<button type="button" class="btn btn-primary isAbout' + (thisObj._currentVal['type'] === 'about' ? ' active' : '') + '" data-item-name="about" data-placement="bottom" data-original-title="物件詳細ページのGSを展開します。"><span>物件概要</span></button>\
-										<button type="button" class="btn btn-primary isMPlan' + (thisObj._currentVal['type'] === 'plan' ? ' active' : '') + '" data-item-name="plan" data-placement="bottom" data-original-title="間取りページのGSを展開します。"><span>間取り</span></button>\
-										<button type="button" class="btn btn-primary isModelroom' + (thisObj._currentVal['type'] === 'modelroom' ? ' active' : '') + '" data-item-name="modelroom" data-placement="bottom" data-original-title="モデルルームページのGSを展開します。"><span>モデルルーム</span></button>\
-										<button type="button" class="btn btn-primary isAppearance' + (thisObj._currentVal['type'] === 'appearance' ? ' active' : '') + '" data-item-name="appearance" data-placement="bottom" data-original-title="外観ページのGSを展開します。"><span>外観</span></button>\
-										<button type="button" class="btn btn-primary isMap' + (thisObj._currentVal['type'] === 'map' ? ' active' : '') + '" data-item-name="map" data-placement="bottom" data-original-title="現地案内図ページのGSを展開します。"><span>現地案内図</span></button>\
+										<button type="button" class="btn btn-primary isAbout' + (thisObj._currentVal['type'] === 'about' ? ' active' : '') + '" data-item-name="about" data-placement="bottom" data-original-title="物件詳細ページのGSを挿入します。"><span>物件概要</span></button>\
+										<button type="button" class="btn btn-primary isMPlan' + (thisObj._currentVal['type'] === 'plan' ? ' active' : '') + '" data-item-name="plan" data-placement="bottom" data-original-title="間取りページのGSを挿入します。"><span>間取り</span></button>\
+										<button type="button" class="btn btn-primary isModelroom' + (thisObj._currentVal['type'] === 'modelroom' ? ' active' : '') + '" data-item-name="modelroom" data-placement="bottom" data-original-title="モデルルームページのGSを挿入します。"><span>モデルルーム</span></button>\
+										<button type="button" class="btn btn-primary isAppearance' + (thisObj._currentVal['type'] === 'appearance' ? ' active' : '') + '" data-item-name="appearance" data-placement="bottom" data-original-title="外観ページのGSを挿入します。"><span>外観</span></button>\
+										<button type="button" class="btn btn-primary isMap' + (thisObj._currentVal['type'] === 'map' ? ' active' : '') + '" data-item-name="map" data-placement="bottom" data-original-title="現地案内図ページのGSを挿入します。"><span>現地案内図</span></button>\
+									</div>\
+								</div>\
+								<div class="group gs-preview">\
+									<p>プレビュー表示するかどうか</p>\
+									<div class="btn-group" data-toggle="buttons-radio" data-item-name="type">\
+										<button type="button" class="btn btn-primary isEnabledOfPreview' + (thisObj._currentVal['isPreview'] === true ? ' active' : '') + '" data-item-name="isEnabledOfPreview" data-placement="bottom" data-original-title="プレビューエリアにGSを展開します。"><span>プレビューする</span></button>\
+										<button type="button" class="btn btn-primary isDisabledOfPreview' + (thisObj._currentVal['isPreview'] !== true ? ' active' : '') + '" data-item-name="isDisabledOfPreview" data-placement="bottom" data-original-title="プレビューエリアにGSを展開しません。"><span>プレビューしない</span></button>\
 									</div>\
 								</div>\
 								<div class="group gs-tag">\
@@ -174,14 +166,6 @@ jQuery(document).ready(function($){
 		,refreshStyle: function(isEnforcement) {
 			var thisObj = this;
 			var targetElem = $("#" + thisObj._targetId);
-			// targetElem
-			// 	.css(
-			// 		{
-			// 			'textAlign'		: thisObj._currentVal['textAlign']
-			// 		}
-			// 	);
-			// GSタグの更新
-			// var gsTag = thisObj.createGsTag(thisObj._currentVal['url'], thisObj._currentVal['type']);
 			thisObj._currentVal['tag'] = thisObj.createGsTag(thisObj._currentVal['url'], thisObj._currentVal['type']);
 			$('.gs-tag .preview').val(thisObj._currentVal['tag']);
 			$(thisObj).trigger('onCompleteRefreshStyle', [thisObj._targetId, thisObj._elementType, $.extend(true, {}, thisObj._currentVal)]);
@@ -192,42 +176,6 @@ jQuery(document).ready(function($){
 		}
 
 		/*
-		 * Textareaの内容が変わった際にコールされるメソッド
-		 * @param	event		Eventオブジェクト
-		 * @return	void
-		 */
-		 /*
-		,onChangeTextarea: function(event) {
-			var thisObj = this;
-			var val = $(event.currentTarget).val();
-
-			if (thisObj._currentVal['source'] !== val) {
-				// var targetElem = $("#" + thisObj._targetId);
-				// if (val !== "") {
-				// 	$("#" + thisObj._targetId).removeClass("empty");
-				// } else {
-				// 	targetElem.addClass("empty");
-				// }
-				thisObj._currentVal['source'] = val;
-				thisObj._hasSaveData = true;
-				thisObj.refreshStyle();
-
-				if (thisObj._timers['forTextarea']) {
-					clearTimeout(thisObj._timers['forTextarea']);
-				}
-				thisObj._timers['forTextarea'] = setTimeout(
-					function(event) {
-						if (thisObj._hasSaveData === true) {
-							thisObj.refreshStyle(true);
-						}
-					},
-					3000
-				);
-			}
-		}
-		*/
-
-		/*
 		 * ページタイプのラジオボタンがクリックされた時にコールされるメソッド
 		 * @param	event		Eventオブジェクト
 		 * @return	void
@@ -236,15 +184,12 @@ jQuery(document).ready(function($){
 			var thisObj = this;
 			var elem = $(event.currentTarget);
 			var itemName = elem.attr('data-item-name');
-			// var parentItemName = elem.parent().attr('data-item-name');
-			// var obj = {
-			// 	'isSelf'		: '_self',
-			// 	'isBlank'		: '_blank',
-			// 	'isUrl'			: 'url',
-			// 	'isMail'		: 'mail',
-			// 	'isPhoneNum'	: 'phoneNum'
-			// }
-			thisObj._currentVal['type'] = elem.attr('data-item-name');
+			if (itemName === 'isEnabledOfPreview' || itemName === 'isDisabledOfPreview') {
+				thisObj._currentVal['isPreview'] = itemName === 'isEnabledOfPreview' ? true : false;
+			} else {
+				thisObj._currentVal['type'] = itemName;
+			}
+			// thisObj._currentVal['type'] = elem.attr('data-item-name');
 			thisObj._hasSaveData = true;
 			thisObj.refreshStyle(true);
 		}
@@ -259,36 +204,25 @@ jQuery(document).ready(function($){
 			var thisObj = this;
 			var currentTarget = $(event.currentTarget);
 			var val = currentTarget.val();
+			var key = currentTarget.attr('name');
+			if (thisObj._currentVal[key] !== val) {
+				thisObj._currentVal[key] = val;
+				// console.log('データ更新');
+				thisObj._hasSaveData = true;
+				thisObj.refreshStyle();
 
-			// if (
-			// 	currentTarget.attr('name') === 'linkUrl' ||
-			// 	currentTarget.attr('name') === 'linkPageId' ||
-			// 	currentTarget.attr('name') === 'mapUrl'
-			// ) {
-				// var key = currentTarget.attr('name') === 'linkUrl' ? 'linkUrl' : 'mapUrl';
-				// console.log('-------');
-				// console.log('url = ' + thisObj._currentVal['url']);
-				// console.log('val = ' + val);
-				var key = currentTarget.attr('name');
-				if (thisObj._currentVal[key] !== val) {
-					thisObj._currentVal[key] = val;
-					// console.log('データ更新');
-					thisObj._hasSaveData = true;
-					thisObj.refreshStyle();
-
-					if (thisObj._timers[key]) {
-						clearTimeout(thisObj._timers[key]);
-					}
-					thisObj._timers[key] = setTimeout(
-						function(event) {
-							if (thisObj._hasSaveData === true) {
-								thisObj.refreshStyle(true);
-							}
-						},
-						3000
-					);
+				if (thisObj._timers[key]) {
+					clearTimeout(thisObj._timers[key]);
 				}
-			// }
+				thisObj._timers[key] = setTimeout(
+					function(event) {
+						if (thisObj._hasSaveData === true) {
+							thisObj.refreshStyle(true);
+						}
+					},
+					3000
+				);
+			}
 		}
 
 		/*
@@ -321,24 +255,7 @@ jQuery(document).ready(function($){
 							}
 						})
 					.end()
-					.on('click', '[data-toggle="buttons-radio"] > .btn', thisObj.onClickRadioButton)
-					/*
-					.on('change', 'textarea', thisObj.onChangeTextarea)
-					.on('focus', 'textarea', function(event) {
-						if (thisObj._timers['onFocus']) {
-							clearInterval(thisObj._timers['onFocus']);
-						}
-						thisObj._timers['onFocus'] = setInterval(function(event2) {thisObj.onChangeTextarea(event);}, 100);
-					})
-					.on('blur', 'textarea', function(event) {
-						if (thisObj._timers['onFocus']) {
-							clearInterval(thisObj._timers['onFocus']);
-						}
-						if (thisObj._hasSaveData === true) {
-							thisObj.refreshStyle(true);
-						}
-					});
-*/
+					.on('click', '[data-toggle="buttons-radio"] > .btn', thisObj.onClickRadioButton);
 
 			} else if (isEnabled === false && thisObj._isEnabled === true) {
 				thisObj._isEnabled = false;
@@ -349,10 +266,7 @@ jQuery(document).ready(function($){
 						.off ('focus')
 						.off('blur')
 					.end()
-					.off('click', '[data-toggle="buttons-radio"] > .btn')
-					// .off('change', 'textarea')
-					// .off('focus', 'textarea')
-					// .off('blur', 'textarea');
+					.off('click', '[data-toggle="buttons-radio"] > .btn');
 			}
 		}
 	}
