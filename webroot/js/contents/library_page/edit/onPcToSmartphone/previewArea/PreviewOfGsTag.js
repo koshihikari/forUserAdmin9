@@ -47,8 +47,9 @@ jQuery(document).ready(function($){
 			thisObj._elementId = elementId;
 			console.log('targetProperty');
 			console.log(targetProperty);
-			if (targetProperty['url'] === '') {
-				targetElem.find('> .contentWrapper').empty().addClass('empty');
+			if (targetProperty['url'] === '' || targetProperty['isPreview'] === false) {
+				targetElem.find('> .contentWrapper').empty();
+				// targetElem.find('> .contentWrapper').empty().addClass('empty');
 			} else {
 				var gsDataInstace = thisObj._instances[('GsTagLibrary_' + thisObj._id)];
 				$(gsDataInstace).on(('onCompleteExpandGsTag_' + thisObj._id), function(event) {
