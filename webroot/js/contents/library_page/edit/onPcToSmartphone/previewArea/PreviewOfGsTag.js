@@ -30,8 +30,9 @@ jQuery(document).ready(function($){
 				this
 				,'refreshStyle'
 				,'insertAbout'
-				,'insertPlan'
+				,'insertGallery'
 				,'insertMap'
+				,'insertPlan'
 			);
 		}
 
@@ -44,57 +45,34 @@ jQuery(document).ready(function($){
 			var thisObj = this;
 			var targetElem = $('#' + elementId);
 			thisObj._elementId = elementId;
-			// console.log('-------------------');
-			// console.log('PreviewOfCode :: refreshStyle :: elementId = ' + elementId + ', itemName = ' + itemName);
 			console.log('targetProperty');
 			console.log(targetProperty);
-			// console.log('targetElem');
-			// console.log(targetElem);
-			// console.log('val = ' + thisObj.val);
-			// console.log('_val = ' + thisObj._val);
-			// console.log('-------------------');
 			if (targetProperty['url'] === '') {
 				targetElem.find('> .contentWrapper').empty().addClass('empty');
 			} else {
 				var gsDataInstace = thisObj._instances[('GsTagLibrary_' + thisObj._id)];
-				// console.log(elementId + ', GS展開');
-				// targetElem.find('> .contentWrapper').empty().html(targetProperty['tag']);
 				$(gsDataInstace).on(('onCompleteExpandGsTag_' + thisObj._id), function(event) {
-				// $(gsDataInstace).on('onCompleteExpandGsTag', function(event) {
-				// $(thisObj._instances['GsTagLibrary']).on('onCompleteExpandGsTag', function(event) {
 					$(gsDataInstace).off(('onCompleteExpandGsTag_' + thisObj._id));
-					// $(gsDataInstace).off('onCompleteExpandGsTag');
-					// $(thisObj._instances['GsTagLibrary']).off('onCompleteExpandGsTag');
 					var gsData = window.GsManager['getGsData'](targetProperty['url']);
-					// var gsData = gsDataInstace.getGsData(targetProperty['url']);
-					// var gsData = thisObj._instances['GsTagLibrary'].getGsData(targetProperty['url']);
-					// console.log('-------------');
-					// console.log('targetProperty');
-					// console.log(targetProperty);
-					// console.log('_id = ' + thisObj._id);
-					// console.log(elementId + ', url = ' + targetProperty['url']);
-					// console.log(elementId + ', gsData');
-					// console.log(gsData);
 					var contentWrapperElement = targetElem.attr('data-eleent-type', '').find('> .contentWrapper');
 					contentWrapperElement.empty();
 					if (gsData['data']) {
 						targetElem.attr('data-element-type', gsData['pageType']);
-						// var wrapperElement = targetElem.attr('data-element-type', gsData['pageType']).find('> .contentWrapper');
 
 						switch (gsData['pageType']) {
 							case 'about':
 								thisObj.insertAbout(contentWrapperElement, gsData['data']);
 								break;
-							case 'plan':
-								thisObj.insertPlan(contentWrapperElement, gsData['data']);
+							case 'modelroom':
+								thisObj.insertGallery(contentWrapperElement, gsData['data']);
 								break;
 							case 'map':
 								thisObj.insertMap(contentWrapperElement, gsData['data']);
 								break;
+							case 'plan':
+								thisObj.insertPlan(contentWrapperElement, gsData['data']);
+								break;
 						}
-					// } else {
-					// 	console.log('空にする');
-						// targetElem.attr('data-eleent-type', '').find('> .contentWrapper').empty();
 					}
 				})
 				$(gsDataInstace).on(('notIncludeGsTag_' + thisObj._id), function(event) {
@@ -140,37 +118,81 @@ jQuery(document).ready(function($){
 		}
 
 		/*
-		 * 指定したエレメントに間取りエレメントを挿入するメソッド
-		 * @param	targetElem		間取りエレメントを挿入するエレメント
-		 * @param	data			間取りエレメントのデータオブジェクト
+		 * 指定したエレメントにギャラリーを挿入するメソッド
+		 * @param	targetElem		ギャラリーを挿入するエレメント
+		 * @param	data			ギャラリーのデータオブジェクト
 		 * @return	void
 		 */
-		,insertPlan: function(targetElem, data) {
+		,insertGallery: function(targetElem, data) {
 			var thisObj = this;
-			var source = '';
-			var tmpArr = [];
+			// var source = '';
+			// var aboutLen = data.length;
+			// if (0 < aboutLen) {
+			// 	for (var aboutNum=0; aboutNum<aboutLen; aboutNum++) {
+			// 		source += '<div class="group">';
+			// 		if (data[aboutNum]['title']) {
+			// 			source += '<h3>' + data[aboutNum]['title'] + '</h3>';
+			// 		}
+			// 		if (data[aboutNum]['keyVal'] && data[aboutNum]['keyVal'].length) {
+			// 			var rowLen = data[aboutNum]['keyVal'].length;
+			// 			var tmpArr = [];
+			// 			for (var row=0; row<rowLen; row++) {
+			// 				tmpArr.push('<tr><td class="key">' + data[aboutNum]['keyVal'][row]['key'] + '</td><td class="val">' + data[aboutNum]['keyVal'][row]['val'] + '</td></tr>');
+			// 			}
+			// 			source += '<table class="table table-bordered for-about"><tbody>' + tmpArr.join('') + '</tbody></table>';
+			// 		}
+			// 		if (data[aboutNum]['note'] && data[aboutNum]['note'].length) {
+			// 			source += '<div class="note">' + data[aboutNum]['note'].join('<br>') + '</div>';
+			// 		}
+			// 		source += '</div>';
+			// 	}
+			// }
+
+
 			var len = data.length;
 			if (0 < len) {
-				if (len === 1) {
-					tmpArr.push('<tr><td><a href="' + data[0]['url'] + '" target="_blank"><img src="' + data[0]['img'] + '" /></a></td></tr>');
-				} else {
-					if ((len % 2) !== 0) {
-						data.push({});
-					}
-					for (var i=0; i<len; i+=2) {
-						tmpArr.push('<tr>');
-						tmpArr.push('<td><a href="' + data[i]['url'] + '" target="_blank"><img src="' + data[i]['img'] + '" /></a></td>');
-						if (data[i+1]['url']) {
-							tmpArr.push('<td><a href="' + data[i+1]['url'] + '" target="_blank"><img src="' + data[i+1]['img'] + '" /></a></td>');
-						} else {
-							tmpArr.push('<td>&nbsp;</td>');
+				var animationType = 'slide';
+				var isAutoPlay = true;
+				var slideshowSpeed = 6;
+				var animationSpeed = 1;
+				var isLoopPlay = true;
+				var images = [];
+				var source ='<div class="flexslider"><ul class="slides">';
+				for (var i=0; i<len; i++) {
+					var imgLen = data[i]['images'] && data[i]['images'].length ? data[i]['images'].length : 0;
+					if (0 < imgLen) {
+						for (var j=0; j<imgLen; j++) {
+							source += '\
+								<li>\
+									<img src="' + data[i]['images'][j] + '" />\
+								</li>\
+							';
+							images.push(data[i]['images'][j]);
 						}
-						tmpArr.push('</tr>');
 					}
 				}
-				source += '<table class="table table-bordered for-plan"><tbody>' + tmpArr.join('') + '</tbody></table>';
+				source +='</ul></div>';
+				targetElem.append(source);
+				$('.flexslider')
+					.attr(
+						{
+							'data-animation'			: animationType,
+							'data-slideshow'			: isAutoPlay === true ? 1 : 0,
+							'data-slideshowSpeed'		: slideshowSpeed * 1000,
+							'data-animationDuration'	: animationSpeed * 1000,
+							'data-animationLoop'		: isLoopPlay === true ? 1 : 0,
+							'data-contents'				: images.join(',')
+						}
+					)
+					.flexslider({
+						animation				: animationType,
+						slideshow				: isAutoPlay,
+						slideshowSpeed			: slideshowSpeed * 1000,
+						animationDuration		: animationSpeed * 1000,
+						animationLoop			: isLoopPlay,
+						smoothHeight			: true
+					});
 			}
-			targetElem.html(source);
 		}
 
 		/*
@@ -229,6 +251,40 @@ jQuery(document).ready(function($){
 					targetElem.append(tagArr.join(''));
 				}
 			};
+		}
+
+		/*
+		 * 指定したエレメントに間取りエレメントを挿入するメソッド
+		 * @param	targetElem		間取りエレメントを挿入するエレメント
+		 * @param	data			間取りエレメントのデータオブジェクト
+		 * @return	void
+		 */
+		,insertPlan: function(targetElem, data) {
+			var thisObj = this;
+			var source = '';
+			var tmpArr = [];
+			var len = data.length;
+			if (0 < len) {
+				if (len === 1) {
+					tmpArr.push('<tr><td><a href="' + data[0]['url'] + '" target="_blank"><img src="' + data[0]['img'] + '" /></a></td></tr>');
+				} else {
+					if ((len % 2) !== 0) {
+						data.push({});
+					}
+					for (var i=0; i<len; i+=2) {
+						tmpArr.push('<tr>');
+						tmpArr.push('<td><a href="' + data[i]['url'] + '" target="_blank"><img src="' + data[i]['img'] + '" /></a></td>');
+						if (data[i+1]['url']) {
+							tmpArr.push('<td><a href="' + data[i+1]['url'] + '" target="_blank"><img src="' + data[i+1]['img'] + '" /></a></td>');
+						} else {
+							tmpArr.push('<td>&nbsp;</td>');
+						}
+						tmpArr.push('</tr>');
+					}
+				}
+				source += '<table class="table table-bordered for-plan"><tbody>' + tmpArr.join('') + '</tbody></table>';
+			}
+			targetElem.html(source);
 		}
 	}
 });

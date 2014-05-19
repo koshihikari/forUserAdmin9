@@ -183,23 +183,6 @@ jQuery(document).ready(function($){
 						retObj['data'] = tmpArr;
 						break;
 
-					case 'plan':
-						retObj['data'] = [];
-						for (row = 0; row < maxRow; row++) {
-							var isShow = dateData.getValue(row, 0);
-							isShow = Number(isShow) === 1 ? true : false;
-							if (isShow === true) {
-								var img = dateData.getValue(row, 1);
-								var url = dateData.getValue(row, 2);
-								var tmpObj = {
-									img		: img,
-									url		: url
-								}
-								retObj['data'].push(tmpObj);
-							}
-						}
-						break;
-
 					case 'map':
 						var obj = {data:[]};
 						for (row = 0; row < maxRow; row++) {
@@ -219,7 +202,7 @@ jQuery(document).ready(function($){
 							// console.log('');
 							obj['data'].push(tmpObj);
 						}
-						// GSに記述されているデータをGoogleMap用とメニューボタン用に分ける為に一度データを検証する
+						// GSに記述されているデータをGoogleMap用とメニューボタン用に分ける為に再度データを検証する
 						var len = obj['data'].length;
 						retObj['data'] = [];
 						for (var i=0; i<len; i++) {
@@ -257,6 +240,67 @@ jQuery(document).ready(function($){
 								}
 							}
 						};
+						break;
+
+					case 'modelroom':
+						var obj = {data:[]};
+						var prevKey = '';
+						var arr = [], prevArr = [];
+						for (row = 1; row < maxRow; row++) {
+							// GSの列の優先順位は、画像パス > キャッチコピー > ボディコピー > キャプションとし、有効な値はそれぞれの行で1列のみとする
+							var img = dateData.getValue(row, 0);
+							var chatchCopy = img === '' ? dateData.getValue(row, 1) : '';
+							var bodyCopy = img === '' && chatchCopy === '' ? dateData.getValue(row, 2) : '';
+							var caption = img === '' && chatchCopy === '' && bodyCopy === '' ? dateData.getValue(row, 3) : '';
+
+							// GSのそれぞれの行に記述されている列に応じて変数keyの値を決める
+							var key = '', val = '';
+							if (img !== '') {
+								key = 'images';
+								val = img;
+							} else if (chatchCopy !== '') {
+								key = 'chatchCopies';
+								val = chatchCopy;
+							} else if (bodyCopy !== '') {
+								key = 'bodyCopies';
+								val = bodyCopy;
+							} else if (caption !== '') {
+								key = 'captions';
+								val = caption;
+							} else {
+								continue;
+							}
+
+							// GSで1つ前の行と同じ列に値が記述されている場合、1つ前の行と同じ配列にpush
+							if (key === prevKey) {
+								prevArr.push(val);
+							// GSで1つ前の行と異なる列に値が記述されている場合、新しくオブジェクト-配列を作って、push
+							} else {
+								var tmpObj = {};
+								tmpObj[key] = [val];
+								arr.push(tmpObj)
+								prevArr = arr[arr.length-1][key];
+							}
+							prevKey = key;
+						}
+						retObj['data'] = arr;
+						break;
+
+					case 'plan':
+						retObj['data'] = [];
+						for (row = 0; row < maxRow; row++) {
+							var isShow = dateData.getValue(row, 0);
+							isShow = Number(isShow) === 1 ? true : false;
+							if (isShow === true) {
+								var img = dateData.getValue(row, 1);
+								var url = dateData.getValue(row, 2);
+								var tmpObj = {
+									img		: img,
+									url		: url
+								}
+								retObj['data'].push(tmpObj);
+							}
+						}
 						break;
 				}
 				return retObj;
