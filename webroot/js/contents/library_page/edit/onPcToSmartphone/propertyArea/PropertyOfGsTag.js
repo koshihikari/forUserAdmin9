@@ -72,6 +72,9 @@ jQuery(document).ready(function($){
 			var thisObj = this;
 			var type = '';
 			switch (thisObj._currentVal['type']) {
+				case 'information':
+					type = 'information';
+					break;
 				case 'about':
 					type = 'about';
 					break;
@@ -88,7 +91,7 @@ jQuery(document).ready(function($){
 					type = 'map';
 					break;
 				default:
-					type = 'about';
+					type = 'information';
 					break;
 			}
 			thisObj._currentVal['type'] = type;
@@ -105,11 +108,12 @@ jQuery(document).ready(function($){
 								<div class="group gs-page-type">\
 									<p>ページタイプ</p>\
 									<div class="btn-group" data-toggle="buttons-radio" data-item-name="type">\
-										<button type="button" class="btn btn-primary isAbout' + (thisObj._currentVal['type'] === 'about' ? ' active' : '') + '" data-item-name="about" data-placement="bottom" data-original-title="物件詳細ページのGSを挿入します。"><span>物件概要</span></button>\
-										<button type="button" class="btn btn-primary isMPlan' + (thisObj._currentVal['type'] === 'plan' ? ' active' : '') + '" data-item-name="plan" data-placement="bottom" data-original-title="間取りページのGSを挿入します。"><span>間取り</span></button>\
-										<button type="button" class="btn btn-primary isModelroom' + (thisObj._currentVal['type'] === 'modelroom' ? ' active' : '') + '" data-item-name="modelroom" data-placement="bottom" data-original-title="モデルルームページのGSを挿入します。"><span>モデルルーム</span></button>\
-										<button type="button" class="btn btn-primary isAppearance' + (thisObj._currentVal['type'] === 'appearance' ? ' active' : '') + '" data-item-name="appearance" data-placement="bottom" data-original-title="外観ページのGSを挿入します。"><span>外観</span></button>\
-										<button type="button" class="btn btn-primary isMap' + (thisObj._currentVal['type'] === 'map' ? ' active' : '') + '" data-item-name="map" data-placement="bottom" data-original-title="現地案内図ページのGSを挿入します。"><span>現地案内図</span></button>\
+										<button type="button" class="btn btn-primary isInformation' + (thisObj._currentVal['type'] === 'information' ? ' active' : '') + '" data-item-name="information" data-placement="bottom" data-original-title="インフォメーションページ用エレメントを挿入します。"><span>インフォメーション</span></button>\
+										<button type="button" class="btn btn-primary isAbout' + (thisObj._currentVal['type'] === 'about' ? ' active' : '') + '" data-item-name="about" data-placement="bottom" data-original-title="物件詳細ページ用エレメントを挿入します。"><span>物件概要</span></button>\
+										<button type="button" class="btn btn-primary isMPlan' + (thisObj._currentVal['type'] === 'plan' ? ' active' : '') + '" data-item-name="plan" data-placement="bottom" data-original-title="間取りページ用エレメントを挿入します。"><span>間取り</span></button>\
+										<button type="button" class="btn btn-primary isModelroom' + (thisObj._currentVal['type'] === 'modelroom' ? ' active' : '') + '" data-item-name="modelroom" data-placement="bottom" data-original-title="モデルルームページ用エレメントを挿入します。"><span>モデルルーム</span></button>\
+										<button type="button" class="btn btn-primary isAppearance' + (thisObj._currentVal['type'] === 'appearance' ? ' active' : '') + '" data-item-name="appearance" data-placement="bottom" data-original-title="外観ページ用エレメントを挿入します。"><span>外観</span></button>\
+										<button type="button" class="btn btn-primary isMap' + (thisObj._currentVal['type'] === 'map' ? ' active' : '') + '" data-item-name="map" data-placement="bottom" data-original-title="現地案内図ページ用エレメントを挿入します。"><span>現地案内図</span></button>\
 									</div>\
 								</div>\
 								<div class="group gs-preview">\
@@ -139,6 +143,9 @@ jQuery(document).ready(function($){
 			var thisObj = this;
 			var gsTag = '';
 			switch (type) {
+				case 'information':
+					gsTag = '<!--insert_gs_to_information(' + url + ')-->';
+					break;
 				case 'about':
 					gsTag = '<!--insert_gs_to_about(' + url + ')-->';
 					break;

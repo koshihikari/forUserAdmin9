@@ -8,16 +8,12 @@ jQuery(document).ready(function($){
 	MYNAMESPACE.namespace('modules.helper.GsTagLibrary');
 	MYNAMESPACE.modules.helper.GsTagLibrary = function() {
 		this._timerId = -1;
-		// this._gsData = {};
 		this._code = '';
 		this._id = '';
 		this.initialize.apply(this, arguments);
 	};
 	MYNAMESPACE.modules.helper.GsTagLibrary.prototype = {
 		_isAccess						: false
-		// ,_timerId						: -1
-		// ,_gsData						: {}
-		// ,_code							: ''
 
 		// コンストラクタ
 		,initialize: function(id) {
@@ -39,9 +35,6 @@ jQuery(document).ready(function($){
 		 */
 		,execute: function(code) {
 			var thisObj = this;
-			// console.log('---------');
-			// console.log('GsTagLibrary :: execute :: code = ' + code);
-			// console.log('---------');
 			thisObj._code = code;
 			if (thisObj._timerId) {
 				clearInterval(thisObj._timerId);
@@ -49,7 +42,6 @@ jQuery(document).ready(function($){
 			thisObj._timerId = setInterval(
 				function(event) {
 					if (window.GsManager['requestGsData']) {
-					// if (window.getGSData) {
 						clearInterval(thisObj._timerId);
 						console.log('GS展開の事前準備が完了しているので、実際の展開処理を実行');
 						console.log('thisObj._code = ' + thisObj._code);
@@ -68,13 +60,6 @@ jQuery(document).ready(function($){
 		,expandGsTag: function(code) {
 			var thisObj = this;
 			var gsInfo = thisObj.getGSInfo(code);   // WYSIWYGエディタに挿入するコードからGoogle Spreadsheetのキーを取得する
-			// console.log('code = ' + code);
-			// console.log('gsInfo');
-			// console.log(gsInfo);
-			// console.log('**********');
-			// console.log('GsTagLibrary :: expandGsTag :: _code = ' + thisObj._code);
-			// console.log('**********');
-			// Google Spreadsheetのキーが見つかった場合、下記の処理を行う
 			if (0 < gsInfo.length) {
 				var counter = 0, complete = gsInfo.length;
 				$(window).off(('onCompleteRequestData_' + thisObj._id));
@@ -90,14 +75,6 @@ jQuery(document).ready(function($){
 					window.GsManager['setGsData'](spreadsheetId, data, 'master');
 
 					counter ++;
-					// console.log('**********');
-					// console.log('GsTagLibrary :: expandGsTag :: _code = ' + thisObj._code);
-					// console.log('**********');
-					// console.log('thisObj._gsData[' + key + ']');
-					// console.log(thisObj._gsData[key]);
-					// console.log('complete = ' + complete);
-					// console.log('counter = ' + counter);
-					// console.log('');
 					if (counter === complete) {
 						$(window).off(('onCompleteRequestData_' + thisObj._id));
 						// $(window).off('onCompleteRequestData');
@@ -105,16 +82,7 @@ jQuery(document).ready(function($){
 						console.log('全てのGSデータ取得完了');
 						console.log('gsData');
 						console.log(gsData);
-					// console.log('thisObj._gsData');
-					// console.log(thisObj._gsData);
 						$(thisObj).trigger(('onCompleteExpandGsTag_' + thisObj._id));
-						// $(thisObj).trigger('onCompleteExpandGsTag', thisObj._id);
-						// $scope.$apply(function() {
-						// 	_wysiwygCode = insertGSDataToHTML(code, _gsData);
-						// 	_code = code;
-						// });
-						// $('.summernote').code(_wysiwygCode);    // WYSIWYGエディタにコードを挿入する
-						// $('.code-view').val(_code);             // 置換したコードでソースエディタを更新する
 					}
 				});
 				for (var i=0; i<complete; i++) {
@@ -139,8 +107,6 @@ jQuery(document).ready(function($){
 			var thisObj = this;
 			var row = 0;
 			var dateData = data["gid" + gid];
-			// console.log('dateData');
-			// console.log(dateData);
 			if (dateData !== null) {
 				var maxRow = dateData.getNumberOfRows();;
 				var tmpArr = [];
@@ -197,9 +163,6 @@ jQuery(document).ready(function($){
 								target		: dateData.getValue(row, 7)
 							}
 							tmpObj['target'] = tmpObj['target'] === '_blank' ? '_blank' : '_self'
-							// console.log('row = ' + row);
-							// console.log(tmpObj);
-							// console.log('');
 							obj['data'].push(tmpObj);
 						}
 						// GSに記述されているデータをGoogleMap用とメニューボタン用に分ける為に再度データを検証する
@@ -303,6 +266,52 @@ jQuery(document).ready(function($){
 							}
 						}
 						break;
+
+						/*
+					case 'information':
+						var obj = {data:[]};
+						var prevKey = '';
+						var arr = [], prevArr = [];
+						for (row = 1; row < maxRow; row++) {
+							// GSの列の優先順位は、画像パス > キャッチコピー > ボディコピー > キャプションとし、有効な値はそれぞれの行で1列のみとする
+							var img = dateData.getValue(row, 0);
+							var chatchCopy = img === '' ? dateData.getValue(row, 1) : '';
+							var bodyCopy = img === '' && chatchCopy === '' ? dateData.getValue(row, 2) : '';
+							var caption = img === '' && chatchCopy === '' && bodyCopy === '' ? dateData.getValue(row, 3) : '';
+
+							// GSのそれぞれの行に記述されている列に応じて変数keyの値を決める
+							var key = '', val = '';
+							if (img !== '') {
+								key = 'images';
+								val = img;
+							} else if (chatchCopy !== '') {
+								key = 'chatchCopies';
+								val = chatchCopy;
+							} else if (bodyCopy !== '') {
+								key = 'bodyCopies';
+								val = bodyCopy;
+							} else if (caption !== '') {
+								key = 'captions';
+								val = caption;
+							} else {
+								continue;
+							}
+
+							// GSで1つ前の行と同じ列に値が記述されている場合、1つ前の行と同じ配列にpush
+							if (key === prevKey) {
+								prevArr.push(val);
+							// GSで1つ前の行と異なる列に値が記述されている場合、新しくオブジェクト-配列を作って、push
+							} else {
+								var tmpObj = {};
+								tmpObj[key] = [val];
+								arr.push(tmpObj)
+								prevArr = arr[arr.length-1][key];
+							}
+							prevKey = key;
+						}
+						retObj['data'] = arr;
+						break;
+						*/
 				}
 				return retObj;
 			} else {
