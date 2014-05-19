@@ -129,52 +129,6 @@ jQuery(document).ready(function($){
 		}
 
 		/*
-		 * 引数codeにGoogleSpreadsheet埋め込み用コードが含まれていれば、GSのURL、ワークシートのID等を返すメソッド
-		 * @param   code:String      GSのコードが埋め込まれているか調べるソースコード
-		 * @return  Array            GSのコードが埋め込まれていれば、GSのURL、ワークシートのID等を保持する配列
-		 */
-		,getGSInfo: function(code) {
-			var thisObj = this;
-			var retArr = [], tmpArr0 = [], tmpArr1 = [], tmpArr2 = [], tmpArr3 = [];
-			var info = '';
-			var result = code.match(/<!--insert_gs_to_(.+)\(.+?\)-->/g);
-			// var result = code.match(/<!--insert_gs\(.+?\)-->/g);
-			if (result !== null) {
-				for (var i=0,len=result.length; i<len; i++) {
-					code.match(/<!--insert_gs_to_(.+)\((.+?)\)-->/);
-					// code.match(/<!--insert_gs\((.+?)\)-->/);
-					// console.log(RegExp.$1);
-					tmpArr0 = RegExp.$2.split('?');
-					// console.log("tmpArr0");
-					// console.log(tmpArr0);
-					tmpArr1 = tmpArr0[1].split('#gid=');
-					// console.log("tmpArr1");
-					// console.log(tmpArr1);
-					tmpArr2 = tmpArr1[0].split('&');
-					// console.log("tmpArr2");
-					// console.log(tmpArr2);
-					var tmpObj = {
-						pageType    : RegExp.$1,
-						url         : tmpArr0[0],
-						gid         : tmpArr1[1]
-					};
-					// console.log("tmpObj");
-					// console.log(tmpObj);
-					for (var j=0, len2=tmpArr2.length; j<len2; j++) {
-						tmpArr3 = tmpArr2[j].split('=');
-						tmpObj[tmpArr3[0]] = tmpArr3[1];
-					}
-					if (tmpObj) {
-						retArr.push(tmpObj);
-					}
-					code = code.replace(/<!--insert_gs_to_(.+)\((.+?)\)-->/, "$1");
-					// code = code.replace(/<!--insert_gs\((.+?)\)-->/, "$1");
-				}
-			}
-			return retArr;
-		}
-
-		/*
 		 * GoogleSpreadsheetから取得したデータをHTMLのコードに変換するメソッド
 		 * @param   data:Object			GoogleSpreadsheetから取得したデータ
 		 * @param   gid:String 			取得したGoogleSpreadsheetのワークシートのID
@@ -309,6 +263,52 @@ jQuery(document).ready(function($){
 			} else {
 				return {};
 			}
+		}
+
+		/*
+		 * 引数codeにGoogleSpreadsheet埋め込み用コードが含まれていれば、GSのURL、ワークシートのID等を返すメソッド
+		 * @param   code:String      GSのコードが埋め込まれているか調べるソースコード
+		 * @return  Array            GSのコードが埋め込まれていれば、GSのURL、ワークシートのID等を保持する配列
+		 */
+		,getGSInfo: function(code) {
+			var thisObj = this;
+			var retArr = [], tmpArr0 = [], tmpArr1 = [], tmpArr2 = [], tmpArr3 = [];
+			var info = '';
+			var result = code.match(/<!--insert_gs_to_(.+)\(.+?\)-->/g);
+			// var result = code.match(/<!--insert_gs\(.+?\)-->/g);
+			if (result !== null) {
+				for (var i=0,len=result.length; i<len; i++) {
+					code.match(/<!--insert_gs_to_(.+)\((.+?)\)-->/);
+					// code.match(/<!--insert_gs\((.+?)\)-->/);
+					// console.log(RegExp.$1);
+					tmpArr0 = RegExp.$2.split('?');
+					// console.log("tmpArr0");
+					// console.log(tmpArr0);
+					tmpArr1 = tmpArr0[1].split('#gid=');
+					// console.log("tmpArr1");
+					// console.log(tmpArr1);
+					tmpArr2 = tmpArr1[0].split('&');
+					// console.log("tmpArr2");
+					// console.log(tmpArr2);
+					var tmpObj = {
+						pageType    : RegExp.$1,
+						url         : tmpArr0[0],
+						gid         : tmpArr1[1]
+					};
+					// console.log("tmpObj");
+					// console.log(tmpObj);
+					for (var j=0, len2=tmpArr2.length; j<len2; j++) {
+						tmpArr3 = tmpArr2[j].split('=');
+						tmpObj[tmpArr3[0]] = tmpArr3[1];
+					}
+					if (tmpObj) {
+						retArr.push(tmpObj);
+					}
+					code = code.replace(/<!--insert_gs_to_(.+)\((.+?)\)-->/, "$1");
+					// code = code.replace(/<!--insert_gs\((.+?)\)-->/, "$1");
+				}
+			}
+			return retArr;
 		}
 	}
 });
