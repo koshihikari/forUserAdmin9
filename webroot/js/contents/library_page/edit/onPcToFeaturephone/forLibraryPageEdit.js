@@ -151,10 +151,33 @@ jQuery(document).ready(function($){
 			<input id="btn-submit-outline" type="button" value="Submit">',
 		buttonClick: helloClick
 	};
+	$.cleditor.buttons.gsInsert = {
+		name: "gsInsert",
+		image: "yt_logo.png",
+		title: "物件概要",
+		command: "inserthtml",
+		popupName: "gsInsert",
+		popupClass: "cleditorPrompt",
+		popupContent: '\
+			<div>あいうえお</div>\
+			',
+		buttonClick: gsInsertClick
+	};
 
 	// Add the button to the default controls before the bold button
 	$.cleditor.defaultOptions.controls = $.cleditor.defaultOptions.controls
-		.replace("bold", "hello bold");
+		.replace("bold", "gsInsert hello bold");
+
+	// Handle the hello button click event
+	function gsInsertClick(e, data) {
+
+		// Wire up the submit button click event
+		$(data.popup).children(":button")
+			.unbind("click")
+			.bind("click", function(e) {
+				console.log('あいうえお');
+			});
+	}
 
 	// Handle the hello button click event
 	function helloClick(e, data) {
@@ -207,21 +230,6 @@ jQuery(document).ready(function($){
 						tmpSourceArr.push('cellSpacing=' + cellSpacing + ',');
 						tmpSourceArr.push('cellPadding=' + cellPadding + ',');
 						tmpSourceArr.push('border=' + border + ' -->');
-						/*
-						tmpSourceArr.push('<!-- OutlineTableBigin -->');
-						tmpSourceArr.push('<!-- categoryFontSize=' + categoryFontSize + ' -->');
-						tmpSourceArr.push('<!-- categoryFontColor=' + categoryFontColor + ' -->');
-						tmpSourceArr.push('<!-- categoryBgColor=' + categoryBgColor + ' -->');
-						tmpSourceArr.push('<!-- keyFontSize=' + keyFontSize + ' -->');
-						tmpSourceArr.push('<!-- keyFontColor=' + keyFontColor + ' -->');
-						tmpSourceArr.push('<!-- keyBgColor=' + keyBgColor + ' -->');
-						tmpSourceArr.push('<!-- valFontSize=' + valFontSize + ' -->');
-						tmpSourceArr.push('<!-- valFontColor=' + valFontColor + ' -->');
-						tmpSourceArr.push('<!-- valBgColor=' + valBgColor + ' -->');
-						tmpSourceArr.push('<!-- cellSpacing=' + cellSpacing + ' -->');
-						tmpSourceArr.push('<!-- cellPadding=' + cellPadding + ' -->');
-						tmpSourceArr.push('<!-- border=' + border + ' -->');
-						*/
 						tmpSourceArr.push('<table width="100%" border="' + border + '" cellpadding="' + cellPadding + '" cellspacing="' + cellSpacing + '">');
 						tmpSourceArr.push('<tr><td bgcolor="' + categoryBgColor + '"><font size="' + categoryFontSize + '" color="' + categoryFontColor + '">' + outlineArr[i]['category']['key'] + '</font></td></tr>');
 						for (j=0,len2=outlineArr[i]['items'].length; j<len2; j++) {
