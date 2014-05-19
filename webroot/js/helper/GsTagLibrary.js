@@ -242,6 +242,7 @@ jQuery(document).ready(function($){
 						};
 						break;
 
+					case 'appearance':
 					case 'modelroom':
 						var obj = {data:[]};
 						var prevKey = '';

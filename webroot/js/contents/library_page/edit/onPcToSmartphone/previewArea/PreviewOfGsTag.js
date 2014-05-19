@@ -63,6 +63,7 @@ jQuery(document).ready(function($){
 							case 'about':
 								thisObj.insertAbout(contentWrapperElement, gsData['data']);
 								break;
+							case 'appearance':
 							case 'modelroom':
 								thisObj.insertGallery(contentWrapperElement, gsData['data']);
 								break;
@@ -125,30 +126,6 @@ jQuery(document).ready(function($){
 		 */
 		,insertGallery: function(targetElem, data) {
 			var thisObj = this;
-			// var source = '';
-			// var aboutLen = data.length;
-			// if (0 < aboutLen) {
-			// 	for (var aboutNum=0; aboutNum<aboutLen; aboutNum++) {
-			// 		source += '<div class="group">';
-			// 		if (data[aboutNum]['title']) {
-			// 			source += '<h3>' + data[aboutNum]['title'] + '</h3>';
-			// 		}
-			// 		if (data[aboutNum]['keyVal'] && data[aboutNum]['keyVal'].length) {
-			// 			var rowLen = data[aboutNum]['keyVal'].length;
-			// 			var tmpArr = [];
-			// 			for (var row=0; row<rowLen; row++) {
-			// 				tmpArr.push('<tr><td class="key">' + data[aboutNum]['keyVal'][row]['key'] + '</td><td class="val">' + data[aboutNum]['keyVal'][row]['val'] + '</td></tr>');
-			// 			}
-			// 			source += '<table class="table table-bordered for-about"><tbody>' + tmpArr.join('') + '</tbody></table>';
-			// 		}
-			// 		if (data[aboutNum]['note'] && data[aboutNum]['note'].length) {
-			// 			source += '<div class="note">' + data[aboutNum]['note'].join('<br>') + '</div>';
-			// 		}
-			// 		source += '</div>';
-			// 	}
-			// }
-
-
 			var len = data.length;
 			if (0 < len) {
 				var source = '', len2 = 0;
@@ -157,21 +134,25 @@ jQuery(document).ready(function($){
 				var slideshowSpeed = 6;
 				var animationSpeed = 1;
 				var isLoopPlay = true;
-				var images = [];
 				for (var i=0; i<len; i++) {
 					// 画像データが存在するなら、ギャラリー用ソースを作成
 					len2 = data[i]['images'] && data[i]['images'].length ? data[i]['images'].length : 0;
 					if (0 < len2) {
-						source +='<div class="flexslider"><ul class="slides">';
+						var images = [];
+						var contents = [];
 						for (var j=0; j<len2; j++) {
-							source += '\
-								<li>\
-									<img src="' + data[i]['images'][j] + '" />\
-								</li>\
-							';
+							contents.push('<li><img src="' + data[i]['images'][j] + '" /></li>')
 							images.push(data[i]['images'][j]);
 						}
-						source +='</ul></div>';
+						var tmpSource ='<div class="flexslider"\
+							"data-animation="' + animationType + '"\
+							"data-slideshow="' + (isAutoPlay === true ? 1 : 0) + '"\
+							"data-slideshowSpeed="' + (slideshowSpeed * 1000) + '"\
+							"data-animationDuration="' + (animationSpeed * 1000) + '"\
+							"data-animationLoop="' + (isLoopPlay === true ? 1 : 0) + '"\
+							"data-contents="' + images.join(',') + '"\
+						><ul class="slides">';
+						source += tmpSource + contents.join('') + '</ul></div>';
 					}
 
 					// キャッチコピーのデータが存在するなら、キャッチコピー用ソースを作成
@@ -205,25 +186,15 @@ jQuery(document).ready(function($){
 					}
 				}
 				targetElem.append(source);
-				// $('.flexslider')
-				// 	.attr(
-				// 		{
-				// 			'data-animation'			: animationType,
-				// 			'data-slideshow'			: isAutoPlay === true ? 1 : 0,
-				// 			'data-slideshowSpeed'		: slideshowSpeed * 1000,
-				// 			'data-animationDuration'	: animationSpeed * 1000,
-				// 			'data-animationLoop'		: isLoopPlay === true ? 1 : 0,
-				// 			'data-contents'				: images.join(',')
-				// 		}
-				// 	)
-				// 	.flexslider({
-				// 		animation				: animationType,
-				// 		slideshow				: isAutoPlay,
-				// 		slideshowSpeed			: slideshowSpeed * 1000,
-				// 		animationDuration		: animationSpeed * 1000,
-				// 		animationLoop			: isLoopPlay,
-				// 		smoothHeight			: true
-				// 	});
+				$('.flexslider')
+					.flexslider({
+						animation				: animationType,
+						slideshow				: isAutoPlay,
+						slideshowSpeed			: slideshowSpeed * 1000,
+						animationDuration		: animationSpeed * 1000,
+						animationLoop			: isLoopPlay,
+						smoothHeight			: true
+					});
 			}
 		}
 
