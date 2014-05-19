@@ -151,17 +151,19 @@ jQuery(document).ready(function($){
 
 			var len = data.length;
 			if (0 < len) {
+				var source = '', len2 = 0;
 				var animationType = 'slide';
 				var isAutoPlay = true;
 				var slideshowSpeed = 6;
 				var animationSpeed = 1;
 				var isLoopPlay = true;
 				var images = [];
-				var source ='<div class="flexslider"><ul class="slides">';
 				for (var i=0; i<len; i++) {
-					var imgLen = data[i]['images'] && data[i]['images'].length ? data[i]['images'].length : 0;
-					if (0 < imgLen) {
-						for (var j=0; j<imgLen; j++) {
+					// 画像データが存在するなら、ギャラリー用ソースを作成
+					len2 = data[i]['images'] && data[i]['images'].length ? data[i]['images'].length : 0;
+					if (0 < len2) {
+						source +='<div class="flexslider"><ul class="slides">';
+						for (var j=0; j<len2; j++) {
 							source += '\
 								<li>\
 									<img src="' + data[i]['images'][j] + '" />\
@@ -169,29 +171,59 @@ jQuery(document).ready(function($){
 							';
 							images.push(data[i]['images'][j]);
 						}
+						source +='</ul></div>';
+					}
+
+					// キャッチコピーのデータが存在するなら、キャッチコピー用ソースを作成
+					len2 = data[i]['chatchCopies'] && data[i]['chatchCopies'].length ? data[i]['chatchCopies'].length : 0;
+					if (0 < len2) {
+						var catchCopies = [];
+						for (var j=0; j<len2; j++) {
+							catchCopies.push(data[i]['chatchCopies'][j]);
+						}
+						source += '<div class="catchcopy">' + catchCopies.join('<br>') + '</div>';
+					}
+
+					// ボディコピーのデータが存在するなら、ボディコピー用ソースを作成
+					len2 = data[i]['bodyCopies'] && data[i]['bodyCopies'].length ? data[i]['bodyCopies'].length : 0;
+					if (0 < len2) {
+						var bodyCopies = [];
+						for (var j=0; j<len2; j++) {
+							bodyCopies.push(data[i]['bodyCopies'][j]);
+						}
+						source += '<div class="bodyCopy">' + bodyCopies.join('<br>') + '</div>';
+					}
+
+					// キャプションのデータが存在するなら、キャプション用ソースを作成
+					len2 = data[i]['captions'] && data[i]['captions'].length ? data[i]['captions'].length : 0;
+					if (0 < len2) {
+						var captions = [];
+						for (var j=0; j<len2; j++) {
+							captions.push(data[i]['captions'][j]);
+						}
+						source += '<div class="caption">' + captions.join('<br>') + '</div>';
 					}
 				}
-				source +='</ul></div>';
 				targetElem.append(source);
-				$('.flexslider')
-					.attr(
-						{
-							'data-animation'			: animationType,
-							'data-slideshow'			: isAutoPlay === true ? 1 : 0,
-							'data-slideshowSpeed'		: slideshowSpeed * 1000,
-							'data-animationDuration'	: animationSpeed * 1000,
-							'data-animationLoop'		: isLoopPlay === true ? 1 : 0,
-							'data-contents'				: images.join(',')
-						}
-					)
-					.flexslider({
-						animation				: animationType,
-						slideshow				: isAutoPlay,
-						slideshowSpeed			: slideshowSpeed * 1000,
-						animationDuration		: animationSpeed * 1000,
-						animationLoop			: isLoopPlay,
-						smoothHeight			: true
-					});
+				// $('.flexslider')
+				// 	.attr(
+				// 		{
+				// 			'data-animation'			: animationType,
+				// 			'data-slideshow'			: isAutoPlay === true ? 1 : 0,
+				// 			'data-slideshowSpeed'		: slideshowSpeed * 1000,
+				// 			'data-animationDuration'	: animationSpeed * 1000,
+				// 			'data-animationLoop'		: isLoopPlay === true ? 1 : 0,
+				// 			'data-contents'				: images.join(',')
+				// 		}
+				// 	)
+				// 	.flexslider({
+				// 		animation				: animationType,
+				// 		slideshow				: isAutoPlay,
+				// 		slideshowSpeed			: slideshowSpeed * 1000,
+				// 		animationDuration		: animationSpeed * 1000,
+				// 		animationLoop			: isLoopPlay,
+				// 		smoothHeight			: true
+				// 	});
 			}
 		}
 
