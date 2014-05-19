@@ -148,18 +148,35 @@ jQuery(document).ready(function($){
 					<td class="val"><input type="text" name="border" value="1" size="10"></td>\
 				</tr>\
 			</table>\
-			<input id="btn-submit-outline" type="button" value="Submit">',
+			<input id="btn-submit-outline" class="btn btn-primary" type="button" value="挿入">',
 		buttonClick: helloClick
 	};
 	$.cleditor.buttons.gsInsert = {
 		name: "gsInsert",
-		image: "yt_logo.png",
-		title: "物件概要",
+		image: "spreadsheets-icon.png",
+		title: "GS挿入",
 		command: "inserthtml",
 		popupName: "gsInsert",
 		popupClass: "cleditorPrompt",
 		popupContent: '\
-			<div>あいうえお</div>\
+			<div class="gs-insert-popup">\
+				<div class="group gs-url">\
+					<p>Google SpreadsheetのURL</p>\
+					<input type="text" name="url" value="" placeholder="GSのURLを入力してください">\
+				</div>\
+				<div class="group gs-page-type">\
+					<p>ページタイプ</p>\
+					<div class="btn-group" data-toggle="buttons-radio" data-item-name="type">\
+						<button type="button" class="btn btn-primary isInformation active" data-item-name="information" data-placement="bottom" data-original-title="インフォメーションページ用エレメントを挿入します。"><span>インフォメーション</span></button>\
+						<button type="button" class="btn btn-primary isAbout" data-item-name="about" data-placement="bottom" data-original-title="物件詳細ページ用エレメントを挿入します。"><span>物件概要</span></button>\
+						<button type="button" class="btn btn-primary isMPlan" data-item-name="plan" data-placement="bottom" data-original-title="間取りページ用エレメントを挿入します。"><span>間取り</span></button>\
+						<button type="button" class="btn btn-primary isModelroom" data-item-name="modelroom" data-placement="bottom" data-original-title="モデルルームページ用エレメントを挿入します。"><span>モデルルーム</span></button>\
+						<button type="button" class="btn btn-primary isAppearance" data-item-name="appearance" data-placement="bottom" data-original-title="外観ページ用エレメントを挿入します。"><span>外観</span></button>\
+						<button type="button" class="btn btn-primary isMap" data-item-name="map" data-placement="bottom" data-original-title="現地案内図ページ用エレメントを挿入します。"><span>現地案内図</span></button>\
+					</div>\
+				</div>\
+				<input id="btn-submit-gs-insert" class="btn btn-primary" type="button" value="挿入">\
+			</div>\
 			',
 		buttonClick: gsInsertClick
 	};
@@ -168,11 +185,10 @@ jQuery(document).ready(function($){
 	$.cleditor.defaultOptions.controls = $.cleditor.defaultOptions.controls
 		.replace("bold", "gsInsert hello bold");
 
-	// Handle the hello button click event
+	// GS挿入ボタンがクリックされた時にコールされるメソッド
 	function gsInsertClick(e, data) {
-
 		// Wire up the submit button click event
-		$(data.popup).children(":button")
+		$(data.popup).find(":button")
 			.unbind("click")
 			.bind("click", function(e) {
 				console.log('あいうえお');
