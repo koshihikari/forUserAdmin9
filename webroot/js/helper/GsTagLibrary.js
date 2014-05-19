@@ -267,32 +267,23 @@ jQuery(document).ready(function($){
 						}
 						break;
 
-						/*
 					case 'information':
 						var obj = {data:[]};
 						var prevKey = '';
 						var arr = [], prevArr = [];
 						for (row = 1; row < maxRow; row++) {
-							// GSの列の優先順位は、画像パス > キャッチコピー > ボディコピー > キャプションとし、有効な値はそれぞれの行で1列のみとする
-							var img = dateData.getValue(row, 0);
-							var chatchCopy = img === '' ? dateData.getValue(row, 1) : '';
-							var bodyCopy = img === '' && chatchCopy === '' ? dateData.getValue(row, 2) : '';
-							var caption = img === '' && chatchCopy === '' && bodyCopy === '' ? dateData.getValue(row, 3) : '';
+							// GSの列の優先順位は、タイトル > 本文とし、有効な値はそれぞれの行で1列のみとする
+							var title = dateData.getValue(row, 0);
+							var message = title === '' ? dateData.getValue(row, 1) : '';
 
 							// GSのそれぞれの行に記述されている列に応じて変数keyの値を決める
 							var key = '', val = '';
-							if (img !== '') {
-								key = 'images';
-								val = img;
-							} else if (chatchCopy !== '') {
-								key = 'chatchCopies';
-								val = chatchCopy;
-							} else if (bodyCopy !== '') {
-								key = 'bodyCopies';
-								val = bodyCopy;
-							} else if (caption !== '') {
-								key = 'captions';
-								val = caption;
+							if (title !== '') {
+								key = 'titles';
+								val = title;
+							} else if (message !== '') {
+								key = 'messages';
+								val = message;
 							} else {
 								continue;
 							}
@@ -311,7 +302,6 @@ jQuery(document).ready(function($){
 						}
 						retObj['data'] = arr;
 						break;
-						*/
 				}
 				return retObj;
 			} else {

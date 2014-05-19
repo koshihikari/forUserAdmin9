@@ -32,6 +32,7 @@ jQuery(document).ready(function($){
 				,'insertAbout'
 				,'insertGallery'
 				,'insertMap'
+				,'insertInformation'
 				,'insertPlan'
 			);
 		}
@@ -70,6 +71,9 @@ jQuery(document).ready(function($){
 								break;
 							case 'map':
 								thisObj.insertMap(contentWrapperElement, gsData['data']);
+								break;
+							case 'information':
+								thisObj.insertInformation(contentWrapperElement, gsData['data']);
 								break;
 							case 'plan':
 								thisObj.insertPlan(contentWrapperElement, gsData['data']);
@@ -196,6 +200,62 @@ jQuery(document).ready(function($){
 						animationLoop			: isLoopPlay,
 						smoothHeight			: true
 					});
+			}
+		}
+
+		/*
+		 * 指定したエレメントにインフォメーションを挿入するメソッド
+		 * @param	targetElem		インフォメーションを挿入するエレメント
+		 * @param	data			インフォメーションのデータオブジェクト
+		 * @return	void
+		 */
+		,insertInformation: function(targetElem, data) {
+			var thisObj = this;
+			var len = data.length;
+			if (0 < len) {
+				var sources = [];
+				sources.push('<dl>');
+				// var source = '', len2 = 0;
+				// var animationType = 'slide';
+				// var isAutoPlay = true;
+				// var slideshowSpeed = 6;
+				// var animationSpeed = 1;
+				// var isLoopPlay = true;
+				for (var i=0; i<len; i++) {
+					// タイトルのデータが存在するなら、タイトル用ソースを作成
+					len2 = data[i]['titles'] && data[i]['titles'].length ? data[i]['titles'].length : 0;
+					if (0 < len2) {
+						// var images = [];
+						// var contents = [];
+						for (var j=0; j<len2; j++) {
+							// contents.push('<li><img src="' + data[i]['images'][j] + '" /></li>')
+							// images.push(data[i]['images'][j]);
+							sources.push('<dt>' + data[i]['titles'][j] + '</dt>');
+						}
+						// var tmpSource ='<div class="flexslider"\
+						// 	"data-animation="' + animationType + '"\
+						// 	"data-slideshow="' + (isAutoPlay === true ? 1 : 0) + '"\
+						// 	"data-slideshowSpeed="' + (slideshowSpeed * 1000) + '"\
+						// 	"data-animationDuration="' + (animationSpeed * 1000) + '"\
+						// 	"data-animationLoop="' + (isLoopPlay === true ? 1 : 0) + '"\
+						// 	"data-contents="' + images.join(',') + '"\
+						// ><ul class="slides">';
+						// source += tmpSource + contents.join('') + '</ul></div>';
+					}
+
+					// 本文のデータが存在するなら、本文用ソースを作成
+					len2 = data[i]['messages'] && data[i]['messages'].length ? data[i]['messages'].length : 0;
+					if (0 < len2) {
+						// var catchCopies = [];
+						for (var j=0; j<len2; j++) {
+							// catchCopies.push(data[i]['chatchCopies'][j]);
+							sources.push('<dd>' + data[i]['messages'][j] + '</dd>');
+						}
+						// source += '<div class="catchcopy">' + catchCopies.join('<br>') + '</div>';
+					}
+				}
+				sources.push('</dl>');
+				targetElem.append(sources.join(''));
 			}
 		}
 
