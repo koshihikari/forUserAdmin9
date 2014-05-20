@@ -204,11 +204,7 @@ jQuery(document).ready(function($){
 						<div class="group gs-page-type">\
 							<p>ページタイプ</p>\
 							<div class="btn-group" data-toggle="buttons-radio" data-item-name="type">\
-								<button type="button" class="btn btn-primary isInformation active" data-item-name="information" data-placement="bottom" data-original-title="インフォメーションページ用エレメントを挿入します。"><span>インフォメーション</span></button>\
-								<button type="button" class="btn btn-primary isAbout" data-item-name="about" data-placement="bottom" data-original-title="物件詳細ページ用エレメントを挿入します。"><span>物件概要</span></button>\
-								<button type="button" class="btn btn-primary isMPlan" data-item-name="plan" data-placement="bottom" data-original-title="間取りページ用エレメントを挿入します。"><span>間取り</span></button>\
-								<button type="button" class="btn btn-primary isModelroom" data-item-name="modelroom" data-placement="bottom" data-original-title="モデルルームページ用エレメントを挿入します。"><span>モデルルーム</span></button>\
-								<button type="button" class="btn btn-primary isAppearance" data-item-name="appearance" data-placement="bottom" data-original-title="外観ページ用エレメントを挿入します。"><span>外観</span></button>\
+								<button type="button" class="btn btn-primary isAbout active" data-item-name="about" data-placement="bottom" data-original-title="物件詳細ページ用エレメントを挿入します。"><span>物件概要</span></button>\
 								<button type="button" class="btn btn-primary isMap" data-item-name="map" data-placement="bottom" data-original-title="現地案内図ページ用エレメントを挿入します。"><span>現地案内図</span></button>\
 							</div>\
 						</div>\
