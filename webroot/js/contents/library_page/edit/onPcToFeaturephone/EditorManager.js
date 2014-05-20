@@ -5,8 +5,8 @@ jQuery(document).ready(function($){
 	/*
 	 * エディタ管理クラス
 	 */
-	MYNAMESPACE.namespace('modules.library_page.edit.onPcToFeaturephone.EdirotManager');
-	MYNAMESPACE.modules.library_page.edit.onPcToFeaturephone.EdirotManager = function() {
+	MYNAMESPACE.namespace('modules.library_page.edit.onPcToFeaturephone.EditorManager');
+	MYNAMESPACE.modules.library_page.edit.onPcToFeaturephone.EditorManager = function() {
 		var date = new Date();
 		this._instances = [];
 		this._outlineArr = [];
@@ -15,7 +15,7 @@ jQuery(document).ready(function($){
 		this._isEventEnabled = false;
 		this.initialize.apply(this, arguments);
 	};
-	MYNAMESPACE.modules.library_page.edit.onPcToFeaturephone.EdirotManager.prototype = {
+	MYNAMESPACE.modules.library_page.edit.onPcToFeaturephone.EditorManager.prototype = {
 
 		/*
 		 * コンストラクタ
@@ -261,6 +261,10 @@ jQuery(document).ready(function($){
 					editor.execCommand(data.command, gsTag, null, data.button);
 					editor.hidePopups();
 					editor.focus();
+					thisObj._editor.updateTextArea();
+					// var code = $('#input').val();
+					// console.log('code = ' + code);
+					// thisObj.refreshCode(true);
 					// console.log('あいうえお');
 					// console.log('editor');
 					// console.log(editor);
@@ -374,7 +378,7 @@ jQuery(document).ready(function($){
 
 		/*
 		 * 編集中のHTMLのコードを更新するメソッド
-		 * @param	isEnabled		true===イベント有効
+		 * @param	void
 		 * @return	void
 		 */
 		,refreshCode: function() {
@@ -384,13 +388,13 @@ jQuery(document).ready(function($){
 			var isWysiwygMode = !thisObj._editor.sourceMode();
 			// console.log('');
 			// console.log('');
-			// console.log('isWysiwygMode = ' + isWysiwygMode);
+			console.log('isWysiwygMode = ' + isWysiwygMode);
 			// WYSIWYGモードなら、GSタグを展開する
 			if (isWysiwygMode === true) {
 				// console.log('GS展開済み');
 				var gsData = window.GsManager['getGsData']();
-				// console.log('WYSIWYGモードなら、GSタグを展開する');
-				// console.log(gsData);
+				console.log('WYSIWYGモードなら、GSタグを展開する');
+				console.log(gsData);
 				for (var spreadsheet_id in gsData) {
 					// console.log('spreadsheet_id = ' + spreadsheet_id);
 					var key = 'https://docs.google.com/spreadsheet/ccc?key=' + gsData[spreadsheet_id]['master']['key'] + '&usp=drive_web#gid=' + gsData[spreadsheet_id]['master']['gid'];
@@ -398,13 +402,13 @@ jQuery(document).ready(function($){
 					tmpGsData[key] = {
 						'source'	: thisObj.createHtmlSource(gsData[spreadsheet_id]['data'], gsData[spreadsheet_id]['pageType'])
 					};
+					console.log('key = ' + key);
+					console.log('tmpGsData');
+					console.log(tmpGsData);
 					if (tmpGsData[key]['source'] !== '') {
 						insertedCode = thisObj._instances[('GsTagLibrary_' + thisObj._id)].convertGsToHtml(code, tmpGsData, gsData[spreadsheet_id]['pageType']);
-						// console.log('key = ' + key);
-						// console.log('tmpGsData');
-						// console.log(tmpGsData);
-						// console.log('insertedCode = ' + insertedCode);
-						// console.log('');
+						console.log('insertedCode = ' + insertedCode);
+						console.log('');
 						$('#input').val(insertedCode);
 						thisObj._editor.updateFrame();
 					}
@@ -437,6 +441,8 @@ jQuery(document).ready(function($){
 				});
 				$(thisObj._instances[('GsTagLibrary_' + thisObj._id)]).on('onCompleteExpandGsTag_'+thisObj._id, thisObj.refreshCode);
 				$(thisObj._editor).on('change', function(event) {
+					// console.log('changeイベントを受信');
+					// console.log('thisObj._id = ' + thisObj._id);
 					var code = $('#input').val();
 					thisObj._instances[('GsTagLibrary_' + thisObj._id)].execute(code);
 				})

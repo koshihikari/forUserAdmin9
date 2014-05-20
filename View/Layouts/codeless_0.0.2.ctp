@@ -443,7 +443,7 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 					array_push($arr, 'contents/library_page/edit/onPcToFeaturephone/Gateway.js?' . $modified);
 					array_push($arr, 'contents/library_page/edit/onPcToFeaturephone/LayoutManager.js?' . $modified);
 					array_push($arr, 'contents/library_page/edit/onPcToFeaturephone/PageManager.js?' . $modified);
-					array_push($arr, 'contents/library_page/edit/onPcToFeaturephone/EdirotManager.js?' . $modified);
+					array_push($arr, 'contents/library_page/edit/onPcToFeaturephone/EditorManager.js?' . $modified);
 					array_push($arr, 'contents/library_page/edit/onPcToFeaturephone/forLibraryPageEdit.js?' . $modified);
 				}
 				break;

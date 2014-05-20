@@ -37,6 +37,8 @@ jQuery(document).ready(function($){
 		 */
 		,execute: function(code) {
 			var thisObj = this;
+			console.log('GsTagLibrary :: execute');
+			console.log('	thisObj._id = ' + thisObj._id);
 			thisObj._code = code;
 			if (thisObj._timerId) {
 				clearInterval(thisObj._timerId);
