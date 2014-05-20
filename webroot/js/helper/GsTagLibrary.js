@@ -25,6 +25,7 @@ jQuery(document).ready(function($){
 				,'expandGsTag'
 				,'getGSInfo'
 				,'convertData'
+				,'insertGSDataToHTML'
 			);
 		}
 
@@ -318,12 +319,12 @@ jQuery(document).ready(function($){
 			var thisObj = this;
 			var retArr = [], tmpArr0 = [], tmpArr1 = [], tmpArr2 = [], tmpArr3 = [];
 			var info = '';
+			// var result = code.match(/<!--insert_gs_to_(.+)([_bigin]*)\(.+?\)-->/g);
 			var result = code.match(/<!--insert_gs_to_(.+)\(.+?\)-->/g);
-			// var result = code.match(/<!--insert_gs\(.+?\)-->/g);
 			if (result !== null) {
 				for (var i=0,len=result.length; i<len; i++) {
+					// code.match(/<!--insert_gs_to_(.+)([_bigin]*)\((.+?)\)-->/);
 					code.match(/<!--insert_gs_to_(.+)\((.+?)\)-->/);
-					// code.match(/<!--insert_gs\((.+?)\)-->/);
 					// console.log(RegExp.$1);
 					tmpArr0 = RegExp.$2.split('?');
 					// console.log("tmpArr0");
@@ -334,8 +335,10 @@ jQuery(document).ready(function($){
 					tmpArr2 = tmpArr1[0].split('&');
 					// console.log("tmpArr2");
 					// console.log(tmpArr2);
+					var pageType = RegExp.$1.split('_');
 					var tmpObj = {
-						pageType    : RegExp.$1,
+						pageType    : pageType[0],
+						// pageType    : RegExp.$1,
 						url         : tmpArr0[0],
 						gid         : tmpArr1[1]
 					};
@@ -348,11 +351,41 @@ jQuery(document).ready(function($){
 					if (tmpObj) {
 						retArr.push(tmpObj);
 					}
+					// code = code.replace(/<!--insert_gs_to_(.+)([_bigin]*)\((.+?)\)-->/, "$1");
 					code = code.replace(/<!--insert_gs_to_(.+)\((.+?)\)-->/, "$1");
-					// code = code.replace(/<!--insert_gs\((.+?)\)-->/, "$1");
 				}
 			}
 			return retArr;
+		}
+
+		/*
+		* 引数codeにGoogleSpreadsheetから生成したHTMLのコードを挿入するメソッド
+		* @param	code:String		挿入前のHTMLソース
+		* @param	gsData:Object	GoogleSpreadsheetから取得したデータ
+		* @param	pageType:String	埋め込むGoogleSpreadsheetのページタイプ
+		* @return	String			挿入後のHTMLソース
+		*/
+		,insertGSDataToHTML: function(code, gsData, pageType) {
+			var thisObj = this;
+			var label = '';
+			// console.log('pageType = ' + pageType);
+			for (var key in gsData) {
+				// console.log('------------------');
+				// console.log('key');
+				// console.log(key);
+				var tmpKey = key.replace(/\//g, '\\/');
+				tmpKey = tmpKey.replace(/\?/g, '\\?');
+				// console.log('tmpKey');
+				// console.log(tmpKey);
+				var re = new RegExp("<!--insert_gs_to_" + pageType + "\\((" + tmpKey + ")\\)-->");
+				// var re = new RegExp("<!--insert_gs\\((" + tmpKey + ")\\)-->");
+				// console.log('re');
+				// console.log(re);
+				// console.log('------------------');
+				code = code.replace(re, '<!--insert_gs_to_' + pageType + '_bigin(' + "$1" + ')-->' + gsData[key]['source'] + '<!--insert_gs_end-->');
+				// code = code.replace(re, '<!--insert_gs_bigin(' + "$1" + ')-->' + gsData[key]['source'] + '<!--insert_gs_end-->');
+			}
+			return code;
 		}
 	}
 });

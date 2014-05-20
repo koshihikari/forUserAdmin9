@@ -372,8 +372,10 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 
 			case 'editInLibrary':
 			case 'editInPage':
-				if ($deviceName === 'Smartphone') {
 					array_push($arr, '//www.google.com/jsapi');
+					array_push($arr, 'helper/gsManager.js?' . $modified);
+					array_push($arr, 'helper/GsTagLibrary.js?' . $modified);
+				if ($deviceName === 'Smartphone') {
 					array_push($arr, '//maps.google.com/maps/api/js?sensor=false&language=ja');
 
 					array_push($arr, '../plugin/procolor-1.0/prototype.compressed.js?' . $modified);
@@ -382,8 +384,6 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 					array_push($arr, '../plugin/jquery-ui-1.9.2.custom/js/jquery-ui-1.9.2.custom.js?' . $modified);
 					array_push($arr, '../plugin/woothemes-FlexSlider-54e6d31/jquery.flexslider.js?' . $modified);
 
-					array_push($arr, 'helper/gsManager.js?' . $modified);
-					array_push($arr, 'helper/GsTagLibrary.js?' . $modified);
 					array_push($arr, 'helper/DropUploader.js?' . $modified);
 					array_push($arr, 'helper/InsertImageModalManager.js?' . $modified);
 					array_push($arr, 'helper/Modal/SelectLinkPageModalManager.js?' . $modified);
@@ -443,6 +443,7 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 					array_push($arr, 'contents/library_page/edit/onPcToFeaturephone/Gateway.js?' . $modified);
 					array_push($arr, 'contents/library_page/edit/onPcToFeaturephone/LayoutManager.js?' . $modified);
 					array_push($arr, 'contents/library_page/edit/onPcToFeaturephone/PageManager.js?' . $modified);
+					array_push($arr, 'contents/library_page/edit/onPcToFeaturephone/EdirotManager.js?' . $modified);
 					array_push($arr, 'contents/library_page/edit/onPcToFeaturephone/forLibraryPageEdit.js?' . $modified);
 				}
 				break;
