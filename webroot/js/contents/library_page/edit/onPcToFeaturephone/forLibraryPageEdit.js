@@ -3,7 +3,7 @@
 var outlineArr = [];
 jQuery.noConflict();
 jQuery(document).ready(function($){
-	console.log('a');
+	// console.log('a');
 
 	/*
 	// Define the hello button
@@ -294,7 +294,7 @@ jQuery(document).ready(function($){
 	*/
 	var DataManager						= new MYNAMESPACE.modules.library_page.edit.onPcToFeaturephone.DataManager();
 	outlineArr = DataManager.getProp()['outlines'];
-	console.log(outlineArr);
+	// console.log(outlineArr);
 	var EdirotManager					= new MYNAMESPACE.modules.library_page.edit.onPcToFeaturephone.EdirotManager(outlineArr);
 	var editor = EdirotManager.getEditor();
 	var Util							= new MYNAMESPACE.modules.helper.Util();

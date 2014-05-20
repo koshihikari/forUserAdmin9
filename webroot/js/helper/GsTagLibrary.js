@@ -25,7 +25,8 @@ jQuery(document).ready(function($){
 				,'expandGsTag'
 				,'getGSInfo'
 				,'convertData'
-				,'insertGSDataToHTML'
+				,'convertGsToHtml'
+				,'convertHtmlToGs'
 			);
 		}
 
@@ -44,6 +45,7 @@ jQuery(document).ready(function($){
 				function(event) {
 					if (window.GsManager['requestGsData']) {
 						clearInterval(thisObj._timerId);
+						console.log('----------');
 						console.log('GS展開の事前準備が完了しているので、実際の展開処理を実行');
 						console.log('thisObj._code = ' + thisObj._code);
 						thisObj.expandGsTag(thisObj._code);
@@ -63,6 +65,7 @@ jQuery(document).ready(function($){
 			var gsInfo = thisObj.getGSInfo(code);   // WYSIWYGエディタに挿入するコードからGoogle Spreadsheetのキーを取得する
 			if (0 < gsInfo.length) {
 				var counter = 0, complete = gsInfo.length;
+				console.log('取得するGSの個数は = ' + complete);
 				$(window).off(('onCompleteRequestData_' + thisObj._id));
 				$(window).on(('onCompleteRequestData_' + thisObj._id), function(event, data) {
 					var spreadsheetId = window.GsManager['getSpreadsheetId'](data.key, data.gid);
@@ -112,7 +115,7 @@ jQuery(document).ready(function($){
 				var maxRow = dateData.getNumberOfRows();;
 				var tmpArr = [];
 				var retObj = {};
-				console.log('map :: maxRow = ' + maxRow);
+				// console.log('map :: maxRow = ' + maxRow);
 				switch (pageType) {
 					case 'about':
 						retObj['data'] = [];
@@ -365,7 +368,7 @@ jQuery(document).ready(function($){
 		* @param	pageType:String	埋め込むGoogleSpreadsheetのページタイプ
 		* @return	String			挿入後のHTMLソース
 		*/
-		,insertGSDataToHTML: function(code, gsData, pageType) {
+		,convertGsToHtml: function(code, gsData, pageType) {
 			var thisObj = this;
 			var label = '';
 			// console.log('pageType = ' + pageType);
@@ -385,6 +388,34 @@ jQuery(document).ready(function($){
 				code = code.replace(re, '<!--insert_gs_to_' + pageType + '_bigin(' + "$1" + ')-->' + gsData[key]['source'] + '<!--insert_gs_end-->');
 				// code = code.replace(re, '<!--insert_gs_bigin(' + "$1" + ')-->' + gsData[key]['source'] + '<!--insert_gs_end-->');
 			}
+			return code;
+		}
+
+		/*
+		* 引数codeからGoogleSpreadsheetから生成したHTMLのコードを取り除くメソッド
+		* @param   code:String      GoogleSpreadsheetから生成したコードが挿入済みのHTMLソース
+		* @return  String           GoogleSpreadsheetから生成したコードを挿入前の状態に戻したHTMLソース
+		*/
+		,convertHtmlToGs: function(code) {
+			var result = code.match(/<!--insert_gs_to_(.+)_bigin\((.*?)\)-->([\s\S]*?)<!--insert_gs_end-->/g);
+			// console.log('-------------');
+			// console.log('code');
+			// console.log(code);
+			// console.log('result');
+			// console.log(result);
+			// console.log();
+			// console.log('$1');
+			// console.log(RegExp.$1);
+			// console.log();
+			// console.log('$2');
+			// console.log(RegExp.$2);
+			// console.log();
+			// console.log('$3');
+			// console.log(RegExp.$3);
+			code = code.replace(/<!--insert_gs_to_(.+)_bigin\((.*?)\)-->([\s\S]*?)<!--insert_gs_end-->/g, ("<!--insert_gs_to_" + RegExp.$1 + "(" + RegExp.$2.replace('\\', '') + ")-->"));
+			// console.log('code');
+			// console.log(code);
+			// console.log('-------------');
 			return code;
 		}
 	}
