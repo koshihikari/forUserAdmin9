@@ -188,6 +188,7 @@ jQuery(document).ready(function($){
 					<input id="btn-submit-outline" class="btn btn-primary" type="button" value="挿入">',
 				buttonClick: thisObj.onClickInsertAbout
 			};
+			var gsUrl = 'https://docs.google.com/spreadsheet/ccc?key=0AtvxJEe7IC7ndFNfbjhXZnIwQnVNOGFraFVGOEtUaHc&usp=drive_web#gid=4';
 			$.cleditor.buttons.gsInsert = {
 				name: "gsInsert",
 				image: "spreadsheets-icon.png",
@@ -199,13 +200,13 @@ jQuery(document).ready(function($){
 					<div class="gs-insert-popup">\
 						<div class="group gs-url">\
 							<p>Google SpreadsheetのURL</p>\
-							<input type="text" name="url" value="" placeholder="GSのURLを入力してください">\
+							<input type="text" name="url" value="' + gsUrl + '" placeholder="GSのURLを入力してください">\
 						</div>\
 						<div class="group gs-page-type">\
 							<p>ページタイプ</p>\
 							<div class="btn-group" data-toggle="buttons-radio" data-item-name="type">\
-								<button type="button" class="btn btn-primary isAbout active" data-item-name="about" data-placement="bottom" data-original-title="物件詳細ページ用エレメントを挿入します。"><span>物件概要</span></button>\
-								<button type="button" class="btn btn-primary isMap" data-item-name="map" data-placement="bottom" data-original-title="現地案内図ページ用エレメントを挿入します。"><span>現地案内図</span></button>\
+								<button type="button" class="btn btn-primary isAbout" data-item-name="about" data-placement="bottom" data-original-title="物件詳細ページ用エレメントを挿入します。"><span>物件概要</span></button>\
+								<button type="button" class="btn btn-primary isMap active" data-item-name="map" data-placement="bottom" data-original-title="現地案内図ページ用エレメントを挿入します。"><span>現地案内図</span></button>\
 							</div>\
 						</div>\
 						<input id="btn-submit-gs-insert" class="btn btn-primary" type="button" value="挿入">\
@@ -405,6 +406,43 @@ jQuery(document).ready(function($){
 					}
 					sources.push('</dl>');
 					*/
+				} else if (pageType === 'map') {
+					for (var i=0; i<len; i++) {
+						// タイトル、緯度、経度、ズームレベル、住所が入力されていればGoogleMapを埋め込む
+						if (data[i]['lat']) {
+							sources.push('<div>');
+							sources.push('<h3 style="text-align:center;">' + data[i]['title'] + '</h3>');
+							sources.push('<div><img src="http://maps.google.com/maps/api/staticmap?center=' + data[i]['lat'] + ',' + data[i]['lng'] + '&zoom=' + data[i]['zoom'] + '&format=gif&markers=' + data[i]['lat'] + ',' + data[i]['lng'] + '&size=232x240&sensor=false"></div>');
+							sources.push('<div style="text-align:center;">' + data[i]['address'] + '</div>');
+							sources.push('</div>');
+							sources.push('<br>');
+						}
+
+
+
+
+						// var tmpArr = [];
+						// sources.push('<div class="group">');
+						// if (data[i]['title']) {
+						// 	tmpArr.push('<tr><td bgcolor="' + categoryBgColor + '"><font size="' + categoryFontSize + '" color="' + categoryFontColor + '">' + data[i]['title'] + '</font></td></tr>');
+						// 	// sources.push('<h3>' + data[i]['title'] + '</h3>');
+						// }
+						// if (data[i]['keyVal'] && data[i]['keyVal'].length) {
+						// 	var len2 = data[i]['keyVal'].length;
+						// 	// var tmpArr = [];
+						// 	for (var j=0; j<len2; j++) {
+						// 		tmpArr.push('<tr><td bgcolor="' + keyBgColor + '"><font size="' + keyFontSize + '" color="' + keyFontColor + '">' + data[i]['keyVal'][j]['key'] + '</font></td></tr>');
+						// 		tmpArr.push('<td bgcolor="' + valBgColor + '"><font size="' + valFontSize + '" color="' + valFontColor + '">' + data[i]['keyVal'][j]['val'] + '</font></td></tr>');
+						// 		// tmpArr.push('<tr><td class="key">' + data[i]['keyVal'][j]['key'] + '</td><td class="val">' + data[i]['keyVal'][j]['val'] + '</td></tr>');
+						// 	}
+						// 	sources.push('<table  width="100%" border="' + border + '" cellpadding="' + cellPadding + '" cellspacing="' + cellSpacing + '"><tbody>' + tmpArr.join('') + '</tbody></table><br>');
+						// 	// sources.push('<table class="table table-bordered for-about"><tbody>' + tmpArr.join('') + '</tbody></table>');
+						// }
+						// if (data[i]['note'] && data[i]['note'].length) {
+						// 	sources.push('<div class="note">' + data[i]['note'].join('<br>') + '</div>');
+						// }
+						// sources.push('</div>');
+					}
 				}
 				return sources.join('');
 			} else {
