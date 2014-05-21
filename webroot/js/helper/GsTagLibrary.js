@@ -373,21 +373,21 @@ jQuery(document).ready(function($){
 		,convertGsToHtml: function(code, gsData, pageType) {
 			var thisObj = this;
 			var label = '';
-			console.log('code = ' + code);
-			console.log('pageType = ' + pageType);
+			// console.log('code = ' + code);
+			// console.log('pageType = ' + pageType);
 			for (var key in gsData) {
-				console.log('------------------');
-				console.log('key');
-				console.log(key);
+				// console.log('------------------');
+				// console.log('key');
+				// console.log(key);
 				var tmpKey = key.replace(/\//g, '\\/');
 				tmpKey = tmpKey.replace(/\?/g, '\\?');
-				console.log('tmpKey');
-				console.log(tmpKey);
+				// console.log('tmpKey');
+				// console.log(tmpKey);
 				var re = new RegExp("<!--insert_gs_to_" + pageType + "\\((" + tmpKey + ")\\)-->");
 				// var re = new RegExp("<!--insert_gs\\((" + tmpKey + ")\\)-->");
-				console.log('re');
-				console.log(re);
-				console.log('------------------');
+				// console.log('re');
+				// console.log(re);
+				// console.log('------------------');
 				code = code.replace(re, '<!--insert_gs_to_' + pageType + '_bigin(' + "$1" + ')-->' + gsData[key]['source'] + '<!--insert_gs_end-->');
 				// code = code.replace(re, '<!--insert_gs_bigin(' + "$1" + ')-->' + gsData[key]['source'] + '<!--insert_gs_end-->');
 			}

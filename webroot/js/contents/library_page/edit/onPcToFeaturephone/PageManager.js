@@ -20,11 +20,12 @@ jQuery(document).ready(function($){
 		 * @param	void
 		 * @return	void
 		 */
-		,initialize: function(dataManager, editor) {
+		,initialize: function(dataManager, editor, gsTagLibrary, id) {
 			var thisObj = this;
 			this._instances = {
 				'DataManager'		: dataManager
 			};
+			this._instances['GsTagLibrary_' + this._id] = gsTagLibrary;
 			this._editor = editor;
 			_.bindAll(
 				this
@@ -41,7 +42,10 @@ jQuery(document).ready(function($){
 		,onClickSaveBtnHandler: function(event) {
 			var thisObj = this;
 			var source = $("iframe").contents().find("body").html();
-			thisObj._instances['DataManager'].setPageSource(source);
+			var convertedSouce = thisObj._instances['GsTagLibrary_' + thisObj._id].convertHtmlToGs(source);
+			console.log('convertedSouce = ' + convertedSouce);
+			thisObj._instances['DataManager'].setPageSource(convertedSouce);
+			// thisObj._instances['DataManager'].setPageSource(source);
 		}
 
 		/*
