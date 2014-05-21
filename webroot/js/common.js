@@ -2,34 +2,6 @@
 
 jQuery.noConflict();
 jQuery(document).ready(function($){
-//$(function() {
-	/*
-	$("#switchSidebar").on('click', function(event) {
-		var elem = $("#wrapper");
-		var targetMarginLeft = 0;
-		var isShow = 1;
-		if (elem.attr('data-is-show') === '1') {
-			targetMarginLeft = -200;
-			isShow = 0;
-		}
-		elem
-			.stop(true)
-			.attr('data-is-show', isShow)
-			.animate(
-				{
-					'margin-left'	: targetMarginLeft
-				},
-				{
-					'duration'	: 200,
-					'easing'	: 'linear',
-					'complete'	: function(event) {
-					}
-				}
-			);
-
-		return false;
-	});
-	*/
 	var timerId = setTimeout(function() {
 		operable();
 	}, 3000);
@@ -43,13 +15,6 @@ jQuery(document).ready(function($){
 	$('*[data-placement][data-original-title]').tooltip();
 
 
-	// $('#simple-menu').sidr(
-	// {
-	// 	source : function(event) {
-	// 		console.log('aaaaa');
-	// 	}
-	// }
-	// );
 	if (0 < $('#simple-menu').length) {
 		$('#simple-menu')
 			.sidr()
@@ -67,4 +32,12 @@ jQuery(document).ready(function($){
 				}
 			});
 	}
-})
+});
+(function () {
+	if (typeof window.console === "undefined") {
+		window.console = {}
+	}
+	if (typeof window.console.log !== "function") {
+		window.console.log = function () {}
+	}
+})();
