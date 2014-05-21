@@ -339,33 +339,73 @@ jQuery(document).ready(function($){
 
 		/*
 		 * HTMLソース作成メソッド
-		 * @param	data		データオブジェクト
+		 * @param	data			データオブジェクト
+		 * @param	pageType		GSデータのページタイプ
 		 * @return	void
 		 */
-		,createHtmlSource: function(data) {
+		,createHtmlSource: function(data, pageType) {
 			var thisObj = this;
 			var len = data && data.length ? data.length : 0;
 			if (0 < len) {
 				var sources = [];
-				sources.push('<dl>');
-				for (var i=0; i<len; i++) {
-					// タイトルのデータが存在するなら、タイトル用ソースを作成
-					len2 = data[i]['titles'] && data[i]['titles'].length ? data[i]['titles'].length : 0;
-					if (0 < len2) {
-						for (var j=0; j<len2; j++) {
-							sources.push('<dt>' + data[i]['titles'][j] + '</dt>');
+				if (pageType === 'about') {
+					var border = 1;
+					var cellSpacing = 0;
+					var cellPadding = 2;
+					var categoryFontSize = 3;
+					var categoryFontColor = '#000';
+					var categoryBgColor = '#fff';
+					var keyFontSize = 2;
+					var keyFontColor = '#000';
+					var keyBgColor = '#e9e9e9';
+					var valFontSize = 2;
+					var valFontColor = '#000';
+					var valBgColor = '#fff';
+					for (var i=0; i<len; i++) {
+						var tmpArr = [];
+						sources.push('<div class="group">');
+						if (data[i]['title']) {
+							tmpArr.push('<tr><td bgcolor="' + categoryBgColor + '"><font size="' + categoryFontSize + '" color="' + categoryFontColor + '">' + data[i]['title'] + '</font></td></tr>');
+							// sources.push('<h3>' + data[i]['title'] + '</h3>');
 						}
+						if (data[i]['keyVal'] && data[i]['keyVal'].length) {
+							var len2 = data[i]['keyVal'].length;
+							// var tmpArr = [];
+							for (var j=0; j<len2; j++) {
+								tmpArr.push('<tr><td bgcolor="' + keyBgColor + '"><font size="' + keyFontSize + '" color="' + keyFontColor + '">' + data[i]['keyVal'][j]['key'] + '</font></td></tr>');
+								tmpArr.push('<td bgcolor="' + valBgColor + '"><font size="' + valFontSize + '" color="' + valFontColor + '">' + data[i]['keyVal'][j]['val'] + '</font></td></tr>');
+								// tmpArr.push('<tr><td class="key">' + data[i]['keyVal'][j]['key'] + '</td><td class="val">' + data[i]['keyVal'][j]['val'] + '</td></tr>');
+							}
+							sources.push('<table  width="100%" border="' + border + '" cellpadding="' + cellPadding + '" cellspacing="' + cellSpacing + '"><tbody>' + tmpArr.join('') + '</tbody></table><br>');
+							// sources.push('<table class="table table-bordered for-about"><tbody>' + tmpArr.join('') + '</tbody></table>');
+						}
+						if (data[i]['note'] && data[i]['note'].length) {
+							sources.push('<div class="note">' + data[i]['note'].join('<br>') + '</div>');
+						}
+						sources.push('</div>');
 					}
+					/*
+					sources.push('<dl>');
+					for (var i=0; i<len; i++) {
+						// タイトルのデータが存在するなら、タイトル用ソースを作成
+						len2 = data[i]['titles'] && data[i]['titles'].length ? data[i]['titles'].length : 0;
+						if (0 < len2) {
+							for (var j=0; j<len2; j++) {
+								sources.push('<dt>' + data[i]['titles'][j] + '</dt>');
+							}
+						}
 
-					// 本文のデータが存在するなら、本文用ソースを作成
-					len2 = data[i]['messages'] && data[i]['messages'].length ? data[i]['messages'].length : 0;
-					if (0 < len2) {
-						for (var j=0; j<len2; j++) {
-							sources.push('<dd>' + data[i]['messages'][j] + '</dd>');
+						// 本文のデータが存在するなら、本文用ソースを作成
+						len2 = data[i]['messages'] && data[i]['messages'].length ? data[i]['messages'].length : 0;
+						if (0 < len2) {
+							for (var j=0; j<len2; j++) {
+								sources.push('<dd>' + data[i]['messages'][j] + '</dd>');
+							}
 						}
 					}
+					sources.push('</dl>');
+					*/
 				}
-				sources.push('</dl>');
 				return sources.join('');
 			} else {
 				return '';
