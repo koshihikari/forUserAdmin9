@@ -14,19 +14,24 @@ jQuery(document).ready(function($){
 		this._editor = null;
 		this._prevCode = '';
 		this._isEventEnabled = false;
+		this._isEditPage = false;
 		this.initialize.apply(this, arguments);
 	};
 	MYNAMESPACE.modules.library_page.edit.onPcToFeaturephone.EditorManager.prototype = {
 
 		/*
 		 * コンストラクタ
-		 * @param	void
+		 * @param	outlineArr 			物件概要データ配列
+		 * @param	gsTagLibrary		GSタグライブラリのインスタンス
+		 * @param	id 					ID
+		 * @param	isEditPage 			true === このクラスのインスタンスが作られたのはガラケー用ページ編集画面、false === このクラスのインスタンスが作られたのはガラケー用ページプレビュー画面
 		 * @return	void
 		 */
-		initialize: function(outlineArr, gsTagLibrary, id) {
+		initialize: function(outlineArr, gsTagLibrary, id, isEditPage) {
 			var thisObj = this;
 			this._outlineArr = outlineArr;
 			this._id = id;
+			this._isEditPage = isEditPage;
 			this._instances = {};
 			this._instances['GsTagLibrary_' + this._id] = gsTagLibrary;
 			// this._instances['GsTagLibrary_' + thisObj._id] = new MYNAMESPACE.modules.helper.GsTagLibrary(thisObj._id);
@@ -41,8 +46,8 @@ jQuery(document).ready(function($){
 				,'refreshCode'
 				,'setEvent'
 			);
-			this.defineCustomButton();
-			this.doEnabled();
+			// this.defineCustomButton();
+			// this.doEnabled();
 		}
 
 		/*
@@ -445,18 +450,18 @@ jQuery(document).ready(function($){
 		 */
 		,refreshCode: function() {
 			var thisObj = this;
-			var code = $('#input').val();
+			var code = '';
 			var insertedCode = '';
-			var isWysiwygMode = !thisObj._editor.sourceMode();
+			var isWysiwygMode = thisObj._isEditPage === false ? false : !thisObj._editor.sourceMode();
 			// console.log('');
 			// console.log('');
-			console.log('isWysiwygMode = ' + isWysiwygMode);
+			// console.log('isWysiwygMode = ' + isWysiwygMode);
 			// WYSIWYGモードなら、GSタグを展開する
-			if (isWysiwygMode === true) {
+			if (isWysiwygMode === true || thisObj._isEditPage === false) {
 				// console.log('GS展開済み');
 				var gsData = window.GsManager['getGsData']();
-				console.log('WYSIWYGモードなら、GSタグを展開する');
-				console.log(gsData);
+				// console.log('WYSIWYGモードなら、GSタグを展開する');
+				// console.log(gsData);
 				for (var spreadsheet_id in gsData) {
 					// console.log('spreadsheet_id = ' + spreadsheet_id);
 					var key = 'https://docs.google.com/spreadsheet/ccc?key=' + gsData[spreadsheet_id]['master']['key'] + '&usp=drive_web#gid=' + gsData[spreadsheet_id]['master']['gid'];
@@ -464,23 +469,31 @@ jQuery(document).ready(function($){
 					tmpGsData[key] = {
 						'source'	: thisObj.createHtmlSource(gsData[spreadsheet_id]['data'], gsData[spreadsheet_id]['pageType'])
 					};
-					console.log('key = ' + key);
-					console.log('tmpGsData');
-					console.log(tmpGsData);
+					// console.log('key = ' + key);
+					// console.log('tmpGsData');
+					// console.log(tmpGsData);
 					if (tmpGsData[key]['source'] !== '') {
-						code = $('#input').val();
-						console.log('code = ' + code);
-						console.log('');
-						insertedCode = thisObj._instances[('GsTagLibrary_' + thisObj._id)].convertGsToHtml(code, tmpGsData, gsData[spreadsheet_id]['pageType']);
-						console.log('insertedCode = ' + insertedCode);
-						console.log('');
-						thisObj._prevCode = insertedCode;
-						$('#input').val(insertedCode);
-						thisObj._editor.updateFrame();
+						// このクラスのインスタンスが作られたのはガラケー用ページ編集画面の場合、WYSIWYGエディタを更新する
+						if (thisObj._isEditPage === true) {
+							code = $('#input').val();
+							// console.log('code = ' + code);
+							// console.log('');;
+							insertedCode = thisObj._instances[('GsTagLibrary_' + thisObj._id)].convertGsToHtml(code, tmpGsData, gsData[spreadsheet_id]['pageType']);
+							// console.log('insertedCode = ' + insertedCode);
+							// console.log('');
+							thisObj._prevCode = insertedCode;
+							$('#input').val(insertedCode);
+							thisObj._editor.updateFrame();
+						// このクラスのインスタンスが作られたのはガラケー用ページプレビュー画面の場合、bodyのコードを更新する
+						} else {
+							code = $('body').html();
+							insertedCode = thisObj._instances[('GsTagLibrary_' + thisObj._id)].convertGsToHtml(code, tmpGsData, gsData[spreadsheet_id]['pageType']);
+							$('body').html(insertedCode);
+						}
 					}
 				}
-				console.log('---------------------');
-				console.log('');
+				// console.log('---------------------');
+				// console.log('');
 			// コード編集モードなら、GSタグを収束する
 			} else {
 				// console.log('code = ' + code);
@@ -502,33 +515,32 @@ jQuery(document).ready(function($){
 		,setEvent: function(isEnabled) {
 			var thisObj = this;
 			if (isEnabled === true && thisObj._isEventEnabled === false) {
-				$('.cleditorToolbar > div > div').on('click', function(event) {
-					var targetElement = $(event.currentTarget);
-					if (targetElement.attr('title') === 'Show Source' || targetElement.attr('title') === 'Show Rich Text') {
-						thisObj.refreshCode();
-					}
-				});
 				$(thisObj._instances[('GsTagLibrary_' + thisObj._id)]).on('onCompleteExpandGsTag_'+thisObj._id, thisObj.refreshCode);
-				$(thisObj._editor).on('change', function(event) {
-					var code = $('#input').val();
-					console.log('changeイベントを受信');
-					console.log('thisObj._id = ' + thisObj._id);
-					console.log('thisObj._prevCode = ' + thisObj._prevCode);
-					console.log('code = ' + code);
-					if (thisObj._prevCode !== code) {
-						thisObj._instances[('GsTagLibrary_' + thisObj._id)].execute(code);
-					}
-				})
-				// .on('button', function(event, btnName) {
-				// 	console.log('btnName = ' + btnName);
-				// })
-				// $(editor).triggerHandler('button', buttonName);
+				if (thisObj._isEditPage === true) {
+					$('.cleditorToolbar > div > div').on('click', function(event) {
+						var targetElement = $(event.currentTarget);
+						if (targetElement.attr('title') === 'Show Source' || targetElement.attr('title') === 'Show Rich Text') {
+							thisObj.refreshCode();
+						}
+					});
+					$(thisObj._editor).on('change', function(event) {
+						var code = $('#input').val();
+						// console.log('changeイベントを受信');
+						// console.log('thisObj._id = ' + thisObj._id);
+						// console.log('thisObj._prevCode = ' + thisObj._prevCode);
+						// console.log('code = ' + code);
+						if (thisObj._prevCode !== code) {
+							thisObj._instances[('GsTagLibrary_' + thisObj._id)].execute(code);
+						}
+					});
+				}
 
 			} else if (isEnabled === false && thisObj._isEventEnabled === true) {
-				$('.cleditorToolbar > div > div').on('click');
 				$(instances[('GsTagLibrary_' + thisObj._id)]).off('onCompleteExpandGsTag_'+thisObj._id);
-				$(thisObj._editor).off('change');
-				// $(window).off('inssertGs');
+				if (thisObj._isEditPage === true) {
+					$('.cleditorToolbar > div > div').on('click');
+					$(thisObj._editor).off('change');
+				}
 			}
 		}
 	}

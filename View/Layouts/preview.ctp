@@ -78,7 +78,7 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 		}
 	?>
 	<?php
-		if ($deviceName === 'Smartphone') {
+		// if ($deviceName === 'Smartphone') {
 			echo $this->Html->script(
 			array(
 				'../plugin/jquery-1.8.2/jquery-1.8.2.min.js',
@@ -102,7 +102,7 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 				'common.js?' . $modified
 			)
 			);
-		}
+		// }
 	?>
 
 	<?php
@@ -171,6 +171,14 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 			array_push($arr, 'contents/library_page/edit/testOnPcToSmartphone/TestReorder.js?' . $modified);
 
 			array_push($arr, 'contents/library_page/edit/onPcToSmartphone/forLibraryPageEdit.js?' . $modified);
+			echo $this->Html->script($arr);
+		} else if ($deviceName === 'Featurephone') {
+			$arr = array();
+			array_push($arr, '//www.google.com/jsapi');
+			array_push($arr, 'helper/gsManager.js?' . $modified);
+			array_push($arr, 'helper/GsTagLibrary.js?' . $modified);
+			array_push($arr, 'contents/library_page/edit/onPcToFeaturephone/EditorManager.js?' . $modified);
+			array_push($arr, 'contents/page/preview/onPcToFeaturephone/forPreviewPage.js?' . $modified);
 			echo $this->Html->script($arr);
 		}
 	?>

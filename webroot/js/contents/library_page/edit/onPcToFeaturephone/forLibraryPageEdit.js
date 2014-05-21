@@ -3,13 +3,15 @@
 var outlineArr = [];
 jQuery.noConflict();
 jQuery(document).ready(function($){
-	var date = new Date();
-	var id = 'id_' + date.getTime();
 	var DataManager						= new MYNAMESPACE.modules.library_page.edit.onPcToFeaturephone.DataManager();
 	outlineArr = DataManager.getProp()['outlines'];
+	var date = new Date();
+	var id = 'id_' + date.getTime();
 	var GsTagLibrary					= new MYNAMESPACE.modules.helper.GsTagLibrary(id);
-	var EditorManager					= new MYNAMESPACE.modules.library_page.edit.onPcToFeaturephone.EditorManager(outlineArr, GsTagLibrary, id);
+	var EditorManager					= new MYNAMESPACE.modules.library_page.edit.onPcToFeaturephone.EditorManager(outlineArr, GsTagLibrary, id, true);
 	// var EditorManager					= new MYNAMESPACE.modules.library_page.edit.onPcToFeaturephone.EditorManager(outlineArr);
+	EditorManager.defineCustomButton();
+	EditorManager.doEnabled();
 	var editor = EditorManager.getEditor();
 	var Util							= new MYNAMESPACE.modules.helper.Util();
 	var LayoutManager					= new MYNAMESPACE.modules.library_page.edit.onPcToFeaturephone.LayoutManager(editor);

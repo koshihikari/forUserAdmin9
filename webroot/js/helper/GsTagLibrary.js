@@ -37,8 +37,8 @@ jQuery(document).ready(function($){
 		 */
 		,execute: function(code) {
 			var thisObj = this;
-			console.log('GsTagLibrary :: execute');
-			console.log('	thisObj._id = ' + thisObj._id);
+			// console.log('GsTagLibrary :: execute');
+			// console.log('	thisObj._id = ' + thisObj._id);
 			thisObj._code = code;
 			if (thisObj._timerId) {
 				clearInterval(thisObj._timerId);
@@ -47,9 +47,9 @@ jQuery(document).ready(function($){
 				function(event) {
 					if (window.GsManager['requestGsData']) {
 						clearInterval(thisObj._timerId);
-						console.log('----------');
-						console.log('GS展開の事前準備が完了しているので、実際の展開処理を実行');
-						console.log('thisObj._code = ' + thisObj._code);
+						// console.log('----------');
+						// console.log('GS展開の事前準備が完了しているので、実際の展開処理を実行');
+						// console.log('thisObj._code = ' + thisObj._code);
 						thisObj.expandGsTag(thisObj._code);
 					}
 				},
@@ -67,7 +67,7 @@ jQuery(document).ready(function($){
 			var gsInfo = thisObj.getGSInfo(code);   // WYSIWYGエディタに挿入するコードからGoogle Spreadsheetのキーを取得する
 			if (0 < gsInfo.length) {
 				var counter = 0, complete = gsInfo.length;
-				console.log('取得するGSの個数は = ' + complete);
+				// console.log('取得するGSの個数は = ' + complete);
 				$(window).off(('onCompleteRequestData_' + thisObj._id));
 				$(window).on(('onCompleteRequestData_' + thisObj._id), function(event, data) {
 					var spreadsheetId = window.GsManager['getSpreadsheetId'](data.key, data.gid);
@@ -81,14 +81,14 @@ jQuery(document).ready(function($){
 					window.GsManager['setGsData'](spreadsheetId, data, 'master');
 
 					counter ++;
-					console.log('counter = ' + counter);
+					// console.log('counter = ' + counter);
 					if (counter === complete) {
 						$(window).off(('onCompleteRequestData_' + thisObj._id));
 						// $(window).off('onCompleteRequestData');
 						var gsData = window.GsManager['getGsData']();
-						console.log('全てのGSデータ取得完了');
-						console.log('gsData');
-						console.log(gsData);
+						// console.log('全てのGSデータ取得完了');
+						// console.log('gsData');
+						// console.log(gsData);
 						$(thisObj).trigger(('onCompleteExpandGsTag_' + thisObj._id));
 					}
 				});
@@ -118,7 +118,7 @@ jQuery(document).ready(function($){
 				var maxRow = dateData.getNumberOfRows();;
 				var tmpArr = [];
 				var retObj = {};
-				console.log('pageType = '+ pageType);
+				// console.log('pageType = '+ pageType);
 				// console.log('map :: maxRow = ' + maxRow);
 				switch (pageType) {
 					case 'about':
@@ -404,29 +404,29 @@ jQuery(document).ready(function($){
 		,convertHtmlToGs: function(code) {
 			var result = code.match(/<!--insert_gs_to_(.+)_bigin\((.*?)\)-->([\s\S]*?)<!--insert_gs_end-->/g);
 			// var result = code.match(/<!--insert_gs_to_(.+)_bigin\((.*?)\)-->([\s\S]*?)<!--insert_gs_end-->/g);
-			console.log('');
-			console.log('-------------');
-			console.log('code');
-			console.log(code);
-			console.log('result');
-			console.log(result);
-			console.log();
+			// console.log('');
+			// console.log('-------------');
+			// console.log('code');
+			// console.log(code);
+			// console.log('result');
+			// console.log(result);
+			// console.log();
 			if (result) {
 				for (var i=0,len=result.length; i<len; i++) {
 					var result = code.match(/<!--insert_gs_to_(.+)_bigin\((.*?)\)-->([\s\S]*?)<!--insert_gs_end-->/);
-					console.log('$1');
-					console.log(RegExp.$1);
-					console.log();
-					console.log('$2');
-					console.log(RegExp.$2);
-					console.log();
-					console.log('$3');
-					console.log(RegExp.$3);
+					// console.log('$1');
+					// console.log(RegExp.$1);
+					// console.log();
+					// console.log('$2');
+					// console.log(RegExp.$2);
+					// console.log();
+					// console.log('$3');
+					// console.log(RegExp.$3);
 					code = code.replace(/<!--insert_gs_to_(.+)_bigin\((.*?)\)-->([\s\S]*?)<!--insert_gs_end-->/, ("<!--insert_gs_to_" + RegExp.$1 + "(" + RegExp.$2.replace('\\', '') + ")-->"));
-					console.log('code');
-					console.log(code);
-					console.log('-------------');
-					console.log('');
+					// console.log('code');
+					// console.log(code);
+					// console.log('-------------');
+					// console.log('');
 				}
 			}
 			// console.log('$1');
