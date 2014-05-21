@@ -81,7 +81,7 @@ jQuery(document).ready(function($){
 				'pageId'					: $('input[type="hidden"][name="pageId"]').val(),
 				'outlines'					: eval("(" + $('input[type="hidden"][name="outlines"]').val() + ")")
 			}
-			console.log(thisObj._prop);
+			// console.log(thisObj._prop);
 		}
 
 		/*

@@ -12,6 +12,7 @@ jQuery(document).ready(function($){
 		this._outlineArr = [];
 		this._id = 'id_' + date.getTime();
 		this._editor = null;
+		this._prevCode = '';
 		this._isEventEnabled = false;
 		this.initialize.apply(this, arguments);
 	};
@@ -57,6 +58,14 @@ jQuery(document).ready(function($){
 					height:'100%'
 				}
 			)[0].focus();
+
+			if ($('#input').val() !== '') {
+				console.log('テキスト有り');
+				var code = $('#input').val();
+				thisObj._instances[('GsTagLibrary_' + thisObj._id)].execute(code);
+				// thisObj.refreshCode();
+				// thisObj._editor.updateFrame();
+			}
 		}
 
 		/*
@@ -190,7 +199,8 @@ jQuery(document).ready(function($){
 					<input id="btn-submit-outline" class="btn btn-primary" type="button" value="挿入">',
 				buttonClick: thisObj.onClickInsertAbout
 			};
-			var gsUrl = 'https://docs.google.com/spreadsheet/ccc?key=0AtvxJEe7IC7ndFNfbjhXZnIwQnVNOGFraFVGOEtUaHc&usp=drive_web#gid=4';
+			// var gsUrl = 'https://docs.google.com/spreadsheet/ccc?key=0AtvxJEe7IC7ndFNfbjhXZnIwQnVNOGFraFVGOEtUaHc&usp=drive_web#gid=4';
+			var gsUrl = '';
 			$.cleditor.buttons.gsInsert = {
 				name: "gsInsert",
 				image: "spreadsheets-icon.png",
@@ -207,8 +217,8 @@ jQuery(document).ready(function($){
 						<div class="group gs-page-type">\
 							<p>ページタイプ</p>\
 							<div class="btn-group" data-toggle="buttons-radio" data-item-name="type">\
-								<button type="button" class="btn btn-primary isAbout" data-item-name="about" data-placement="bottom" data-original-title="物件詳細ページ用エレメントを挿入します。"><span>物件概要</span></button>\
-								<button type="button" class="btn btn-primary isMap active" data-item-name="map" data-placement="bottom" data-original-title="現地案内図ページ用エレメントを挿入します。"><span>現地案内図</span></button>\
+								<button type="button" class="btn btn-primary isAbout active" data-item-name="about" data-placement="bottom" data-original-title="物件詳細ページ用エレメントを挿入します。"><span>物件概要</span></button>\
+								<button type="button" class="btn btn-primary isMap" data-item-name="map" data-placement="bottom" data-original-title="現地案内図ページ用エレメントを挿入します。"><span>現地案内図</span></button>\
 							</div>\
 						</div>\
 						<input id="btn-submit-gs-insert" class="btn btn-primary" type="button" value="挿入">\
@@ -458,16 +468,23 @@ jQuery(document).ready(function($){
 					console.log('tmpGsData');
 					console.log(tmpGsData);
 					if (tmpGsData[key]['source'] !== '') {
+						code = $('#input').val();
+						console.log('code = ' + code);
+						console.log('');
 						insertedCode = thisObj._instances[('GsTagLibrary_' + thisObj._id)].convertGsToHtml(code, tmpGsData, gsData[spreadsheet_id]['pageType']);
 						console.log('insertedCode = ' + insertedCode);
 						console.log('');
+						thisObj._prevCode = insertedCode;
 						$('#input').val(insertedCode);
 						thisObj._editor.updateFrame();
 					}
 				}
+				console.log('---------------------');
+				console.log('');
 			// コード編集モードなら、GSタグを収束する
 			} else {
 				// console.log('code = ' + code);
+				code = $('#input').val();
 				insertedCode = thisObj._instances[('GsTagLibrary_' + thisObj._id)].convertHtmlToGs(code);
 				$('#input').val(insertedCode);
 				thisObj._editor.updateFrame();
@@ -493,10 +510,14 @@ jQuery(document).ready(function($){
 				});
 				$(thisObj._instances[('GsTagLibrary_' + thisObj._id)]).on('onCompleteExpandGsTag_'+thisObj._id, thisObj.refreshCode);
 				$(thisObj._editor).on('change', function(event) {
-					// console.log('changeイベントを受信');
-					// console.log('thisObj._id = ' + thisObj._id);
 					var code = $('#input').val();
-					thisObj._instances[('GsTagLibrary_' + thisObj._id)].execute(code);
+					console.log('changeイベントを受信');
+					console.log('thisObj._id = ' + thisObj._id);
+					console.log('thisObj._prevCode = ' + thisObj._prevCode);
+					console.log('code = ' + code);
+					if (thisObj._prevCode !== code) {
+						thisObj._instances[('GsTagLibrary_' + thisObj._id)].execute(code);
+					}
 				})
 				// .on('button', function(event, btnName) {
 				// 	console.log('btnName = ' + btnName);

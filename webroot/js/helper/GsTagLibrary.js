@@ -81,10 +81,11 @@ jQuery(document).ready(function($){
 					window.GsManager['setGsData'](spreadsheetId, data, 'master');
 
 					counter ++;
+					console.log('counter = ' + counter);
 					if (counter === complete) {
 						$(window).off(('onCompleteRequestData_' + thisObj._id));
 						// $(window).off('onCompleteRequestData');
-						var gsData = window.GsManager['getGsData'](spreadsheetId);
+						var gsData = window.GsManager['getGsData']();
 						console.log('全てのGSデータ取得完了');
 						console.log('gsData');
 						console.log(gsData);
@@ -117,6 +118,7 @@ jQuery(document).ready(function($){
 				var maxRow = dateData.getNumberOfRows();;
 				var tmpArr = [];
 				var retObj = {};
+				console.log('pageType = '+ pageType);
 				// console.log('map :: maxRow = ' + maxRow);
 				switch (pageType) {
 					case 'about':
@@ -175,7 +177,7 @@ jQuery(document).ready(function($){
 						var len = obj['data'].length;
 						retObj['data'] = [];
 						for (var i=0; i<len; i++) {
-							console.log('i = ' + i);
+							// console.log('i = ' + i);
 							// タイトル、緯度、経度、ズームレベル、住所が入力されていればGoogleMapのデータ
 							if (
 								obj['data'][i]['title'] !== null && obj['data'][i]['title'] !== '' &&
@@ -184,15 +186,15 @@ jQuery(document).ready(function($){
 								obj['data'][i]['zoom'] !== null && obj['data'][i]['zoom'] !== '' &&
 								obj['data'][i]['address'] !== null && obj['data'][i]['address'] !== ''
 							) {
-								console.log('	GoogleMapのデータ');
+								// console.log('	GoogleMapのデータ');
 								retObj['data'].push(obj['data'][i]);
 
 							// ボタン名、URLが入力されていればリンクボタンのデータ
 							} else {
-								console.log('	リンクボタンのデータかも');
+								// console.log('	リンクボタンのデータかも');
 								var btnArr = [];
 								for (i=i; i<len; i++) {
-									console.log('		i = ' + i + ', リンクボタンのデータです');
+									// console.log('		i = ' + i + ', リンクボタンのデータです');
 									if (
 										obj['data'][i]['btnName'] !== null && obj['data'][i]['btnName'] !== '' &&
 										obj['data'][i]['url'] !== null && obj['data'][i]['url'] !== '' &&
@@ -401,12 +403,32 @@ jQuery(document).ready(function($){
 		*/
 		,convertHtmlToGs: function(code) {
 			var result = code.match(/<!--insert_gs_to_(.+)_bigin\((.*?)\)-->([\s\S]*?)<!--insert_gs_end-->/g);
-			// console.log('-------------');
-			// console.log('code');
-			// console.log(code);
-			// console.log('result');
-			// console.log(result);
-			// console.log();
+			// var result = code.match(/<!--insert_gs_to_(.+)_bigin\((.*?)\)-->([\s\S]*?)<!--insert_gs_end-->/g);
+			console.log('');
+			console.log('-------------');
+			console.log('code');
+			console.log(code);
+			console.log('result');
+			console.log(result);
+			console.log();
+			if (result) {
+				for (var i=0,len=result.length; i<len; i++) {
+					var result = code.match(/<!--insert_gs_to_(.+)_bigin\((.*?)\)-->([\s\S]*?)<!--insert_gs_end-->/);
+					console.log('$1');
+					console.log(RegExp.$1);
+					console.log();
+					console.log('$2');
+					console.log(RegExp.$2);
+					console.log();
+					console.log('$3');
+					console.log(RegExp.$3);
+					code = code.replace(/<!--insert_gs_to_(.+)_bigin\((.*?)\)-->([\s\S]*?)<!--insert_gs_end-->/, ("<!--insert_gs_to_" + RegExp.$1 + "(" + RegExp.$2.replace('\\', '') + ")-->"));
+					console.log('code');
+					console.log(code);
+					console.log('-------------');
+					console.log('');
+				}
+			}
 			// console.log('$1');
 			// console.log(RegExp.$1);
 			// console.log();
@@ -415,10 +437,12 @@ jQuery(document).ready(function($){
 			// console.log();
 			// console.log('$3');
 			// console.log(RegExp.$3);
-			code = code.replace(/<!--insert_gs_to_(.+)_bigin\((.*?)\)-->([\s\S]*?)<!--insert_gs_end-->/g, ("<!--insert_gs_to_" + RegExp.$1 + "(" + RegExp.$2.replace('\\', '') + ")-->"));
+			// code = code.replace(/<!--insert_gs_to_(.+)_bigin\((.*?)\)-->([\s\S]*?)<!--insert_gs_end-->/g, ("<!--insert_gs_to_" + RegExp.$1 + "(" + RegExp.$2.replace('\\', '') + ")-->"));
+			// // code = code.replace(/<!--insert_gs_to_(.+)_bigin\((.*?)\)-->([\s\S]*?)<!--insert_gs_end-->/g, ("<!--insert_gs_to_" + RegExp.$1 + "(" + RegExp.$2.replace('\\', '') + ")-->"));
 			// console.log('code');
 			// console.log(code);
 			// console.log('-------------');
+			// console.log('');
 			return code;
 		}
 	}
