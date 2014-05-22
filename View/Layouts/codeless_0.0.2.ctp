@@ -225,6 +225,8 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 
 					// array_push($arr, 'helper/ConcretePageManagerForFeaturephone.js?' . $modified);
 					array_push($arr, 'helper/ConcretePageManager/SpConcretePageManager.js?' . $modified);
+					array_push($arr, 'helper/ConcretePageManager/FpConcretePageManager.js?' . $modified);
+					array_push($arr, 'contents/library_page/edit/onPcToFeaturephone/EditorManager.js?' . $modified);
 					array_push($arr, 'contents/library_page/edit/onPcToSmartphone/RenderingManager.js?' . $modified);
 					array_push($arr, 'contents/outline/edit/onPcToSmartphone/DataManager.js?' . $modified);
 

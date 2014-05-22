@@ -654,7 +654,46 @@ jQuery(document).ready(function($){
 		 * @param	updateData		更新するデータ
 		 * @return	void
 		 */
-		,publishFpPage: function(residenceId, pageId, title, path) {
+		,publishFpPage: function(residenceId, pageId, title, path, concrete_source) {
+			console.log('');
+			console.log('----------');
+			console.log('AppModel.js :: publishFpPageメソッド');
+			var thisObj = this;
+			var prop = thisObj._prop;
+			var url = thisObj._prop['currentUrl'] + 'Main/publishFpPage/';
+			var sendData = {
+				'device_name'				: 'featurephone',
+				'device_num'				: 8,
+				'company_id'				: prop['companyId'],
+				'user_id'					: prop['userId'],
+				'residence_id'				: residenceId,
+				'page_id'					: pageId,
+				'title'						: title,
+				'path'						: path,
+				'concrete_source'			: concrete_source
+			};
+			var eventNames = {
+				'initEventName'				: 'onInitPublishConcretePageForFp',
+				'completeEventName'			: 'onCompletePublishConcretePageForFp',
+				'errorEventName'			: 'onErrorPublishConcretePageForFp'
+			};
+			var callback = function(data) {
+				console.log('リクエスト完了');
+				console.log(data);
+				console.log('----------');
+				if (data['result'] === true) {
+					$(thisObj).trigger('onSuccessPublishConcretePageForFp');
+					// $(thisObj).trigger(eventNames['completeEventName']);
+				} else {
+					$(thisObj).trigger(eventNames['errorEventName'], recordId);
+				}
+			}
+			thisObj.access(url, sendData, eventNames, callback);
+		}
+		,DEL_publishFpPage: function(residenceId, pageId, title, path) {
+			console.log('');
+			console.log('----------');
+			console.log('AppModel.js :: publishFpPageメソッド');
 			var thisObj = this;
 			var prop = thisObj._prop;
 			var url = thisObj._prop['currentUrl'] + 'Main/publishFpPage/';
@@ -676,6 +715,7 @@ jQuery(document).ready(function($){
 			var callback = function(data) {
 				console.log('リクエスト完了');
 				console.log(data);
+				console.log('----------');
 				if (data['result'] === true) {
 					$(thisObj).trigger('onSuccessPublishConcretePageForFp');
 					// $(thisObj).trigger(eventNames['completeEventName']);
@@ -808,88 +848,46 @@ jQuery(document).ready(function($){
 			thisObj.access(url, sendData, eventNames, callback);
 		}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 		/*
-		 * ページタグを削除するメソッド
-		 * @param	tagId		タグID
+		 * ガラケーページのデータを取得するメソッド
+		 * @param	recordId	ページのレコードID
 		 * @return	void
 		 */
-		// ,delPageTag: function(tagId, pageId) {
-		// 	var thisObj = this;
-		// 	var prop = thisObj._prop;
-		// 	var url = thisObj._prop['currentUrl'] + 'Main/delPageTag/';
-		// 	var sendData = {
-		// 		'device_name'				: 'smartphone',
-		// 		'device_num'				: 2,
-		// 		'id'						: tagId
-		// 	};
-		// 	var eventNames = {
-		// 		'initEventName'				: 'onInitDelPageTag',
-		// 		'completeEventName'			: 'onCompleteDelPageTag',
-		// 		'errorEventName'			: 'onErrorDelPageTag'
-		// 	};
-		// 	var callback = function(data) {
-		// 		console.log('リクエスト完了');
-		// 		console.log(data);
-		// 		console.log('is true === ' + (data['result'] === true));
-		// 		if (data['result'] === true) {
-		// 			$(thisObj).trigger('onSuccessDelPageTag', [data]);
-		// 		} else {
-		// 			$(thisObj).trigger(eventNames['errorEventName']);
-		// 		}
-		// 	}
-		// 	thisObj.access(url, sendData, eventNames, callback);
-		// }
+		,getPageData: function(recordId, deviceName) {
+			console.log('');
+			console.log('----------');
+			console.log('AppModel.js :: getPageDataメソッド');
+			console.log('recordId = ' + recordId);
+			console.log('deviceName = ' + deviceName);
+			console.log('----------');
+			var thisObj = this;
+			var prop = thisObj._prop;
+			var url = thisObj._prop['currentUrl'] + 'Main/requestSinglePageData/';
+			var sendData = {
+				'device_num'				: 2,
+				'device_name'				: deviceName,
+				'page_id'					: recordId
+			};
+			var eventNames = {
+				'initEventName'				: 'onInitGetPageData',
+				'completeEventName'			: 'onCompleteGetPageData',
+				'errorEventName'			: 'onErrorGetPageData'
+			};
+			var callback = function(data) {
+				console.log('');
+				console.log('----------');
+				console.log('AppModel.js :: getPageDataメソッド :: handler');
+				console.log('data');
+				console.log(data);
+				if (data['result'] === true) {
+					$(thisObj).trigger('onSuccessGetPageData', [data['data']]);
+				} else {
+					$(thisObj).trigger(eventNames['errorEventName']);
+				}
+			}
+			thisObj.access(url, sendData, eventNames, callback);
+		}
 
-		/*
-		 * タグを並び替えるメソッド
-		 * @param	tagId				タグID
-		 * @param	order				並び替えた後のタグのindex
-		 * @param	pageIdArr			並び替えるタグが属するページのID
-		 * @return	void
-		 */
-		// ,reorderPageTag: function(tagId, order, pageId) {
-		// 	var thisObj = this;
-		// 	var prop = thisObj._prop;
-		// 	var currentInfo = thisObj.getCurrentInfo();
-		// 	var url = thisObj._prop['currentUrl'] + 'Main/reorderPageTag/';
-		// 	var sendData = {
-		// 		'device_name'				: 'smartphone',
-		// 		'device_num'				: 2,
-		// 		'user_id'					: prop['userId'],
-		// 		'id'						: tagId,
-		// 		'order'						: order,
-		// 		'page_id'					: pageId
-		// 	};
-		// 	var eventNames = {
-		// 		'initEventName'				: 'onInitReorderPageTag',
-		// 		'completeEventName'			: 'onCompleteReorderPageTag',
-		// 		'errorEventName'			: 'onErrorReorderPageTag'
-		// 	};
-		// 	var callback = function(data) {
-		// 		if (data['result'] === true) {
-		// 			$(thisObj).trigger('onSuccessreorderPageTag');
-		// 		} else {
-		// 			$(thisObj).trigger(eventNames['errorEventName']);
-		// 		}
-		// 	}
-		// 	thisObj.access(url, sendData, eventNames, callback);
-		// }
 
 
 

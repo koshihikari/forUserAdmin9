@@ -14,7 +14,7 @@ jQuery(document).ready(function($){
 		this._editor = null;
 		this._prevCode = '';
 		this._isEventEnabled = false;
-		this._isEditPage = false;
+		this._pageType = '';
 		this.initialize.apply(this, arguments);
 	};
 	MYNAMESPACE.modules.library_page.edit.onPcToFeaturephone.EditorManager.prototype = {
@@ -24,14 +24,14 @@ jQuery(document).ready(function($){
 		 * @param	outlineArr 			物件概要データ配列
 		 * @param	gsTagLibrary		GSタグライブラリのインスタンス
 		 * @param	id 					ID
-		 * @param	isEditPage 			true === このクラスのインスタンスが作られたのはガラケー用ページ編集画面、false === このクラスのインスタンスが作られたのはガラケー用ページプレビュー画面
+		 * @param	pageType 			editPage === このクラスのインスタンスが作られたのはガラケー用ページ編集画面、previewPage === このクラスのインスタンスが作られたのはガラケー用ページプレビュー画面、concretePage === このクラスのインスタンスが作られたのはガラケー用静的ページ出力画面
 		 * @return	void
 		 */
-		initialize: function(outlineArr, gsTagLibrary, id, isEditPage) {
+		initialize: function(outlineArr, gsTagLibrary, id, pageType) {
 			var thisObj = this;
 			this._outlineArr = outlineArr;
 			this._id = id;
-			this._isEditPage = isEditPage;
+			this._pageType = pageType;
 			this._instances = {};
 			this._instances['GsTagLibrary_' + this._id] = gsTagLibrary;
 			// this._instances['GsTagLibrary_' + thisObj._id] = new MYNAMESPACE.modules.helper.GsTagLibrary(thisObj._id);
@@ -406,7 +406,7 @@ jQuery(document).ready(function($){
 							sources.push('<div>');
 							sources.push('<h3 style="text-align:center;">' + data[i]['title'] + '</h3>');
 							sources.push('<div><img src="http://maps.google.com/maps/api/staticmap?center=' + data[i]['lat'] + ',' + data[i]['lng'] + '&zoom=' + data[i]['zoom'] + '&format=gif&markers=' + data[i]['lat'] + ',' + data[i]['lng'] + '&size=232x240&sensor=false"></div>');
-							sources.push('<div style="text-align:center;">' + data[i]['address'] + '</div>');
+							sources.push('<div style="text-align:center;"><font face="Arial, Verdana" size="2">' + data[i]['address'] + '</font></div>');
 							sources.push('</div>');
 							sources.push('<br>');
 						}
@@ -452,12 +452,13 @@ jQuery(document).ready(function($){
 			var thisObj = this;
 			var code = '';
 			var insertedCode = '';
-			var isWysiwygMode = thisObj._isEditPage === false ? false : !thisObj._editor.sourceMode();
+			// var isWysiwygMode = thisObj._isEditPage === false ? false : !thisObj._editor.sourceMode();
+			var isWysiwygMode = thisObj._pageType === 'editPage' ? !thisObj._editor.sourceMode() : false;
 			// console.log('');
 			// console.log('');
 			// console.log('isWysiwygMode = ' + isWysiwygMode);
 			// WYSIWYGモードなら、GSタグを展開する
-			if (isWysiwygMode === true || thisObj._isEditPage === false) {
+			if (isWysiwygMode === true || thisObj._pageType !== 'editPage') {
 				// console.log('GS展開済み');
 				var gsData = window.GsManager['getGsData']();
 				// console.log('WYSIWYGモードなら、GSタグを展開する');
@@ -474,7 +475,7 @@ jQuery(document).ready(function($){
 					// console.log(tmpGsData);
 					if (tmpGsData[key]['source'] !== '') {
 						// このクラスのインスタンスが作られたのはガラケー用ページ編集画面の場合、WYSIWYGエディタを更新する
-						if (thisObj._isEditPage === true) {
+						if (thisObj._pageType === 'editPage') {
 							code = $('#input').val();
 							// console.log('code = ' + code);
 							// console.log('');;
@@ -485,10 +486,16 @@ jQuery(document).ready(function($){
 							$('#input').val(insertedCode);
 							thisObj._editor.updateFrame();
 						// このクラスのインスタンスが作られたのはガラケー用ページプレビュー画面の場合、bodyのコードを更新する
-						} else {
+						} else if (thisObj._pageType === 'previewPage') {
 							code = $('body').html();
 							insertedCode = thisObj._instances[('GsTagLibrary_' + thisObj._id)].convertGsToHtml(code, tmpGsData, gsData[spreadsheet_id]['pageType']);
 							$('body').html(insertedCode);
+						// このクラスのインスタンスが作られたのはガラケー用本番ページ書き出し画面の場合、コードを返す
+						} else if (thisObj._pageType === 'concretePage') {
+							code = $('#tmp').html();
+							insertedCode = thisObj._instances[('GsTagLibrary_' + thisObj._id)].convertGsToHtml(code, tmpGsData, gsData[spreadsheet_id]['pageType']);
+							$(thisObj).trigger('onCompleteRefreshCode', insertedCode);
+							// $('body').html(insertedCode);
 						}
 					}
 				}

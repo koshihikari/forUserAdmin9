@@ -40,7 +40,8 @@ jQuery(document).ready(function($){
 				{
 					'RenderingManager'		: new MYNAMESPACE.modules.library_page.edit.onPcToSmartphone.RenderingManager()
 				}
-			)
+			);
+			this._instances['FpConcretePageManager'] = new MYNAMESPACE.modules.helper.ConcretePageManager.FpConcretePageManager(thisObj._instances['AppModel']);
 		}
 
 		/*
@@ -103,7 +104,8 @@ jQuery(document).ready(function($){
 					thisObj._instances['SpConcretePageManager'].publish(residenceId, pageId, title, path, true);
 				} else if (deviceType === 'fp') {
 					console.log('----------');
-					thisObj._instances['AppModel'].publishFpPage(residenceId, pageId, title, path);
+					thisObj._instances['FpConcretePageManager'].publish(residenceId, pageId, title, path);
+					// thisObj._instances['AppModel'].publishFpPage(residenceId, pageId, title, path);
 				} else {
 					console.log('SPでもFPでも無いページをパブリッシュしようとしています。');
 					console.log('----------');
@@ -273,6 +275,12 @@ jQuery(document).ready(function($){
 						}
 					)
 				$(thisObj._instances['SpConcretePageManager'])
+					.on('onCompleteStaticPagePublish',
+						function(event) {
+							thisObj.bulkPublish();
+						}
+					)
+				$(thisObj._instances['FpConcretePageManager'])
 					.on('onCompleteStaticPagePublish',
 						function(event) {
 							thisObj.bulkPublish();

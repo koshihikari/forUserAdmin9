@@ -43,7 +43,11 @@ class Featurephone_PagePublishBehavior extends ModelBehavior {
 			if (isset($data['edited']) && $data['edited']) {
 				$saveData['edited'] = $data['edited'];
 			}
+			if (isset($data['concrete_source']) && $data['concrete_source']) {
+				$saveData['concrete_source'] = $data['concrete_source'];
+			}
 
+			/*
 			// プレビューソースが渡されたら、プレビューソースと本番ソースを両方上書きする
 			if (isset($data['preview_source']) && $data['preview_source']) {
 				$saveData['preview_source'] = $data['preview_source'];
@@ -60,6 +64,7 @@ class Featurephone_PagePublishBehavior extends ModelBehavior {
 				$result = $featurephone_pages->find('first', $options);
 				$saveData['concrete_source'] = $result['featurephone_pages']['preview_source'];
 			}
+			*/
 
 			if (is_array($featurephone_pages->save($saveData)) === true) {
 				$featurephone_pages->commit();

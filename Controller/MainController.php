@@ -53,6 +53,7 @@ class MainController extends AppController {
 			switch ($methodName) {
 				case 'request':
 				case 'getPageTag':
+				case 'requestSinglePageData':
 					$isSuccess = true;
 					break;
 						/*
@@ -94,7 +95,6 @@ class MainController extends AppController {
 					$class = ClassRegistry::init('Main_BulkUpdateOutlineDataAction');
 					$isSuccess = $class->bulkUpdateOutlineData($request);
 					break;
-
 				case 'addPage':
 					$isSuccess = ClassRegistry::init('Main_AddPageAction')->addPage($request);
 					break;
@@ -117,16 +117,6 @@ class MainController extends AppController {
 					$class = ClassRegistry::init('Main_SetPageTagDataAction');
 					$isSuccess = $class->setPageTagData($request);
 					break;
-				// case 'setPageTag':
-				// 	$class = ClassRegistry::init('Main_SetPageTagAction');
-				// 	$isSuccess = $class->setPageTag($request);
-				// 	break;
-				// case 'delPageTag':
-				// 	$isSuccess = ClassRegistry::init('Main_DelPageTagAction')->delPageTag($request);
-				// 	break;
-				// case 'reorderPageTag':
-				// 	$isSuccess = ClassRegistry::init('Main_ReorderPageTagAction')->reorderPageTag($request);
-				// 	break;
 			}
 
 			if ($isSuccess === true) {
@@ -136,17 +126,24 @@ class MainController extends AppController {
 					);
 					if ($request->data['is_publish'] === true) {
 						$json['spOutlineInfo'] = $class->outlineSpPageInfo;
-						// $json['spOutlineIds'] = $class->outlineSpPageIds;
-						// $json['spOutlineIds'] = ClassRegistry::init('Main_GetOutlinePageIdsAction')->getOutlineSpPageIds($reauest->dat['residene_ids']);
 					}
+
 				} else if ($methodName === 'getPageTag') {
 					$json = ClassRegistry::init('Main_GetPageTagAction')->getPageTag($request);
-				// } else if ($methodName === 'setPageTag') {
-				// 	$json = array('result'=>true, 'id'=>$class->editTagId);
-				// } else if ($methodName === 'delPageTag' || $methodName === 'reorderPageTag') {
-				// 	$json = array('result'=>true);
+
 				} else if ($methodName === 'setPageTagData') {
 					$json = array('result'=>true);
+
+				// 単一ページデータ取得
+				} else if ($methodName === 'requestSinglePageData') {
+					$result = ClassRegistry::init('Main_RequestSinglePageDataAction')->requestPage($request);
+					if ($result['result'] === true && 0 < count($result['data'])) {
+						$json = array(
+							'result'					=> true,
+							'data'						=> $result['data']
+						);
+					}
+
 				} else {
 					// 物件リストとページリスト取得
 					$result = ClassRegistry::init('Main_RequestResidenceAction')->requestResidence($request);
@@ -337,6 +334,15 @@ class MainController extends AppController {
 	 */
 	public function setPageTagData () {
 		return $this->_doMethod('setPageTagData', $this->request);
+	}
+
+	/*
+	 * 単一ページ情報取得メソッド
+	 * @param	void
+	 * @return	json
+	 */
+	public function requestSinglePageData () {
+		return $this->_doMethod('requestSinglePageData', $this->request);
 	}
 
 	/*

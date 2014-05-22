@@ -307,8 +307,8 @@ jQuery(document).ready(function($){
 
 			} else if (isEnabled === false && thisObj._isEnabled === true){
 				thisObj._isEnabled = false;
-				thisObj._modal
-				// $(thisObj._modal)
+				// thisObj._modal
+				$(thisObj._modal)
 					.off('click', '.btn-add-tag')
 					.off('click', '.btn-del-tag')
 					.off('click', '.btn-update')
