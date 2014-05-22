@@ -39,13 +39,18 @@ jQuery(document).ready(function($){
 
 		/*
 		 * プレビューエリアのスキン変更メソッド
-		 * @param	deviceName		変更するスキン名
+		 * @param	elementId				ターゲットのエレメント
+		 * @param	itemName				アイテム名
+		 * @param	targetProperty			アイテムのプロパティ
+		 * @param	isPublishStaticPage		true === 本番ページ書き出し
 		 * @return	void
 		 */
-		,refreshStyle: function(elementId, itemName, targetProperty) {
+		,refreshStyle: function(elementId, itemName, targetProperty, isPublishStaticPage) {
 			var thisObj = this;
 			var targetElem = $('#' + elementId);
 			thisObj._elementId = elementId;
+			isPublishStaticPage = isPublishStaticPage === true ? true : false;
+
 			console.log('targetProperty');
 			console.log(targetProperty);
 			if (targetProperty['url'] === '' || targetProperty['isPreview'] === false) {
@@ -56,27 +61,31 @@ jQuery(document).ready(function($){
 				$(gsDataInstace).on(('onCompleteExpandGsTag_' + thisObj._id), function(event) {
 					$(gsDataInstace).off(('onCompleteExpandGsTag_' + thisObj._id));
 					var gsData = window.GsManager['getGsData'](targetProperty['url']);
-					var contentWrapperElement = targetElem.attr('data-eleent-type', '').find('> .contentWrapper');
+					var contentWrapperElement = targetElem.attr('data-element-type', '').find('> .contentWrapper');
+					if (0 === contentWrapperElement.length) {
+						contentWrapperElement = $('<div>', {class:'contentWrapper'}).appendTo(targetElem);
+					}
 					contentWrapperElement.empty();
 					if (gsData['data']) {
 						targetElem.attr('data-element-type', gsData['pageType']);
 
 						switch (gsData['pageType']) {
 							case 'about':
-								thisObj.insertAbout(contentWrapperElement, gsData['data']);
+								thisObj.insertAbout(contentWrapperElement, gsData['data'], isPublishStaticPage);
 								break;
 							case 'appearance':
 							case 'modelroom':
-								thisObj.insertGallery(contentWrapperElement, gsData['data']);
+								thisObj.insertGallery(contentWrapperElement, gsData['data'], isPublishStaticPage);
 								break;
 							case 'map':
-								thisObj.insertMap(contentWrapperElement, gsData['data']);
+								// targetElem.attr('data-item-name', 'Map');
+								thisObj.insertMap(contentWrapperElement, gsData['data'], isPublishStaticPage);
 								break;
 							case 'information':
-								thisObj.insertInformation(contentWrapperElement, gsData['data']);
+								thisObj.insertInformation(contentWrapperElement, gsData['data'], isPublishStaticPage);
 								break;
 							case 'plan':
-								thisObj.insertPlan(contentWrapperElement, gsData['data']);
+								thisObj.insertPlan(contentWrapperElement, gsData['data'], isPublishStaticPage);
 								break;
 						}
 					}
@@ -93,11 +102,12 @@ jQuery(document).ready(function($){
 
 		/*
 		 * 指定したエレメントに物件概要を挿入するメソッド
-		 * @param	targetElem		物件概要を挿入するエレメント
-		 * @param	data			物件概要のデータオブジェクト
+		 * @param	targetElem				物件概要を挿入するエレメント
+		 * @param	data					物件概要のデータオブジェクト
+		 * @param	isPublishStaticPage		true === 本番ページ書き出し
 		 * @return	void
 		 */
-		,insertAbout: function(targetElem, data) {
+		,insertAbout: function(targetElem, data, isPublishStaticPage) {
 			var thisObj = this;
 			var source = '';
 			var aboutLen = data.length;
@@ -126,11 +136,12 @@ jQuery(document).ready(function($){
 
 		/*
 		 * 指定したエレメントにギャラリーを挿入するメソッド
-		 * @param	targetElem		ギャラリーを挿入するエレメント
-		 * @param	data			ギャラリーのデータオブジェクト
+		 * @param	targetElem				ギャラリーを挿入するエレメント
+		 * @param	data					ギャラリーのデータオブジェクト
+		 * @param	isPublishStaticPage		true === 本番ページ書き出し
 		 * @return	void
 		 */
-		,insertGallery: function(targetElem, data) {
+		,insertGallery: function(targetElem, data, isPublishStaticPage) {
 			var thisObj = this;
 			var len = data.length;
 			if (0 < len) {
@@ -206,11 +217,12 @@ jQuery(document).ready(function($){
 
 		/*
 		 * 指定したエレメントにインフォメーションを挿入するメソッド
-		 * @param	targetElem		インフォメーションを挿入するエレメント
-		 * @param	data			インフォメーションのデータオブジェクト
+		 * @param	targetElem				インフォメーションを挿入するエレメント
+		 * @param	data					インフォメーションのデータオブジェクト
+		 * @param	isPublishStaticPage		true === 本番ページ書き出し
 		 * @return	void
 		 */
-		,insertInformation: function(targetElem, data) {
+		,insertInformation: function(targetElem, data, isPublishStaticPage) {
 			var thisObj = this;
 			var len = data.length;
 			if (0 < len) {
@@ -262,11 +274,12 @@ jQuery(document).ready(function($){
 
 		/*
 		 * 指定したエレメントにGoogleMapを挿入するメソッド
-		 * @param	targetElem		GoogleMapを挿入するエレメント
-		 * @param	data			GoogleMapのデータオブジェクト
+		 * @param	targetElem				GoogleMapを挿入するエレメント
+		 * @param	data					GoogleMapのデータオブジェクト
+		 * @param	isPublishStaticPage		true === 本番ページ書き出し
 		 * @return	void
 		 */
-		,insertMap: function(targetElem, data) {
+		,insertMap: function(targetElem, data, isPublishStaticPage) {
 			var thisObj = this;
 			var len = data.length;
 			// targetElem
@@ -279,29 +292,54 @@ jQuery(document).ready(function($){
 			for (var i=0; i<len; i++) {
 				// タイトル、緯度、経度、ズームレベル、住所が入力されていればGoogleMapを埋め込む
 				if (data[i]['lat']) {
-					var groupElem = $('<div>').addClass('group').appendTo(targetElem);
-					var myOptions = {
-						zoom			: data[i]['zoom'],
-						center			: new google.maps.LatLng(data[i]['lat'], data[i]['lng']),
-						mapTypeId		: google.maps.MapTypeId.ROADMAP,
-						scaleControl	: true,
-						draggable		: false,
-						scrollwheel		: false
-					};
-					var gMap = {
-						geocoder	: new google.maps.Geocoder()
-					}
-					var mapElem = $('<div>').addClass('map').appendTo(groupElem);
-					gMap['map'] = new google.maps.Map(mapElem[0], myOptions);
-					var marker = new google.maps.Marker({
-						position	: new google.maps.LatLng(data[i]['lat'], data[i]['lng']),
-						map			: gMap['map'],
-						title		: ''
-					});
+					if (isPublishStaticPage === true) {
+						// var wrapperElem = $('<div>').addClass('contentWrapper').appendTo(targetElem);
+						// var groupElem = $('<div>').addClass('map').appendTo(targetElem);
+						// var groupElem = $('<div>', {'class' : 'map'}).appendTo(targetElem);
+						var groupElem = $('<div>', {'class' : 'group'}).appendTo(targetElem);
+						var mapElem = $('<div>', {'class' : 'map'}).appendTo(groupElem);
+						// targetElem.closest('[data-item-name="GsTag"]').attr(
+						groupElem.attr(
+							{
+								// 'data-aaa'				: 'あいうえお',
+								'data-zoom'				: data[i]['zoom'],
+								'data-lat'				: data[i]['lat'],
+								'data-lng'				: data[i]['lng'],
+								'data-map-type-id'		: google.maps.MapTypeId.ROADMAP,
+								'data-scale-control'	: true,
+								'data-draggable'		: false,
+								'data-scrollwheel'		: false,
+								'data-map-width'		: '100%',
+								'data-map-height'		: 240
+							}
+						);
+						var addressElem = '<div class="address"><a href="http://maps.apple.com/?q=' + data[i]['address'] + '" class="openmap" style="text-decoration: underline;"><span class="text">' + data[i]['address'] + '</span></a></div>';
+						groupElem.append(addressElem);
+					} else {
+						var groupElem = $('<div>').addClass('group').appendTo(targetElem);
+						var myOptions = {
+							zoom			: data[i]['zoom'],
+							center			: new google.maps.LatLng(data[i]['lat'], data[i]['lng']),
+							mapTypeId		: google.maps.MapTypeId.ROADMAP,
+							scaleControl	: true,
+							draggable		: false,
+							scrollwheel		: false
+						};
+						var gMap = {
+							geocoder	: new google.maps.Geocoder()
+						}
+						var mapElem = $('<div>').addClass('map').appendTo(groupElem);
+						gMap['map'] = new google.maps.Map(mapElem[0], myOptions);
+						var marker = new google.maps.Marker({
+							position	: new google.maps.LatLng(data[i]['lat'], data[i]['lng']),
+							map			: gMap['map'],
+							title		: ''
+						});
 
-					var addressElem = '<div class="address"><a href="http://maps.apple.com/?q=' + data[i]['address'] + '" class="openmap" style="text-decoration: underline;"><span class="text">' + data[i]['address'] + '</span></a></div>';
-					groupElem.append(addressElem);
-					mapElem.css('height', 240);
+						var addressElem = '<div class="address"><a href="http://maps.apple.com/?q=' + data[i]['address'] + '" class="openmap" style="text-decoration: underline;"><span class="text">' + data[i]['address'] + '</span></a></div>';
+						groupElem.append(addressElem);
+						mapElem.css('height', 240);
+					}
 				// データが配列なら、メニューエレメントを作成する
 				} else if (0 < data[i].length) {
 					var tagArr = [];
@@ -313,18 +351,23 @@ jQuery(document).ready(function($){
 						tagArr.push('<li style="width:' + liWidth + ';"><a href="' + data[i][j]['url'] + '" target="' + data[i][j]['target'] + '">' + data[i][j]['btnName'] + '</a></li>');
 					}
 					tagArr.push('</ul>');
-					targetElem.append(tagArr.join(''));
+					if (isPublishStaticPage === true) {
+						targetElem.append(tagArr.join(''));
+					} else {
+						targetElem.append(tagArr.join(''));
+					}
 				}
 			};
 		}
 
 		/*
 		 * 指定したエレメントに間取りエレメントを挿入するメソッド
-		 * @param	targetElem		間取りエレメントを挿入するエレメント
-		 * @param	data			間取りエレメントのデータオブジェクト
+		 * @param	targetElem				間取りエレメントを挿入するエレメント
+		 * @param	data					間取りエレメントのデータオブジェクト
+		 * @param	isPublishStaticPage		true === 本番ページ書き出し
 		 * @return	void
 		 */
-		,insertPlan: function(targetElem, data) {
+		,insertPlan: function(targetElem, data, isPublishStaticPage) {
 			var thisObj = this;
 			var source = '';
 			var tmpArr = [];
