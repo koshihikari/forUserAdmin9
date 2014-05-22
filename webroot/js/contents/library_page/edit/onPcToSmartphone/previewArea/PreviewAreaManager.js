@@ -442,10 +442,13 @@ jQuery(document).ready(function($){
 		,refreshAllElementStyle: function(isPublishStaticPage) {
 			var thisObj = this;
 			var elementData = thisObj._instances['DataManager'].getAllElementDataObj();
-			// console.log('-----------------------');
-			// console.log('refreshAllElementStyle');
-			// console.log('-----------------------');
-			// console.log(elementData);
+			console.log('');
+			console.log('----------');
+			console.log('PreviewAreaManager.js :: refreshAllElementStyleメソッド');
+			console.log('isPublishStaticPage = ' + isPublishStaticPage);
+			console.log('elementData');
+			console.log(elementData);
+			console.log('----------');
 			var count = 0;
 			var tmpCount2 = 0;
 			for (var elementId in elementData) {

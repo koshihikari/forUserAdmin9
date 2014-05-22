@@ -80,14 +80,15 @@ jQuery(document).ready(function($){
 								break;
 						}
 					}
-				})
+					$(thisObj).trigger('onCompleteRefreshStyle', [elementId, itemName]);
+				});
 				$(gsDataInstace).on(('notIncludeGsTag_' + thisObj._id), function(event) {
 					console.log('そんなGSない');
 					targetElem.find('> .contentWrapper').empty().addClass('empty');
 				});
 				gsDataInstace.execute(targetProperty['tag']);
 			}
-			$(thisObj).trigger('onCompleteRefreshStyle', [elementId, itemName]);
+			// $(thisObj).trigger('onCompleteRefreshStyle', [elementId, itemName]);
 		}
 
 		/*

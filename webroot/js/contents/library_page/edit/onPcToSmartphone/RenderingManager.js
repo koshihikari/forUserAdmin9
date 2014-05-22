@@ -59,14 +59,11 @@ jQuery(document).ready(function($){
 		 * @return	void
 		 */
 		,render: function(pageId, isPublishStaticPage, residenceId) {
-			// console.log('レンダリング :: pageId = ' + pageId);
+			console.log('');
+			console.log('----------');
+			console.log('RenderingManager.js :: renderメソッド');
 			var thisObj = this;
-			// thisObj._tmpId = pageId;
 			thisObj._isPublishStaticPage = isPublishStaticPage;
-			// if (thisObj._wasAccessed === true) {
-			// 	thisObj._instances['PreviewAreaManager']					= new MYNAMESPACE.modules.library_page.edit.PreviewAreaManager(thisObj._instances['DataManager']);
-			// }
-			// thisObj._wasAccessed = true;
 
 			if (pageId) {
 				var prop = thisObj._instances['DataManager'].getProp();
@@ -76,14 +73,24 @@ jQuery(document).ready(function($){
 					thisObj._instances['DataManager'].replaceProp('pageId', pageId);
 				}
 			}
-			// $('#iphone5').tinyscrollbar();
+			console.log('pageId = ' + pageId);
+			console.log('isPublishStaticPage = ' + isPublishStaticPage);
+			console.log('residenceId = ' + residenceId);
+			console.log('----------');
 			var compCount = 2;
 			var count = 0;
 			var compMethod = function(event) {
-				// console.log('event.type = ' + event.type);
+				console.log('');
+				console.log('----------');
+				console.log('RenderingManager.js :: renderメソッド :: hadler');
+				console.log('count = ' + count + ', compCount = ' + compCount);
+				console.log('----------');
 				if (++count === compCount) {
+					console.log('');
+					console.log('----------');
+					console.log('RenderingManager.js :: renderメソッド :: hadler');
+					console.log('データ取得完了');
 					thisObj._instances['Util'].setStatus(true, 'データ取得完了', 500);
-					// console.log('初期データ取得完了');
 
 					$(thisObj._instances['DataManager'])
 						.off('onCompleteRequestElementList')	// エレメントデータ読み込み完了
@@ -93,33 +100,32 @@ jQuery(document).ready(function($){
 						.off('onErrorGetFieldList')	// エレメントデータ読み込み完了
 
 					var targetElementData = thisObj._instances['DataManager'].getChildElementDataObj('spContent');
-					// console.log(targetElementData);
+					console.log('targetElementData');
+					console.log(targetElementData);
 					if (0 < targetElementData.length) {
-						// console.log('PreviewAreaManagerのレンダリング開始');
+						console.log('パターンA');
+						console.log('----------');
 						thisObj._instances['PreviewAreaManager'].reset();
 						thisObj._instances['PreviewAreaManager'].render('spContent', null, true);
 					} else {
-						// console.log('PreviewAreaManagerの全てのエレメントのスタイルセット開始');
+						console.log('パターンB');
+						console.log('----------');
 						thisObj._instances['PreviewAreaManager'].refreshAllElementStyle();
 						thisObj._instances['DataManager'].setEvent(true);
 						thisObj.onCompleteRenderHandler();
 					}
 				}
 			}
-			// if (thisObj._tmpFlg === false) {
-				// thisObj._tmpFlg = true;
-				$(thisObj._instances['DataManager'])
-					.on('onCompleteRequestElementList', compMethod)		// エレメントデータ読み込み完了
-					.on('onErrorRequestElementList', compMethod)	// エレメントデータ読み込みエラー
+			$(thisObj._instances['DataManager'])
+				.on('onCompleteRequestElementList', compMethod)		// エレメントデータ読み込み完了
+				.on('onErrorRequestElementList', compMethod)	// エレメントデータ読み込みエラー
 
-
-				$(thisObj._instances['OutlineDataManager'])
-					.on('onCompleteGetFieldList', function(event, data) {
-						thisObj._instances['DataManager'].setFRK(data);
-						compMethod(event);
-					})
-					.on('onErrorGetFieldList', compMethod)
-			// }
+			$(thisObj._instances['OutlineDataManager'])
+				.on('onCompleteGetFieldList', function(event, data) {
+					thisObj._instances['DataManager'].setFRK(data);
+					compMethod(event);
+				})
+				.on('onErrorGetFieldList', compMethod)
 
 			thisObj._instances['Util'].setStatus(true, 'データ取得中・・・');
 			thisObj._instances['DataManager'].requestElementList();
@@ -133,26 +139,10 @@ jQuery(document).ready(function($){
 		 */
 		,onCompleteRenderHandler: function() {
 			var thisObj = this;
-			// console.log('初期処理完了 :: thisObj._tmpId = ' + thisObj._tmpId);
 			thisObj._instances['LayoutManager'].onResizeWindow();
 			$('#spContent').find('[data-item-name="Library"] *').removeClass('editable');
 			$(thisObj).trigger('onCompleteRender');
-			// console.log('プレビューエリアのレンダリングがスタイルの適用を含めて完了した');
 			thisObj._instances['PreviewAreaManager'].setSortableInstance();
-			// thisObj._instances['DataManager'].executelList();
-
-			/*
-			if (isTest === true) {
-				$(TestInsert).on('onCompleteTestSerialInsert', function(event) {
-					// TestDelete.testSerialDelete();
-				});
-				// TestInsert.testInsert();
-				// TestInsert.testSerialInsert();
-				// TestDelete.testDelete('id-1363858229158');
-				// TestDelete.testSerialDelete();
-				TestReorder.testReorder('id-1363861032105', 'spContent', 1);
-			}
-			*/
 		}
 
 		/*
@@ -162,26 +152,30 @@ jQuery(document).ready(function($){
 		 * @return	void
 		 */
 		,publishConcretePage: function(recordId, companyId, residenceId, path, title, source, callback) {
+			console.log('');
+			console.log('----------');
+			console.log('RenderingManager.js :: publishConcretePageメソッド');
+			console.log('recordId = ' + recordId);
+			console.log('companyId = ' + companyId);
+			console.log('residenceId = ' + residenceId);
+			console.log('path = ' + path);
+			console.log('title = ' + title);
+			console.log('source = ' + source);
 			var thisObj = this;
-			// console.log('RenderingManager :: publishConcretePage :: recordId = ' + recordId + ', companyId = ' + companyId + ', residenceId = ' + residenceId + ', path = ' + path + ', title = ' + title);
 			var prop = thisObj._instances['DataManager'].getProp();
 			$(thisObj._instances['DataManager'])
 				.on('onCompletePublishConcretePage', function(event, data) {
-				// $(thisObj._instances['DataManager']).on('onCompletePublishConcretePage', function(event, recordId) {
 					$(thisObj._instances['DataManager'])
 						.off('onCompletePublishConcretePage')
 						.off('onErrorPublishConcretePage');
-					// console.log('data');
-					// console.log(data);
 					callback(event, data);
-					// callback(event, recordId);
 				})
 				.on('onErrorPublishConcretePage', function(event, data) {
-				// $(thisObj._instances['DataManager']).on('onCompletePublishConcretePage', function(event, recordId) {
 					$(thisObj._instances['DataManager'])
 						.off('onCompletePublishConcretePage')
 						.off('onErrorPublishConcretePage');
 				});
+			console.log('----------');
 			thisObj._instances['DataManager'].publishConcretePage(recordId, companyId, residenceId, prop['userId'], path, title, source);
 		}
 
@@ -247,9 +241,11 @@ jQuery(document).ready(function($){
 		 * @return	void
 		 */
 		,onCompleteRefreshAllElementStyleHandler: function(event) {
+			console.log('');
+			console.log('----------');
+			console.log('RenderingManager.js :: onCompleteRefreshAllElementStyleHandlerメソッド');
+			console.log('----------');
 			var thisObj = this;
-			// console.log('プレビューエリアに配置した全てのエレメントへのスタイルの適用が完了した');
-			// thisObj._instances['PreviewAreaManager'].onCompleteRefreshStyle();
 			thisObj._instances['LayoutManager'].onResizeWindow();
 
 			setTimeout(

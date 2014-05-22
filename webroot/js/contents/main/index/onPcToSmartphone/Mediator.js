@@ -33,9 +33,7 @@ jQuery(document).ready(function($){
 
 			this._instances = instances;
 			this._instances['UtilManager'] = new MYNAMESPACE.modules.main.index.onPcToSmartphone.UtilManager();
-			// this._instances['view'] = {};
 			this._instances['view'] = {
-				// 'BulkEditTagView'		: new MYNAMESPACE.modules.main.index.onPcToSmartphone.view.BulkEditTagView(thisObj._instances['AppModel'])
 				'TagView'		: new MYNAMESPACE.modules.main.index.onPcToSmartphone.view.TagView(thisObj._instances['AppModel'])
 			};
 			this._instances['SpConcretePageManager'] = new MYNAMESPACE.modules.helper.ConcretePageManager.SpConcretePageManager(
@@ -43,18 +41,6 @@ jQuery(document).ready(function($){
 					'RenderingManager'		: new MYNAMESPACE.modules.library_page.edit.onPcToSmartphone.RenderingManager()
 				}
 			)
-
-			/*
-			this._instances['FpConcretePageManager'] = new MYNAMESPACE.modules.helper.ConcretePageManagerForFeaturephone(
-				{
-					'DataManager'		: new MYNAMESPACE.modules.library_page.catalog.onPcToFeaturephone.DataManager(
-						{
-							'Gateway'		: new MYNAMESPACE.modules.helper.Gateway()
-						}
-					)
-				}
-			);
-			*/
 		}
 
 		/*
@@ -64,24 +50,28 @@ jQuery(document).ready(function($){
 		 * @return	void
 		 */
 		,publish: function(event, pageInfo) {
-		// ,publish: function(event, deviceType, pageIdArr) {
 			var thisObj = this;
+			console.log('');
+			console.log('----------');
+			console.log('Mediator.js :: publishメソッド');
+			console.log('pageInfo');
+			console.log(pageInfo);
 			if (0 < pageInfo.length) {
 				thisObj._bulkPublishData = {
-					// 'deviceType'	: deviceType,
-					// 'pageIdArr'		: pageIdArr,
 					'pageInfo'		: pageInfo,
 					'count'			: 0
 				};
+				console.log('書き出し');
+				console.log('thisObj._bulkPublishData');
 				console.log(thisObj._bulkPublishData);
-				// PageManager.setEvent(false);
 				for (var viewName in thisObj._instances['view']) {
 					thisObj._instances['view'][viewName].setEvent(false);
 				}
+				console.log('----------');
 				thisObj.bulkPublish();
 			} else {
 				console.log('ERROR!', '書きだすページを選択してください。');
-				// AlertModalManager.open('ERROR!', '書きだすページを選択してください。');
+				console.log('----------');
 			}
 		}
 
@@ -92,37 +82,31 @@ jQuery(document).ready(function($){
 		 */
 		,bulkPublish: function() {
 			var thisObj = this;
-			console.log('Mediator :: bulkPublish :: thisObj._bulkPublishData.count = ' + thisObj._bulkPublishData['count']);
-			console.log('Mediator :: bulkPublish :: thisObj._bulkPublishData.length = ' + thisObj._bulkPublishData['pageInfo'].length);
-			// console.log('Mediator :: bulkPublish :: thisObj._bulkPublishData.length = ' + thisObj._bulkPublishData['pageIdArr'].length);
-			// if (thisObj._bulkPublishData['count'] < thisObj._bulkPublishData['pageIdArr'].length) {
-			// 	thisObj._instances['UtilManager'].showCurtain('ページID :: ' + thisObj._bulkPublishData['pageIdArr'][thisObj._bulkPublishData['count']] + '書き出し開始(' + (thisObj._bulkPublishData['count'] + 1) + '/' + thisObj._bulkPublishData['pageIdArr'].length + ')', 300);
-				// var pageId = thisObj._bulkPublishData['pageIdArr'][thisObj._bulkPublishData['count']];
+			console.log('');
+			console.log('----------');
+			console.log('Mediator.js :: bulkPublishメソッド');
+			console.log('パブリッシュした回数 :: thisObj._bulkPublishData.count = ' + thisObj._bulkPublishData['count']);
+			console.log('パブリッシュしないといけない回数 :: thisObj._bulkPublishData.length = ' + thisObj._bulkPublishData['pageInfo'].length);
 			if (thisObj._bulkPublishData['count'] < thisObj._bulkPublishData['pageInfo'].length) {
 				thisObj._instances['UtilManager'].showCurtain('ページID :: ' + thisObj._bulkPublishData['pageInfo'][thisObj._bulkPublishData['count']]['pageId'] + '書き出し開始(' + (thisObj._bulkPublishData['count'] + 1) + '/' + thisObj._bulkPublishData['pageInfo'].length + ')', 300);
 				var residenceId = thisObj._bulkPublishData['pageInfo'][thisObj._bulkPublishData['count']]['residenceId'];
 				var pageId = thisObj._bulkPublishData['pageInfo'][thisObj._bulkPublishData['count']]['pageId'];
 				var deviceType = thisObj._bulkPublishData['pageInfo'][thisObj._bulkPublishData['count']]['deviceType'];
 				var $elem = $('#' + deviceType + '-page-item_' + pageId);
-				// var $elem = $('#' + thisObj._bulkPublishData['deviceType'] + '-page-item_' + pageId);
 				var title = $elem.find('.title input[type="text"]').val();
 				var path = $elem.find('.path input[type="text"]').val();
 				var currentInfo = thisObj._instances['AppModel'].getCurrentInfo();
 				var concretePageManager = null;
-				// var id = $('#' + thisObj._bulkPublishData['deviceType'] + '-page-item_' + pageId).closest('div').attr('id');
-				// console.log('bulkPublish :: residenceId = ' + id);
-				// var residenceId = +$('#' + thisObj._bulkPublishData['deviceType'] + '-page-item_' + pageId).closest('div').attr('id').replace('sp-tab-content-in-residence-id_', '');
 
 				if (deviceType === 'sp') {
-				// if (thisObj._bulkPublishData['deviceType'] === 'sp') {
+					console.log('----------');
 					thisObj._instances['SpConcretePageManager'].publish(residenceId, pageId, title, path, true);
-					// thisObj._instances['SpConcretePageManager'].publish(currentInfo['residenceId'], pageId, title, path, true);
 				} else if (deviceType === 'fp') {
-				// } else if (thisObj._bulkPublishData['deviceType'] === 'fp') {
+					console.log('----------');
 					thisObj._instances['AppModel'].publishFpPage(residenceId, pageId, title, path);
-					// thisObj._instances['AppModel'].publishFpPage(currentInfo['residenceId'], pageId, title, path);
 				} else {
 					console.log('SPでもFPでも無いページをパブリッシュしようとしています。');
+					console.log('----------');
 					return;
 				}
 
@@ -130,6 +114,7 @@ jQuery(document).ready(function($){
 
 			} else {
 				console.log('パブリッシュ完了');
+				console.log('----------');
 				thisObj._instances['UtilManager'].hideCurtain();
 				thisObj._instances['UtilManager'].setStatus(true, '本番ページ書き出し完了', 500);
 				for (var viewName in thisObj._instances['view']) {
@@ -159,32 +144,6 @@ jQuery(document).ready(function($){
 					$(thisObj._instances['view'][viewName])
 						.on('onClickBulkPublishBtn', thisObj.publish)
 						.on('onClickEditTagBtn', thisObj._instances['view']['TagView'].confirm);
-						// .on('onClickBulkEditTagBtn', thisObj._instances['view']['BulkEditTagView'].confirm);
-
-					// if (viewName.indexOf('Sp') !== -1) {
-					// 	var data = {
-					// 		'residenceInfo'		: {
-					// 			'id'		: 11,
-					// 			'name'		: 'パレステージ阿佐ヶ谷'
-					// 		},
-					// 		'pageInfo'			: [
-					// 			{'id' : 306, 'name' : 'パレステージ阿佐ヶ谷'},
-					// 			{'id' : 307, 'name' : '外観｜パレステージ阿佐ヶ谷'},
-					// 			{'id' : 308, 'name' : '周辺環境｜パレステージ阿佐ヶ谷'},
-					// 			{'id' : 309, 'name' : 'アクセス｜パレステージ阿佐ヶ谷'},
-					// 			{'id' : 310, 'name' : '間取り｜パレステージ阿佐ヶ谷'},
-					// 			{'id' : 311, 'name' : 'モデルルーム｜パレステージ阿佐ヶ谷'},
-					// 			{'id' : 312, 'name' : '現地案内図｜パレステージ阿佐ヶ谷'},
-					// 			{'id' : 429, 'name' : '間取り｜70Atype｜パレステージ阿佐ヶ谷'},
-					// 			{'id' : 430, 'name' : '間取り｜80Atype｜パレステージ阿佐ヶ谷'},
-					// 			{'id' : 431, 'name' : '間取り｜90Atype｜パレステージ阿佐ヶ谷'},
-					// 			{'id' : 432, 'name' : '間取り｜90Btype｜パレステージ阿佐ヶ谷'},
-					// 			{'id' : 484, 'name' : '物件概要｜パレステージ阿佐ヶ谷'},
-					// 			{'id' : 541, 'name' : 'コピー :: 物件概要｜パレステージ阿佐ヶ谷'}
-					// 		]
-					// 	};
-					// 	// $(thisObj._instances['view'][viewName]).trigger('onClickBulkEditTagBtn', data);
-					// }
 				}
 			}
 		}
@@ -215,7 +174,6 @@ jQuery(document).ready(function($){
 					'onInitReorderResidence', 'onCompleteReorderResidence', 'onErrorReorderResidence',
 					'onInitChangeResidenceString', 'onCompleteChangeResidenceString', 'onErrorChangeResidenceString',
 					'onInitBulkUpdateOutlineData', 'onCompleteBulkUpdateOutlineData', 'onErrorBulkUpdateOutlineData',
-					// 'onCompleteUpdateOutlineData',
 					'onInitAddPage', 'onCompleteAddPage', 'onErrorAddPage',
 					'onInitDuplicatePage', 'onCompleteDuplicatePage', 'onErrorDuplicatePage',
 					'onInitDelPage', 'onCompleteDelPage', 'onErrorDelPage',
@@ -226,9 +184,6 @@ jQuery(document).ready(function($){
 					'onErrorPublishConcretePage',
 					'onInitGetPageTag', 'onCompleteGetPageTag', 'onErrorGetPageTag',
 					'onInitSetPageTagData', 'onCompleteSetPageTagData', 'onErrorSetPageTagData'
-					// 'onInitSetPageTag', 'onCompleteSetPageTag', 'onErrorSetPageTag',
-					// 'onInitDelPageTag', 'onCompleteDelPageTag', 'onErrorDelPageTag',
-					// 'onInitReorderPageTag', 'onCompleteReorderPageTag', 'onErrorReorderPageTag'
 				]
 			}
 
@@ -258,8 +213,6 @@ jQuery(document).ready(function($){
 						thisObj.publish(event, deviceType, pageIdArr);
 					})
 					.on('onSuccessPublishConcretePageForFp', function(event, data) {
-					// .on('onCompletePublishConcretePageForFp', function(event, data) {
-						// thisObj._pageData = data;
 						console.log('ガラケー書き出し完了');
 						thisObj.bulkPublish();
 					})
@@ -299,9 +252,6 @@ jQuery(document).ready(function($){
 					)
 					.on('onSetData onUpdateData',
 						function(event, key) {
-							// console.log('Mediator :: onUpdateData :: key = ' + key);
-							// var id = thisObj._instances['AppModel'].getResidenceId();
-
 							if (key === 'ResidenceData') {
 								thisObj._instances['view']['ResidenceView'].render();
 							} else if (

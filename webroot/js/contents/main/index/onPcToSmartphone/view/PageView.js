@@ -458,9 +458,10 @@ jQuery(document).ready(function($){
 					}
 				);
 			});
+			// console.log('pageInfoArr');
+			// console.log(pageInfoArr);
 			if (0 < pageInfoArr.length) {
 				$(thisObj).trigger('onClickBulkPublishBtn', [pageInfoArr]);
-				// $(thisObj).trigger('onClickBulkPublishBtn', [thisObj._deviceType, pageIdArr]);
 			}
 		}
 

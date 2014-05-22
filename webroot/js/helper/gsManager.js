@@ -4,6 +4,10 @@ google.load("visualization", "1");
 google.setOnLoadCallback(function() {
 	var gsData = {};
 	var baseUrl = 'https://docs.google.com/spreadsheet/pub';
+	console.log('');
+	console.log('----------');
+	console.log('gsManager.js :: setOnLoadCallbackメソッド');
+	console.log('----------');
 
 	var getGsData = function(spredsheetId) {
 		var retObj = {};

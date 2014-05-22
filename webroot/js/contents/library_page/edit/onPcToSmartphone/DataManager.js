@@ -1794,10 +1794,8 @@ jQuery(document).ready(function($){
 
 			if (thisObj._isAccess === false) {
 				thisObj._isAccess = true;
-				// console.log('リクエスト開始');
 				var url = thisObj._prop['currentUrl'] + 'Page/publishConcretePage/';
 				var sendData = {
-					// 'residence_id'		: residenceId,
 					'device_num'		: 2,
 					'id'				: recordId,
 					'user_id'			: userId,
@@ -1807,13 +1805,12 @@ jQuery(document).ready(function($){
 					'title'				: title,
 					'source'			: source
 				}
-				// console.log('');
-				// console.log('');
-				// console.log('sendData');
-				// console.log(sendData);
-				// console.log('');
-				// console.log('');
-				// return;
+				console.log('');
+				console.log('----------');
+				console.log('DataManager.js :: publishConcretePageメソッド');
+				console.log('sendData');
+				console.log(sendData);
+				console.log('----------');
 				$(thisObj).trigger('onInitPublishConcretePage', recordId);
 				$.ajax({
 					type: "POST",
@@ -1821,12 +1818,9 @@ jQuery(document).ready(function($){
 					data: sendData,
 					dataType: "json",
 					success: function(obj){
-						// console.log('リクエスト完了');
-						// console.log(obj);
 						if (obj['result'] === true) {
 							thisObj._isAccess = false;
 							$(thisObj).trigger('onCompletePublishConcretePage', [obj['data']]);
-							// $(thisObj).trigger('onCompletePublishConcretePage', recordId);
 						} else {
 							$(thisObj).trigger('onErrorPublishConcretePage', recordId);
 						}
