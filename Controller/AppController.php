@@ -83,7 +83,7 @@ class AppController extends Controller {
 		$this->set(
 			array(
 				'isAdmin' 				=> $this->isAdmin(),
-				'targetCompanyName' 	=> $this->Auth->user('target_company_name'),
+				'isCustomer'		 	=> $this->isCustomer(),
 				'userData' 				=> $this->Auth->user(),
 				'isEnable'				=> $this->isEnable
 			)
@@ -102,6 +102,10 @@ class AppController extends Controller {
 	public function isGuest() {
 		// return $this->userType === 'guest';
 		return (int)$this->Auth->user('group_id') === 3 ? true : false;
+	}
+	public function isCustomer() {
+		// return $this->userType === 'guest';
+		return (int)$this->Auth->user('group_id') === 4 ? true : false;
 	}
 	// public function isRegistUser() {
 	// 	return $this->userType !== '';

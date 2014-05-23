@@ -104,7 +104,7 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 
 			array_push($arr, 'less/custom/contents/user/loginInUsers.less');
 
-			if ($isAdmin === true && $targetCompanyName === 'nisshinfudosan') {
+			if ($isCustomer === true) {
 				$pageName = $this->action . 'In' . $this->name;
 				if ($pageName === 'indexInMain') {
 					array_push($arr, 'less/custom/contents/main/index/onPcToSmartphone/customCatalogInLibrary.less');
@@ -438,13 +438,13 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 		echo $this->Html->script($arr);
 	?>
 </head>
-<body id="<?php echo $this->action . 'In' . $this->name; ?>" class="<?php echo strtolower($this->name);?><?php echo ($isAdmin === true && $targetCompanyName === 'nisshinfudosan') ? ' custom' : '' ?>">
+<body id="<?php echo $this->action . 'In' . $this->name; ?>" class="<?php echo strtolower($this->name);?><?php echo $isCustomer === true ? ' custom' : '' ?>">
 
 	<?php //if (($this->action . 'In' . $this->name) === 'indexInIndex' || ($this->name) === 'Users'): ?>
 	<?php if (($this->name) === 'Users'): ?>
 		<?php echo $this->fetch('content'); ?>
 	<?php else: ?>
-		<?php if ($isAdmin === true && $targetCompanyName && $targetCompanyName === 'nisshinfudosan'): ?>
+		<?php if ($isCustomer === true): ?>
 		<div id="contentForUserAdmin" class="commonElem">
 			<?php echo $this->fetch('content'); ?>
 		</div>
@@ -456,7 +456,7 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 		<?php endif; ?>
 	</div>
 	<?php endif; ?>
-	<?php if ($isAdmin === true && $targetCompanyName !== 'nisshinfudosan'): ?>
+	<?php if ($isCustomer === false): ?>
 	<?php //echo $this->element('sql_dump'); ?>
 	<?php echo $this->element('sidePanel'); ?>
 	<?php endif; ?>

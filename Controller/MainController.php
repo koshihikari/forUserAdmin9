@@ -46,7 +46,7 @@ class MainController extends AppController {
 				'modified'				=> $this->modified
 			)
 		);
-		if ($this->Auth->user('target_company_name') === 'nisshinfudosan') {
+		if ($this->isCustomer() === true) {
 			$this->render("../Contents/Main/customIndexInMain");
 		} else {
 			$this->render("../Contents/Main/indexInMain");
