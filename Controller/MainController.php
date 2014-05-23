@@ -13,8 +13,17 @@ class MainController extends AppController {
 	 * @return	json
 	 */
 	public function index($device="p") {
+		// error_log('isNisshinfudosan = ' . $this->Auth->user('target_company_name') . "\n", 3, 'log.txt');
 		$deviceName = $this->getDeviceName($device);
 		$userData = $this->Auth->user();
+
+		// ob_start();//ここから
+		// var_dump($userData);
+		// $out=ob_get_contents();//ob_startから出力された内容をゲットする。
+		// ob_end_clean();//ここまで
+		// error_log('-----------------' . "\n", 3, 'log.txt');
+		// error_log($out . "\n", 3, 'log.txt');
+		// error_log('-----------------' . "\n", 3, 'log.txt');
 		$catalog = ClassRegistry::init('Residence_ResidenceCatalogAction')->getResidenceCatalog($userData['company_id']);
 		$companyResult = ClassRegistry::init('companies')->find('first', array('conditions'=>array('id'=>$userData['company_id'])));
 		$Action = ClassRegistry::init('Library_Page_GetMasterElementAction');
@@ -26,9 +35,10 @@ class MainController extends AppController {
 			array(
 				'device'				=> $device,
 				'deviceName'			=> $deviceName,
-				// 'title_for_layout'		=> '様の物件一覧',
 				'title_for_layout'		=> $catalog['companySites'][0]['companies']['name'] . '様の物件一覧',
 				'userData' 				=> $userData,
+				// 'isAdmin' 				=> $this->isAdmin(),
+				// 'targetCompanyName' 	=> $this->Auth->user('target_company_name'),
 				'concreteUrl'			=> $companyResult['companies']['url'],
 						'menuData'				=> json_encode($json['data']['menuData']),
 						'itemData'				=> json_encode($json['data']['itemData']),
@@ -36,7 +46,11 @@ class MainController extends AppController {
 				'modified'				=> $this->modified
 			)
 		);
-		$this->render("../Contents/Main/indexInMain");
+		if ($this->Auth->user('target_company_name') === 'nisshinfudosan') {
+			$this->render("../Contents/Main/customIndexInMain");
+		} else {
+			$this->render("../Contents/Main/indexInMain");
+		}
 	}
 
 

@@ -6,6 +6,7 @@ class UsersController extends AppController {
 	var $components = array('Auth');
 
 	public function beforeFilter() {
+		parent::beforeFilter();
 		$this->Auth->allow('login', 'logout', 'add');
 	}
 
@@ -13,7 +14,6 @@ class UsersController extends AppController {
 		if ($this->request->isPost()) {
 			if ($this->Auth->login()) {
 				$this->redirect(array('controller'=>'Main', 'action'=>''));
-				// $this->redirect(array('controller'=>'Residence', 'action'=>'catalog'));
 			} else {
 				$this->Session->setFlash('ユーザ名かパスワードが違います。', 'default', array(), 'auth');
 			}

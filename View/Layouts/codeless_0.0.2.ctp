@@ -103,6 +103,13 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 			array_push($arr, 'less/custom/contents/residence/catalog/onPcToSmartphone/catalogInResidence.less');
 
 			array_push($arr, 'less/custom/contents/user/loginInUsers.less');
+
+			if ($isAdmin === true && $targetCompanyName === 'nisshinfudosan') {
+				$pageName = $this->action . 'In' . $this->name;
+				if ($pageName === 'indexInMain') {
+					array_push($arr, 'less/custom/contents/main/index/onPcToSmartphone/customCatalogInLibrary.less');
+				}
+			}
 		}
 		/***** ここまで各画面のLess *****/
 
@@ -164,13 +171,8 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 					array_push($arr, '../plugin/procolor-1.0/prototype.compressed.js?' . $modified);
 					array_push($arr, '../plugin/procolor-1.0/procolor.js?' . $modified);
 					array_push($arr, '../plugin/jquery-json/jquery.json-2.4.min.js?' . $modified);
-					/*
-					*/
 					array_push($arr, '../plugin/jquery-ui-1.10.3.custom/js/jquery-ui-1.10.3.custom.js?' . $modified);
-					// array_push($arr, '../plugin/jquery-ui-1.9.2.custom/js/jquery-ui-1.9.2.custom.js?' . $modified);
 					array_push($arr, '../plugin/woothemes-FlexSlider-54e6d31/jquery.flexslider.js?' . $modified);
-					/*
-					*/
 
 					array_push($arr, 'contents/main/index/onPcToSmartphone/Mediator.js?' . $modified);
 					array_push($arr, 'contents/main/index/onPcToSmartphone/UtilManager.js?' . $modified);
@@ -179,7 +181,6 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 					array_push($arr, 'contents/main/index/onPcToSmartphone/view/ResidenceView.js?' . $modified);
 					array_push($arr, 'contents/main/index/onPcToSmartphone/view/BulkEditOutlineView.js?' . $modified);
 					array_push($arr, 'contents/main/index/onPcToSmartphone/view/TagView.js?' . $modified);
-					// array_push($arr, 'contents/main/index/onPcToSmartphone/view/BulkEditTagView.js?' . $modified);
 
 					array_push($arr, 'contents/library_page/edit/onPcToSmartphone/DataManager.js?' . $modified);
 					array_push($arr, 'contents/library_page/edit/onPcToSmartphone/RenderingManager.js?' . $modified);
@@ -223,31 +224,15 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 					array_push($arr, 'contents/library_page/edit/onPcToSmartphone/LayoutManager.js?' . $modified);
 					array_push($arr, 'contents/library_page/edit/onPcToSmartphone/ToolbarManager.js?' . $modified);
 
-					// array_push($arr, 'helper/ConcretePageManagerForFeaturephone.js?' . $modified);
 					array_push($arr, 'helper/ConcretePageManager/SpConcretePageManager.js?' . $modified);
 					array_push($arr, 'helper/ConcretePageManager/FpConcretePageManager.js?' . $modified);
 					array_push($arr, 'contents/library_page/edit/onPcToFeaturephone/EditorManager.js?' . $modified);
 					array_push($arr, 'contents/library_page/edit/onPcToSmartphone/RenderingManager.js?' . $modified);
 					array_push($arr, 'contents/outline/edit/onPcToSmartphone/DataManager.js?' . $modified);
 
-					// array_push($arr, 'helper/ConcretePageManagerForFeaturephone.js?' . $modified);
-					// array_push($arr, 'contents/library_page/catalog/onPcToFeaturephone/DataManager.js?' . $modified);
-					// array_push($arr, 'contents/library_page/catalog/onPcToFeaturephone/PageManager.js?' . $modified);
-					// array_push($arr, 'contents/library_page/catalog/onPcToFeaturephone/forLibraryPageCatalog.js?' . $modified);
-					/*
-					array_push($arr, 'contents/main/index/onPcToSmartphone/BaseRightElementManager.js?' . $modified);
-					array_push($arr, 'contents/main/index/onPcToSmartphone/Mediator.js?' . $modified);
-					array_push($arr, 'contents/main/index/onPcToSmartphone/UtilManager.js?' . $modified);
-					array_push($arr, 'contents/main/index/onPcToSmartphone/DataManager.js?' . $modified);
-					array_push($arr, 'contents/main/index/onPcToSmartphone/ResidenceManager.js?' . $modified);
-					array_push($arr, 'contents/main/index/onPcToSmartphone/PageWrapperManager.js?' . $modified);
-					array_push($arr, 'contents/main/index/onPcToSmartphone/PageManager.js?' . $modified);
-					array_push($arr, 'contents/main/index/onPcToSmartphone/SmartphonePageManager.js?' . $modified);
-					array_push($arr, 'contents/main/index/onPcToSmartphone/FeaturephonePageManager.js?' . $modified);
-					array_push($arr, 'contents/main/index/onPcToSmartphone/ResidencePageManager.js?' . $modified);
-					*/
-
-					array_push($arr, 'contents/main/index/onPcToSmartphone/index.js?' . $modified);
+					// if ($isAdmin === true && $targetCompanyName !== 'nisshinfudosan') {
+						array_push($arr, 'contents/main/index/onPcToSmartphone/index.js?' . $modified);
+					// }
 				break;
 
 			case 'editInOutline':
@@ -453,21 +438,28 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 		echo $this->Html->script($arr);
 	?>
 </head>
-<body id="<?php echo $this->action . 'In' . $this->name; ?>" class="<?php echo strtolower($this->name);?>">
+<body id="<?php echo $this->action . 'In' . $this->name; ?>" class="<?php echo strtolower($this->name);?><?php echo ($isAdmin === true && $targetCompanyName === 'nisshinfudosan') ? ' custom' : '' ?>">
 
 	<?php //if (($this->action . 'In' . $this->name) === 'indexInIndex' || ($this->name) === 'Users'): ?>
 	<?php if (($this->name) === 'Users'): ?>
 		<?php echo $this->fetch('content'); ?>
 	<?php else: ?>
+		<?php if ($isAdmin === true && $targetCompanyName && $targetCompanyName === 'nisshinfudosan'): ?>
 		<div id="contentForUserAdmin" class="commonElem">
-			<?php echo $this->element('navigationPanel'); ?>
-			<?php //echo $this->element('breadCrumbListForUserAdmin'); ?>
 			<?php echo $this->fetch('content'); ?>
 		</div>
+		<?php else: ?>
+		<div id="contentForUserAdmin" class="commonElem">
+			<?php echo $this->element('navigationPanel'); ?>
+			<?php echo $this->fetch('content'); ?>
+		</div>
+		<?php endif; ?>
 	</div>
 	<?php endif; ?>
+	<?php if ($isAdmin === true && $targetCompanyName !== 'nisshinfudosan'): ?>
 	<?php //echo $this->element('sql_dump'); ?>
 	<?php echo $this->element('sidePanel'); ?>
+	<?php endif; ?>
 
 
 

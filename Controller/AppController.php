@@ -82,8 +82,10 @@ class AppController extends Controller {
 		);
 		$this->set(
 			array(
+				'isAdmin' 				=> $this->isAdmin(),
+				'targetCompanyName' 	=> $this->Auth->user('target_company_name'),
 				'userData' 				=> $this->Auth->user(),
-				'isEnable'			=> $this->isEnable
+				'isEnable'				=> $this->isEnable
 			)
 		);
 		// $this->printInfo();
