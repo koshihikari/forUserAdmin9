@@ -322,7 +322,22 @@
 
 <div class="head">
 	<h2><?php echo $title_for_layout; ?></h2>
-	<button class="btn btn-primary">ログアウト</button>
+				<?php
+					echo $this->Html->link(
+						'<span>ログアウト</span>',
+						array(
+							'controller' => '',
+							'action' => 'logout'
+						),
+						array(
+							'class' => 'btn btn-primary btn-logout',
+							'escape' => false
+						)
+					);
+				?>
+	<!--
+	<button class="btn btn-primary btn-logout">ログアウト</button>
+-->
 </div>
 <div id="wrapper">
 	<div id="residences" class="parents">
