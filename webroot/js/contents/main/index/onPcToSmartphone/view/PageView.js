@@ -541,6 +541,7 @@ jQuery(document).ready(function($){
 		,setEvent: function(isEnabled) {
 			var thisObj = this;
 			var $baseElem = $('#' + thisObj._deviceType + '-tab-content-in-residence-id_' + thisObj._residenceId);
+			var prop = thisObj._instances['AppModel'].getProp();
 
 			if (isEnabled === true && thisObj._isEnabled === false) {
 				thisObj._isEnabled = true;
@@ -554,18 +555,22 @@ jQuery(document).ready(function($){
 					.on('click', '.btn-released-all', thisObj.onChangeCheckedBtnHandler)	// 全てのチェックを外す
 					.on('click', '.btn-checkd-all-not-latest', thisObj.onChangeCheckedBtnHandler)	// 最新版でないページを全てチェックする
 					.on('click', '.btn-bulk-publish', thisObj.onClickBulkPublishBtnHandler)	// チェックしたページを一括書き出し
-					// .on('click', '.btn-bulk-edit-tag', thisObj.onClickBulkEditTagBtnHandler)	// チェックしたページのタグを一括編集
-					.find('ul.page-list')
-						.attr('data-is-sortable', 1)
-						.sortable(
-							{
-								'placeholder'				: 'placeholder',
-								'tolerance'					: 'pointer',
-								'forcePlaceholderSize'		: true,
-								'opacity'					: 0.5,
-								'update'					: thisObj.onUpdateOrderHandler
-							}
-						);
+
+				// ログインユーザが顧客でなければ、ページリストのドラッグイベントを有効にする
+				if (prop['isCustomer'] === false) {
+					$baseElem
+						.find('ul.page-list')
+							.attr('data-is-sortable', 1)
+							.sortable(
+								{
+									'placeholder'				: 'placeholder',
+									'tolerance'					: 'pointer',
+									'forcePlaceholderSize'		: true,
+									'opacity'					: 0.5,
+									'update'					: thisObj.onUpdateOrderHandler
+								}
+							);
+				}
 
 				if (thisObj._deviceType === 'sp') {
 					var $tab = $('#page-wrapper-in-residence-id_' + thisObj._residenceId + '> .nav-tabs > li');
@@ -586,10 +591,13 @@ jQuery(document).ready(function($){
 					.off('click', '.btn-released-all')	// 全てのチェックを外す
 					.off('click', '.btn-checkd-all-not-latest')	// 最新版でないページを全てチェックする
 					.off('click', '.btn-bulk-publish')	// チェックしたページを一括書き出し
-					// .off('click', '.btn-bulk-edit-tag')	// チェックしたページのタグを一括編集
-					.find('ul.page-list[data-is-sortable="1"]')
-						.sortable('destroy')
-						.attr('data-is-sortable', 0);
+				// ログインユーザが顧客でなければ、物件リストのドラッグイベントを無効にする
+				if (prop['isCustomer'] === false) {
+					$baseElem
+						.find('ul.page-list[data-is-sortable="1"]')
+							.sortable('destroy')
+							.attr('data-is-sortable', 0);
+				}
 
 				if (thisObj._deviceType === 'sp') {
 					var $tab = $('#page-wrapper-in-residence-id_' + thisObj._residenceId + '> .nav-tabs > li');

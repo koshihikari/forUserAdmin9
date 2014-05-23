@@ -9,8 +9,9 @@
 <input type="hidden" name="previewUrl" value="<?php //echo $data['companies']['url']; ?>" />
 <input type="hidden" name="companyId" value="<?php echo $userData['company_id']; ?>" />
 <input type="hidden" name="concreteUrl" value="<?php echo $concreteUrl; ?>" />
-	<input type="hidden" name="menuData" value='<?php echo json_encode($menuData); ?>' />
-	<input type="hidden" name="itemData" value='<?php echo json_encode($itemData); ?>' />
+<input type="hidden" name="isCustomer" value='<?php echo $isCustomer; ?>' />
+<input type="hidden" name="menuData" value='<?php echo json_encode($menuData); ?>' />
+<input type="hidden" name="itemData" value='<?php echo json_encode($itemData); ?>' />
 
 <script id="residence-item-template" type="text/template">
 	<li id="residence-id_<%= residenceId %>" class="residence-item <%= isCompanySite === true ? 'company-item' : '' %>">

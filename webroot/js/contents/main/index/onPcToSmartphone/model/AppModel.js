@@ -91,7 +91,8 @@ jQuery(document).ready(function($){
 				'currentUrl'				: $('input[type="hidden"][name="currentUrl"]').val(),
 				'companyId'					: $('input[type="hidden"][name="companyId"]').val(),
 				'userId'					: $('input[type="hidden"][name="userId"]').val(),
-				'previewUrl'				: $('input[type="hidden"][name="previewUrl"]').val()
+				'previewUrl'				: $('input[type="hidden"][name="previewUrl"]').val(),
+				'isCustomer'				: $('input[type="hidden"][name="isCustomer"]').val() === '1' ? true : false
 			}
 		}
 

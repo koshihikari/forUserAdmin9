@@ -474,6 +474,7 @@ jQuery(document).ready(function($){
 		,setEvent: function(isEnabled) {
 			var thisObj = this;
 			var $baseElem = $('#residences');
+			var prop = thisObj._instances['AppModel'].getProp();
 
 			if (isEnabled === true && thisObj._isEnabled === false) {
 				thisObj._isEnabled = true;
@@ -487,27 +488,32 @@ jQuery(document).ready(function($){
 					.on('click', '.btn-checked-all', thisObj.onChangeCheckedBtnHandler)	// 全てチェックする
 					.on('click', '.btn-released-all', thisObj.onChangeCheckedBtnHandler)	// 全てのチェックを外す
 					.on('click', '.btn-bulk-edit-outline', thisObj.onClickBulkEditOutlineBtnHandler)	// チェックした物件の物件概要を一括編集する
-					.find('ul.residence-list')
-						.attr('data-is-sortable', 1)
-						.sortable(
-							{
-								'placeholder'				: 'placeholder',
-								'tolerance'					: 'pointer',
-								'forcePlaceholderSize'		: true,
-								'opacity'					: 0.5,
-								'update'					: thisObj.onUpdateOrderHandler
-							}
-						)
-					.find('> li')
-						.attr('data-is-droppable', 1)
-						.droppable(
-							{
-								'accept'				: $('.page-item'),
-								'tolerance'				: 'pointer',
-								'hoverClass'			: 'on-hover',
-								'drop'					: function(event, ui) { thisObj.onDropPageHandler(event, ui, this); }
-							}
-						)
+
+				// ログインユーザが顧客でなければ、物件リストのドラッグイベントを有効にする
+				if (prop['isCustomer'] === false) {
+					$baseElem
+						.find('ul.residence-list')
+							.attr('data-is-sortable', 1)
+							.sortable(
+								{
+									'placeholder'				: 'placeholder',
+									'tolerance'					: 'pointer',
+									'forcePlaceholderSize'		: true,
+									'opacity'					: 0.5,
+									'update'					: thisObj.onUpdateOrderHandler
+								}
+							)
+						.find('> li')
+							.attr('data-is-droppable', 1)
+							.droppable(
+								{
+									'accept'				: $('.page-item'),
+									'tolerance'				: 'pointer',
+									'hoverClass'			: 'on-hover',
+									'drop'					: function(event, ui) { thisObj.onDropPageHandler(event, ui, this); }
+								}
+							)
+				}
 
 			} else if (isEnabled === false && thisObj._isEnabled === true){
 				thisObj._isEnabled = false;
@@ -521,9 +527,13 @@ jQuery(document).ready(function($){
 					.off('click', '.btn-checked-all')	// 全てチェックする
 					.off('click', '.btn-released-all')	// 全てのチェックを外す
 					.off('click', '.btn-bulk-edit-outline')	// チェックした物件の物件概要を一括編集する
-					.find('ul.residence-list[data-is-sortable="1"]')
-						.sortable('destroy')
-						.attr('data-is-sortable', 0);
+				// ログインユーザが顧客でなければ、物件リストのドラッグイベントを無効にする
+				if (prop['isCustomer'] === false) {
+					$baseElem
+						.find('ul.residence-list[data-is-sortable="1"]')
+							.sortable('destroy')
+							.attr('data-is-sortable', 0);
+				}
 			}
 
 			thisObj._instances['TextInputManager'].setEvent($baseElem.find('input[type="text"]'), isEnabled);
