@@ -49,6 +49,18 @@
 						.tab-pane {
 							>.page-list {
 								>.page-item {
+									&.not-latest {
+										background: none;
+									}
+									&:hover {
+										background: rgba(254, 255, 234, 1);
+									}
+									&.current {
+										background: rgba(222,234,254,1);
+									}
+									&.active {
+										background: rgb(182, 203, 255);
+									}
 									>.group {
 										margin-left: 25px;
 									}
