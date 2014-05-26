@@ -405,7 +405,7 @@ jQuery(document).ready(function($){
 						if (data[i]['lat']) {
 							sources.push('<div>');
 							sources.push('<h3 style="text-align:center;">' + data[i]['title'] + '</h3>');
-							sources.push('<div><img src="http://maps.google.com/maps/api/staticmap?center=' + data[i]['lat'] + ',' + data[i]['lng'] + '&zoom=' + data[i]['zoom'] + '&format=gif&markers=' + data[i]['lat'] + ',' + data[i]['lng'] + '&size=232x240&sensor=false"></div>');
+							sources.push('<div><img src="http://maps.google.com/maps/api/staticmap?center=' + data[i]['lat'] + ',' + data[i]['lng'] + '&zoom=' + data[i]['zoom'] + '&format=gif&markers=' + data[i]['lat'] + ',' + data[i]['lng'] + '&size=232x240&sensor=false" width="100%"></div>');
 							sources.push('<div style="text-align:center;"><font face="Arial, Verdana" size="2">' + data[i]['address'] + '</font></div>');
 							sources.push('</div>');
 							sources.push('<br>');

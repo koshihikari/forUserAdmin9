@@ -23,11 +23,23 @@
 					overflow-y: scroll;
 
 					>li {
+
+						&.company-item {
+							&::before{
+								display: none;
+							}
+						}
+						.name {
+							padding: 0 0 5px 5px;
+							&::before {
+								margin-bottom: 0;
+							}
+						}
 					}
 
-					>.placeholder {
-						background: rgb(231, 231, 231);
-					}
+					// >.placeholder {
+					// 	background: rgb(231, 231, 231);
+					// }
 				}
 			}
 
@@ -65,9 +77,9 @@
 									}
 								}
 
-								>.placeholder {
-									background: rgb(231, 231, 231);
-								}
+								// >.placeholder {
+								// 	background: rgb(231, 231, 231);
+								// }
 							}
 						}
 					}
