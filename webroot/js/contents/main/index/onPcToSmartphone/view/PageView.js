@@ -286,7 +286,9 @@ jQuery(document).ready(function($){
 		 */
 		,onResizeWindow: function(event) {
 			var thisObj = this;
-			var height = $(window).height() - 161;
+			var prop = thisObj._instances['AppModel'].getProp();
+			var height = $(window).height() - (prop['isCustomer'] === true ? 136 : 161);
+			// var height = $(window).height() - 161;
 			var $ul = $('#' + thisObj._deviceType + '-tab-content-in-residence-id_' + thisObj._residenceId + ' ul.page-list');
 			$ul.height(height);
 		}

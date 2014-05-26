@@ -46,11 +46,11 @@ class MainController extends AppController {
 				'modified'				=> $this->modified
 			)
 		);
-		if ($this->isCustomer() === true) {
-			$this->render("../Contents/Main/customIndexInMain");
-		} else {
+		// if ($this->isCustomer() === true) {
+		// 	$this->render("../Contents/Main/customIndexInMain");
+		// } else {
 			$this->render("../Contents/Main/indexInMain");
-		}
+		// }
 	}
 
 
