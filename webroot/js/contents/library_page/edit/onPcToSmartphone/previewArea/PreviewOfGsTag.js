@@ -328,6 +328,9 @@ jQuery(document).ready(function($){
 						var gMap = {
 							geocoder	: new google.maps.Geocoder()
 						}
+						if (data[i]['title'] !== '') {
+							groupElem.append('<h3>' + data[i]['title'] + '</h3>');
+						}
 						var mapElem = $('<div>').addClass('map').appendTo(groupElem);
 						gMap['map'] = new google.maps.Map(mapElem[0], myOptions);
 						var marker = new google.maps.Marker({
