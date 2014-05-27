@@ -297,6 +297,9 @@ jQuery(document).ready(function($){
 						// var groupElem = $('<div>').addClass('map').appendTo(targetElem);
 						// var groupElem = $('<div>', {'class' : 'map'}).appendTo(targetElem);
 						var groupElem = $('<div>', {'class' : 'group'}).appendTo(targetElem);
+						if (data[i]['title'] !== '') {
+							groupElem.append('<h3>' + data[i]['title'] + '</h3>');
+						}
 						var mapElem = $('<div>', {'class' : 'map'}).appendTo(groupElem);
 						// targetElem.closest('[data-item-name="GsTag"]').attr(
 						groupElem.attr(
