@@ -263,9 +263,9 @@ jQuery(document).ready(function($){
 						for (row = 0; row < maxRow; row++) {
 							var isShow = dateData.getValue(row, 0);
 							isShow = Number(isShow) === 1 ? true : false;
-							if (isShow === true) {
-								var img = dateData.getValue(row, 1);
-								var url = dateData.getValue(row, 2);
+							var img = dateData.getValue(row, 1);
+							var url = dateData.getValue(row, 2);
+							if (isShow === true && img !== '' && url !== '') {
 								var tmpObj = {
 									img		: img,
 									url		: url
