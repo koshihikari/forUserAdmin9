@@ -113,6 +113,7 @@ jQuery(document).ready(function($){
 				var $liElem = $('#' + listElementId);
 				var forTemplateData = {
 					'isCompanySite'				: +data[i]['residences']['is_company_site'] === 0 ? false : true,
+					'isShow'					: +data[i]['residences']['is_show'],
 					'residenceId'				: data[i]['residences']['id'],
 					'residenceName'				: data[i]['residences']['name'],
 					'residencePath'				: data[i]['residences']['path'],

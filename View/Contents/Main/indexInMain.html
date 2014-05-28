@@ -14,7 +14,7 @@
 <input type="hidden" name="itemData" value='<?php echo json_encode($itemData); ?>' />
 
 <script id="residence-item-template" type="text/template">
-	<li id="residence-id_<%= residenceId %>" class="residence-item <%= isCompanySite === true ? 'company-item' : '' %>" data-is-visible="1">
+	<li id="residence-id_<%= residenceId %>" class="residence-item <%= isCompanySite === true ? 'company-item' : '' %>" data-is-visible="<%= isShow %>">
 		<label>
 			<?php if ($isCustomer === false): ?>
 				<p class="checkbox"><input type="checkbox" <%= checked ? 'checked' : '' %> /></p>
