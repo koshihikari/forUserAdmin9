@@ -63,30 +63,65 @@
 						// &:last-child {
 						// 	border-bottom: none;
 						// }
-						&.not-latest {
-							background: rgb(255, 245, 174);
-						}
-						&:hover {
-							background: rgba(254, 255, 234, 1);
-						}
-						&.current {
-							background: rgba(222,234,254,1);
-						}
-						&.on-hover {
-							background: rgba(101, 157, 250, 1);
-						}
 						&[data-is-visible="1"] {
+							background: rgba(255, 255, 255, 1);
+							&.not-latest {
+								background: rgb(255, 245, 174);
+							}
+							&:hover {
+								background: rgba(254, 255, 234, 1);
+							}
+							&.current {
+								background: rgba(222,234,254,1);
+								&:hover {
+									background: rgba(202,214,255,1);
+								}
+							}
+							// &.on-hover {
+							// 	background: rgba(101, 157, 250, 1);
+							// }
 							.btn-switch-residence {
 								&:before {
 									content: 'この物件を非表示にする';
 								}
 							}
+							.control-btns {
+								display: block;
+							}
+							.name {
+								display: block;
+							}
+							.path {
+								display: block;
+							}
+							.name.naked {
+								display: none;
+							}
 						}
 						&[data-is-visible="0"] {
+							background: rgba(0, 0, 0, 0.10);
+							&.current {
+								background: rgba(0, 0, 0, 0.2);
+							}
+							&:hover {
+								background: rgba(0, 0, 0, 0.30);
+							}
 							.btn-switch-residence {
 								&:before {
 									content: 'この物件を表示する';
 								}
+							}
+							.control-btns {
+								display: none;
+							}
+							.name {
+								display: none;
+							}
+							.path {
+								display: none;
+							}
+							.name.naked {
+								display: block;
 							}
 						}
 
@@ -167,6 +202,12 @@
 								vertical-align: middle;
 								margin-right: 5px;
 								margin-bottom: 5px;
+							}
+						}
+						.name.naked {
+							padding: 0 0 5px 5px;
+							&::before {
+								margin-bottom: 0;
 							}
 						}
 						.path {
