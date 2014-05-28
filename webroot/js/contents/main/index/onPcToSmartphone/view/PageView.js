@@ -210,6 +210,7 @@ jQuery(document).ready(function($){
 				} else {	// エレメントが存在しない場合は作成
 					var forTemplateData = {
 						'pageId'				: data[i][key]['id'],
+						'isShow'				: +data[i][key]['is_show'],
 						'pageTitle'				: data[i][key]['title'],
 						'pagePath'				: data[i][key]['path'],
 						'pageUrl'				: pageUrl,

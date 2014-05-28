@@ -103,7 +103,7 @@
 </script>
 
 <script id="smartphone-page-item-template" type="text/template">
-	<li id="sp-page-item_<%= pageId %>" class="page-item sp-page-item <%= isLatest ? '' : 'not-latest' %>" data-is-visible="1">
+	<li id="sp-page-item_<%= pageId %>" class="page-item sp-page-item <%= isLatest ? '' : 'not-latest' %>" data-is-visible="<%= isShow %>">
 		<div class="clearfix">
 			<label>
 				<p class="checkbox"><input type="checkbox"></p>
@@ -180,7 +180,7 @@
 </script>
 
 <script id="featurephone-page-item-template" type="text/template">
-	<li id="fp-page-item_<%= pageId %>" class="page-item fp-page-item <%= isLatest ? '' : 'not-latest' %>" data-is-visible="1">
+	<li id="fp-page-item_<%= pageId %>" class="page-item fp-page-item <%= isLatest ? '' : 'not-latest' %>" data-is-visible="<%= isShow %>">
 		<div class="clearfix">
 			<label>
 				<p class="checkbox"><input type="checkbox"></p>
