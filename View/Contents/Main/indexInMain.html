@@ -103,7 +103,7 @@
 </script>
 
 <script id="smartphone-page-item-template" type="text/template">
-	<li id="sp-page-item_<%= pageId %>" class="page-item sp-page-item <%= isLatest ? '' : 'not-latest' %>">
+	<li id="sp-page-item_<%= pageId %>" class="page-item sp-page-item <%= isLatest ? '' : 'not-latest' %>" data-is-visible="1">
 		<div class="clearfix">
 			<label>
 				<p class="checkbox"><input type="checkbox"></p>
@@ -111,12 +111,12 @@
 			</label>
 			<div class="btns">
 				<?php if ($isCustomer === false): ?>
-				<div class="btn-group">
-					<button class="btn btn-warning btn-switch-residence visible">このページを非表示にする</button>
+				<div class="btn-group control-btns">
 					<a href="<%= editUrl %>" class="btn btn-primary btn-edit">編集</a>
 					<button class="btn btn-primary btn-duplicate-page">複製</button>
 					<button class="btn btn-danger btn-del-page">削除</button>
 					<button class="btn btn-primary btn-edit-tag">タグ修正</button>
+					<button class="btn btn-warning btn-switch-page"></button>
 				</div>
 				<?php endif; ?>
 				<div class="btn-group">
@@ -146,8 +146,11 @@
 			</div>
 		</div>
 		<div class="group">
+			<p class="title naked"><%= pageTitle %></p>
 			<?php if ($isCustomer === true): ?>
+				<!--
 				<p class="title"><%= pageTitle %></p>
+				-->
 				<p class="path"><span><%= pageUrl %></span><%= pagePath %></p>
 			<?php else: ?>
 				<p class="title"><input type="text" name="title" value="<%= pageTitle %>" /></p>
@@ -177,7 +180,7 @@
 </script>
 
 <script id="featurephone-page-item-template" type="text/template">
-	<li id="fp-page-item_<%= pageId %>" class="page-item fp-page-item <%= isLatest ? '' : 'not-latest' %>">
+	<li id="fp-page-item_<%= pageId %>" class="page-item fp-page-item <%= isLatest ? '' : 'not-latest' %>" data-is-visible="1">
 		<div class="clearfix">
 			<label>
 				<p class="checkbox"><input type="checkbox"></p>
@@ -186,10 +189,10 @@
 			<div class="btns">
 				<?php if ($isCustomer === false): ?>
 					<div class="btn-group">
-						<button class="btn btn-warning btn-switch-residence visible">このページを非表示にする</button>
 						<a href="<%= editUrl %>" class="btn btn-primary btn-edit">編集</a>
 						<button class="btn btn-primary btn-duplicate-page">複製</button>
 						<button class="btn btn-danger btn-del-page">削除</button>
+						<button class="btn btn-warning btn-switch-page"></button>
 					</div>
 				<?php endif; ?>
 				<div class="btn-group">
@@ -219,8 +222,11 @@
 			</div>
 		</div>
 		<div class="group">
+			<p class="title naked"><%= pageTitle %></p>
 			<?php if ($isCustomer === true): ?>
+				<!--
 				<p class="title"><%= pageTitle %></p>
+				-->
 				<p class="path"><span><%= pageUrl %></span><%= pagePath %></p>
 			<?php else: ?>
 				<p class="title"><input type="text" name="title" value="<%= pageTitle %>" /></p>

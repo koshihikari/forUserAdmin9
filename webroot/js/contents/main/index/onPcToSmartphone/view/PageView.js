@@ -39,6 +39,7 @@ jQuery(document).ready(function($){
 				,'onChangeCurrentInfo'
 				,'render'
 				,'onResizeWindow'
+				,'onClickSwitchBtnHandler'
 				,'onClickAddPageBtnHandler'
 				,'onClickDelPageBtnHandler'
 				,'onClickDuplicatePageBtnHandler'
@@ -291,6 +292,27 @@ jQuery(document).ready(function($){
 			// var height = $(window).height() - 161;
 			var $ul = $('#' + thisObj._deviceType + '-tab-content-in-residence-id_' + thisObj._residenceId + ' ul.page-list');
 			$ul.height(height);
+		}
+
+		/*
+		 * 表示切り替えボタン押下時にコールされるイベントハンドラ
+		 * @param	event			Eventオブジェクト
+		 * @return	void
+		 */
+		,onClickSwitchBtnHandler: function(event) {
+			event.stopPropagation();
+			var thisObj = this;
+			var currentTarget = $(event.currentTarget);
+			var pageLiElem = currentTarget.closest('li');
+			var pageId = pageLiElem.attr('id').replace((thisObj._deviceType + '-page-item_'), '');
+			var isVisible = pageLiElem.attr('data-is-visible') === '1' ? true : false;
+			pageLiElem.attr('data-is-visible', isVisible === true ? '0' : '1');
+			// if (isVisible === true) {
+			// 	pageLiElem.find('.btn-edit, .btn-duplicate-page, .btn-del-page, .btn-edit-tag').addClass('disabled');
+			// } else {
+			// 	pageLiElem.find('.btn-edit, .btn-duplicate-page, .btn-del-page, .btn-edit-tag').removeClass('disabled');
+			// }
+			console.log('onClickSwitchBtnHandler :: pageId = ' + pageId + ', isVisible = ' + isVisible);
 		}
 
 		/*
@@ -557,6 +579,7 @@ jQuery(document).ready(function($){
 					.on('click', '.btn-released-all', thisObj.onChangeCheckedBtnHandler)	// 全てのチェックを外す
 					.on('click', '.btn-checkd-all-not-latest', thisObj.onChangeCheckedBtnHandler)	// 最新版でないページを全てチェックする
 					.on('click', '.btn-bulk-publish', thisObj.onClickBulkPublishBtnHandler)	// チェックしたページを一括書き出し
+					.on('click', '.btn-switch-page', thisObj.onClickSwitchBtnHandler)	// 表示切り替え
 
 				// ログインユーザが顧客でなければ、ページリストのドラッグイベントを有効にする
 				if (prop['isCustomer'] === false) {
@@ -593,6 +616,7 @@ jQuery(document).ready(function($){
 					.off('click', '.btn-released-all')	// 全てのチェックを外す
 					.off('click', '.btn-checkd-all-not-latest')	// 最新版でないページを全てチェックする
 					.off('click', '.btn-bulk-publish')	// チェックしたページを一括書き出し
+					.off('click', '.btn-switch-page')	// 表示切り替え
 				// ログインユーザが顧客でなければ、物件リストのドラッグイベントを無効にする
 				if (prop['isCustomer'] === false) {
 					$baseElem

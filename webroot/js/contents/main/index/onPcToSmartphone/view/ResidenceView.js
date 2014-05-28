@@ -260,7 +260,6 @@ jQuery(document).ready(function($){
 			console.log('onClickSwitchBtnHandler :: residenceId = ' + residenceId + ', isVisible = ' + isVisible);
 		}
 
-
 		/*
 		 * 物件追加ボタン押下時にコールされるイベントハンドラ
 		 * @param	event			Eventオブジェクト
