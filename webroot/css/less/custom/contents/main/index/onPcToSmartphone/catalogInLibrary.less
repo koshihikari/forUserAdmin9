@@ -75,6 +75,20 @@
 						&.on-hover {
 							background: rgba(101, 157, 250, 1);
 						}
+						&[data-is-visible="1"] {
+							.btn-switch-residence {
+								&:before {
+									content: 'この物件を非表示にする';
+								}
+							}
+						}
+						&[data-is-visible="0"] {
+							.btn-switch-residence {
+								&:before {
+									content: 'この物件を表示する';
+								}
+							}
+						}
 
 						label {
 							// display: inline-block;

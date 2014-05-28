@@ -36,6 +36,7 @@ jQuery(document).ready(function($){
 				,'onChangeCurrentInfo'
 				,'render'
 				,'onResizeWindow'
+				,'onClickSwitchBtnHandler'
 				,'onClickAddResidenceBtnHandler'
 				,'onClickDuplicateResidenceBtnHandler'
 				,'onClickDelResidenceBtnHandler'
@@ -240,9 +241,25 @@ jQuery(document).ready(function($){
 			var thisObj = this;
 			var prop = thisObj._instances['AppModel'].getProp();
 			var height = $(window).height() - (prop['isCustomer'] === true ? 60 : 161);
-			// var height = $(window).height() - 161;
 			$('#residences > ul.residence-list').height(height);
 		}
+
+		/*
+		 * 表示切り替えボタン押下時にコールされるイベントハンドラ
+		 * @param	event			Eventオブジェクト
+		 * @return	void
+		 */
+		,onClickSwitchBtnHandler: function(event) {
+			event.stopPropagation();
+			var thisObj = this;
+			var currentTarget = $(event.currentTarget);
+			var residenceLiElem = currentTarget.closest('li');
+			var residenceId = residenceLiElem.attr('id').replace('residence-id_', '');
+			var isVisible = residenceLiElem.attr('data-is-visible') === '1' ? true : false;
+			residenceLiElem.attr('data-is-visible', isVisible === true ? '0' : '1');
+			console.log('onClickSwitchBtnHandler :: residenceId = ' + residenceId + ', isVisible = ' + isVisible);
+		}
+
 
 		/*
 		 * 物件追加ボタン押下時にコールされるイベントハンドラ
@@ -250,6 +267,7 @@ jQuery(document).ready(function($){
 		 * @return	void
 		 */
 		,onClickAddResidenceBtnHandler: function(event) {
+			event.stopPropagation();
 			var thisObj = this;
 			thisObj._instances['AppModel'].addResidence();
 		}
@@ -260,6 +278,7 @@ jQuery(document).ready(function($){
 		 * @return	void
 		 */
 		,onClickDuplicateResidenceBtnHandler: function(event) {
+			event.stopPropagation();
 			var thisObj = this;
 			var residenceId = $(event.currentTarget).closest('li').attr('id').replace('residence-id_', '');
 			thisObj._instances['AppModel'].duplicateResidence(residenceId);
@@ -271,6 +290,7 @@ jQuery(document).ready(function($){
 		 * @return	void
 		 */
 		,onClickDelResidenceBtnHandler: function(event) {
+			event.stopPropagation();
 			var thisObj = this;
 			var $residence = $(event.currentTarget).closest('li');
 			var residenceId = $residence.attr('id').replace('residence-id_', '');
@@ -483,6 +503,7 @@ jQuery(document).ready(function($){
 				$baseElem
 					.on('click', 'input[type="text"]', thisObj.onFocusTextInputHandler)	// テキストボックス
 					.on('click', '.residence-item', thisObj.onClickResidenceHandler)	// 物件選択
+					.on('click', '.btn-switch-residence', thisObj.onClickSwitchBtnHandler)	// 表示切り替え
 					.on('click', '.btn-add-residence', thisObj.onClickAddResidenceBtnHandler)	// 物件追加
 					.on('click', '.btn-duplicate-residence', thisObj.onClickDuplicateResidenceBtnHandler)	// 物件複製
 					.on('click', '.btn-del-residence', thisObj.onClickDelResidenceBtnHandler)	// 物件削除
@@ -522,6 +543,7 @@ jQuery(document).ready(function($){
 				$baseElem
 					.off('click', 'input[type="text"]')	// テキストボックス
 					.off('click', '.residence-item')	// 物件選択
+					.off('click', '.btn-switch-residence')	// 表示切り替え
 					.off('click', '.btn-add-residence')	// 物件追加
 					.off('click', '.btn-duplicate-residence')	// 物件複製
 					.off('click', '.btn-del-residence')	// 物件削除
