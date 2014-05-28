@@ -304,8 +304,11 @@ jQuery(document).ready(function($){
 			var thisObj = this;
 			var currentTarget = $(event.currentTarget);
 			var pageLiElem = currentTarget.closest('li');
-			var tabPaneElem = pageLiElem.closest('.sp-tab-pane');
-			var residenceId = tabPaneElem.attr('id').replace('sp-tab-content-in-residence-id_', '');
+			var replaceWord = thisObj._deviceType === 'sp' ? 'sp-tab-content-in-residence-id_' : 'fp-tab-content-in-residence-id_';
+			// var tabPaneElem = pageLiElem.closest('.sp-tab-pane');
+			var tabPaneElem = pageLiElem.closest('.tab-pane');
+			var residenceId = tabPaneElem.attr('id').replace(replaceWord, '');
+			// var residenceId = tabPaneElem.attr('id').replace('sp-tab-content-in-residence-id_', '');
 			var pageId = pageLiElem.attr('id').replace((thisObj._deviceType + '-page-item_'), '');
 			var isVisible = pageLiElem.attr('data-is-visible') === '1' ? true : false;
 			pageLiElem.attr('data-is-visible', isVisible === true ? '0' : '1');
