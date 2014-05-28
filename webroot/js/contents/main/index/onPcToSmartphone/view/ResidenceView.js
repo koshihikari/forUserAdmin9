@@ -258,6 +258,7 @@ jQuery(document).ready(function($){
 			var isVisible = residenceLiElem.attr('data-is-visible') === '1' ? true : false;
 			residenceLiElem.attr('data-is-visible', isVisible === true ? '0' : '1');
 			console.log('onClickSwitchBtnHandler :: residenceId = ' + residenceId + ', isVisible = ' + isVisible);
+			$(thisObj).trigger('onSwitchResidenceVisible', [residenceId, !isVisible]);
 		}
 
 		/*

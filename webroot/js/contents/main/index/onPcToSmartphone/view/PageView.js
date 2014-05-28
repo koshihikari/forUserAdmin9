@@ -304,6 +304,8 @@ jQuery(document).ready(function($){
 			var thisObj = this;
 			var currentTarget = $(event.currentTarget);
 			var pageLiElem = currentTarget.closest('li');
+			var tabPaneElem = pageLiElem.closest('.sp-tab-pane');
+			var residenceId = tabPaneElem.attr('id').replace('sp-tab-content-in-residence-id_', '');
 			var pageId = pageLiElem.attr('id').replace((thisObj._deviceType + '-page-item_'), '');
 			var isVisible = pageLiElem.attr('data-is-visible') === '1' ? true : false;
 			pageLiElem.attr('data-is-visible', isVisible === true ? '0' : '1');
@@ -312,7 +314,8 @@ jQuery(document).ready(function($){
 			// } else {
 			// 	pageLiElem.find('.btn-edit, .btn-duplicate-page, .btn-del-page, .btn-edit-tag').removeClass('disabled');
 			// }
-			console.log('onClickSwitchBtnHandler :: pageId = ' + pageId + ', isVisible = ' + isVisible);
+			console.log('onClickSwitchBtnHandler :: residenceId = ' + residenceId + ', pageId = ' + pageId + ', isVisible = ' + isVisible);
+			$(thisObj).trigger('onSwitchPageVisible', residenceId);
 		}
 
 		/*

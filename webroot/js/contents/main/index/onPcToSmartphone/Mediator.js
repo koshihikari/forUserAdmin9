@@ -141,11 +141,24 @@ jQuery(document).ready(function($){
 				thisObj._instances['view'][viewName] = view;
 				if (viewName === 'ResidenceView') {
 					$(thisObj._instances['view'][viewName])
-						.on('onClickBulkEditOutlineBtn', thisObj._instances['view']['BulkEditOutlineView'].confirm);
+						.on('onClickBulkEditOutlineBtn', thisObj._instances['view']['BulkEditOutlineView'].confirm)
+						.on('onSwitchResidenceVisible', function(event, residenceId, isVisible) {
+							$('#page-wrapper-in-residence-id_' + residenceId)
+								.find('.page-item').attr('data-is-visible', (isVisible === true ? 1 : 0));
+						});
 				} else if (viewName.indexOf('PageViewOf') !== -1) {
 					$(thisObj._instances['view'][viewName])
 						.on('onClickBulkPublishBtn', thisObj.publish)
-						.on('onClickEditTagBtn', thisObj._instances['view']['TagView'].confirm);
+						.on('onClickEditTagBtn', thisObj._instances['view']['TagView'].confirm)
+						.on('onSwitchPageVisible', function(event, residenceId) {
+							var isVisible = false;
+							// スマホ、ガラケーページが全て非表示なら、その物件リストは非表示
+							// スマホ、ガラケーページの内、どれか1つでも表示されていたらその物件リストは表示
+							$('#page-wrapper-in-residence-id_' + residenceId + ' .page-item').each(function(i) {
+								isVisible = ($(this).attr('data-is-visible') === '1' || isVisible === true) ? true : false;
+							})
+							$('#residence-id_' + residenceId).attr('data-is-visible', (isVisible === true ? 1 : 0));
+						});
 				}
 			}
 		}
