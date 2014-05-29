@@ -69,6 +69,7 @@ class AppController extends Controller {
 	}
 	public function beforeFilter() {
 		// parent::beforeFilter();
+		// $this->modified = '012345';
 		$this->modified = filemtime("../webroot/history.html");
 
 		$this->isEnable = array(
