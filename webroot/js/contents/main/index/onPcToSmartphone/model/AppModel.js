@@ -57,7 +57,7 @@ jQuery(document).ready(function($){
 
 				,'getPageTag'
 				,'setPageTagData'
-				// ,'setPageTag'
+				,'switchResidenceVisible'
 				// ,'delPageTag'
 				// ,'reorderPageTag'
 
@@ -900,6 +900,46 @@ jQuery(document).ready(function($){
 				} else {
 					$(thisObj).trigger(eventNames['errorEventName']);
 				}
+			}
+			thisObj.access(url, sendData, eventNames, callback);
+		}
+
+		/*
+		 * 物件の表示/非表示を切り替えるメソッド
+		 * @param	residenceId		表示を切り替える物件のID
+		 * @param	isShow			true === 表示、false === 非表示
+		 * @return	void
+		 */
+		 /*
+		*/
+		,switchResidenceVisible: function(residenceId, isShow) {
+			var thisObj = this;
+			var prop = thisObj._prop;
+			var url = thisObj._prop['currentUrl'] + 'Main/switchResidenceVisible/';
+			var sendData = {
+				'device_name'				: 'smartphone',
+				'device_num'				: 2,
+				'company_id'				: prop['companyId'],
+				'residence_id'				: residenceId,
+				'is_show'					: isShow === true ? 1 : 0,
+				'is_company_site'			: 0,
+				'is_customer'				: prop['isCustomer'] === true ? 1 : 0
+			};
+			var eventNames = {
+				'initEventName'				: 'onInitSwitchResidenceVisible',
+				'completeEventName'			: 'onCompleteSwitchResidenceVisible',
+				'errorEventName'			: 'onErrorSwitchResidenceVisible'
+			};
+			console.log('--------');
+			console.log('switchResidenceVisible :: 物件の表示切り替え開始');
+			console.log('sendData');
+			console.log(sendData);
+			console.log('--------');
+			var callback = function(data) {
+				console.log('--------');
+				console.log('switchResidenceVisible :: 物件の表示切り替え完了');
+				console.log('--------');
+				thisObj.callback(residenceId, '-', data);
 			}
 			thisObj.access(url, sendData, eventNames, callback);
 		}

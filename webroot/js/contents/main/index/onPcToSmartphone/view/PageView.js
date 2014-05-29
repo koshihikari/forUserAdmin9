@@ -127,6 +127,7 @@ jQuery(document).ready(function($){
 				var edited = data[i][key]['edited'] ? data[i][key]['edited'] : '-----';
 				var publisher = data[i]['publishedUser']['name'] ? data[i]['publishedUser']['name'] : '-----';
 				var published = data[i][key]['published'] ? data[i][key]['published'] : '-----';
+				// var isShow = data[i][key]['is_show'] === '1' ?
 
 				if (0 < $liElem.length) {	// 既にエレメントが存在する場合は修正
 					if (existenceLiNames[listElementId] === true) {
@@ -162,6 +163,7 @@ jQuery(document).ready(function($){
 					if ($liElem.find('.published').html() !== published) {
 						$liElem.find('.published').html(published);
 					}
+					$liElem.attr('data-is-visible', data[i][key]['is_show']);
 
 					// プレビューページ用ページタイトルとURL、QRコードの更新チェック
 					var $dropDownForPreviewElem = $liElem.find('.dropdown-menu-for-preview');

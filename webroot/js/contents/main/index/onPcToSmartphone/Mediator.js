@@ -142,10 +142,10 @@ jQuery(document).ready(function($){
 				if (viewName === 'ResidenceView') {
 					$(thisObj._instances['view'][viewName])
 						.on('onClickBulkEditOutlineBtn', thisObj._instances['view']['BulkEditOutlineView'].confirm)
-						.on('onSwitchResidenceVisible', function(event, residenceId, isVisible) {
-							$('#page-wrapper-in-residence-id_' + residenceId)
-								.find('.page-item').attr('data-is-visible', (isVisible === true ? 1 : 0));
-						});
+						// .on('onSwitchResidenceVisible', function(event, residenceId, isVisible) {
+						// 	$('#page-wrapper-in-residence-id_' + residenceId)
+						// 		.find('.page-item').attr('data-is-visible', (isVisible === true ? 1 : 0));
+						// });
 				} else if (viewName.indexOf('PageViewOf') !== -1) {
 					$(thisObj._instances['view'][viewName])
 						.on('onClickBulkPublishBtn', thisObj.publish)

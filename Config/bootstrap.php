@@ -198,4 +198,5 @@ App::build(
 );
 
 // CakePlugin::load('AclExtras');
+CakePlugin::load('DebugKit');
 CakePlugin::load('Less');

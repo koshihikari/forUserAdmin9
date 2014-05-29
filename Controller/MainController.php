@@ -364,6 +364,28 @@ class MainController extends AppController {
 	}
 
 	/*
+	 * 物件の表示/非表示を切り替えるメソッド
+	 * @param	void
+	 * @return	json
+	 */
+	public function switchResidenceVisible () {
+		$isSuccess = ClassRegistry::init('Main_SwitchVisibleAction')->switchResidenceVisible($this->request);
+		if ($isSuccess === true) {
+			return $this->_doMethod('request', $this->request);
+			// $json = array('result'=>true);
+		} else {
+			$this->autoRender = false;
+			$this->autoLayout = false;
+			$json = array('result'=>false, 'message'=>'値が渡されていません');
+
+			$this->RequestHandler->setContent('json');
+			$this->RequestHandler->respondAs('application/json; charset=UTF-8');
+
+			return new CakeResponse(array('body' => json_encode($json)));
+		}
+	}
+
+	/*
 	 * ページのタグをセットするメソッド
 	 * @param	void
 	 * @return	json
