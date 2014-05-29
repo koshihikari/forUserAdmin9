@@ -59,8 +59,8 @@ jQuery(document).ready(function($){
 						<p></p>\
 					</div>\
 					<div class="modal-footer">\
-						<button type="button" class="btn close-btn"><span><i data-icon=""></i>キャンセル</span></button>\
-						<button type="button" class="btn btn-primary agree-btn"><span><i data-icon=""></i>確認</span></button>\
+						<button type="button" class="btn close-btn"><span>キャンセル</span></button>\
+						<button type="button" class="btn btn-primary agree-btn"><span>確認</span></button>\
 					</div>\
 				</div>\
 			';

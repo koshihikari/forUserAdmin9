@@ -307,8 +307,8 @@ jQuery(document).ready(function($){
 				{
 					'title'									: '削除確認',
 					'message'								: message,
-					'close-btn-text'						: '<i data-icon=""></i>キャンセル',
-					'agree-btn-text'						: '<i data-icon=""></i>削除する'
+					'close-btn-text'						: 'キャンセル',
+					'agree-btn-text'						: '削除する'
 				},
 				function() {
 					thisObj._instances['AppModel'].delResidence(residenceId);
