@@ -542,6 +542,7 @@ jQuery(document).ready(function($){
 				'device_num'				: 2,
 				'company_id'				: prop['companyId'],
 				'is_company_site'			: 0,
+				'is_customer'				: prop['isCustomer'] === true ? 1 : 0,
 				'residence_id'				: residenceId ? residenceId : -1,
 				'page_id'					: pageId,
 				'user_id'					: prop['userId'],
