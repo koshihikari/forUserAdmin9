@@ -85,6 +85,9 @@ class MainController extends AppController {
 					if ($isSuccess === true) {
 						$request->data['residence_id'] = $class->latestId;
 					}
+		// error_log('-----------------' . "\n", 3, 'log.txt');
+		// error_log('residence_id = ' . $request->data['residence_id'] . "\n", 3, 'log.txt');
+		// error_log('-----------------' . "\n", 3, 'log.txt');
 					break;
 				case 'delResidence':
 					$isSuccess = ClassRegistry::init('Main_DelAction')->delResidence($request);
@@ -169,6 +172,7 @@ class MainController extends AppController {
 						$resultOfFp = ClassRegistry::init('Main_Featurephone_RequestPageAction')->requestPage($request);
 						$json = array(
 							'result'					=> true,
+							'residenceId'				=> $request->data['residence_id'],
 							'residences'				=> $result['data'],
 							// 'smartphonePages'			=> array(),
 							'smartphonePages'			=> $resultOfSp['data'],

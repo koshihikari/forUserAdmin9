@@ -34,21 +34,21 @@ class Main_RequestResidenceAction extends Model {
 				'order'
 			)
 		);
-		error_log('比較 =  ' . ($request->data['is_customer']) . "\n", 3, 'log.txt');
-		error_log('比較 =  ' . ($request->data['is_customer'] === '1') . "\n", 3, 'log.txt');
-		error_log('比較 =  ' . ($request->data['is_customer'] === 1) . "\n", 3, 'log.txt');
-		error_log('比較 =  ' . ($request->data['is_customer'] === true) . "\n", 3, 'log.txt');
-		error_log('比較 =  ' . ($request->data['is_customer'] === 'true') . "\n", 3, 'log.txt');
+		// error_log('比較 =  ' . ($request->data['is_customer']) . "\n", 3, 'log.txt');
+		// error_log('比較 =  ' . ($request->data['is_customer'] === '1') . "\n", 3, 'log.txt');
+		// error_log('比較 =  ' . ($request->data['is_customer'] === 1) . "\n", 3, 'log.txt');
+		// error_log('比較 =  ' . ($request->data['is_customer'] === true) . "\n", 3, 'log.txt');
+		// error_log('比較 =  ' . ($request->data['is_customer'] === 'true') . "\n", 3, 'log.txt');
 		if ($request->data['is_customer'] === '1') {
 			$options['conditions']['is_show'] = '1';
 		}
-		ob_start();//ここから
-		var_dump($options);
-		$out=ob_get_contents();//ob_startから出力された内容をゲットする。
-		ob_end_clean();//ここまで
-		error_log('-----------------' . "\n", 3, 'log.txt');
-		error_log($out . "\n", 3, 'log.txt');
-		error_log('-----------------' . "\n", 3, 'log.txt');
+		// ob_start();//ここから
+		// var_dump($options);
+		// $out=ob_get_contents();//ob_startから出力された内容をゲットする。
+		// ob_end_clean();//ここまで
+		// error_log('-----------------' . "\n", 3, 'log.txt');
+		// error_log($out . "\n", 3, 'log.txt');
+		// error_log('-----------------' . "\n", 3, 'log.txt');
 		$result = $residences->find('all', $options);
 
 		for ($i=0, $len=count($result); $i<$len; $i++) {

@@ -282,6 +282,7 @@ jQuery(document).ready(function($){
 									residenceId = +(key.replace('FpPageDataOf', ''));
 									viewName = 'FpPageViewOf' + residenceId;
 								}
+								console.log('viewName = ' + viewName);
 								thisObj._instances['view'][viewName].render();
 							}
 

@@ -107,6 +107,12 @@ jQuery(document).ready(function($){
 			var qrApiUrl = 'http://chart.apis.google.com/chart?cht=qr&chs=150x150&chl=';
 			var existenceLiNames = {};
 
+			console.log('PageView :: setElement :: _residenceId = ' + thisObj._residenceId + ', dataName = ' + dataName);
+			console.log('data');
+			console.log(data);
+			console.log('prop');
+			console.log(prop);
+
 			$targetElem.find('> ul.page-list > li').each(function(i) {
 				existenceLiNames[$(this).attr('id')] = true;
 			});
@@ -265,6 +271,7 @@ jQuery(document).ready(function($){
 		 */
 		,render: function() {
 			var thisObj = this;
+			console.log('PageView :: render :: _residenceId = ' + thisObj._residenceId);
 
 			thisObj.setStatus('onInitRender');
 			$(thisObj).trigger('onInitRender');

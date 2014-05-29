@@ -264,8 +264,9 @@ jQuery(document).ready(function($){
 				'device_name'				: 'smartphone',
 				'device_num'				: 2,
 				'company_id'				: prop['companyId'],
+				'user_id'					: prop['userId'],
 				'is_company_site'			: 0,
-				'user_id'					: prop['userId']
+				'is_customer'				: prop['isCustomer'] === true ? 1 : 0
 			};
 			var eventNames = {
 				'initEventName'				: 'onInitAddResidence',
@@ -274,7 +275,10 @@ jQuery(document).ready(function($){
 			};
 			var callback = function(data) {
 				var currentInfo = thisObj.getCurrentInfo();
-				thisObj.callback(currentInfo['residenceId'], currentInfo['deviceType'], data);
+				// console.log('currentInfo');
+				// console.log(currentInfo);
+				// thisObj.callback(currentInfo['residenceId'], currentInfo['deviceType'], data);
+				thisObj.callback(data['residenceId'], currentInfo['deviceType'], data);
 			}
 			thisObj.access(url, sendData, eventNames, callback);
 		}
