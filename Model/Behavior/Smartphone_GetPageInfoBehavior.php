@@ -11,12 +11,12 @@ class Smartphone_GetPageInfoBehavior extends ModelBehavior {
 	 * @param	$user_id			ユーザID
 	 * @return	boolean
 	 */
-	public function getPageInfo(Model $model, $isResidenceSearch, $id) {
-		$result = $this->_getPageInfo($isResidenceSearch, $id);
+	public function getPageInfo(Model $model, $isResidenceSearch, $id, $isCustomer) {
+		$result = $this->_getPageInfo($isResidenceSearch, $id, $isCustomer);
 		return $result;
 	}
 
-	private function _getPageInfo($isResidenceSearch, $id) {
+	private function _getPageInfo($isResidenceSearch, $id, $isCustomer) {
 		$smartphone_pages = ClassRegistry::init('smartphone_pages');
 		$smartphone_pages->bindModel(
 			array(
@@ -44,6 +44,9 @@ class Smartphone_GetPageInfoBehavior extends ModelBehavior {
 					'smartphone_pages.order ASC'
 				)
 			);
+			if ($isCustomer === '1') {
+				$options['conditions']['is_show'] = '1';
+			}
 		} else {
 			$options = array(
 				'conditions'		=> array(

@@ -14,9 +14,10 @@ class Main_Smartphone_RequestPageAction extends Model {
 
 		if ($request->isPost()) {
 			if (
-				isset($request->data['residence_id'])
+				isset($request->data['residence_id']) &&
+				isset($request->data['is_customer'])
 			) {
-				$result = $this->getPageInfo(true, $request->data['residence_id']);
+				$result = $this->getPageInfo(true, $request->data['residence_id'], $request->data['is_customer']);
 				$json = array('result'=>true, 'data'=>$result);
 			}
 		}
