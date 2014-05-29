@@ -34,7 +34,7 @@ class Page_Smartphone_PublishConcretePageAction extends AppModel {
 				$isCorrect = $this->_setPageSource($isCorrect, $request);
 				if ($isCorrect === true) {
 					$this->commit();
-					$result = $this->getPageInfo(false, $request->data['id']);
+					$result = $this->getPageInfo(false, $request->data['id'], '0');
 					$json = array('result'=>true, 'data'=>$result);
 
 					// $data = $this->_getPageData($request->data['id']);

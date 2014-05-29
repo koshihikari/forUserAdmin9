@@ -11,7 +11,7 @@ class Smartphone_GetPageInfoBehavior extends ModelBehavior {
 	 * @param	$user_id			ユーザID
 	 * @return	boolean
 	 */
-	public function getPageInfo(Model $model, $isResidenceSearch, $id, $isCustomer) {
+	public function getPageInfo(Model $model, $isResidenceSearch, $id, $isCustomer='1') {
 		$result = $this->_getPageInfo($isResidenceSearch, $id, $isCustomer);
 		return $result;
 	}
