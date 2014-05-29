@@ -54,8 +54,8 @@ jQuery(document).ready(function($){
 			// ガラケーページレンダリング用エレメントを作成し、配置
 			displayAreaElement.append(spContentElement);
 			tmpElement.append(displayAreaElement);
-			// tmpElement.prependTo('body').hide();
-			tmpElement.prependTo('body');
+			tmpElement.prependTo('body').hide();
+			// tmpElement.prependTo('body');
 			console.log('');
 			console.log('----------');
 			console.log('FpConcretePageManager.js :: publishメソッド');
@@ -75,6 +75,7 @@ jQuery(document).ready(function($){
 				console.log('----------');
 				$(thisObj._instances['EditorManager']).on('onCompleteRefreshCode', function(event, code) {
 					$(thisObj._instances['EditorManager']).off('onCompleteRefreshCode');
+					$(thisObj._instances['GsTagLibrary']).off(('notIncludeGsTag_' + thisObj._id));
 					console.log('');
 					console.log('----------');
 					console.log('FpConcretePageManager.js :: publishメソッド :: handler :: handler');
@@ -83,6 +84,7 @@ jQuery(document).ready(function($){
 					console.log('----------');
 					// GSタグの置換処理が終われば、置換したコードをDBに書き込む
 					$(thisObj._instances['AppModel']).on('onSuccessPublishConcretePageForFp', function(event) {
+						tmpElement.remove();
 						$(thisObj._instances['AppModel']).off('onSuccessPublishConcretePageForFp');
 						console.log('');
 						console.log('----------');
@@ -99,6 +101,22 @@ jQuery(document).ready(function($){
 						$(thisObj).trigger('onCompleteStaticPagePublish', data);
 					});
 					*/
+				});
+				console.log('イベント名 = ' + ('notIncludeGsTag_' + thisObj._id));
+				$(thisObj._instances['GsTagLibrary']).on(('notIncludeGsTag_' + thisObj._id), function(event) {
+					$(thisObj._instances['GsTagLibrary']).off(('notIncludeGsTag_' + thisObj._id));
+					$(thisObj._instances['EditorManager']).off('onCompleteRefreshCode');
+					// コードをDBに書き込む
+					$(thisObj._instances['AppModel']).on('onSuccessPublishConcretePageForFp', function(event) {
+						$(thisObj._instances['AppModel']).off('onSuccessPublishConcretePageForFp');
+						tmpElement.remove();
+						console.log('');
+						console.log('----------');
+						console.log('FpConcretePageManager.js :: publishメソッド :: handler :: handler :: handler');
+						console.log('----------');
+						$(thisObj).trigger('onCompleteStaticPagePublish');
+					})
+					thisObj._instances['AppModel'].publishFpPage(residenceId, recordId, title, path, data['preview_source']);
 				});
 				tmpElement.html(data['preview_source']);
 				// プレビューコードを取得したら、GSタグの置換処理を行う

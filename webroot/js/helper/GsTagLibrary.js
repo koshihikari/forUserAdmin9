@@ -99,6 +99,9 @@ jQuery(document).ready(function($){
 					window.GsManager['requestGsData'](thisObj._id, gsInfo[i].key, gsInfo[i].gid);
 				}
 			} else {
+				console.log('---------');
+				console.log('GSタグはありません :: ' + thisObj._id);
+				console.log('---------');
 				$(thisObj).trigger(('notIncludeGsTag_' + thisObj._id));
 			}
 		}
