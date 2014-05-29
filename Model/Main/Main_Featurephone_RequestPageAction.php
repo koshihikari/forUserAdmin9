@@ -16,7 +16,7 @@ class Main_Featurephone_RequestPageAction extends Model {
 			if (
 				isset($request->data['residence_id'])
 			) {
-				$result = $this->getPageInfo(true, $request->data['residence_id']);
+				$result = $this->getPageInfo(true, $request->data['residence_id'], $request->data['is_customer']);
 				$json = array('result'=>true, 'data'=>$result);
 			}
 		}
