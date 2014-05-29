@@ -930,15 +930,15 @@ jQuery(document).ready(function($){
 				'completeEventName'			: 'onCompleteSwitchResidenceVisible',
 				'errorEventName'			: 'onErrorSwitchResidenceVisible'
 			};
-			console.log('--------');
-			console.log('switchResidenceVisible :: 物件の表示切り替え開始');
-			console.log('sendData');
-			console.log(sendData);
-			console.log('--------');
+			// console.log('--------');
+			// console.log('switchResidenceVisible :: 物件の表示切り替え開始');
+			// console.log('sendData');
+			// console.log(sendData);
+			// console.log('--------');
 			var callback = function(data) {
-				console.log('--------');
-				console.log('switchResidenceVisible :: 物件の表示切り替え完了');
-				console.log('--------');
+				// console.log('--------');
+				// console.log('switchResidenceVisible :: 物件の表示切り替え完了');
+				// console.log('--------');
 				thisObj.callback(residenceId, '-', data);
 			}
 			thisObj.access(url, sendData, eventNames, callback);

@@ -241,7 +241,8 @@ jQuery(document).ready(function($){
 		,onResizeWindow: function(event) {
 			var thisObj = this;
 			var prop = thisObj._instances['AppModel'].getProp();
-			var height = $(window).height() - (prop['isCustomer'] === true ? 60 : 161);
+			// var height = $(window).height() - (prop['isCustomer'] === true ? 60 : 161);
+			var height = $(window).height() - (prop['isCustomer'] === true ? 60 : 127);
 			$('#residences > ul.residence-list').height(height);
 		}
 
