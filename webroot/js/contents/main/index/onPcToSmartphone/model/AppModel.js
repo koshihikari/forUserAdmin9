@@ -298,8 +298,9 @@ jQuery(document).ready(function($){
 				'device_name'				: 'smartphone',
 				'device_num'				: 2,
 				'company_id'				: prop['companyId'],
+				'residence_id'				: residenceId,
 				'is_company_site'			: 0,
-				'residence_id'				: residenceId
+				'is_customer'				: prop['isCustomer'] === true ? 1 : 0
 			};
 			var eventNames = {
 				'initEventName'				: 'onInitDelResidence',
