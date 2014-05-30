@@ -142,6 +142,7 @@ jQuery(document).ready(function($){
 					if ($liElem.find('.featurephone-page-count').html() !== data[i]['residences']['featurephone_page_count']) {
 						$liElem.find('.featurephone-page-count').html(data[i]['residences']['featurephone_page_count']);
 					}
+					$liElem.attr('data-is-visible', data[i]['residences']['is_show']);
 
 				} else {	// エレメントが存在しない場合は作成
 					$('#residences > ul').append($(_.template($('#residence-item-template').text(), forTemplateData)));

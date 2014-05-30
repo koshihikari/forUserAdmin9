@@ -328,7 +328,8 @@ jQuery(document).ready(function($){
 			// 	pageLiElem.find('.btn-edit, .btn-duplicate-page, .btn-del-page, .btn-edit-tag').removeClass('disabled');
 			// }
 			console.log('onClickSwitchBtnHandler :: residenceId = ' + residenceId + ', pageId = ' + pageId + ', isVisible = ' + isVisible);
-			$(thisObj).trigger('onSwitchPageVisible', residenceId);
+			// $(thisObj).trigger('onSwitchPageVisible', residenceId);
+			thisObj._instances['AppModel'].switchPageVisible(residenceId, thisObj._deviceType, pageId, !isVisible);
 		}
 
 		/*
