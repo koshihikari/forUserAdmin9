@@ -213,6 +213,12 @@ jQuery(document).ready(function($){
 						}
 					)
 					.on(
+						'onEmptyResidences',
+						function(event) {
+							thisObj._instances['UtilManager'].showStatusMessage(event);
+						}
+					)
+					.on(
 						'onCompleteUpdateOutlineData',
 						function(event, isPublish, deviceType, spOutlineInfo) {
 							console.log('一括書き出し完了 :: isPublish = ' + isPublish);

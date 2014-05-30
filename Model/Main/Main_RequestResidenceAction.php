@@ -10,18 +10,39 @@ class Main_RequestResidenceAction extends Model {
 	 */
 	public function requestResidence($request) {
 		$residences = ClassRegistry::init('residences');
-		$residences->bindModel(
-			array(
-				'hasMany'		=> array(
-					'smartphone_pages'			=> array(
-						'foreignKey'	=> 'residence_id'
-					),
-					'featurephone_pages'		=> array(
-						'foreignKey'	=> 'residence_id'
+		if ($request->data['is_customer'] === '1') {
+			$residences->bindModel(
+				array(
+					'hasMany'		=> array(
+						'smartphone_pages'			=> array(
+							'foreignKey'	=> 'residence_id',
+							'conditions'	=> array(
+								'is_show'	=> 1
+							)
+						),
+						'featurephone_pages'		=> array(
+							'foreignKey'	=> 'residence_id',
+							'conditions'	=> array(
+								'is_show'	=> 1
+							)
+						)
 					)
 				)
-			)
-		);
+			);
+		} else {
+			$residences->bindModel(
+				array(
+					'hasMany'		=> array(
+						'smartphone_pages'			=> array(
+							'foreignKey'	=> 'residence_id'
+						),
+						'featurephone_pages'		=> array(
+							'foreignKey'	=> 'residence_id'
+						)
+					)
+				)
+			);
+		}
 		$options = array(
 			'conditions'		=> array(
 				'company_id'			=> $request->data['company_id']

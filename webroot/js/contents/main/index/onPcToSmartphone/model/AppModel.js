@@ -245,9 +245,15 @@ jQuery(document).ready(function($){
 				'errorEventName'			: 'onErrorRequest'
 			};
 			var callback = function(data) {
-				var targetResidenceId = 0 < residenceId ? residenceId : data['residences'][0]['residences']['id'];
-				var targetDeviceType = '-';
-				thisObj.callback(targetResidenceId, targetDeviceType, data);
+				console.log('data');
+				console.log(data);
+				if (0 === data['residences'].length) {
+					$(thisObj).trigger('onEmptyResidences');
+				} else {
+					var targetResidenceId = 0 < residenceId ? residenceId : data['residences'][0]['residences']['id'];
+					var targetDeviceType = '-';
+					thisObj.callback(targetResidenceId, targetDeviceType, data);
+				}
 			}
 			thisObj.access(url, sendData, eventNames, callback);
 		}

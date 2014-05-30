@@ -75,7 +75,7 @@ jQuery(document).ready(function($){
 			var thisObj = this;
 			var message = '';
 			var duration = 300;
-			console.log(event.type);
+			// console.log(event.type);
 
 			switch (event.type) {
 				case 'onInitRequest':
@@ -234,41 +234,14 @@ jQuery(document).ready(function($){
 					message = 'タグ修正失敗';
 					break;
 
-				// case 'onInitSetPageTag':
-				// 	message = 'タグ修正中・・・';
-				// 	break;
-				// case 'onCompleteSetPageTag':
-				// 	message = 'タグ修正完了';
-				// 	break;
-				// case 'onErrorSetPageTag':
-				// 	message = 'タグ修正失敗';
-				// 	break;
-
-				// case 'onInitDelPageTag':
-				// 	message = 'タグ削除中・・・';
-				// 	break;
-				// case 'onCompleteDelPageTag':
-				// 	message = 'タグ削除完了';
-				// 	break;
-				// case 'onErrorDelPageTag':
-				// 	message = 'タグ削除失敗';
-				// 	break;
-
-				// case 'onInitReorderPageTag':
-				// 	message = 'タグ並び替え中・・・';
-				// 	break;
-				// case 'onCompleteReorderPageTag':
-				// 	message = 'タグ並び替え完了';
-				// 	break;
-				// case 'onErrorReorderPageTag':
-				// 	message = 'タグ並び替え失敗';
-				// 	break;
-
+				case 'onEmptyResidences':
+					message = '現在この管理画面で閲覧が許可されている物件はありません。';
+					break;
 				default:
 					return;
 			}
 
-			console.log('event.type = ' + event.type + ', message = ' + message);
+			// console.log('event.type = ' + event.type + ', message = ' + message);
 			if (event.type.indexOf('onComplete') !== -1) {
 				thisObj._instances['Util'].setStatus(true, message, 500);
 				thisObj._instances['Util'].hideCurtain();

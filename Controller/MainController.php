@@ -164,26 +164,50 @@ class MainController extends AppController {
 				} else {
 					// 物件リストとページリスト取得
 					$result = ClassRegistry::init('Main_RequestResidenceAction')->requestResidence($request);
-					if ($result['result'] === true && 0 < count($result['data'])) {
-						if (!isset($request->data['residence_id'])) {
-							$request->data['residence_id'] = $result['data'][0]['residences']['id'];
-						}
-						$resultOfSp = ClassRegistry::init('Main_Smartphone_RequestPageAction')->requestPage($request);
-						$resultOfFp = ClassRegistry::init('Main_Featurephone_RequestPageAction')->requestPage($request);
-						$json = array(
-							'result'					=> true,
-							'residenceId'				=> $request->data['residence_id'],
-							'residences'				=> $result['data'],
-							// 'smartphonePages'			=> array(),
-							'smartphonePages'			=> $resultOfSp['data'],
-							'featurephonePages'			=> $resultOfFp['data']
-							// 'featurephonePages'			=> array()
-						);
-						if (
-							$methodName === 'delResidence' ||
-							$methodName === 'duplicateResidence'
-						) {
-							$json['targetResidenceId'] = $request->data['residence_id'];
+
+					ob_start();//ここから
+					var_dump($result);
+					$out=ob_get_contents();//ob_startから出力された内容をゲットする。
+					ob_end_clean();//ここまで
+					error_log('-----------------' . "\n", 3, 'log.txt');
+					error_log($out . "\n", 3, 'log.txt');
+					error_log('-----------------' . "\n", 3, 'log.txt');
+
+					if ($result['result'] === true) {
+						if (0 < count($result['data'])) {
+						// if ($result['result'] === true && 0 < count($result['data'])) {
+							if (!isset($request->data['residence_id'])) {
+								$request->data['residence_id'] = $result['data'][0]['residences']['id'];
+							}
+							$resultOfSp = ClassRegistry::init('Main_Smartphone_RequestPageAction')->requestPage($request);
+							$resultOfFp = ClassRegistry::init('Main_Featurephone_RequestPageAction')->requestPage($request);
+							$json = array(
+								'result'					=> true,
+								'residenceId'				=> $request->data['residence_id'],
+								'residences'				=> $result['data'],
+								'smartphonePages'			=> $resultOfSp['data'],
+								'featurephonePages'			=> $resultOfFp['data']
+							);
+							if (
+								$methodName === 'delResidence' ||
+								$methodName === 'duplicateResidence'
+							) {
+								$json['targetResidenceId'] = $request->data['residence_id'];
+							}
+						} else {
+							$json = array(
+								'result'					=> true,
+								'residenceId'				=> '',
+								'residences'				=> array(),
+								'smartphonePages'			=> array(),
+								'featurephonePages'			=> array()
+							);
+							if (
+								$methodName === 'delResidence' ||
+								$methodName === 'duplicateResidence'
+							) {
+								$json['targetResidenceId'] = $request->data['residence_id'];
+							}
 						}
 					}
 				}
