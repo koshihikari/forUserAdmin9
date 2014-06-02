@@ -33,9 +33,8 @@
 			<div class="clearfix"></div>
 		<?php endif; ?>
 		<div class="group">
-				<p class="name naked"><%= residenceName %></p>
 			<?php if ($isCustomer === true): ?>
-				<p class="path"><%= companyUrl%><%p= residencePath %></p>
+				<p class="name naked"><%= residenceName %></p>
 			<?php else: ?>
 				<p class="name"><input type="text" name="name" value="<%= residenceName %>" /></p>
 				<p class="path"><%= companyUrl %><input type="text" name="path" value="<%= residencePath %>" /></p>
