@@ -15,12 +15,12 @@
 
 <script id="residence-item-template" type="text/template">
 	<li id="residence-id_<%= residenceId %>" class="residence-item <%= isCompanySite === true ? 'company-item' : '' %>" data-is-visible="<%= isShow %>">
-		<label>
-			<?php if ($isCustomer === false): ?>
+		<?php if ($isCustomer === false): ?>
+			<label>
 				<p class="checkbox"><input type="checkbox" <%= checked ? 'checked' : '' %> /></p>
-			<?php endif; ?>
-			<p class="record-id"><%= residenceId %></p>
-		</label>
+				<p class="record-id"><%= residenceId %></p>
+			</label>
+		<?php endif; ?>
 		<?php if ($isCustomer === false): ?>
 			<div class="btn-group">
 				<button class="btn btn-warning btn-switch-residence"></button>
@@ -147,9 +147,6 @@
 		<div class="group">
 			<?php if ($isCustomer === true): ?>
 				<p class="title naked"><%= pageTitle %></p>
-				<!--
-				<p class="title"><%= pageTitle %></p>
-				-->
 				<p class="path"><span><%= pageUrl %></span><%= pagePath %></p>
 			<?php else: ?>
 				<p class="title"><input type="text" name="title" value="<%= pageTitle %>" /></p>
@@ -223,9 +220,6 @@
 		<div class="group">
 			<?php if ($isCustomer === true): ?>
 				<p class="title naked"><%= pageTitle %></p>
-				<!--
-				<p class="title"><%= pageTitle %></p>
-				-->
 				<p class="path"><span><%= pageUrl %></span><%= pagePath %></p>
 			<?php else: ?>
 				<p class="title"><input type="text" name="title" value="<%= pageTitle %>" /></p>
