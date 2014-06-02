@@ -104,10 +104,18 @@
 <script id="smartphone-page-item-template" type="text/template">
 	<li id="sp-page-item_<%= pageId %>" class="page-item sp-page-item <%= isLatest ? '' : 'not-latest' %>" data-is-visible="<%= isShow %>">
 		<div class="clearfix">
-			<label>
-				<p class="checkbox"><input type="checkbox"></p>
-				<p class="record-id"><%= pageId %></p>
-			</label>
+			<?php if ($isCustomer === true): ?>
+				<div class="btn-group" data-toggle="buttons-checkbox">
+					<label class="is_published">
+						<input type="checkbox">&nbsp;チェックする
+					</label>
+				</div>
+			<?php else: ?>
+				<label>
+					<p class="checkbox"><input type="checkbox"></p>
+					<p class="record-id"><%= pageId %></p>
+				</label>
+			<?php endif; ?>
 			<div class="btns">
 				<?php if ($isCustomer === false): ?>
 				<div class="btn-group control-btns">
@@ -178,10 +186,18 @@
 <script id="featurephone-page-item-template" type="text/template">
 	<li id="fp-page-item_<%= pageId %>" class="page-item fp-page-item <%= isLatest ? '' : 'not-latest' %>" data-is-visible="<%= isShow %>">
 		<div class="clearfix">
-			<label>
-				<p class="checkbox"><input type="checkbox"></p>
-				<p class="record-id"><%= pageId %></p>
-			</label>
+			<?php if ($isCustomer === true): ?>
+				<div class="btn-group" data-toggle="buttons-checkbox">
+					<label class="is_published">
+						<input type="checkbox">&nbsp;チェックする
+					</label>
+				</div>
+			<?php else: ?>
+				<label>
+					<p class="checkbox"><input type="checkbox"></p>
+					<p class="record-id"><%= pageId %></p>
+				</label>
+			<?php endif; ?>
 			<div class="btns">
 				<?php if ($isCustomer === false): ?>
 					<div class="btn-group control-btns">
